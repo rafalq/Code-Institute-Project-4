@@ -91,3 +91,24 @@ footer.footer {
   padding-top: 4rem;
   padding-bottom: 4rem;
 }
+
+					/*** search-page.html ***/
+a {
+    color: #023b6d;
+    text-decoration: none;
+}
+a:hover, a:focus {
+    color: #5a7d9c;
+    text-decoration: none;
+}					
+.badge.badge-pill{
+	background-color: transparent;
+	color: #000000a6;
+}					
+					/*** item-page.html ***/
+p.item-timer{
+	font-weight: bold;
+}
+p.item-price{
+	font-size: 25px;
+}					
