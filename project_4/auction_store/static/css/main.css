@@ -106,9 +106,19 @@ a:hover, a:focus {
 	color: #000000a6;
 }					
 					/*** item-page.html ***/
+					
 p.item-timer{
 	font-weight: bold;
 }
 p.item-price{
 	font-size: 25px;
+}
+#btn-auction:hover{
+	color: white;
+}
+#btn-buy:hover{
+	color: white;
+}
+hr{
+	margin: auto;
 }					
