@@ -1,0 +1,156 @@
+{% extends 'auction_store/base.html' %}
+{% block content %}
+{% load static %}
+<div class="container">
+
+    <div id="carouselExampleIndicators" class="carousel slide d-none d-lg-block mb-0" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="row">
+                    <img class="col-lg-6 order-lg-2 text-white carousel-img" src="{% static 'img/tools.jpg' %}" alt="Image">
+                    <img class="col-lg-6 order-lg-2 text-white carousel-img" src="{% static 'img/tools-2.jpg' %}" alt="Image">
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="row">
+                    <img class="col-lg-6 order-lg-2 text-white carousel-img" src="{% static 'img/writing.jpg' %}">
+                    <img class="col-lg-6 order-lg-2 text-white carousel-img" src="{% static 'img/military.jpg' %}">
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="row">
+                    <img class="col-lg-6 order-lg-2 text-white carousel-img" src="{% static 'img/treasure.jpg' %}">
+                    <img class="col-lg-6 order-lg-2 text-white carousel-img" src="{% static 'img/private.jpg' %}">
+                </div>
+            </div>
+
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true" style="color: black !important"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+
+    <!-- Images slides -->
+
+    <div id="carouselExampleIndicators" class="carousel slide d-block d-lg-none mb-0" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="row">
+                    <img class="col-12 order-lg-2 text-white carousel-img" src="{% static 'img/tools.jpg' %}">
+                </div>
+            </div>
+
+            <div class=" carousel-item">
+                <div class="row">
+                    <img class="col-12 order-lg-2 text-white carousel-img" src="{% static 'img/treasure.jpg' %}">
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="row">
+                    <img class="col-12 order-lg-2 text-white carousel-img" src="{% static 'img/writing.jpg' %}">
+                </div>
+            </div>
+
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true" style="color: black !important"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Categories -->
+
+    <section class="categories text-center bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-md-2">
+                    <div class="categories-item mx-auto mb-5 mb-lg-0">
+                        <img class="img-fluid rounded mb-3 p-2" src="{% static 'img/military.png' %}">
+                        <h5>Military</h5>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2">
+                    <div class="categories-item mx-auto mb-5 mb-lg-0">
+                        <img class="img-fluid rounded mb-3 p-2" src="{% static 'img/private.png' %}" alt="Image of">
+                        <h5>Private</h5>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2">
+                    <div class="categories-item mx-auto mb-5 mb-lg-0">
+                        <img class="img-fluid rounded mb-3 p-2" src="{% static 'img/tools.png' %}" alt="Image of">
+                        <h5>Tools</h5>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2">
+                    <div class="categories-item mx-auto mb-5 mb-lg-0">
+                        <img class="img-fluid rounded mb-3 p-2" src="{% static 'img/treasure.png' %}" alt="Image of">
+                        <h5>Treasure</h5>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2">
+                    <div class="categories-item mx-auto mb-5 mb-lg-0">
+                        <img class="img-fluid rounded mb-3 p-2" src="{% static 'img/writing.png' %}" alt="Image of">
+                        <h5>Writing</h5>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2">
+                    <div class="categories-item mx-auto mb-5 mb-lg-0">
+                        <img class="img-fluid rounded mb-3 p-2" src="{% static 'img/other.png' %}" alt="Image of">
+                        <h5>Other</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jumbotron -->
+
+    <div class="jumbotron p-4 m-auto bg-primary text-warning">
+        <img id="jumbotron-icon" class="float-left mt-md-3 mr-md-3 d-none d-md-block" src="../static/img/001-pay.png">
+        <div class="row">
+            <h1 class="col-md-8 display-5 text-md-left text-center">The fastest way to checkout </h1>
+            <p class="lead col-md-8 text-md-left text-center">You can pay your item with your credit card!</p>
+        </div>
+        <a id="jumbotron-button-md" class="jumbotron-button jumbotron-button-hover d-none d-md-block btn btn-outline-warning float-right text-warning">Shop Now</a>
+        <a class="jumbotron-button jumbotron-button-hover d-block d-md-none col-6 offset-3 btn btn-outline-warning text-warning">Shop Now</a>
+    </div>
+
+
+    <div id="just-added-wrapper" class="row mt-1 no-gutters">
+        <div class="col-12 col-md-4 jumbotron mb-0 px-3 text-center">
+            <h4 class="pt-md-5">Just Added... </h4>
+            <p>The latest items! Waiting for you</p>
+        </div>
+        <div id="home-scrollspy" class="col-12 col-md-8">
+            <div class="row">
+                <img class="col-12 order-lg-2 text-white" src='../static/img/military.jpg'>
+                <img class="col-12 order-lg-2 text-white" src='../static/img/private.jpg'>
+                <img class="col-12 order-lg-2 text-white" src='../static/img/tools.jpg'>
+                <img class="col-12 order-lg-2 text-white" src='../static/img/treasure.jpg'>
+                <img class="col-12 order-lg-2 text-white" src='../static/img/tools-2.jpg'>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -65,7 +65,7 @@ h6 {
 #just-added-wrapper{
 		width: 100%;
 	}
-#home-scrollspy{	
+#home-scrollspy{
 	background-color: #eee;
 	height: 300px;
 	overflow-x: hidden;
@@ -100,13 +100,13 @@ a {
 a:hover, a:focus {
     color: #5a7d9c;
     text-decoration: none;
-}					
+}
 .badge.badge-pill{
 	background-color: transparent;
 	color: #000000a6;
-}					
+}
 					/*** item-page.html ***/
-					
+
 p.item-timer{
 	font-weight: bold;
 }
@@ -119,6 +119,11 @@ p.item-price{
 #btn-buy:hover{
 	color: white;
 }
-hr{
-	margin: auto;
-}					
+p.bid-icon{
+    font-size: 12px;
+    color: #adabab;
+}
+span.key-item-detail{
+    font-size: 14px;
+    font-weight: light;
+}
