@@ -92,7 +92,7 @@ footer.footer {
   padding-bottom: 4rem;
 }
 
-					/*** search-page.html ***/
+					/*** search.html ***/
 a {
     color: #023b6d;
     text-decoration: none;
@@ -105,7 +105,7 @@ a:hover, a:focus {
 	background-color: transparent;
 	color: #000000a6;
 }
-					/*** item-page.html ***/
+					/*** item.html ***/
 
 p.item-timer{
 	font-weight: bold;
