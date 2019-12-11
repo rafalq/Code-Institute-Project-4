@@ -1,5 +1,16 @@
 {% extends 'auction_store/base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-<h1>{{ user.username }}</h1>
+<div class="container content-section">
+    <div class="row">
+        <div class="col-2 media">
+            <img class="img-fluid img-thumbnail account-img" src="{{ user.account.image.url }}">
+            <div class="col-10 media-body">
+                <h2 class="account-heading">{{ user.username }}</h2>
+                <p class="text-secondary">{{ user.email }}</p>
+            </div>
+        </div>
+    </div>
+    <!-- FORM HERE -->
+</div>
 {% endblock content %}
