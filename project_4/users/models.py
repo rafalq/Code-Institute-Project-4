@@ -11,8 +11,7 @@ class Account(models.Model):
         return f'{self.user.username} Account'
 
 
-"""
-#the function is unnecessary so far
+# the function is unnecessary so far
 
     def save(self):
         super().save()
@@ -23,4 +22,3 @@ class Account(models.Model):
             output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.image.path)
-"""

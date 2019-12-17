@@ -20,6 +20,12 @@ h6 {
 #search-input{
 	width: auto ;
 }
+.nav-item{
+    color: #023b6d !important;
+}
+.nav-item:hover{
+    color: initial !important;
+}
 
 /* auction-section */
 .carousel{
@@ -92,7 +98,7 @@ footer.footer {
   padding-bottom: 4rem;
 }
 
-					/*** search.html ***/
+					/*** store.html ***/
 a {
     color: #023b6d;
     text-decoration: none;
@@ -105,7 +111,7 @@ a:hover, a:focus {
 	background-color: transparent;
 	color: #000000a6;
 }
-					/*** item.html ***/
+					/*** item_detail.html ***/
 
 p.item-timer{
 	font-weight: bold;
@@ -113,10 +119,10 @@ p.item-timer{
 p.item-price{
 	font-size: 25px;
 }
-#btn-auction:hover{
+.btn-auction:hover{
 	color: white;
 }
-#btn-buy:hover{
+.btn-buy:hover{
 	color: white;
 }
 p.bid-icon{

@@ -1,12 +1,19 @@
 {% extends 'auction_store/base.html' %}
 {% block content %}
+<style>
+    footer {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+    }
+</style>
 <div class="container">
     <div class="row">
-        <div class="col-12 text-center">
+        <div class="col-12 pt-5 mt-5 text-center">
             <h2>You have been logged out</h2>
         </div>
         <div class="col-8 offset-2">
-            <div class="border-top pt-3">
+            <div class="pt-3">
                 <small class="text-muted">
                     <a href="{% url 'login' %}">Log In Again</a>
                 </small>

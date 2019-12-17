@@ -38,29 +38,41 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="btn btn-link text-dark pl-0 pl-md-2 pt-md-2 active" href="{% url 'auction_store-home' %}">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-item btn btn-link text-dark pl-0 pl-md-2 pt-md-2 active" href="{% url 'auction_store-home' %}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-link text-dark pl-0 pl-md-2 pt-md-2" href="{% url 'auction_store-home' %}">About <span class="sr-only">(current)</span></a>
+                    <a class="nav-item btn btn-link text-dark pl-0 pl-md-2 pt-md-2" href="{% url 'auction_store-home' %}">About <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-link text-dark pl-0 pl-md-2 pt-md-2 active" href="{% url 'auction_store-store' %}">Store <span class="sr-only">(current)</span></a>
+                    <a class="nav-item btn btn-link text-dark pl-0 pl-md-2 pt-md-2 active" href="{% url 'auction_store-store' %}">Store <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
 
             <ul class="navbar-nav pr-3">
                 {% if user.is_authenticated %}
+                <li class="nav-item pt-md-2 px-md-3">
+                    <a class="nav-link" href="{% url 'item-create' %}" role="button" data-toggle="tooltip" data-placement="bottom" title="Sell"><i class="nav-item fas fa-sign"></i></a>
+                </li>
                 <li class="nav-item pt-md-2">
                     <a class="nav-link" href="{% url 'profile' %}" id="navbarDropdown" role="button" data-toggle="tooltip" data-placement="bottom" title="Your Account" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-user-alt"></i>
+                        <i class="nav-item fas fa-user-alt"></i>
                     </a>
                 </li>
                 <li class="nav-item pt-md-2 px-md-3">
-                    <a class="nav-link" href="#" role="button" data-toggle="tooltip" data-placement="bottom" title="Shopping Cart"><i class="fas fa-shopping-cart"></i></a>
+                    <a class="nav-link" href="#" role="button" data-toggle="tooltip" data-placement="bottom" title="Shopping Cart"><i class="nav-item fas fa-shopping-cart"></i></a>
                 </li>
                 <li class="nav-item pt-md-2 pr-md-3">
-                    <a class="nav-link" href="{% url 'logout' %}" role="button" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="fas fa-sign-out-alt"></i></a>
+                    <a class="nav-link" href="{% url 'logout' %}" role="button" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="nav-item fas fa-sign-out-alt"></i></a>
                 </li>
+
+                <!--
+                {% if user.is_superuser %}
+                <li class="nav-item pt-md-2 pr-md-3">
+                    <a class="nav-link" href="#" role="button" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="fas fa-sign-out-alt"></i>Add New</a>
+                </li>
+                {% endif %}
+                -->
+
                 {% else %}
                 <li class="nav-item">
                     <a class="btn btn-link text-danger pr-0 pr-md-3 pt-md-3" href="{% url 'register' %}">Register</a>
@@ -93,7 +105,7 @@
     {% endblock %}
 
     <!-- Footer -->
-    <footer class="footer bg-light">
+    <footer class="footer bg-light py-4">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
