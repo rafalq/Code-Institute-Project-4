@@ -6,13 +6,13 @@ from PIL import Image
 
 
 class Item(models.Model):
-    image = models.ImageField(default='default.jpg', upload_to='items_pics')
-    item_name = models.CharField(max_length=100)
-    item_desc = models.TextField()
-    item_price = models.IntegerField()
-    item_bid_start_date = models.DateTimeField(auto_now=True)
+    image = models.ImageField(upload_to='profile_pics', default='default.jpg')
+    name = models.CharField(max_length=100)
+    desc = models.TextField()
+    price = models.IntegerField()
+    start_date = models.DateTimeField(auto_now=True)
     in_auction = models.BooleanField()
-    item_bid_end_date = models.DateTimeField(auto_now=True)
+    end_date = models.DateTimeField(auto_now=True)
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def save(self):
@@ -20,19 +20,20 @@ class Item(models.Model):
 
         img = Image.open(self.image.path)
 
-        if img.height > 300 or img.width > 300:
-            output_size = (300, 300)
-            img.thumbnail(output_size)
-            img.save(self.image.path)
+        # if img.height > 300 or img.width > 300:
+        #     output_size = (300, 300)
+        #     img.thumbnail(output_size)
+        #     img.save(self.image.path)
 
     def __str__(self):
-        return self.item_name
+        return self.name
 
     def get_absolute_url(self):
         return reverse('item-detail', kwargs={'pk': self.pk})
 
 
 class Bid(models.Model):
-    bid_amount = models.IntegerField()
-    bid_date = models.DateTimeField(default=timezone.now)
-    bidder_name = models.ForeignKey(User, on_delete=models.CASCADE)
+    amount = models.IntegerField(null=False, blank=False)
+    date = models.DateTimeField(default=timezone.now)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    bidder = models.ForeignKey(User, on_delete=models.CASCADE)

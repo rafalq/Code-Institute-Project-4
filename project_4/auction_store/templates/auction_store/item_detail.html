@@ -1,5 +1,6 @@
 {% extends 'auction_store/base.html' %}
 {% block content %}
+{% load crispy_forms_tags %}
 {% load static %}
 <div class="container-fluid pt-3">
     <!-- container -->
@@ -14,26 +15,32 @@
                     <p class="text-center"><span class="key-item-detail">Manufactured by: </span>Nation</p>
                 </div>
                 <div class="col-md-6 pt-4">
-                    <h3 class="text-center">{{ object.item_name }}</h3>
+                    <h3 class="text-center">{{ object.name }}</h3>
                     <div class="row pt-4">
 
                         {% if object.seller ==  user %}
                         <div class="col-6">
-                            <a class="btn-auction btn btn-outline-warning btn-lg w-100" href="{% url 'item-update' object.id %}">Update</a>
+                            <a class="btn-auction btn btn-outline-warning btn-lg w-100"
+                            href="{% url 'item-update' object.id %}">Update</a>
                         </div>
                         <div class="col-6">
-                            <a class="btn-buy btn btn-outline-danger btn-lg w-100" href="{% url 'item-delete' object.id %}">Delete</a>
+                            <a class="btn-buy btn btn-outline-danger btn-lg w-100"
+                            href="{% url 'item-delete' object.id %}">Delete</a>
                         </div>
                         {% else %}
                         <div class="col-6">
                             <p class="fas fa-hourglass-end text-center w-100"></p>
                             <p id="timer" class="text-center text-center"></p>
-                            <a id="btn-auction" class="btn btn-outline-warning btn-lg w-100" data-toggle="modal" data-target="#exampleModal">Place Bid</a>
+                            <a
+                            class="btn-auction btn btn-outline-warning btn-lg w-100"
+                            data-toggle="modal" data-target="#bid-form">
+                            Place Bid
+                            </a>
                         </div>
                         <div class="col-6">
                             <i class="fas fa-euro-sign text-center w-100"></i>
-                            <p class="item-price text-center">{{ object.item_price }}</p>
-                            <a id="btn-buy" class="btn btn-outline-danger btn-lg w-100">Buy Now</a>
+                            <p class="item-price text-center">{{ object.price }}</p>
+                            <a class="btn-buy btn btn-outline-danger color-danger btn-lg w-100">Buy Now</a>
                         </div>
                         {% endif %}
 
@@ -43,7 +50,8 @@
                                 18.04 (approx. EUR 21.05) Express delivery to Ireland
                             </p>
                             <p class="mb-1"><span class="key-item-detail">Delivery: </span>8 - 14 days</p>
-                            <p class="mb-0"><span class="key-item-detail">Payments: </span> <img src="../../static/img/paypal.png"> </p>
+                            <p class="mb-0"><span class="key-item-detail">Payments:
+                            </span> <img src="../../static/img/paypal.png"> </p>
                             <p><span class="key-item-detail">Return: </span>30 days</p>
                         </div>
                     </div>
@@ -70,48 +78,70 @@
         <div class="col-12 col-md-4 border-left">
             <h5 class="pt-3 text-center">Bid History</h5>
             <div class="progress mt-3">
-                <div class="progress-bar bg-danger" style="width: 25%;" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">Time Left</div>
+                <div class="progress-bar bg-danger" style="width: 25%;" role="progressbar"
+                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">Time Left</div>
             </div>
-
             {% for bid in bids %}
             <div class="row pt-3">
                 <p class="bid-icon col-4 mb-0 text-center fas fa-user-alt"></p>
                 <p class="bid-icon col-4 mb-0 text-center fas fa-euro-sign"></p>
                 <p class="bid-icon col-4 mb-0 text-center far fa-clock"></p>
-                <p class="col-4 mb-0 text-center">{{ bid.bidder_name }}</p>
-                <p class="col-4 mb-0 text-center">{{ bid.bid_amount }}</p>
-                <p class="col-4 mb-0 text-center"> {{ bid.bid_date|date:"d M Y, H:i:s" }}</p>
+                <p class="col-4 mb-0 text-center">{{ bid.bidder }}</p>
+                <p class="col-4 mb-0 text-center">{{ bid.amount }}</p>
+                <p class="col-4 mb-0 text-center"> {{ bid.date|date:"d M Y, H:i:s" }}</p>
             </div>
             <hr class="my-1">
             {% endfor %}
+        </div>
+    </div>
+</div>
 
+<form method="POST">
+    {% csrf_token %}
+    <div class="modal fade" id="bid-form" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">EUR 67</h5>
+                    <p>8d 2h 55m | 33 bids<p>
+                            <button type="button" class="close"
+                            data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row ml-2">
+                        <button type="button"
+                        class="col-3 ml-4 p-2 btn btn-outline-primary">
+                        Eur {{ object.price|add:1 }} Bid</button>
+                        <button type="button"
+                        class="col-3 ml-4 p-2 btn btn-outline-primary">
+                        Eur {{ object.price|add:2 }} Bid</button>
+                        <button type="button"
+                        class="col-3 ml-4 p-2 btn btn-outline-primary">
+                        Eur {{ object.price|add:4 }} Bid</button>
+                    </div>
+                    <hr class="py-2 mt-3 mb-0">
+                    <div class="row ml-5 mb-3">
+                        <div class="col-6">
+                            {{form|crispy}}
+                        </div>
+                        <button id="bid-btn" type="submit"
+                        class="col-3 ml-2 btn btn-primary">
+                        Bid</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</form>
+<!-- <form method="POST">
+{% csrf_token %}
+
+<div class="row">
+     {{form.as_p}}
+    <button type="submit" class="col-4 ml-2 btn btn-primary">Bid</button>
 </div>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">EUR 67</h5>
-                <p>8d 2h 55m | 33 bids<p>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-            </div>
-            <div class="modal-body">
-                <div class="row ml-2">
-                    <button type="button" class="col-3 ml-4 p-2 btn btn-primary">Eur 68 Bid</button>
-                    <button type="button" class="col-3 ml-4 p-2 btn btn-primary">Eur 69 Bid</button>
-                    <button type="button" class="col-3 ml-4 p-2 btn btn-primary">Eur 72 Bid</button>
-                </div>
-                <hr class="py-2 mt-3">
-                <div class="row">
-                    <input type="text" class="col-6 offset-1 form-control" placeholder="EUR" value="EUR " aria-label="Recipient's username" aria-describedby="basic-addon2">
-                    <button type="button" class="col-4 ml-2 btn btn-primary">Bid</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+</form> -->
 {% endblock content %}

@@ -146,13 +146,13 @@
             <div class="card">
                 <img src="{{ item.image.url }}" alt="Image of" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title"><a href="{% url 'item-detail' item.id %}">{{ item.item_name }}</a></h5>
+                    <h5 class="card-title"><a href="{% url 'item-detail' item.id %}">{{ item.name }}</a></h5>
                     <p><span class="text-muted">from</span> <span class="font-italic">{{ item.seller }}</span></p>
-                    <p class="text-center"><i class="fas fa-euro-sign"></i> {{ item.item_price }}</p>
-                    <p class="card-text">{{ item.item_desc }}</p>
+                    <p class="text-center"><i class="fas fa-euro-sign"></i> {{ item.price }}</p>
+                    <p class="card-text">{{ item.desc }}</p>
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted">Last updated {{ item.item_bid_start_date }}</small>
+                    <small class="text-muted">Last updated {{ item.start_date }}</small>
                 </div>
             </div>
         </div>

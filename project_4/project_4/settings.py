@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'auction_store.apps.AuctionStoreConfig',
     'users.apps.UsersConfig',
     'crispy_forms',
+	'bootstrap_modal_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

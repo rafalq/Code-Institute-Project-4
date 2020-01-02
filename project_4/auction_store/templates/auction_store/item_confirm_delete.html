@@ -14,10 +14,12 @@
                 {% csrf_token %}
                 <fieldset class="form-group">
                     <legend class="text-center border-bottom mb-4">Delete Artifact</legend>
-                    <h3 class="text-center">Are you sure you want to remove the artifact "{{ object.item_name }}"?</h3>
+                    <h3 class="text-center">
+                    Are you sure you want to remove the artifact "{{ object.item_name }}"?</h3>
                 </fieldset>
                 <div class="form-group">
-                    <a class="btn btn-outline-secondary ml-4" href="{% url 'item-detail' object.id %}">Cancel</a>
+                    <a class="btn btn-outline-secondary ml-4"
+                    href="{% url 'item-detail' object.id %}">Cancel</a>
                     <button class="btn btn-outline-danger ml-3" type="submit">Delete</button>
                 </div>
             </form>

@@ -21,12 +21,20 @@ h6 {
 	width: auto ;
 }
 .nav-item{
-    color: #023b6d !important;
+    color: rgba(2, 59, 109, 1) !important;
 }
 .nav-item:hover{
-    color: initial !important;
+    color: rgba(2, 59, 109, 0.65) !important;
+    text-decoration: none;
 }
-
+#register-link:hover{
+    color: rgba(167, 29, 42, 0.65) !important;
+    text-decoration: none;
+}
+#login-link:hover{
+    color: rgba(0, 123, 255, 0.65) !important;
+    text-decoration: none;
+}
 /* auction-section */
 .carousel{
 	margin-top: 2rem;
@@ -122,8 +130,11 @@ p.item-price{
 .btn-auction:hover{
 	color: white;
 }
+.btn-buy{
+    color: #dc3545;
+}
 .btn-buy:hover{
-	color: white;
+	color: initial;
 }
 p.bid-icon{
     font-size: 12px;
@@ -132,4 +143,18 @@ p.bid-icon{
 span.key-item-detail{
     font-size: 14px;
     font-weight: light;
+}
+/* modal */
+#bid-btn{
+    height: 60%;
+    margin-top: 36px !important;
+}
+#div_id_amount{
+    margin: auto;
+}
+
+label[for="id_amount"]{
+    font-weight: 600;
+    font-size: 20px;
+    margin-left: 5px;
 }

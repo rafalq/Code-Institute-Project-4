@@ -10,11 +10,8 @@ class Account(models.Model):
     def __str__(self):
         return f'{self.user.username} Account'
 
-
-# the function is unnecessary so far
-
-    def save(self):
-        super().save()
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
 
         img = Image.open(self.image.path)
 

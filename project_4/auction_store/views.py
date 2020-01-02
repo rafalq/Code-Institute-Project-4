@@ -10,42 +10,58 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
+from django.views.generic.edit import FormMixin
+from django.contrib.auth.decorators import login_required
+from .forms import BidForm
 from .models import Bid, Item
+from django.urls import reverse
 
 
 def home(request):
     return render(request, 'auction_store/home.html')
 
 
-def store(request):
-    context = {
-        'items': Item.objects.all()
-    }
-    return render(request, 'auction_store/store.html', context)
-
-
-def item(request):
-    context = {
-        'bids': Bid.objects.all()
-    }
-
-    return render(request, 'auction_store/item.html', context)
-
-
 class ItemListView(ListView):
     model = Item
     template_name = 'auction_store/store.html'
     context_object_name = 'items'
-    ordering = ['-item_bid_start_date']
+    ordering = ['-start_date']
 
 
-class ItemDetailView(DetailView):
+class ItemDetailView(FormMixin, LoginRequiredMixin, DetailView):
     model = Item
+    form_class = BidForm
+
+    def get_success_url(self):
+        return reverse('item-detail', kwargs={'pk': self.object.id})
+
+    def get_context_data(self, **kwargs):
+        context = super(ItemDetailView, self).get_context_data(**kwargs)
+        context['bids'] = Bid.objects.filter(item=self.object)
+        context['form'] = BidForm(initial={'item': self.object})
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        form.instance.item = self.object
+        form.instance.bidder = self.request.user
+        form.save()
+        return super(ItemDetailView, self).form_valid(form)
+
+    def get_absolute_url(self):
+        return reverse('item-detail', kwargs={'pk': self.pk})
 
 
 class ItemCreateView(LoginRequiredMixin, CreateView):
     model = Item
-    fields = ['image', 'item_name', 'item_desc', 'item_price', 'in_auction']
+    fields = ['image', 'name', 'desc', 'price', 'in_auction']
 
     def form_valid(self, form):
         form.instance.seller = self.request.user
@@ -54,7 +70,7 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
 
 class ItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Item
-    fields = ['image', 'item_name', 'item_desc', 'item_price', 'in_auction']
+    fields = ['image', 'name', 'desc', 'price', 'in_auction']
 
     def form_valid(self, form):
         form.instance.seller = self.request.user
