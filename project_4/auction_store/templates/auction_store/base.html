@@ -63,27 +63,28 @@
             </ul>
 
             <ul class="navbar-nav pr-3">
+
                 {% if user.is_authenticated %}
-                <li class="nav-item pt-md-2 px-md-3">
+                <li class="nav-item pt-md-1 px-md-3">
                     <a class="nav-link" href="{% url 'item-create' %}" role="button"
                     data-toggle="tooltip" data-placement="bottom" title="Sell">
-                        <i class="nav-item fas fa-sign"></i>
+                        <i class="nav-item fas fa-hand-holding-usd"></i>
                     </a>
                 </li>
-                <li class="nav-item pt-md-2">
+                <li class="nav-item pt-md-1">
                     <a class="nav-link" href="{% url 'profile' %}" id="navbarDropdown" role="button"
                     data-toggle="tooltip" data-placement="bottom" title="Your Account"
                     aria-haspopup="true" aria-expanded="false">
                         <i class="nav-item fas fa-user-alt"></i>
                     </a>
                 </li>
-                <li class="nav-item pt-md-2 px-md-3">
-                    <a class="nav-link" href="#" role="button" data-toggle="tooltip"
-                    data-placement="bottom" title="Shopping Cart">
-                        <i class="nav-item fas fa-shopping-cart"></i>
+                <li class="nav-item pt-md-1 px-md-3">
+                    <a class="nav-link" href="{% url 'storage' %}" role="button" data-toggle="tooltip"
+                    data-placement="bottom" title="Storage">
+                        <i class="nav-item fas fa-boxes"></i>
                     </a>
                 </li>
-                <li class="nav-item pt-md-2 pr-md-3">
+                <li class="nav-item pt-md-1 pr-md-3">
                     <a class="nav-link" href="{% url 'logout' %}" role="button"
                     data-toggle="tooltip" data-placement="bottom" title="Logout">
                         <i class="nav-item fas fa-sign-out-alt"></i>

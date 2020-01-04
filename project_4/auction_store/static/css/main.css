@@ -22,6 +22,7 @@ h6 {
 }
 .nav-item{
     color: rgba(2, 59, 109, 1) !important;
+    font-size: 20px;
 }
 .nav-item:hover{
     color: rgba(2, 59, 109, 0.65) !important;
@@ -127,14 +128,21 @@ p.item-timer{
 p.item-price{
 	font-size: 25px;
 }
+.btn-auction{
+    color: #ffc107 !important;
+}
 .btn-auction:hover{
-	color: white;
+	color: white !important;
 }
 .btn-buy{
-    color: #dc3545;
+    color: #dc3545 !important;
 }
 .btn-buy:hover{
-	color: initial;
+	color: white !important;
+}
+#img-paypal{
+    height: 35px !important;
+    width: 45px !important;
 }
 p.bid-icon{
     font-size: 12px;

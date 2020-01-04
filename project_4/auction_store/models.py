@@ -14,6 +14,9 @@ class Item(models.Model):
     in_auction = models.BooleanField()
     end_date = models.DateTimeField(auto_now=True)
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
+    sold = models.BooleanField(null=True)
+    buyer = models.ForeignKey(
+        User, null=True, related_name="buyer", on_delete=models.CASCADE)
 
     def save(self):
         super().save()

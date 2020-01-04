@@ -69,6 +69,7 @@
                     </ul>
                 </div>
             </div>
+
             <!-- Time -->
             <div class="table-section bg-light">
                 <h6 class="font-weight-bold btn btn-block" data-target="#time" data-toggle="collapse" aria-haspopup="true" aria-expanded="false" aria-controls="collapseExample">Time
@@ -103,6 +104,7 @@
                     </ul>
                 </div>
             </div>
+
             <!-- Price -->
             <div class="table-section bg-light">
                 <h6 class="font-weight-bold btn btn-block" data-target="#price" data-toggle="collapse" aria-haspopup="true" aria-expanded="false" aria-controls="collapseExample">Price
@@ -137,19 +139,24 @@
                     </ul>
                 </div>
             </div>
+
         </div>
         <!-- End of Search Table -->
 
         <!-- Item Card -->
         {% for item in items %}
-        <div class="card-group col-12 col-md-3 px-0">
+        <div class="card-group col-12 col-md-3 px-0 h-25">
             <div class="card">
                 <img src="{{ item.image.url }}" alt="Image of" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title"><a href="{% url 'item-detail' item.id %}">{{ item.name }}</a></h5>
                     <p><span class="text-muted">from</span> <span class="font-italic">{{ item.seller }}</span></p>
                     <p class="text-center"><i class="fas fa-euro-sign"></i> {{ item.price }}</p>
-                    <p class="card-text">{{ item.desc }}</p>
+                    {% if item.sold %}
+                        <img class="img-fluid" src="{% static 'img/sold.png' %}">
+                    {% else %}
+                        <p class="card-text">{{ item.desc }}</p>
+                    {% endif %}
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">Last updated {{ item.start_date }}</small>

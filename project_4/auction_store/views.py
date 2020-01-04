@@ -11,10 +11,10 @@ from django.views.generic import (
     DeleteView
 )
 from django.views.generic.edit import FormMixin
-from django.contrib.auth.decorators import login_required
-from .forms import BidForm
+from .forms import BidForm, BuyForm
 from .models import Bid, Item
 from django.urls import reverse
+from django.contrib import messages
 
 
 def home(request):
@@ -92,3 +92,15 @@ class ItemDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == item.seller:
             return True
         return False
+
+
+class ItemBuyUpdateView(LoginRequiredMixin, UpdateView):
+    model = Item
+    # fields = ['sold']
+    form_class = BuyForm
+    template_name = 'auction_store/buy_form.html'
+
+    def form_valid(self, form):
+        form.instance.sold = True
+        form.instance.buyer = self.request.user
+        return super().form_valid(form)

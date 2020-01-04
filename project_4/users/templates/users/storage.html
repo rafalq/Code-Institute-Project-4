@@ -1,0 +1,35 @@
+{% extends 'auction_store/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+          <div class="col-5 media-body">
+            <h1>Purchased</h1>
+            {% for item in items %}
+                {% if item.buyer == user %}
+                    <p>{{ item.name }}</p>
+                    <hr>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="col-md-5">
+        </div>
+    </div>
+
+    <div class="row">
+          <div class="col-5 media-body">
+            <h1>Auction</h1>
+            {% for bid in bids %}
+                {% if bid.bidder == user %}
+                    <p>{{ bid.bidder }}</p>
+                    <p>{{ bid.date }}</p>
+                    <p>{{ bid.amount }}</p>
+                    <hr>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="col-md-5">
+        </div>
+    </div>
+</div>
+{% endblock content %}

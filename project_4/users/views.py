@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserUpdateForm, AccountUpdateForm
+from django.views.generic import ListView
+from auction_store.models import Item, Bid
 
 
 def register(request):
@@ -10,7 +12,8 @@ def register(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            messages.success(request, f'Your account has been created! You are now able to log in')
+            messages.success(
+                request, f'Your account has been created! You are now able to log in')
             return redirect('login')
     else:
         form = UserRegisterForm()
@@ -39,3 +42,22 @@ def profile(request):
     }
 
     return render(request, 'users/profile.html', context)
+
+
+class UserItemListView(ListView):
+    model = Item
+    template_name = 'users/storage.html'
+    context_object_name = 'items'
+    ordering = ['-start_date']
+
+    def get_context_data(self, **kwargs):
+        context = super(UserItemListView, self).get_context_data(**kwargs)
+        context['bids'] = Bid.objects.all()
+        return context
+
+
+class UserBidListView(ListView):
+    model = Bid
+    template_name = 'users/storage.html'
+    context_object_name = 'bids'
+    ordering = ['-date']
