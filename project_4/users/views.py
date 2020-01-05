@@ -54,10 +54,3 @@ class UserItemListView(ListView):
         context = super(UserItemListView, self).get_context_data(**kwargs)
         context['bids'] = Bid.objects.all()
         return context
-
-
-class UserBidListView(ListView):
-    model = Bid
-    template_name = 'users/storage.html'
-    context_object_name = 'bids'
-    ordering = ['-date']

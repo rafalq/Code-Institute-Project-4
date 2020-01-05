@@ -5,6 +5,17 @@ from django.urls import reverse
 from PIL import Image
 
 
+def dtime():
+    return timezone.now() + timezone.timedelta(days=1)
+
+
+# def dtime_prog_bar():
+#     dtime_date = datetime.date(dtime)
+#     tday = datetime.date.today()
+#     till_day = dtime_date - tday
+#     return(till_day.total_seconds())
+
+
 class Item(models.Model):
     image = models.ImageField(upload_to='profile_pics', default='default.jpg')
     name = models.CharField(max_length=100)
@@ -12,7 +23,7 @@ class Item(models.Model):
     price = models.IntegerField()
     start_date = models.DateTimeField(auto_now=True)
     in_auction = models.BooleanField()
-    end_date = models.DateTimeField(auto_now=True)
+    end_date = models.DateTimeField(default=dtime)
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
     sold = models.BooleanField(null=True)
     buyer = models.ForeignKey(
