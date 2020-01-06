@@ -12,9 +12,12 @@
     <div class="col-md-6">
      <img class="img-fluid" src="{{ object.image.url }}">
      <h5 class="pt-4 text-center">Item Specification</h5>
-     <p class="pt-2 mb-2 text-center"><span class="key-item-detail">Condition: </span>Very Good</p>
-     <p class="mb-2 text-center"><span class="key-item-detail">Origin Country: </span>China</p>
-     <p class="text-center"><span class="key-item-detail">Manufactured by: </span>Nation</p>
+     <p class="pt-2 mb-2 text-center"><span class="key-item-detail">Condition:
+     </span>Very Good</p>
+     <p class="mb-2 text-center"><span class="key-item-detail">Origin Country:
+     </span>China</p>
+     <p class="text-center"><span class="key-item-detail">Manufactured by:
+     </span>Nation</p>
     </div>
     <div class="col-md-6 pt-4">
      <h3 class="text-center">{{ object.name }}</h3>
@@ -62,136 +65,112 @@
        {% endif %}
       {% endif %}
 
-                        <div class="col-12 pt-5">
-                            <p class="mb-1"><span class="key-item-detail">Postage: </span>
-                                <i class="fas fa-euro-sign"></i>
-                                18.04 (approx. EUR 21.05) Express delivery to Ireland
-                            </p>
-                            <p class="mb-1 mt-2"><span class="key-item-detail">Delivery: </span>8 - 14 days</p>
-                            <p class="mb-0"><span class="key-item-detail">Payments:
-                            </span> <img id="img-paypal" src="{% static 'img/paypal.png' %}"></p>
-                            <p><span class="key-item-detail">Return: </span>30 days</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row pt-4 pl-3 pl-md-5">
-                <h5 class="pb-2 col-12 text-center">History</h5>
-                <p class="pr-5">
-                    4 Well-Known Traditional Chinese Clothes Types. ... The Hanfu, Zhongshan suit (Mao suit), Tang suit, and cheongsam (qipao) are the four most distinctive types of traditional Chinese clothing.
-                    4 Well-Known Traditional Chinese Clothes Types
-                    Each country in the world has its own unique traditional clothes, from which people are able to distinguish one country from another, and so it has been with China.
-
-                    The Hanfu, Zhongshan suit (Mao suit), Tang suit, and cheongsam (qipao) are the four most distinctive types of traditional Chinese clothing.
-
-                    1. Hanfu hanfu
-                    The Hanfu (' Han clothing' — the majority of Chinese are of Han ethnicity) is the oldest of China's traditional clothes. Legend traces it back to over 4,000 years ago when Huangdi's consort, Leizu, made cloth with silk. It was
-                    constantly improved throughout several dynasties. Until the Han Dynasty, the Hanfu was adopted and vigorously promoted by the ruling class. It then became the national clothing of the Han ethnic people. It also had a
-                    far-reaching influence on neighboring Asian countries, such as Korea, Japan, and Vietnam. 2. Zhongshan Suit...
-                </p>
-            </div>
-        </div>
-
-        <div class="col-12 col-md-4 border-left">
-            <h5 class="pt-3 text-center">Bid History</h5>
-
-    <div id='progressbar'></div>
-
-            {% for bid in bids %}
-            <div class="row pt-3">
-                <p class="bid-icon col-4 mb-0 text-center fas fa-user-alt"></p>
-                <p class="bid-icon col-4 mb-0 text-center fas fa-euro-sign"></p>
-                <p class="bid-icon col-4 mb-0 text-center far fa-clock"></p>
-                <p class="col-4 mb-0 text-center">{{ bid.bidder }}</p>
-                <p class="col-4 mb-0 text-center">{{ bid.amount }}</p>
-                <p class="col-4 mb-0 text-center"> {{ bid.date|date:"d M Y, H:i:s" }}</p>
-            </div>
-            <hr class="my-1">
-            {% endfor %}
-        </div>
+      <div class="col-12 pt-5">
+       <p class="mb-1"><span class="key-item-detail">Postage: </span>
+        <i class="fas fa-euro-sign"></i>
+        18.04 (approx. EUR 21.05) Express delivery to Ireland
+       </p>
+       <p class="mb-1 mt-2"><span class="key-item-detail">Delivery: </span>8 - 14 days</p>
+       <p class="mb-0"><span class="key-item-detail">Payments:
+        </span> <img id="img-paypal" src="{% static 'img/paypal.png' %}"></p>
+       <p><span class="key-item-detail">Return: </span>30 days</p>
+      </div>
+     </div>
     </div>
-</div>
+            </div><!-- ?????????  -->
 
+    <div class="row pt-4 pl-3 pl-md-5">
+     <h5 class="pb-2 col-12 text-center">History</h5>
+     <p class="pr-5">
+     4 Well-Known Traditional Chinese Clothes Types.
+     The Hanfu, Zhongshan suit (Mao suit), Tang suit,
+     and cheongsam (qipao) are the four most distinctive
+     types of traditional Chinese clothing.
+     4 Well-Known Traditional Chinese Clothes Types
+     Each country in the world has its own unique traditional clothes,
+     from which people are able to distinguish one country from another,
+     and so it has been with China.
+     The Hanfu, Zhongshan suit (Mao suit), Tang suit, and cheongsam (qipao) are
+     the four most distinctive types of traditional Chinese clothing.
+     1. Hanfu hanfu
+     The Hanfu (' Han clothing' — the majority of Chinese are of Han ethnicity)
+     is the oldest of China's traditional clothes.
+     Legend traces it back to over 4,000 years ago when Huangdi's consort,
+     Leizu, made cloth with silk. It was
+     constantly improved throughout several dynasties.
+     Until the Han Dynasty, the Hanfu was adopted and vigorously promoted by
+     the ruling class. It then became the national clothing of the Han ethnic people.
+     It also had a far-reaching influence on neighboring Asian countries,
+     such as Korea, Japan, and Vietnam. 2. Zhongshan Suit...
+     </p>
+    </div>
 
+        </div><!-- ?????????  -->
+
+    <div class="col-12 col-md-4 border-left">
+     <h5 class="pt-3 text-center">Bid History</h5>
+     <div class="row">
+      <div id='progressbar'>
+       <p class="col-8 offset-4">Time Left</p>
+      </div>
+     </div>
+     <div class="row">
+      <p id="start-date" class="col-12 justify-content-center">Start date: {{ object.start_date|date:"F d, Y H:i:s" }}</p>
+     </div>
+     {% for bid in bids %}
+     <div class="row pt-3">
+      <p class="bid-icon col-4 mb-0 text-center fas fa-user-alt"></p>
+      <p class="bid-icon col-4 mb-0 text-center fas fa-euro-sign"></p>
+      <p class="bid-icon col-4 mb-0 text-center far fa-clock"></p>
+      <p class="col-4 mb-0 text-center">{{ bid.bidder }}</p>
+      <p class="col-4 mb-0 text-center">{{ bid.amount }}</p>
+      <p class="col-4 mb-0 text-center"> {{ bid.date|date:"d M Y, H:i:s" }}</p>
+     </div>
+     <hr class="my-1">
+     {% endfor %}
+    </div>
+
+    </div><!-- ?????????  -->
 
 <form method="POST">
-    {% csrf_token %}
-    <div class="modal fade" id="bid-form" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">EUR 67</h5>
-                    <p>8d 2h 55m | 33 bids<p>
-                            <button type="button" class="close"
-                            data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row ml-2">
-                        <button type="button"
-                        class="col-3 ml-4 p-2 btn btn-outline-primary">
-                        Eur {{ object.price|add:1 }} Bid</button>
-                        <button type="button"
-                        class="col-3 ml-4 p-2 btn btn-outline-primary">
-                        Eur {{ object.price|add:2 }} Bid</button>
-                        <button type="button"
-                        class="col-3 ml-4 p-2 btn btn-outline-primary">
-                        Eur {{ object.price|add:4 }} Bid</button>
-                    </div>
-                    <hr class="py-2 mt-3 mb-0">
-                    <div class="row ml-5 mb-3">
-                        <div class="col-6">
-                            {{form|crispy}}
-                        </div>
-                        <button id="bid-btn" type="submit"
-                        name="bid_form"
-                        class="col-3 ml-2 btn btn-primary">
-                        Bid</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
-<script src="{% static 'js/progress-bar.js' %}"></script>
-<!-- <form method="POST">
-    {% csrf_token %}
-    <div class="modal fade" id="buy-form" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">EUR 67</h5>
-                    <p>You are about to buy... <p>
-                        <button type="button" class="close"
-                            data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row ml-5 mb-3">
-                        <button id="bid-btn" type="submit"
-                        class="col-3 ml-2 btn btn-outline-danger">
-                        Cancel</button>
-                        <button id="bid-btn" type="submit"
-                        name="buy_form"
-                        class="col-3 ml-2 btn btn-outline-primary">
-                        Buy</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</form> -->
-<!-- <form method="POST">
 {% csrf_token %}
+ <div class="modal fade" id="bid-form" tabindex="-1" role="dialog"
+ aria-labelledby="exampleModalLabel" aria-hidden="true">
+ <div class="modal-dialog" role="document">
+ <div class="modal-content">
+  <div class="modal-header">
+   <h5 class="modal-title" id="exampleModalLabel">EUR 67</h5>
+   <p>8d 2h 55m | 33 bids<p>
+   <button type="button" class="close"
+   data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+   </button>
+  </div>
+  <div class="modal-body">
+   <div class="row ml-2">
+    <button type="button"
+    class="col-3 ml-4 p-2 btn btn-outline-primary">
+    Eur {{ object.price|add:1 }} Bid</button>
+    <button type="button"
+    class="col-3 ml-4 p-2 btn btn-outline-primary">
+    Eur {{ object.price|add:2 }} Bid</button>
+    <button type="button"
+    class="col-3 ml-4 p-2 btn btn-outline-primary">
+    Eur {{ object.price|add:4 }} Bid</button>
+   </div>
+   <hr class="py-2 mt-3 mb-0">
+   <div class="row ml-5 mb-3">
+    <div class="col-6">
+    {{form|crispy}}
+    </div>
+    <button id="bid-btn" type="submit" name="bid_form"
+    class="col-3 ml-2 btn btn-primary">Bid</button>
+    </div>
+   </div>
+  </div>
+  </div>
+ </div>
+</form>
 
-<div class="row">
-     {{form.as_p}}
-    <button type="submit" class="col-4 ml-2 btn btn-primary">Bid</button>
-</div>
-</form> -->
+<script src="{% static 'js/progress-bar.js' %}"></script>
 {% endblock content %}

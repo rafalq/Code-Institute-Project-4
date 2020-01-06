@@ -4,7 +4,8 @@
  *  @param duration the duration of the timer example: '10s'
  *  @param callback, optional function which is called when the progressbar reaches 0.
  */
- // Use the end_date from the Item django model
+
+// Use the end_date from the Item django model
 var endDate = document.getElementById("timer").innerHTML;
 // Set the date we're counting down to
 var countDownDate = new Date(endDate).getTime();
@@ -39,8 +40,10 @@ function createProgressbar(id, duration, callback) {
   progressbarinner.style.animationPlayState = 'running';
 }
 
+
 addEventListener('load', function() {
   createProgressbar('progressbar', secondsStr, function() {
     alert('Time is up!');
   });
 });
+
