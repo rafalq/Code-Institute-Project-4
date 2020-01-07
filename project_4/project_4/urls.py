@@ -28,7 +28,7 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('', include('auction_store.urls')),
-    path('profile/storage/', UserItemListView.as_view(), name='storage'),
+    path('profile/history/', UserItemListView.as_view(), name='history'),
 ]
 
 if settings.DEBUG:

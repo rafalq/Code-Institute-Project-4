@@ -68,7 +68,7 @@
                 <li class="nav-item pt-md-1 px-md-3">
                     <a class="nav-link" href="{% url 'item-create' %}" role="button"
                     data-toggle="tooltip" data-placement="bottom" title="Sell">
-                        <i class="nav-item fas fa-hand-holding-usd"></i>
+                        <i class="nav-item fas fa-ad"></i>
                     </a>
                 </li>
                 <li class="nav-item pt-md-1">
@@ -79,9 +79,10 @@
                     </a>
                 </li>
                 <li class="nav-item pt-md-1 px-md-3">
-                    <a class="nav-link" href="{% url 'storage' %}" role="button" data-toggle="tooltip"
-                    data-placement="bottom" title="Storage">
-                        <i class="nav-item fas fa-boxes"></i>
+                    <a class="nav-link" href="{% url 'history' %}"
+                    role="button" data-toggle="tooltip"
+                    data-placement="bottom" title="History">
+                        <i class="nav-item fas fa-history"></i>
                     </a>
                 </li>
                 <li class="nav-item pt-md-1 pr-md-3">
@@ -135,59 +136,59 @@
     {% endblock %}
 
     <!-- Footer -->
-    <footer class="footer bg-light py-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
-                    <ul class="list-inline mb-2">
-                        <li class="list-inline-item">
-                            <a href="#">About</a>
-                        </li>
-                        <li class="list-inline-item">&sdot;</li>
-                        <li class="list-inline-item">
-                            <a href="#">Contact</a>
-                        </li>
-                        <li class="list-inline-item">&sdot;</li>
-                        <li class="list-inline-item">
-                            <a href="#">Terms of Use</a>
-                        </li>
-                        <li class="list-inline-item">&sdot;</li>
-                        <li class="list-inline-item">
-                            <a href="#">Privacy Policy</a>
-                        </li>
-                    </ul>
-                    <p class="text-muted small mb-4 mb-lg-0">
-                    &copy; Your Website 2019. All Rights Reserved.</p>
-                </div>
-                <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
-                    <ul class="list-inline mb-0">
-                        <li class="list-inline-item mr-3">
-                            <a href="#">
-                                <i class="fab fa-facebook fa-2x fa-fw"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item mr-3">
-                            <a href="#">
-                                <i class="fab fa-twitter-square fa-2x fa-fw"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fab fa-instagram fa-2x fa-fw"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
+<footer class="footer bg-light py-4">
+ <div class="container">
+  <div class="row">
+   <div class="col-lg-6 h-100 text-center text-lg-left my-auto pb-md-4">
+    <ul class="list-inline mb-2">
+     <li class="list-inline-item">
+      <a href="#">About</a>
+     </li>
+     <li class="list-inline-item">&sdot;</li>
+     <li class="list-inline-item">
+      <a href="#">Contact</a>
+     </li>
+     <li class="list-inline-item">&sdot;</li>
+     <li class="list-inline-item">
+      <a href="#">Terms of Use</a>
+     </li>
+     <li class="list-inline-item">&sdot;</li>
+     <li class="list-inline-item">
+      <a href="#">Privacy Policy</a>
+     </li>
+    </ul>
+    <p class="text-muted small mb-4 mb-lg-0">
+    &copy; Your Website 2019. All Rights Reserved.
+    </p>
+   </div>
+   <div class="col-lg-6 h-100 text-center text-lg-right my-auto pb-md-2">
+    <ul class="list-inline mb-0">
+     <li class="list-inline-item mr-3">
+      <a href="#">
+      <i class="fab fa-facebook fa-2x fa-fw"></i>
+      </a>
+     </li>
+     <li class="list-inline-item mr-3">
+      <a href="#">
+      <i class="fab fa-twitter-square fa-2x fa-fw"></i>
+      </a>
+     </li>
+     <li class="list-inline-item">
+      <a href="#">
+      <i class="fab fa-instagram fa-2x fa-fw"></i>
+      </a>
+     </li>
+    </ul>
+   </div>
+  </div>
+ </div>
+</footer>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="{% static 'js/jquery.min.js' %}"></script>
-    <script src="{% static 'bootstrap/bootstrap.bundle.min.js' %}"></script>
+<!-- Bootstrap core JavaScript -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'bootstrap/bootstrap.bundle.min.js' %}"></script>
+<!-- JavaScript-->
+<script src="{% static 'js/script.js' %}"></script>
 
-    <!-- JavaScript-->
-    <script src="{% static 'js/script.js' %}"></script>
 </body>
-
 </html>

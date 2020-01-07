@@ -5,26 +5,32 @@
 <link rel="stylesheet" href="{% static 'css/progress-bar.css' %}">
 
 <div class="container-fluid pt-3">
-<!-- container -->
- <div class="row">
-  <div class="col-12 col-md-8">
-   <div class="row">
+ <div class="row"><!-- top row -->
+
+  <div class="col-12 col-md-8"><!-- top col-12 -->
+   <div class="row"><!-- item-spec row -->
+
     <div class="col-md-6">
-     <img class="img-fluid" src="{{ object.image.url }}">
+     <img class="img-fluid ml-3" src="{{ object.image.url }}">
      <h5 class="pt-4 text-center">Item Specification</h5>
-     <p class="pt-2 mb-2 text-center"><span class="key-item-detail">Condition:
-     </span>Very Good</p>
-     <p class="mb-2 text-center"><span class="key-item-detail">Origin Country:
-     </span>China</p>
-     <p class="text-center"><span class="key-item-detail">Manufactured by:
-     </span>Nation</p>
+     <p class="pt-2 mb-2 text-center">
+      <span class="key-item-detail">Condition:
+      </span>Very Good</p>
+     <p class="mb-2 text-center">
+      <span class="key-item-detail">Origin Country:
+      </span>China</p>
+     <p class="text-center">
+      <span class="key-item-detail">Manufactured by:
+      </span>Nation</p>
     </div>
+
     <div class="col-md-6 pt-4">
      <h3 class="text-center">{{ object.name }}</h3>
      <div class="row pt-4">
-
       {% if object.sold %}
        <img class="img-fluid" src="{% static 'img/sold.png' %}">
+      <!-- {% elif object.in_auction and object.today_date >=  object.finish_date %}
+       <img class="img-fluid" src="{% static 'img/sold.png' %}"-->
       {% else %}
        {% if object.seller ==  user %}
         <div class="col-6">
@@ -70,18 +76,18 @@
         <i class="fas fa-euro-sign"></i>
         18.04 (approx. EUR 21.05) Express delivery to Ireland
        </p>
-       <p class="mb-1 mt-2"><span class="key-item-detail">Delivery: </span>8 - 14 days</p>
+       <p class="mb-1 mt-2">
+        <span class="key-item-detail">Delivery: </span>8 - 14 days</p>
        <p class="mb-0"><span class="key-item-detail">Payments:
         </span> <img id="img-paypal" src="{% static 'img/paypal.png' %}"></p>
        <p><span class="key-item-detail">Return: </span>30 days</p>
       </div>
      </div>
     </div>
-            </div><!-- ?????????  -->
 
-    <div class="row pt-4 pl-3 pl-md-5">
-     <h5 class="pb-2 col-12 text-center">History</h5>
-     <p class="pr-5">
+    <div class="row pt-4 m-1 mx-4">
+     <h5 class="pb-2 col-12 m-0 pl-0">History</h5>
+     <p class="#">
      4 Well-Known Traditional Chinese Clothes Types.
      The Hanfu, Zhongshan suit (Mao suit), Tang suit,
      and cheongsam (qipao) are the four most distinctive
@@ -105,17 +111,33 @@
      </p>
     </div>
 
-        </div><!-- ?????????  -->
+   </div><!-- item-spec row -->
+  </div><!-- top col-12 -->
 
+    {% if object.in_auction %}
     <div class="col-12 col-md-4 border-left">
      <h5 class="pt-3 text-center">Bid History</h5>
      <div class="row">
-      <div id='progressbar'>
-       <p class="col-8 offset-4">Time Left</p>
+      {% if object.seller ==  user %}
+       <p id="timer" class="col-12 mb-0 text-center">
+        {{ object.end_date|date:"F d, Y H:i:s" }}
+       </p>
+      {% endif %}
+      <div class="container my-2">
+       {% if object.today_date >= object.finish_date %}
+       <p>SOLD</p>
+       {% else %}
+       <div id="progress-bar"></div>
+       {% endif %}
       </div>
      </div>
-     <div class="row">
-      <p id="start-date" class="col-12 justify-content-center">Start date: {{ object.start_date|date:"F d, Y H:i:s" }}</p>
+     <div class="row my-2">
+      <p id="start-date" class="col-12 text-center">
+      Start date: {{ object.start_date|date:"F d, Y H:i:s" }}
+      </p>
+      <p id="start-date" class="col-12 text-center">
+      End Date: {{ object.end_date|date:"F d, Y H:i:s" }}
+      </p>
      </div>
      {% for bid in bids %}
      <div class="row pt-3">
@@ -129,9 +151,11 @@
      <hr class="my-1">
      {% endfor %}
     </div>
+    {% endif %}
+ </div><!--top row  -->
+</div><!--container  -->
 
-    </div><!-- ?????????  -->
-
+<!--MODAL-->
 <form method="POST">
 {% csrf_token %}
  <div class="modal fade" id="bid-form" tabindex="-1" role="dialog"
@@ -171,6 +195,30 @@
   </div>
  </div>
 </form>
+
+<script>
+// Use the end_date from the Item django model
+var endDate = document.getElementById("timer").innerHTML;
+var startDate = document.getElementById("start-date").innerHTML;
+
+// Set the date we're counting down to
+var countDownDate = new Date(endDate).getTime();
+var startCountDownDate = new Date(startDate).getTime();
+var tday = new Date().getTime();
+
+var timeFromStart = Math.floor((countDownDate - startCountDownDate)/ 1000);
+var timeLeft = Math.floor((countDownDate - tday) / 1000);
+var progressNow = Math.floor((timeLeft * 100) / timeFromStart) ;
+
+//change for a string to be able to use as an arg in the functions
+var progressStr = progressNow + "%";
+var progressBar = document.getElementById("progress-bar")
+progressBar.style.width = progressStr;
+
+// window.setTimeout(function(){
+//  location.href = "http://localhost:8000/store";
+//  }, 3000); // refresh/redirect after the time
+</script>
 
 <script src="{% static 'js/progress-bar.js' %}"></script>
 {% endblock content %}

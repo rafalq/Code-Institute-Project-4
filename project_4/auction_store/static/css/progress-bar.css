@@ -1,64 +1,11 @@
-.progressbar {
-  width: 80%;
-  float: right;
-  margin: 25px auto;
+.container {
+  height: 30px;
 }
+.container #progress-bar {
+  height: 100%;
+  -webkit-transition-property: width;-webkit-transition-duration: 10s;
+  -webkit-transition-timing-function: linear;
+  transition-property: width;
+  transition-timing-function: linear;
 
-.progressbar .inner {
-  height: 20px;
-
-  animation: progressbar-countdown;
-  /* Placeholder, this will be updated using javascript */
-  animation-duration: 0s;
-  /* We stop in the end */
-  animation-iteration-count: 1;
-  /* Stay on pause when the animation is finished finished */
-  animation-fill-mode: forwards;
-  /* We start paused, we start the animation using javascript */
-  animation-play-state: paused;
-  /* We want a linear animation, ease-out is standard */
-  animation-timing-function: linear;
-}
-
-
-@keyframes progressbar-countdown {
-  0% {
-    width: 100%;
-    background: #00FF00;
-  }
-  10% {
-    width: 90%;
-    background: #7CFC00;
-  }
-  20% {
-    width: 80%;
-    background: #ADFF2F;
-  }
-  30% {
-    width: 70%;
-    background: #FFFF00;
-  }
-  40% {
-    width: 60%;
-    background: #FFD700;
-  }
-  50% {
-    width: 50%;
-    background: #FFA500;
-  }60% {
-    width: 40%;
-    background: #FF8C00;
-  }70% {
-    width: 30%;
-    background: #FF4500;
-  }80% {
-    width: 20%;
-    background: #FF4500;
-  }90% {
-    width: 10%;
-    background: #FF0000;
-  }100% {
-    width: 0%;
-    background: #FF0000;
-  }
 }

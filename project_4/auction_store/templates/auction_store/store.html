@@ -153,8 +153,9 @@
                     <p><span class="text-muted">from</span> <span class="font-italic">{{ item.seller }}</span></p>
                     <p class="text-center"><i class="fas fa-euro-sign"></i> {{ item.price }}</p>
                     {% if item.sold %}
-                        <img class="img-fluid" src="{% static 'img/sold.png' %}">
-                    {% else %}
+
+    <img class="img-fluid" src="{% static 'img/sold.png' %}">
+      {% else %}
                         <p class="card-text">{{ item.desc }}</p>
                     {% endif %}
                 </div>

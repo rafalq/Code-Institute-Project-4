@@ -16,6 +16,12 @@ from .models import Bid, Item
 from django.urls import reverse
 from django.contrib import messages
 import datetime
+from background_task import background
+
+
+@background(schedule=30)
+def test():
+    return render(request, 'auction_store/home.html')
 
 
 def home(request):
@@ -38,7 +44,8 @@ class ItemDetailView(FormMixin, LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ItemDetailView, self).get_context_data(**kwargs)
-        context['bids'] = Bid.objects.filter(item=self.object)
+        context['bids'] = Bid.objects.filter(
+            item=self.object).order_by('-id')
         context['form'] = BidForm(initial={'item': self.object})
         return context
 
@@ -67,6 +74,13 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.seller = self.request.user
         return super().form_valid(form)
+
+    # @background(schedule=5)
+    # def auction_sell(item_id):
+    #     item = Item.objects.get(pk=item_id)
+    #     item.update(sold=True)
+
+    # auction_sell(item.id)
 
 
 class ItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -97,7 +111,6 @@ class ItemDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 class ItemBuyUpdateView(LoginRequiredMixin, UpdateView):
     model = Item
-    # fields = ['sold']
     form_class = BuyForm
     template_name = 'auction_store/buy_form.html'
 
