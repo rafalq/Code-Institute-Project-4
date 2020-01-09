@@ -22,6 +22,6 @@ urlpatterns = [
          ItemDeleteView.as_view(), name='item-delete'),
     path('store/item/<int:pk>/buy/',
          ItemBuyUpdateView.as_view(), name='buy'),
-    path('store/test', views.test, name='test'),
+    # path('store/test', views.test, name='test'),
     # # path('store/item/<int:pk>/bid', BidCreateView.as_view(), name='bid-create'),
 ]

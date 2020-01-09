@@ -5,13 +5,23 @@
 <link rel="stylesheet" href="{% static 'css/progress-bar.css' %}">
 
 <div class="container-fluid pt-3">
+{% if messages %}
+ {% for message in messages %}
+  <div class="container m-auto mt-3 text-center">
+   <div class="alert alert-{{ message.tags }}">
+    {{ message }}
+   </div>
+  </div>
+ {% endfor %}
+{% endif %}
+
  <div class="row"><!-- top row -->
 
-  <div class="col-12 col-md-8"><!-- top col-12 -->
+  <div class="col-md-8"><!-- top col-12 -->
    <div class="row"><!-- item-spec row -->
 
-    <div class="col-md-6">
-     <img class="img-fluid ml-3" src="{{ object.image.url }}">
+    <div class="col-12 col-md-6">
+     <img class="img-fluid ml-md-3 col-12" src="{{ object.image.url }}">
      <h5 class="pt-4 text-center">Item Specification</h5>
      <p class="pt-2 mb-2 text-center">
       <span class="key-item-detail">Condition:
@@ -28,7 +38,7 @@
      <h3 class="text-center">{{ object.name }}</h3>
      <div class="row pt-4">
       {% if object.sold %}
-       <img class="img-fluid" src="{% static 'img/sold.png' %}">
+       <img class="img-fluid" src="{% static 'img/sold-out.png' %}">
       <!-- {% elif object.in_auction and object.today_date >=  object.finish_date %}
        <img class="img-fluid" src="{% static 'img/sold.png' %}"-->
       {% else %}
@@ -138,7 +148,9 @@
       <p id="start-date" class="col-12 text-center">
       End Date: {{ object.end_date|date:"F d, Y H:i:s" }}
       </p>
+      <p class="col-12 text-center">Starting Bid: <strong>EUR {{ object.start_auction_price}}</strong></p>
      </div>
+
      {% for bid in bids %}
      <div class="row pt-3">
       <p class="bid-icon col-4 mb-0 text-center fas fa-user-alt"></p>
@@ -163,8 +175,15 @@
  <div class="modal-dialog" role="document">
  <div class="modal-content">
   <div class="modal-header">
-   <h5 class="modal-title" id="exampleModalLabel">EUR 67</h5>
-   <p>8d 2h 55m | 33 bids<p>
+  {% for bid in bids %}
+   {% if forloop.first %}
+   <h5 class="modal-title" id="exampleModalLabel">EUR {{ bid.amount }}</h5>
+   {% endif %}
+  {% endfor %}
+  {% if not bids %}
+   <h5 class="modal-title" id="exampleModalLabel">EUR {{ object.start_auction_price}}</h5>
+  {% endif %}
+   <p>{{ object.end_date|date:"F d, Y H:i:s" }} | {{ bids.count }} Bids<p>
    <button type="button" class="close"
    data-dismiss="modal" aria-label="Close">
     <span aria-hidden="true">&times;</span>
@@ -172,15 +191,36 @@
   </div>
   <div class="modal-body">
    <div class="row ml-2">
-    <button type="button"
-    class="col-3 ml-4 p-2 btn btn-outline-primary">
-    Eur {{ object.price|add:1 }} Bid</button>
-    <button type="button"
-    class="col-3 ml-4 p-2 btn btn-outline-primary">
-    Eur {{ object.price|add:2 }} Bid</button>
-    <button type="button"
-    class="col-3 ml-4 p-2 btn btn-outline-primary">
-    Eur {{ object.price|add:4 }} Bid</button>
+    {% for bid in bids %}
+     {% if forloop.first %}
+      <button type="button"
+      class="fixed-btn col-3 ml-4 p-2 btn btn-outline-primary">
+      EUR {{ bid.amount|add:1 }}
+      </button>
+      <button type="button"
+      class="fixed-btn col-3 ml-4 p-2 btn btn-outline-primary">
+      EUR {{ bid.amount|add:2 }}
+      </button>
+      <button type="button"
+      class="fixed-btn col-3 ml-4 p-2 btn btn-outline-primary">
+      EUR {{ bid.amount|add:4 }}
+      </button>
+     {% endif %}
+    {% endfor %}
+    {% if not bids %}
+      <button type="button"
+      class="fixed-btn col-3 ml-4 p-2 btn btn-outline-primary">
+      EUR {{ object.start_auction_price|add:1 }}
+      </button>
+      <button type="button"
+      class="fixed-btn col-3 ml-4 p-2 btn btn-outline-primary">
+      EUR {{ object.start_auction_price|add:2 }}
+      </button>
+      <button type="button"
+      class="fixed-btn col-3 ml-4 p-2 btn btn-outline-primary">
+      EUR {{ object.start_auction_price|add:4 }}
+      </button>
+     {% endif %}
    </div>
    <hr class="py-2 mt-3 mb-0">
    <div class="row ml-5 mb-3">
@@ -214,6 +254,31 @@ var progressNow = Math.floor((timeLeft * 100) / timeFromStart) ;
 var progressStr = progressNow + "%";
 var progressBar = document.getElementById("progress-bar")
 progressBar.style.width = progressStr;
+
+var fixedAmountBtn = document.getElementsByClassName("fixed-btn")
+var amountInput = document.getElementById("id_amount")
+
+for(var i = 0; i < fixedAmountBtn.length; i++){
+  fixedAmountBtn[i].addEventListener("click", function(){
+  var btnStr = this.textContent;
+  var x = btnStr.split(" ");
+  var bidAmount = parseInt(x[7])
+  amountInput.value = bidAmount;
+  });
+}
+
+
+
+var bidBtn = document.getElementById("bid-btn");
+
+bidBtn.addEventListener("click", function(){
+  var modalLabel = document.getElementById("exampleModalLabel").innerHTML;
+  var x = modalLabel.split(" ");
+  var bidAmount = parseInt(x[1]);
+  if (amountInput.value <= bidAmount){
+    alert("Offer must be higher than the last bid!");
+  }
+  });
 
 // window.setTimeout(function(){
 //  location.href = "http://localhost:8000/store";

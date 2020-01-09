@@ -6,8 +6,8 @@ from PIL import Image
 import datetime
 
 
-def dtime():
-    return timezone.now() + timezone.timedelta(days=1)
+# def dtime():
+#     return timezone.now() + timezone.timedelta(days=1)
 
 
 class Item(models.Model):
@@ -17,6 +17,7 @@ class Item(models.Model):
     price = models.IntegerField()
     start_date = models.DateTimeField(auto_now=True)
     in_auction = models.BooleanField(default=False)
+    start_auction_price = models.IntegerField(null=True, blank=True)
     end_date = models.DateTimeField(null=True, blank=True)
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
     sold = models.BooleanField(null=True)

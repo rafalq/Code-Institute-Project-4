@@ -16,12 +16,8 @@ from .models import Bid, Item
 from django.urls import reverse
 from django.contrib import messages
 import datetime
-from background_task import background
 
-
-@background(schedule=30)
-def test():
-    return render(request, 'auction_store/home.html')
+# from .tasks import end_auction
 
 
 def home(request):
@@ -58,9 +54,19 @@ class ItemDetailView(FormMixin, LoginRequiredMixin, DetailView):
             return self.form_invalid(form)
 
     def form_valid(self, form):
-        form.instance.item = self.object
-        form.instance.bidder = self.request.user
-        form.save()
+        bids = Bid.objects.filter(
+            item=self.object)
+        if not bids and form.instance.amount > self.object.start_auction_price:
+            form.instance.item = self.object
+            form.instance.bidder = self.request.user
+            form.save()
+        elif form.instance.amount > Bid.objects.last().amount:
+            form.instance.item = self.object
+            form.instance.bidder = self.request.user
+            form.save()
+        else:
+            return super(ItemDetailView, self).form_invalid(form)
+
         return super(ItemDetailView, self).form_valid(form)
 
     def get_absolute_url(self):
@@ -69,23 +75,20 @@ class ItemDetailView(FormMixin, LoginRequiredMixin, DetailView):
 
 class ItemCreateView(LoginRequiredMixin, CreateView):
     model = Item
-    fields = ['image', 'name', 'desc', 'price', 'in_auction']
+    fields = ['image', 'name', 'desc', 'price',
+              'in_auction', 'start_auction_price']
 
     def form_valid(self, form):
-        form.instance.seller = self.request.user
-        return super().form_valid(form)
-
-    # @background(schedule=5)
-    # def auction_sell(item_id):
-    #     item = Item.objects.get(pk=item_id)
-    #     item.update(sold=True)
-
-    # auction_sell(item.id)
+        if form.instance.in_auction and form.instance.start_auction_price == None:
+            return super().form_invalid(form)
+        else:
+            form.instance.seller = self.request.user
+            return super().form_valid(form)
 
 
 class ItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Item
-    fields = ['image', 'name', 'desc', 'price', 'in_auction']
+    fields = ['image', 'name', 'desc', 'price']
 
     def form_valid(self, form):
         form.instance.seller = self.request.user
@@ -118,3 +121,19 @@ class ItemBuyUpdateView(LoginRequiredMixin, UpdateView):
         form.instance.sold = True
         form.instance.buyer = self.request.user
         return super().form_valid(form)
+
+# class WinAuctionUpdateView(LoginRequiredMixin, UpdateView):
+#     model = Item
+#     form_class = BuyForm
+#     template_name = 'auction_store/buy_form.html'
+
+#     def form_valid(self, form):
+#         form.instance.sold = True
+#         return super().form_valid(form)
+
+#     def get_context_data(self, **kwargs):
+#         context = super(ItemDetailView, self).get_context_data(**kwargs)
+#         context['bids'] = Bid.objects.filter(
+#             item=self.object).order_by('-id')
+#         context['form'] = BidForm(initial={'item': self.object})
+#         return context

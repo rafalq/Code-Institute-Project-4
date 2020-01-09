@@ -1,0 +1,396 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"bid",
+				"bidAmount"
+			],
+			[
+				"start",
+				"start_auction_price"
+			],
+			[
+				"do",
+				"document"
+			],
+			[
+				"bids",
+				"bids_set"
+			],
+			[
+				"pro",
+				"progressStr"
+			],
+			[
+				"star",
+				"startCountDownDate"
+			],
+			[
+				"seconds",
+				"secondsStr"
+			],
+			[
+				"progressbar",
+				"progressbarinner"
+			],
+			[
+				"p",
+				"progressbarinner"
+			],
+			[
+				"inner",
+				"innerHTML"
+			],
+			[
+				"prog",
+				"progressbar"
+			],
+			[
+				"crea",
+				"createElement"
+			],
+			[
+				"pr",
+				"progressbar"
+			],
+			[
+				"backgr",
+				"background-size\tproperty"
+			],
+			[
+				"background",
+				"background-color\tproperty"
+			],
+			[
+				"get",
+				"getElementById"
+			],
+			[
+				"count",
+				"countDownDate"
+			],
+			[
+				"end",
+				"endDate"
+			],
+			[
+				"it",
+				"item-detail"
+			],
+			[
+				"B",
+				"BuyForm"
+			],
+			[
+				"Succe",
+				"success"
+			],
+			[
+				"Bi",
+				"BidCreateView"
+			],
+			[
+				"item",
+				"item_bids"
+			],
+			[
+				"text",
+				"text-decoration\tproperty"
+			],
+			[
+				"dt_u",
+				"dt_utcnow"
+			],
+			[
+				"days",
+				"days_in_month"
+			],
+			[
+				"num",
+				"num_1"
+			],
+			[
+				"st",
+				"student_1"
+			],
+			[
+				"cs_",
+				"cs_courses_duplicated"
+			],
+			[
+				"so",
+				"sorted_courses"
+			],
+			[
+				"courses",
+				"courses_2"
+			],
+			[
+				"cor",
+				"courses"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"Ins",
+				"Package Control: Install Package"
+			],
+			[
+				"Install",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 186.0,
+		"history":
+		[
+			"first_module.py",
+			"python first_module.py",
+			"exit",
+			"exit()",
+			"quit()",
+			"print(\"First module: \" + __name__)",
+			"print(\"First module: \"__name__)",
+			"print(__name__)",
+			"python",
+			"mkdir python"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/Kupaczuk/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/users/forms.py",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/auction_store/templates/auction_store/item_form.html",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/project_4/settings.py",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/auction_store/forms.py",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/auction_store/templates/auction_store/item_detail.html",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/project_4/celery.py",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/project_4/__init__.py",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/auction_store/models.py",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/auction_store/views.py",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/auction_store/static/js/progress-bar.js",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/auction_store/static/js/script.js",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/users/views.py",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/project_4/urls.py",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/auction_store/templates/auction_store/base.html",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/users/templates/users/login.html",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/users/models.py",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/auction_store/urls.py",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/auction_store/migrations/0003_auto_20200107_1711.py",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/auction_store/migrations/0002_auto_20200105_1453.py",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/auction_store/migrations/0001_initial.py",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/users/migrations/0001_initial.py",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/auction_store/migrations/__init__.py",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/auction_store/apps.py",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/auction_store/templates/auction_store/store.html",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/auction_store/templates/auction_store/buy_form.html",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/auction_store/static/css/progress-bar.css",
+		"/C/Users/Kupaczuk/Desktop/count-percentage",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/auction_store/static/progress-bar/progress-bar.css",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/auction_store/static/progress-bar/progress-bar.js",
+		"/C/Users/Kupaczuk/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/users/templates/users/storage.html",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/users/templates/users/profile.html",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/users/apps.py",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/auction_store/templates/auction_store/home.html",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/auction_store/templates/auction_store/item_confirm_delete.html",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/auction_store/templates/auction_store/forms.py",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/users/templates/users/register.html",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/auction_store/static/css/main.css",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/auction_store/templates/auction_store/bid_form.html",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/auction_store/mixins.py",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/auction_store/templates/auction_store/item_auction.html",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/users/migrations/__init__.py",
+		"/C/Users/Kupaczuk/Desktop/python-schafer-test/datetime-module.py",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/auction_store/admin.py",
+		"/C/Users/Kupaczuk/Desktop/project-4/project_4/db.sqlite3",
+		"/C/Users/Kupaczuk/Desktop/python-schafer-test/integer-float.py",
+		"/C/Users/Kupaczuk/Desktop/time-counter/days-counter.py",
+		"/C/Users/Kupaczuk/Desktop/python-schafer-test/functions.py",
+		"/C/Users/Kupaczuk/Desktop/python-schafer-test/string.py",
+		"/C/Users/Kupaczuk/Desktop/python-schafer-test/dictionaries.py",
+		"/C/Users/Kupaczuk/Desktop/python-schafer-test/lists-tuples-sets/tuples.py",
+		"/C/Users/Kupaczuk/Desktop/python-schafer-test/lists-tuples-sets/sets.py",
+		"/C/Users/Kupaczuk/Desktop/python-schafer-test/lists-tuples-sets/lists.py",
+		"/C/Users/Kupaczuk/Desktop/python-schafer-test/loops-iterations.py",
+		"/C/Users/Kupaczuk/Desktop/python-schafer-test/conditionals-booleans.py",
+		"/C/Users/Kupaczuk/Desktop/test-sublime-packages/index.html",
+		"/C/Users/Kupaczuk/Desktop/python-schafer-test/lists-tuples-sets/empty-lists-tuples-sets.py",
+		"/C/Users/Kupaczuk/AppData/Roaming/Sublime Text 3/Packages/Emmet/Emmet.sublime-settings",
+		"/C/Users/Kupaczuk/AppData/Roaming/Sublime Text 3/Packages/User/Anaconda.sublime-settings",
+		"/C/Users/Kupaczuk/AppData/Roaming/Sublime Text 3/Packages/Anaconda/Anaconda.sublime-settings",
+		"/C/Users/Kupaczuk/Desktop/python-schafer-test/__name__/first_module.py",
+		"/C/Users/Kupaczuk/Desktop/python-schafer-test/__name__/first_class_function.py",
+		"/C/Users/Kupaczuk/Desktop/python-schafer-test/__name__/__name__.py",
+		"/C/Users/Kupaczuk/Desktop/python-schafer-test/__name__/second_module.py",
+		"/C/Users/Kupaczuk/Desktop/flask-blog/templates/home.html",
+		"/C/Users/Kupaczuk/Desktop/flask-blog/flaskblog.py",
+		"/C/Users/Kupaczuk/Desktop/python-schafer-test/__name__/second-module.py",
+		"/C/Users/Kupaczuk/Desktop/python-schafer-test/__name__/first-module.py",
+		"/C/Users/Kupaczuk/Desktop/flask-blog/templates/index.html"
+	],
+	"find":
+	{
+		"height": 36.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 36.0
+	},
+	"input":
+	{
+		"height": 74.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "apps.sublime-project",
+	"replace":
+	{
+		"height": 68.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 390.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

@@ -132,3 +132,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'auction_store-home'
 LOGIN_URL = 'login'
+
+CELERY_BROKER_URL = 'redis://h:p373761d9fc88db3a7d08f3dff09a78c6f16e723c1d87606d1ca3423b30e50957@ec2-52-30-174-7.eu-west-1.compute.amazonaws.com:9779'
+
+CELERY_ACCEPT_COTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
