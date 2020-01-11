@@ -1,0 +1,196 @@
+{% extends 'auction_store/base.html' %}
+{% block content %}
+{% load static %}
+<div class="container-fluid py-1"><!-- container-fluid -->
+ <!-- Search Table -->
+ <div class="row"><!--??????-->
+
+  <div class="col-12 col-md-3 mb-3 px-md-0">
+   <!-- Categories -->
+   <div class="table-section bg-light">
+    <h6 class="font-weight-bold btn btn-block"
+    data-target="#categories" data-toggle="collapse"
+    aria-haspopup="true" aria-expanded="false" aria-controls="collapseExample">
+    Categories<i class="fas fa-sort-down float-right"></i>
+    </h6>
+    <div id="categories" class="collapse show" aria-labelledby="dropdownMenuButton">
+     <ul class="list-group">
+      <li class="list-group-item d-flex justify-content-between
+      align-items-center py-1 px-4 border-0">
+       <input class="col-2" type="checkbox"
+       aria-label="Checkbox for following text input">
+       <p class="col-7 px-0 mb-0 text-center"><a href="#">Military</a></p>
+       <p class="mb-0">
+        <span class="col-3 badge badge-primary badge-pill">4676767</span>
+       </p>
+      </li>
+      <li class="list-group-item d-flex justify-content-between
+      align-items-center py-1 px-4 border-0">
+       <input class="col-2" type="checkbox"
+       aria-label="Checkbox for following text input">
+       <p class="col-7 px-0 mb-0 text-center"><a href="#">Private</a></p>
+       <p class="mb-0">
+        <span class="col-3 badge badge-primary badge-pill">4676767</span>
+       </p>
+      </li>
+      <li class="list-group-item d-flex justify-content-between
+      align-items-center py-1 px-4 border-0">
+       <input class="col-2" type="checkbox"
+       aria-label="Checkbox for following text input">
+       <p class="col-7 px-0 mb-0 text-center"><a href="#">Tools</a></p>
+       <p class="mb-0">
+        <span class="col-3 badge badge-primary badge-pill">4676767</span>
+       </p>
+      </li>
+      <li class="list-group-item d-flex justify-content-between
+      align-items-center py-1 px-4 border-0">
+       <input class="col-2" type="checkbox"
+       aria-label="Checkbox for following text input">
+       <p class="col-7 px-0 mb-0 text-center"><a href="#">Treasure</a></p>
+       <p class="mb-0">
+        <span class="col-3 badge badge-primary badge-pill">4676767</span>
+       </p>
+      </li>
+      <li class="list-group-item d-flex justify-content-between
+       align-items-center py-1 px-4 border-0">
+       <input class="col-2" type="checkbox"
+       aria-label="Checkbox for following text input">
+       <p class="col-7 px-0 mb-0 text-center"><a href="#">Writings</a></p>
+       <p class="mb-0">
+        <span class="col-3 badge badge-primary badge-pill">4676767</span>
+       </p>
+      </li>
+      <li class="list-group-item d-flex justify-content-between
+      align-items-center py-1 px-4 border-0">
+       <input class="col-2" type="checkbox"
+       aria-label="Checkbox for following text input">
+       <p class="col-7 px-0 mb-0 text-center"><a href="#">Other</a></p>
+       <p class="mb-0">
+        <span class="col-3 badge badge-primary badge-pill">4676767</span>
+       </p>
+      </li>
+     </ul>
+    </div>
+   </div>
+
+            <!-- Format -->
+  <div class="table-section bg-light">
+   <h6 class="font-weight-bold btn btn-block" data-target="#format" data-toggle="collapse" aria-haspopup="true" aria-expanded="false" aria-controls="collapseExample">Format
+   <i class="fas fa-sort-down float-right"></i>
+   </h6>
+   <div id="format" class="collapse show" aria-labelledby="dropdownMenuButton">
+    <ul class="list-group">
+     <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-4 border-0">
+      <input class="col-2" type="checkbox" aria-label="Checkbox for following text input">
+      <p class="col-7 px-0 mb-0 text-center"><a href="#">All Listings</a></p>
+      <p class="mb-0"><span class="col-3 badge badge-primary badge-pill">4676767</span></p>
+     </li>
+     <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-4 border-0">
+      <input class="col-2" type="checkbox" aria-label="Checkbox for following text input">
+      <p class="col-7 px-0 mb-0 text-center"><a href="#">Auction</a></p>
+      <p class="mb-0"><span class="col-3 badge badge-primary badge-pill">4676767</span></p>
+     </li>
+     <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-4 border-0">
+      <input class="col-2" type="checkbox" aria-label="Checkbox for following text input">
+      <p class="col-7 px-0 mb-0 text-center"><a href="#">Buy It Now</a></p>
+      <p class="mb-0"><span class="col-3 badge badge-primary badge-pill">4676767</span></p>
+     </li>
+    </ul>
+   </div>
+  </div>
+            <!-- Time -->
+  <div class="table-section bg-light">
+   <h6 class="font-weight-bold btn btn-block" data-target="#time" data-toggle="collapse" aria-haspopup="true" aria-expanded="false" aria-controls="collapseExample">Time
+    <i class="fas fa-sort-down float-right"></i>
+   </h6>
+    <div id="time" class="collapse show" aria-labelledby="dropdownMenuButton">
+     <ul class="list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-4 border-0">
+       <input class="col-2" type="checkbox" aria-label="Checkbox for following text input">
+       <p class="col-7 px-0 mb-0 text-center"><a href="#">Less Than 24h</a></p>
+       <p class="mb-0"><span class="col-3 badge badge-primary badge-pill">4676767</span></p>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-4 border-0">
+       <input class="col-2" type="checkbox" aria-label="Checkbox for following text input">
+       <p class="col-7 px-0 mb-0 text-center"><a href="#">3 Days</a></p>
+      <p class="mb-0"><span class="col-3 badge badge-primary badge-pill">4676767</span></p>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-4 border-0">
+       <input class="col-2" type="checkbox" aria-label="Checkbox for following text input">
+       <p class="col-7 px-0 mb-0 text-center"><a href="#">This Week</a></p>
+       <p class="mb-0"><span class="col-3 badge badge-primary badge-pill">4676767</span></p>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-4 border-0">
+       <input class="col-2" type="checkbox" aria-label="Checkbox for following text input">
+       <p class="col-7 px-0 mb-0 text-center"><a href="#">This Month</a></p>
+       <p class="mb-0"><span class="col-3 badge badge-primary badge-pill">4676767</span></p>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-4 border-0">
+       <input class="col-2" type="checkbox" aria-label="Checkbox for following text input">
+       <p class="col-7 px-0 mb-0 text-center"><a href="#">This Year</a></p>
+       <p class="mb-0"><span class="col-3 badge badge-primary badge-pill">4676767</span></p>
+      </li>
+     </ul>
+    </div>
+  </div>
+
+    <!-- Price -->
+  <div class="table-section bg-light">
+   <h6 class="font-weight-bold btn btn-block" data-target="#price" data-toggle="collapse" aria-haspopup="true" aria-expanded="false" aria-controls="collapseExample">Price
+    <i class="fas fa-sort-down float-right"></i>
+   </h6>
+    <div id="price" class="collapse show" aria-labelledby="dropdownMenuButton">
+     <ul class="list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-4 border-0">
+       <input class="col-2" type="checkbox" aria-label="Checkbox for following text input">
+       <p class="col-7 px-0 mb-0 text-center"><a href="#">0 - 50</a></p>
+       <p class="mb-0"><span class="col-3 badge badge-primary badge-pill">4676767</span></p>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-4 border-0">
+       <input class="col-2" type="checkbox" aria-label="Checkbox for following text input">
+       <p class="col-7 px-0 mb-0 text-center"><a href="#">50 - 100</a></p>
+       <p class="mb-0"><span class="col-3 badge badge-primary badge-pill">4676767</span></p>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-4 border-0">
+       <input class="col-2" type="checkbox" aria-label="Checkbox for following text input">
+       <p class="col-7 px-0 mb-0 text-center"><a href="#">100 - 300</a></p>
+       <p class="mb-0"><span class="col-3 badge badge-primary badge-pill">4676767</span></p>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-4 border-0">
+       <input class="col-2" type="checkbox" aria-label="Checkbox for following text input">
+       <p class="col-7 px-0 mb-0 text-center"><a href="#">300 - 500</a></p>
+       <p class="mb-0"><span class="col-3 badge badge-primary badge-pill">4676767</span></p>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-4 border-0">
+       <input class="col-2" type="checkbox" aria-label="Checkbox for following text input">
+       <p class="col-7 px-0 mb-0 text-center"><a href="#">500 - 1000</a></p>
+       <p class="mb-0"><span class="col-3 badge badge-primary badge-pill">4676767</span></p>
+      </li>
+     </ul>
+    </div>
+  </div><!-- End of Search Table -->
+        <!-- Item Card -->
+  {% for item in items %}
+  <div class="card-group col-12 col-md-3 px-0 h-25">
+   <div class="card">
+    {% if item.sold or item.today_date >= item.finish_date %}
+     <img class="layered-image img-fluid ml-md-3 col-12" src="{{ item.image.url }}">
+     <img class="image-overlay img-fluid" src="{% static 'img/sold-out.png' %}">
+    {% else %}
+     <img class="img-fluid ml-md-3 col-12" src="{{ item.image.url }}">
+    {% endif %}
+     <div class="card-body">
+      <h5 class="card-title"><a href="{% url 'item-detail' item.id %}">{{ item.name }}</a></h5>
+      <p><span class="text-muted">from</span> <span class="font-italic">{{ item.seller }}</span></p>
+      <p class="text-center"><i class="fas fa-euro-sign"></i> {{ item.price }}</p>
+      <p class="card-text">{{ item.desc }}</p>
+     </div>
+     <div class="card-footer">
+      <small class="text-muted">Last updated {{ item.start_date }}</small>
+     </div>
+   </div>
+  </div>
+  {% endfor %}
+ </div><!-- row -->
+</div><!-- container -->
+{% endblock content %}

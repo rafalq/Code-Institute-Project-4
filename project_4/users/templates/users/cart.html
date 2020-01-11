@@ -1,0 +1,22 @@
+{% extends 'auction_store/base.html' %}
+{% block content %}
+<div class="container">
+ <div class="row">
+   <div class="col-12">
+    <h3 class="text-center pt-4 pb-3">Win Auction Artifacts</h3>
+
+     {% for bid in win_bids %}
+     {% if not bid.item.sold and bid.item.end_date < bid.today_date %}
+        <p>ITEM NAME: {{ bid.item.name}}</p>
+        <p>BIDDER: {{ bid.bidder }} </p>
+        <p>DATE: {{ bid.date }} </p>
+        <div class="form-group">
+         <a class="btn btn-outline-primary" href="{% url 'buy' bid.item.id %}">Buy</a>
+        </div>
+      {% endif %}
+     {% endfor %}
+
+   </div>
+ </div>
+</div>
+{% endblock content %}}

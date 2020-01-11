@@ -11,10 +11,12 @@ from django.views.generic import (
     DeleteView
 )
 from django.views.generic.edit import FormMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from .forms import BidForm, BuyForm
 from .models import Bid, Item
 from django.urls import reverse
 from django.contrib import messages
+from django.utils import timezone
 import datetime
 
 # from .tasks import end_auction
@@ -31,9 +33,10 @@ class ItemListView(ListView):
     ordering = ['-start_date']
 
 
-class ItemDetailView(FormMixin, LoginRequiredMixin, DetailView):
+class ItemDetailView(FormMixin, LoginRequiredMixin, SuccessMessageMixin, DetailView):
     model = Item
     form_class = BidForm
+    success_message = "Bid!"
 
     def get_success_url(self):
         return reverse('item-detail', kwargs={'pk': self.object.id})
@@ -56,21 +59,32 @@ class ItemDetailView(FormMixin, LoginRequiredMixin, DetailView):
     def form_valid(self, form):
         bids = Bid.objects.filter(
             item=self.object)
-        if not bids and form.instance.amount > self.object.start_auction_price:
-            form.instance.item = self.object
-            form.instance.bidder = self.request.user
-            form.save()
-        elif form.instance.amount > Bid.objects.last().amount:
-            form.instance.item = self.object
-            form.instance.bidder = self.request.user
-            form.save()
-        else:
-            return super(ItemDetailView, self).form_invalid(form)
+        if self.object.end_date > form.instance.date:
+            if not bids and form.instance.amount > self.object.start_auction_price:
+                form.instance.item = self.object
+                form.instance.bidder = self.request.user
+                form.save()
+            elif form.instance.amount > Bid.objects.last().amount:
+                form.instance.item = self.object
+                form.instance.bidder = self.request.user
+                form.save()
+            else:
+                return super(ItemDetailView, self).form_invalid(form)
 
         return super(ItemDetailView, self).form_valid(form)
 
     def get_absolute_url(self):
         return reverse('item-detail', kwargs={'pk': self.pk})
+
+    # @property
+    # def today_date(self):
+    #     return timezone.now()
+    #     # .isoformat()
+
+    # @property
+    # def finish_date(self):
+    #     return self.end_date
+    #  # .isoformat()
 
 
 class ItemCreateView(LoginRequiredMixin, CreateView):
@@ -82,8 +96,19 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
         if form.instance.in_auction and form.instance.start_auction_price == None:
             return super().form_invalid(form)
         else:
+            form.instance.end_date = timezone.now() + timezone.timedelta(minutes=1)
             form.instance.seller = self.request.user
             return super().form_valid(form)
+
+
+@property
+def compare_dates(self):
+    return datetime.now() > self.end_date
+
+
+@property
+def compare_d(self):
+    return self.datetime.now() > self.end_date
 
 
 class ItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -91,8 +116,12 @@ class ItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     fields = ['image', 'name', 'desc', 'price']
 
     def form_valid(self, form):
-        form.instance.seller = self.request.user
-        return super().form_valid(form)
+        item = self.get_object()
+        if not item.sold:
+            form.instance.seller = self.request.user
+            return super().form_valid(form)
+
+        return super(ItemUpdateView, self).form_invalid(form)
 
     def test_func(self):
         item = self.get_object()
@@ -112,15 +141,21 @@ class ItemDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
 
-class ItemBuyUpdateView(LoginRequiredMixin, UpdateView):
+class ItemBuyUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Item
     form_class = BuyForm
-    template_name = 'auction_store/buy_form.html'
+    success_url = '/store'
+    success_message = 'You have just bought ...!'
+    template_name = 'users/buy_form.html'
 
     def form_valid(self, form):
-        form.instance.sold = True
-        form.instance.buyer = self.request.user
-        return super().form_valid(form)
+        item = self.get_object()
+        if not item.sold:
+            form.instance.sold = True
+            form.instance.buyer = self.request.user
+            return super().form_valid(form)
+
+        return super(ItemBuyUpdateView, self).form_invalid(form)
 
 # class WinAuctionUpdateView(LoginRequiredMixin, UpdateView):
 #     model = Item

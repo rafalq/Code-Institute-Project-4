@@ -16,12 +16,17 @@
 {% endif %}
 
  <div class="row"><!-- top row -->
-
   <div class="col-md-8"><!-- top col-12 -->
    <div class="row"><!-- item-spec row -->
-
     <div class="col-12 col-md-6">
+
+    {% if object.sold %}
+     <img class="layered-image img-fluid ml-md-3 col-12" src="{{ object.image.url }}">
+     <img class="image-overlay img-fluid" src="{% static 'img/sold-out.png' %}">
+    {% else %}
      <img class="img-fluid ml-md-3 col-12" src="{{ object.image.url }}">
+    {% endif %}
+
      <h5 class="pt-4 text-center">Item Specification</h5>
      <p class="pt-2 mb-2 text-center">
       <span class="key-item-detail">Condition:
@@ -33,26 +38,33 @@
       <span class="key-item-detail">Manufactured by:
       </span>Nation</p>
     </div>
-
     <div class="col-md-6 pt-4">
      <h3 class="text-center">{{ object.name }}</h3>
+      <i class="fas fa-euro-sign text-center w-100"></i>
+      <p class="item-price text-center">{{ object.price }}</p>
      <div class="row pt-4">
-      {% if object.sold %}
-       <img class="img-fluid" src="{% static 'img/sold-out.png' %}">
-      <!-- {% elif object.in_auction and object.today_date >=  object.finish_date %}
-       <img class="img-fluid" src="{% static 'img/sold.png' %}"-->
-      {% else %}
        {% if object.seller ==  user %}
+       {% if object.today_date < object.finish_date %}
         <div class="col-6">
+        {% if not object.sold %}
          <a class="btn-auction btn btn-outline-warning btn-lg w-100"
          href="{% url 'item-update' object.id %}">Update</a>
+         {% endif %}
+         {% endif %}
          </div>
         <div class="col-6">
+         {% if not object.sold %}
+         {% if object.today_date < object.finish_date %}
          <a class="btn-buy btn btn-outline-danger btn-lg w-100"
          href="{% url 'item-delete' object.id %}">Delete</a>
+         {% endif %}
+         {% endif %}
         </div>
        {% else %}
+
         {% if object.in_auction %}
+         {% if not object.sold %}
+         {% if object.today_date < object.finish_date %}
          <div class="col-6">
           <p class="fas fa-hourglass-end text-center w-100"></p>
           <p id="timer" class="text-center text-center">
@@ -61,25 +73,36 @@
           data-toggle="modal" data-target="#bid-form">
           Place Bid
           </a>
+          {% endif %}
+          {% endif %}
          </div>
+          {% if not object.sold %}
+          {% if object.today_date < object.finish_date %}
          <div class="col-6">
           <i class="fas fa-euro-sign text-center w-100"></i>
           <p class="item-price text-center">{{ object.price }}</p>
           <a class="btn-buy btn btn-outline-danger color-danger btn-lg w-100"
           href="{% url 'buy' object.id %}">
           Buy Now</a>
+          {% endif %}
+          {% endif %}
           </div>
         {% else %}
          <div class="offset-2 col-8">
           <i class="fas fa-euro-sign text-center w-100"></i>
           <p class="item-price text-center">{{ object.price }}</p>
+          {% if not object.sold %}
           <a class="btn-buy btn btn-outline-danger color-danger btn-lg w-100"
           href="{% url 'buy' object.id %}">
           Buy Now</a>
+          {% else %}
+          <p>SOLD</p>
+          {% endif %}
          </div>
         {% endif %}
+
        {% endif %}
-      {% endif %}
+
 
       <div class="col-12 pt-5">
        <p class="mb-1"><span class="key-item-detail">Postage: </span>
@@ -120,8 +143,8 @@
      such as Korea, Japan, and Vietnam. 2. Zhongshan Suit...
      </p>
     </div>
-
    </div><!-- item-spec row -->
+
   </div><!-- top col-12 -->
 
     {% if object.in_auction %}
@@ -134,8 +157,8 @@
        </p>
       {% endif %}
       <div class="container my-2">
-       {% if object.today_date >= object.finish_date %}
-       <p>SOLD</p>
+       {% if object.today_date > object.finish_date %}
+       <p class="text-center">SOLD!</p>
        {% else %}
        <div id="progress-bar"></div>
        {% endif %}
@@ -164,10 +187,11 @@
      {% endfor %}
     </div>
     {% endif %}
- </div><!--top row  -->
-</div><!--container  -->
+ </div><!-- top row  -->
+</div><!-- container  -->
 
 <!--MODAL-->
+{% if not object.sold %}
 <form method="POST">
 {% csrf_token %}
  <div class="modal fade" id="bid-form" tabindex="-1" role="dialog"
@@ -235,55 +259,25 @@
   </div>
  </div>
 </form>
+{% endif %}
 
 <script>
-// Use the end_date from the Item django model
 var endDate = document.getElementById("timer").innerHTML;
-var startDate = document.getElementById("start-date").innerHTML;
 
-// Set the date we're counting down to
 var countDownDate = new Date(endDate).getTime();
-var startCountDownDate = new Date(startDate).getTime();
+
 var tday = new Date().getTime();
 
-var timeFromStart = Math.floor((countDownDate - startCountDownDate)/ 1000);
-var timeLeft = Math.floor((countDownDate - tday) / 1000);
-var progressNow = Math.floor((timeLeft * 100) / timeFromStart) ;
 
-//change for a string to be able to use as an arg in the functions
-var progressStr = progressNow + "%";
-var progressBar = document.getElementById("progress-bar")
-progressBar.style.width = progressStr;
-
-var fixedAmountBtn = document.getElementsByClassName("fixed-btn")
-var amountInput = document.getElementById("id_amount")
-
-for(var i = 0; i < fixedAmountBtn.length; i++){
-  fixedAmountBtn[i].addEventListener("click", function(){
-  var btnStr = this.textContent;
-  var x = btnStr.split(" ");
-  var bidAmount = parseInt(x[7])
-  amountInput.value = bidAmount;
-  });
+var timeLeftRedirect = Math.floor(countDownDate - tday);
+console.log(timeLeftRedirect)
+// refresh/redirect after the time
+  if(timeLeftRedirect > 0){
+    window.setTimeout(function(){
+      location.href = "http://localhost:8000/store";
+    }, timeLeftRedirect);
 }
-
-
-
-var bidBtn = document.getElementById("bid-btn");
-
-bidBtn.addEventListener("click", function(){
-  var modalLabel = document.getElementById("exampleModalLabel").innerHTML;
-  var x = modalLabel.split(" ");
-  var bidAmount = parseInt(x[1]);
-  if (amountInput.value <= bidAmount){
-    alert("Offer must be higher than the last bid!");
-  }
-  });
-
-// window.setTimeout(function(){
-//  location.href = "http://localhost:8000/store";
-//  }, 3000); // refresh/redirect after the time
 </script>
-
+<script src="{% static 'js/progress.js' %}"></script>
 <script src="{% static 'js/progress-bar.js' %}"></script>
 {% endblock content %}

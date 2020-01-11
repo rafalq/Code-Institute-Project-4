@@ -2,8 +2,14 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserUpdateForm, AccountUpdateForm
-from django.views.generic import ListView
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin,
+    UserPassesTestMixin
+)
+from auction_store.forms import BuyForm
+from django.views.generic import ListView, UpdateView
 from auction_store.models import Item, Bid
+from django.db.models import OuterRef, Subquery
 
 
 def register(request):
@@ -46,11 +52,53 @@ def profile(request):
 
 class UserItemListView(ListView):
     model = Item
-    template_name = 'users/storage.html'
+    template_name = 'users/history.html'
     context_object_name = 'items'
     ordering = ['-start_date']
 
     def get_context_data(self, **kwargs):
         context = super(UserItemListView, self).get_context_data(**kwargs)
-        context['bids'] = Bid.objects.all()
+        context['bids'] = Bid.objects.all().order_by('-id')
         return context
+
+
+class CartListView(ListView):
+    model = Item
+    template_name = 'users/cart.html'
+    context_object_name = 'items'
+    ordering = ['-end_date']
+
+    def get_context_data(self, **kwargs):
+        context = super(CartListView, self).get_context_data(**kwargs)
+        context['bids2'] = Bid.objects.all().order_by("-id")
+        sq = Bid.objects.filter(item=OuterRef('item')).order_by(
+            '-id')
+        context['win_bids'] = Bid.objects.filter(bidder=self.request.user,
+                                                 pk=Subquery(sq.values('pk')[:1]))
+        return context
+
+    @property
+    def today_date(self):
+        return timezone.now()
+        # .isoformat()
+
+    # def get_winner(self):
+    #     if
+    #     winner =
+
+
+class ItemBuyUpdateView(LoginRequiredMixin, UpdateView):
+    model = Item
+    form_class = BuyForm
+    success_url = '/store'
+    success_message = 'You have just bought ...!'
+    template_name = 'auction_store/buy_form.html'
+
+    def form_valid(self, form):
+        item = self.get_object()
+        if not item.sold:
+            form.instance.sold = True
+            form.instance.buyer = self.request.user
+            return super().form_valid(form)
+
+        return super(ItemBuyUpdateView, self).form_invalid(form)

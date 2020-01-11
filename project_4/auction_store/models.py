@@ -20,22 +20,14 @@ class Item(models.Model):
     start_auction_price = models.IntegerField(null=True, blank=True)
     end_date = models.DateTimeField(null=True, blank=True)
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
-    sold = models.BooleanField(null=True)
+    sold = models.BooleanField(default=False)
     buyer = models.ForeignKey(
         User, null=True, related_name="buyer", on_delete=models.CASCADE)
 
-    def save(self, *args, **kwargs):
-
-        if self.in_auction:
-            self.end_date = timezone.now() + timezone.timedelta(days=1)
-            super(Item, self).save(*args, **kwargs)
-        else:
-            super(Item, self).save(*args, **kwargs)
-
-        # if img.height > 300 or img.width > 300:
-        #     output_size = (300, 300)
-        #     img.thumbnail(output_size)
-        #     img.save(self.image.path)
+    # if img.height > 300 or img.width > 300:
+    #     output_size = (300, 300)
+    #     img.thumbnail(output_size)
+    #     img.save(self.image.path)
 
     def __str__(self):
         return self.name
@@ -45,11 +37,17 @@ class Item(models.Model):
 
     @property
     def today_date(self):
-        return timezone.now().isoformat()
+        return timezone.now()
+        # .isoformat()
 
     @property
     def finish_date(self):
-        return self.end_date.isoformat()
+        return self.end_date
+        # .isoformat()
+
+    # @property
+    # def compare_dates(self):
+    #     return datetime.now() > self.end_date
 
 
 class Bid(models.Model):
@@ -57,3 +55,17 @@ class Bid(models.Model):
     date = models.DateTimeField(default=timezone.now)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     bidder = models.ForeignKey(User, on_delete=models.CASCADE)
+    winner = models.ForeignKey(
+        User, null=True, related_name="winner", on_delete=models.CASCADE)
+
+    @property
+    def today_date(self):
+        return timezone.now()
+#         # .isoformat()
+
+# class Sold(models.Model):
+#     image = models.ImageField(upload_to='profile_pics', default='default.jpg')
+#     name = models.CharField(max_length=100)
+#     buyer = models.ForeignKey(
+#         User, null=True, related_name="buyer", on_delete=models.CASCADE)
+#     purchase_date = models.DateTimeField(null=True, blank=True)

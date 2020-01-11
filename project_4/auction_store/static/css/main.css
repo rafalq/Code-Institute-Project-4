@@ -122,6 +122,26 @@ a:hover, a:focus {
 }
 					/*** item_detail.html ***/
 
+.layered-image {
+  position: relative;
+}
+.layered-image img {
+  height: 200px;
+  width: 300px;
+}
+.image-overlay {
+  position: absolute;
+  top: -35px;
+  left: 8px;
+  opacity: .8;
+}
+.image-overlay-store {
+  position: absolute;
+  top: -30px;
+  left: 5px;
+  opacity: .8;
+}
+
 p.item-timer{
 	font-weight: bold;
 }
