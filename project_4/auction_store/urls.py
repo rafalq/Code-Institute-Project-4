@@ -6,14 +6,11 @@ from .views import (
     ItemUpdateView,
     ItemDeleteView,
     ItemBuyUpdateView,
-    # EndItemDetailView,
-    # BuyItemDetailView,
 )
 from . import views
 
 urlpatterns = [
     path('', views.home, name='auction_store-home'),
-    # path('store/item/<int:pk>/bid', views.bid, name='bid'),
     path('store/', ItemListView.as_view(), name='auction_store-store'),
     path('store/new/', ItemCreateView.as_view(), name='item-create'),
     path('store/item/<int:pk>/', ItemDetailView.as_view(), name='item-detail'),
@@ -23,8 +20,4 @@ urlpatterns = [
          ItemDeleteView.as_view(), name='item-delete'),
     path('store/item/<int:pk>/buy/',
          ItemBuyUpdateView.as_view(), name='buy'),
-    # path('store/item/<int:pk>/',
-    #      EndItemDetailView.as_view(), name='item-end'),
-    # path('store/item_buy/<int:pk>/',
-    #      BuyItemDetailView.as_view(), name='item-buy'),
 ]

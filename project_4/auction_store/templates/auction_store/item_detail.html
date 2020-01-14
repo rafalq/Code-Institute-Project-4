@@ -45,34 +45,60 @@
      <h3 class="text-center">{{ object.name }}</h3>
 
        {% if object.seller ==  user %}
-       <div class="col-12">
-        <i class="fas fa-euro-sign text-center w-100"></i>
-        <p class="item-price text-center">{{ object.price }}</p>
-       </div>
-       {% if not object.sold or object.today_date < object.finish_date %}
-       <div class="row pb-4">
-       <div class="col-6">
-        <a class="btn-auction btn btn-outline-warning btn-lg w-100"
-        href="{% url 'item-update' object.id %}">Update</a>
-       </div>
-       <div class="col-6">
-        <a class="btn btn-outline-danger btn-lg w-100"
-        href="{% url 'item-delete' object.id %}">Delete</a>
-       </div>
-       </div>
-       {% else %}
-       <div class="row pb-4">
-       <div class="col-6">
-        <a class="disabled btn-auction btn btn-outline-secondary btn-lg w-100"
-        href="{% url 'item-update' object.id %}" style="color: #6c757d !important;">Update</a>
-       </div>
-       <div class="col-6">
-        <a class="disabled btn btn-outline-secondary btn-lg w-100"
-        href="{% url 'item-delete' object.id %}">Delete</a>
-       </div>
-       </div>
+        {% if not object.sold and object.today_date < object.finish_date %}
+        <div class="row pb-4">
+         <div class="col-6">
+          <p class="fas fa-hourglass-end text-center w-100"></p>
+          <p id="timer" class="text-center text-center">
+          {{ object.end_date|date:"F d, Y H:i:s" }}</p>
+          <a class="btn-auction btn btn-outline-warning btn-lg w-100"
+          href="{% url 'item-update' object.id %}">Update</a>
+         </div>
+         <div class="col-6">
+          <i class="fas fa-euro-sign text-center w-100"></i>
+          <p class="item-price text-center">{{ object.price }}</p>
+          <a class="btn btn-outline-danger btn-lg w-100"
+          href="{% url 'item-delete' object.id %}">Delete</a>
+         </div>
+        </div>
+        {% else %}
+
+        <div class="col-12">
+         {% if not object.in_auction and object.sold %}
+          <p class="text-center text-muted">Sold for:</p>
+          <i class="fas fa-euro-sign text-center w-100"></i>
+          <p class="item-price text-center">{{ object.price }}</p>
+         {% elif object.in_auction and object.sold %}
+          <p class="text-center text-muted">Sold for:</p>
+          <i class="fas fa-euro-sign text-center w-100"></i>
+          <p class="item-price text-center">{{ object.price }}</p>
+           {% elif object.today_date > object.finish_date %}
+            {% if bids|length %}
+             {% for bid in bids %}
+              {% if forloop.first %}
+               <p class="text-center text-muted">Winning Bid:</p>
+               <i class="fas fa-euro-sign text-center w-100"></i>
+               <p class="item-price text-center">{{ bid.amount }}</p>
+              {% endif %}
+             {% endfor %}
+            {% else %}
+             <i class="fas fa-euro-sign text-center w-100"></i>
+             <p class="item-price text-center">{{ object.price }}</p>
+           {% endif %}
+          {% endif %}
+        </div>
+        <div class="row pb-4">
+         <div class="col-6">
+          <a class="disabled btn-auction btn btn-outline-secondary btn-lg w-100"
+          href="#" style="color: #6c757d !important;">Update</a>
+         </div>
+         <div class="col-6">
+          <a class="disabled btn btn-outline-secondary btn-lg w-100"
+          href="#">Delete</a>
+         </div>
+        </div>
        {% endif %}
-       {% else %}
+      {% else %}
 
 
          {% if not object.in_auction and not object.sold %}
@@ -176,7 +202,7 @@
   </div><!-- top col-8 -->
 
 
-    {% if object.in_auction or object.in_auction and object.seller ==  user%}
+    {% if object.in_auction %}
     <div class="col-12 col-md-4 border-left"><!------------------------------------------------>
      <h5 class="pt-3 text-center">Bid History</h5>
      <div class="row">

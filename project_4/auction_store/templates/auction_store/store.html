@@ -3,21 +3,15 @@
 {% load static %}
 
 <div class="container-fluid"><!-- container -->
-
 <div class="row">
-
  <div class="col-12 col-md-4 table-section bg-light"><!-- col-4-->
-
   <div class="table-section bg-light"><!-- table-section-->
-
    <h6 class="font-weight-bold btn btn-block"
    data-target="#categories" data-toggle="collapse"
    aria-haspopup="true" aria-expanded="false" aria-controls="collapseExample">
    Categories<i class="fas fa-sort-down float-right"></i>
    </h6>
-
    <div id="categories" class="collapse show" aria-labelledby="dropdownMenuButton"><!-- collapse-show-->
-
     <ul class="list-group">
      <li class="list-group-item d-flex justify-content-between
       align-items-center py-1 px-4 border-0">
@@ -74,30 +68,126 @@
        </p>
       </li>
     </ul>
-
-   </div><!-- table-section-->
+   </div><!-- table-section--><!-- collapse-show-->
   </div><!-- table-section-->
+
+            <!-- Format -->
+  <div class="table-section bg-light">
+   <h6 class="font-weight-bold btn btn-block" data-target="#format" data-toggle="collapse" aria-haspopup="true" aria-expanded="false" aria-controls="collapseExample">Format
+   <i class="fas fa-sort-down float-right"></i>
+   </h6>
+   <div id="format" class="collapse show" aria-labelledby="dropdownMenuButton">
+    <ul class="list-group">
+     <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-4 border-0">
+      <input class="col-2" type="checkbox" aria-label="Checkbox for following text input">
+      <p class="col-7 px-0 mb-0 text-center"><a href="#">All Listings</a></p>
+      <p class="mb-0"><span class="col-3 badge badge-primary badge-pill">4676767</span></p>
+     </li>
+     <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-4 border-0">
+      <input class="col-2" type="checkbox" aria-label="Checkbox for following text input">
+      <p class="col-7 px-0 mb-0 text-center"><a href="#">Auction</a></p>
+      <p class="mb-0"><span class="col-3 badge badge-primary badge-pill">4676767</span></p>
+     </li>
+     <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-4 border-0">
+      <input class="col-2" type="checkbox" aria-label="Checkbox for following text input">
+      <p class="col-7 px-0 mb-0 text-center"><a href="#">Buy It Now</a></p>
+      <p class="mb-0"><span class="col-3 badge badge-primary badge-pill">4676767</span></p>
+     </li>
+    </ul>
+   </div>
+  </div>
+            <!-- Time -->
+  <div class="table-section bg-light">
+   <h6 class="font-weight-bold btn btn-block" data-target="#time" data-toggle="collapse" aria-haspopup="true" aria-expanded="false" aria-controls="collapseExample">Time
+    <i class="fas fa-sort-down float-right"></i>
+   </h6>
+    <div id="time" class="collapse show" aria-labelledby="dropdownMenuButton">
+     <ul class="list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-4 border-0">
+       <input class="col-2" type="checkbox" aria-label="Checkbox for following text input">
+       <p class="col-7 px-0 mb-0 text-center"><a href="#">Less Than 24h</a></p>
+       <p class="mb-0"><span class="col-3 badge badge-primary badge-pill">4676767</span></p>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-4 border-0">
+       <input class="col-2" type="checkbox" aria-label="Checkbox for following text input">
+       <p class="col-7 px-0 mb-0 text-center"><a href="#">3 Days</a></p>
+      <p class="mb-0"><span class="col-3 badge badge-primary badge-pill">4676767</span></p>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-4 border-0">
+       <input class="col-2" type="checkbox" aria-label="Checkbox for following text input">
+       <p class="col-7 px-0 mb-0 text-center"><a href="#">This Week</a></p>
+       <p class="mb-0"><span class="col-3 badge badge-primary badge-pill">4676767</span></p>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-4 border-0">
+       <input class="col-2" type="checkbox" aria-label="Checkbox for following text input">
+       <p class="col-7 px-0 mb-0 text-center"><a href="#">This Month</a></p>
+       <p class="mb-0"><span class="col-3 badge badge-primary badge-pill">4676767</span></p>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-4 border-0">
+       <input class="col-2" type="checkbox" aria-label="Checkbox for following text input">
+       <p class="col-7 px-0 mb-0 text-center"><a href="#">This Year</a></p>
+       <p class="mb-0"><span class="col-3 badge badge-primary badge-pill">4676767</span></p>
+      </li>
+     </ul>
+    </div>
+  </div>
+
+    <!-- Price -->
+  <div class="table-section bg-light">
+   <h6 class="font-weight-bold btn btn-block" data-target="#price" data-toggle="collapse" aria-haspopup="true" aria-expanded="false" aria-controls="collapseExample">Price
+    <i class="fas fa-sort-down float-right"></i>
+   </h6>
+    <div id="price" class="collapse show" aria-labelledby="dropdownMenuButton">
+     <ul class="list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-4 border-0">
+       <input class="col-2" type="checkbox" aria-label="Checkbox for following text input">
+       <p class="col-7 px-0 mb-0 text-center"><a href="#">0 - 50</a></p>
+       <p class="mb-0"><span class="col-3 badge badge-primary badge-pill">4676767</span></p>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-4 border-0">
+       <input class="col-2" type="checkbox" aria-label="Checkbox for following text input">
+       <p class="col-7 px-0 mb-0 text-center"><a href="#">50 - 100</a></p>
+       <p class="mb-0"><span class="col-3 badge badge-primary badge-pill">4676767</span></p>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-4 border-0">
+       <input class="col-2" type="checkbox" aria-label="Checkbox for following text input">
+       <p class="col-7 px-0 mb-0 text-center"><a href="#">100 - 300</a></p>
+       <p class="mb-0"><span class="col-3 badge badge-primary badge-pill">4676767</span></p>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-4 border-0">
+       <input class="col-2" type="checkbox" aria-label="Checkbox for following text input">
+       <p class="col-7 px-0 mb-0 text-center"><a href="#">300 - 500</a></p>
+       <p class="mb-0"><span class="col-3 badge badge-primary badge-pill">4676767</span></p>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-4 border-0">
+       <input class="col-2" type="checkbox" aria-label="Checkbox for following text input">
+       <p class="col-7 px-0 mb-0 text-center"><a href="#">500 - 1000</a></p>
+       <p class="mb-0"><span class="col-3 badge badge-primary badge-pill">4676767</span></p>
+      </li>
+     </ul>
+    </div>
+  </div><!-- End of Search Table -->
  </div><!-- col-4 -->
 
 <div class="col-12 col-md-8 px-0">
  {% for item in items %}
- <div class="card text-center border border-white">
-  <div class="card-header py-1">
+ <div class="card text-center border border-white my-2">
+  <div class="card-header pt-2 pb-1 bg-muted">
    <h5 class="card-title"><a href="{% url 'item-detail' item.id %}">{{ item.name }}</a></h5>
   </div>
   <div class="card-body row py-0 pl-3">
-   <div class="col-4 m-0 p-0">
+   <div class="col-12 col-md-4 m-0 p-0">
     {% if item.sold %}
     <img class="layered-image img-fluid" src="{{ item.image.url }}">
     <img class="image-overlay-store img-fluid" src="{% static 'img/sold-out.png' %}">
     {% else %}
     <img class="layered-image img-fluid" src="{{ item.image.url }}">
     {% endif %}
-    {% if not item.sold and item.today_date >= item.finish_date %}
-    <img class="image-time-store img-fluid" src="{% static 'img/bell.png' %}">
-    {% endif %}
    </div>
-   <div class="col-7 py-2">
+   <div class="col-12 col-md-7 py-2">
+    {% if not item.sold and item.today_date >= item.finish_date %}
+    <img class="image-time-store img-fluid" src="{% static 'img/auction-smaller.png' %}">
+    {% endif %}
     <p class="text-left m-auto">{{ item.desc }}</p>
     <!--a href="#" class="btn btn-primary">Go somewhere</a-->
    </div>

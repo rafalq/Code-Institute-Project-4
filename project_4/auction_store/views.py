@@ -19,7 +19,15 @@ from django.contrib import messages
 from django.utils import timezone
 import datetime
 
-# from .tasks import end_auction
+
+@property
+def compare_dates(self):
+    return datetime.now() > self.end_date
+
+
+@property
+def compare_d(self):
+    return self.datetime.now() > self.end_date
 
 
 def home(request):
@@ -31,14 +39,6 @@ class ItemListView(ListView):
     template_name = 'auction_store/store.html'
     context_object_name = 'items'
     ordering = ['-start_date']
-
-    @property
-    def finish_date(self):
-        return self.end_date.isoformat()
-
-    @property
-    def today_date(self):
-        return timezone.now().isoformat()
 
 
 class ItemDetailView(FormMixin, LoginRequiredMixin, SuccessMessageMixin, DetailView):
@@ -84,16 +84,6 @@ class ItemDetailView(FormMixin, LoginRequiredMixin, SuccessMessageMixin, DetailV
     def get_absolute_url(self):
         return reverse('item-detail', kwargs={'pk': self.pk})
 
-    # @property
-    # def today_date(self):
-    #     return timezone.now()
-    #     # .isoformat()
-
-    # @property
-    # def finish_date(self):
-    #     return self.end_date
-    #  # .isoformat()
-
 
 class ItemCreateView(LoginRequiredMixin, CreateView):
     model = Item
@@ -107,16 +97,6 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
             form.instance.end_date = timezone.now() + timezone.timedelta(minutes=1)
             form.instance.seller = self.request.user
             return super().form_valid(form)
-
-
-@property
-def compare_dates(self):
-    return datetime.now() > self.end_date
-
-
-@property
-def compare_d(self):
-    return self.datetime.now() > self.end_date
 
 
 class ItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -164,19 +144,3 @@ class ItemBuyUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
             return super().form_valid(form)
 
         return super(ItemBuyUpdateView, self).form_invalid(form)
-
-# class WinAuctionUpdateView(LoginRequiredMixin, UpdateView):
-#     model = Item
-#     form_class = BuyForm
-#     template_name = 'auction_store/buy_form.html'
-
-#     def form_valid(self, form):
-#         form.instance.sold = True
-#         return super().form_valid(form)
-
-#     def get_context_data(self, **kwargs):
-#         context = super(ItemDetailView, self).get_context_data(**kwargs)
-#         context['bids'] = Bid.objects.filter(
-#             item=self.object).order_by('-id')
-#         context['form'] = BidForm(initial={'item': self.object})
-#         return context
