@@ -17,11 +17,8 @@
 {% endif %}
 
  <div class="row pt-3"><!-- top row -->
-
   <div class="col-md-8"><!-- top col-8 -->
-
-    <div class="row">
-
+   <div class="row">
     <div class="col-12 col-md-6 mr-0"><!------------------------------------------------>
     {% if object.sold %}
      <img class="layered-image img-fluid ml-md-3 col-12" src="{{ object.image.url }}">
@@ -40,10 +37,8 @@
       <span class="key-item-detail">Manufactured by:
       </span>Nation</p>
     </div><!------------------------------------------------>
-
     <div class="col-md-6 pt-2 mr-0"><!------------------------------------------------>
      <h3 class="text-center">{{ object.name }}</h3>
-
        {% if object.seller ==  user %}
         {% if not object.sold and object.today_date < object.finish_date %}
         <div class="row pb-4">

@@ -14,24 +14,31 @@ from django.views.generic.edit import FormMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from .forms import BidForm, BuyForm
 from .models import Bid, Item
+from django.db.models import Q
 from django.urls import reverse
 from django.contrib import messages
 from django.utils import timezone
 import datetime
 
 
-@property
-def compare_dates(self):
-    return datetime.now() > self.end_date
-
-
-@property
-def compare_d(self):
-    return self.datetime.now() > self.end_date
-
-
 def home(request):
     return render(request, 'auction_store/home.html')
+
+
+def search(request):
+    query = request.GET.get('q')
+    items = Item.objects.filter(Q(
+        name__icontains=query) | Q(
+        desc__icontains=query) | Q(
+        price__icontains=query) | Q(
+        seller__username__icontains=query) | Q(
+        buyer__username__icontains=query))
+    context = {
+        'items': items
+    }
+    messages.success(
+                request, f'Found!')
+    return render(request, 'auction_store/store.html', context)
 
 
 class ItemListView(ListView):

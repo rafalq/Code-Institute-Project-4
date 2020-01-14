@@ -120,7 +120,7 @@ a:hover, a:focus {
 	background-color: transparent;
 	color: #000000a6;
 }
-.card:hover{
+.card-row:hover{
   border: 1px solid #A9A9A9 !important;
 }
 					/*** item_detail.html ***/
@@ -146,7 +146,7 @@ a:hover, a:focus {
 }
 .image-time-store {
   position: relative;
-  top: -200px;
+  top: -210px;
   left: 130px;
   opacity: .5;
 }

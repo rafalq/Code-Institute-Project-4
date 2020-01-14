@@ -20,4 +20,5 @@ urlpatterns = [
          ItemDeleteView.as_view(), name='item-delete'),
     path('store/item/<int:pk>/buy/',
          ItemBuyUpdateView.as_view(), name='buy'),
+    path('results/', views.search, name='search'),
 ]
