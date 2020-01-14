@@ -102,3 +102,46 @@ class ItemBuyUpdateView(LoginRequiredMixin, UpdateView):
             return super().form_valid(form)
 
         return super(ItemBuyUpdateView, self).form_invalid(form)
+
+# class CartDetailView(FormMixin, LoginRequiredMixin, SuccessMessageMixin, DetailView):
+#     model = Item
+#     form_class = BuyForm
+#     success_message = "Buy!"
+
+#     def get_success_url(self):
+#         return reverse('cart', kwargs={'pk': self.object.id})
+
+#     def get_context_data(self, **kwargs):
+#         context = super(ItemDetailView, self).get_context_data(**kwargs)
+#         context['bids'] = Bid.objects.filter(
+#             item=self.object).order_by('-id')
+#         context['form'] = BidForm(initial={'item': self.object})
+#         return context
+
+#     def post(self, request, *args, **kwargs):
+#         self.object = self.get_object()
+#         form = self.get_form()
+#         if form.is_valid():
+#             return self.form_valid(form)
+#         else:
+#             return self.form_invalid(form)
+
+#     def form_valid(self, form):
+#         bids = Bid.objects.filter(
+#             item=self.object)
+#         if self.object.end_date > form.instance.date:
+#             if not bids and form.instance.amount > self.object.start_auction_price:
+#                 form.instance.item = self.object
+#                 form.instance.bidder = self.request.user
+#                 form.save()
+#             elif form.instance.amount > Bid.objects.last().amount:
+#                 form.instance.item = self.object
+#                 form.instance.bidder = self.request.user
+#                 form.save()
+#             else:
+#                 return super(ItemDetailView, self).form_invalid(form)
+
+#         return super(ItemDetailView, self).form_valid(form)
+
+#     def get_absolute_url(self):
+#         return reverse('item-detail', kwargs={'pk': self.pk})

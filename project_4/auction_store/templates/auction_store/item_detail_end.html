@@ -1,0 +1,137 @@
+{% extends 'auction_store/base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/progress-bar.css' %}">
+
+<div class="container-fluid pt-3"><!-- container -->
+
+{% if messages %}
+ {% for message in messages %}
+  <div class="container m-auto mt-3 text-center">
+   <div class="alert alert-{{ message.tags }}">
+    {{ message }}
+   </div>
+  </div>
+ {% endfor %}
+{% endif %}
+
+<div class="row"><!-- row main wrapper-->
+
+  <div class="col-md-8 mt-3"><!-- col-md-8 -->
+   <div class="row"><!-- item-spec row -->
+
+    <div class="col-12 col-md-6">
+     <img class="img-fluid ml-md-3 col-12" src="{{ object.image.url }}">
+     <h5 class="pt-4 text-center">Item Specification</h5>
+     <p class="pt-2 mb-2 text-center">
+      <span class="key-item-detail">Condition:
+      </span>Very Good</p>
+     <p class="mb-2 text-center">
+      <span class="key-item-detail">Origin Country:
+      </span>China</p>
+     <p class="text-center">
+      <span class="key-item-detail">Manufactured by:
+      </span>Nation</p>
+    </div>
+
+    <div class="col-md-6 pt-4">
+     <h3 class="text-center pb-2">{{ object.name }}</h3>
+     {% if item.in_auction%}
+      {% if item.sold %}
+       <p class="text-center text-muted">Sold for:</p>
+       <i class="fas fa-euro-sign text-center w-100"></i>
+       <p class="item-price text-center">{{ object.price }}</p>
+      {% else %}
+       <p class="text-center text-muted">Winning Bid:</p>
+       <i class="fas fa-euro-sign text-center w-100"></i>
+        {% for bid in bids %}
+         {% if forloop.first %}
+          <p class="item-price text-center">{{ bid.amount }}</p>
+         {% endif %}
+        {%  endfor %}
+      {% endif %}
+
+     {% else %}
+      <p class="text-center text-muted">Sold for:</p>
+       <i class="fas fa-euro-sign text-center w-100"></i>
+       <p class="item-price text-center">{{ object.price }}</p>
+     {% endif %}
+
+
+
+      <div class="col-12 pt-3">
+       <p class="mb-1"><span class="key-item-detail">Postage: </span>
+        <i class="fas fa-euro-sign"></i>
+        18.04 (approx. EUR 21.05) Express delivery to Ireland
+       </p>
+       <p class="mb-1 mt-2">
+        <span class="key-item-detail">Delivery: </span>8 - 14 days</p>
+       <p class="mb-0"><span class="key-item-detail">Payments:
+        </span> <img id="img-paypal" src="{% static 'img/paypal.png' %}"></p>
+       <p><span class="key-item-detail">Return: </span>30 days</p>
+      </div>
+     </div>
+    </div><!-- item-spec row -->
+
+    <div class="row pt-4 m-1 mx-4 text-center">
+     <h5 class="pb-2 col-12 m-0 pl-0">History</h5>
+     <p class="#">
+     4 Well-Known Traditional Chinese Clothes Types.
+     The Hanfu, Zhongshan suit (Mao suit), Tang suit,
+     and cheongsam (qipao) are the four most distinctive
+     types of traditional Chinese clothing.
+     4 Well-Known Traditional Chinese Clothes Types
+     Each country in the world has its own unique traditional clothes,
+     from which people are able to distinguish one country from another,
+     and so it has been with China.
+     The Hanfu, Zhongshan suit (Mao suit), Tang suit, and cheongsam (qipao) are
+     the four most distinctive types of traditional Chinese clothing.
+     1. Hanfu hanfu
+     The Hanfu (' Han clothing' — the majority of Chinese are of Han ethnicity)
+     is the oldest of China's traditional clothes.
+     Legend traces it back to over 4,000 years ago when Huangdi's consort,
+     Leizu, made cloth with silk. It was
+     constantly improved throughout several dynasties.
+     Until the Han Dynasty, the Hanfu was adopted and vigorously promoted by
+     the ruling class. It then became the national clothing of the Han ethnic people.
+     It also had a far-reaching influence on neighboring Asian countries,
+     such as Korea, Japan, and Vietnam. 2. Zhongshan Suit...
+     </p>
+    </div><!-- row history -->
+
+   </div><!-- col-md-8 -->
+    <div class="col-12 col-md-4 border-left">
+     <h5 class="pt-3 text-center">Bid History</h5>
+     <div class="row">
+       <p id="timer" class="col-12 mb-0 text-center">
+        {{ object.end_date|date:"F d, Y H:i:s" }}
+       </p>
+     </div>
+     <div class="row my-2">
+      <p id="start-date" class="col-12 text-center">
+      Start date: {{ object.start_date|date:"F d, Y H:i:s" }}
+      </p>
+      <p id="start-date" class="col-12 text-center">
+      End Date: {{ object.end_date|date:"F d, Y H:i:s" }}
+      </p>
+      <p class="col-12 text-center">Starting Bid:
+        <strong>EUR {{ object.start_auction_price}}</strong>
+      </p>
+     </div>
+     {% for bid in bids %}
+     <hr class="my-1">
+     <div class="row pt-3">
+      <p class="bid-icon col-4 mb-0 text-center fas fa-user-alt"></p>
+      <p class="bid-icon col-4 mb-0 text-center fas fa-euro-sign"></p>
+      <p class="bid-icon col-4 mb-0 text-center far fa-clock"></p>
+      <p class="col-4 mb-0 text-center">{{ bid.bidder }}</p>
+      <p class="col-4 mb-0 text-center">{{ bid.amount }}</p>
+      <p class="col-4 mb-0 text-center"> {{ bid.date|date:"d M Y, H:i:s" }}</p>
+     </div>
+     {% endfor %}
+    </div>
+
+  </div><!--  main wrapper row  -->
+ </div><!--  container  -->
+{% endblock content %}

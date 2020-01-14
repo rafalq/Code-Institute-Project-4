@@ -32,6 +32,14 @@ class ItemListView(ListView):
     context_object_name = 'items'
     ordering = ['-start_date']
 
+    @property
+    def finish_date(self):
+        return self.end_date.isoformat()
+
+    @property
+    def today_date(self):
+        return timezone.now().isoformat()
+
 
 class ItemDetailView(FormMixin, LoginRequiredMixin, SuccessMessageMixin, DetailView):
     model = Item

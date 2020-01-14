@@ -1,5 +1,6 @@
 {% extends 'auction_store/base.html' %}
 {% block content %}
+{% load static %}
 <div class="container">
  <div class="row">
    <div class="col-12">
@@ -7,15 +8,29 @@
 
      {% for bid in win_bids %}
      {% if not bid.item.sold and bid.item.end_date < bid.today_date %}
-        <p>ITEM NAME: {{ bid.item.name}}</p>
-        <p>BIDDER: {{ bid.bidder }} </p>
-        <p>DATE: {{ bid.date }} </p>
-        <div class="form-group">
-         <a class="btn btn-outline-primary" href="{% url 'buy' bid.item.id %}">Buy</a>
-        </div>
-      {% endif %}
-     {% endfor %}
+      <div class="card text-center border border-white">
 
+      <div class="card-header py-1">
+        <h5 class="card-title mb-0"><a href="#">{{ bid.item.name }}</a></h5>
+      </div>
+
+      <div class="card-body row py-0 pl-3">
+       <div class="col-4 m-0 p-0">
+        <img class="img-fluid" src="{{ item.image.url }}">
+       </div>
+       <div class="col-7 py-2">
+        <p class="text-left m-auto">{{ item.desc }}</p>
+        <a class="btn btn-outline-primary" href="{% url 'buy' bid.item.id %}">Buy</a>
+        <!--a href="#" class="btn btn-primary">Go somewhere</a-->
+       </div>
+      </div>
+
+      <div class="card-footer text-muted py-1">
+       Winning Bid: {{ bid.date }}
+      </div>
+     </div>
+     {% endif %}
+     {% endfor %}
    </div>
  </div>
 </div>

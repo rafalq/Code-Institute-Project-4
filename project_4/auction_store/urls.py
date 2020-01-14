@@ -6,7 +6,8 @@ from .views import (
     ItemUpdateView,
     ItemDeleteView,
     ItemBuyUpdateView,
-    # BidCreateView,
+    # EndItemDetailView,
+    # BuyItemDetailView,
 )
 from . import views
 
@@ -22,6 +23,8 @@ urlpatterns = [
          ItemDeleteView.as_view(), name='item-delete'),
     path('store/item/<int:pk>/buy/',
          ItemBuyUpdateView.as_view(), name='buy'),
-    # path('store/test', views.test, name='test'),
-    # # path('store/item/<int:pk>/bid', BidCreateView.as_view(), name='bid-create'),
+    # path('store/item/<int:pk>/',
+    #      EndItemDetailView.as_view(), name='item-end'),
+    # path('store/item_buy/<int:pk>/',
+    #      BuyItemDetailView.as_view(), name='item-buy'),
 ]

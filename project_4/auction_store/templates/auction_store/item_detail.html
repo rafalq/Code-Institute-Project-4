@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{% static 'css/progress-bar.css' %}">
 
 <div class="container-fluid pt-3">
+
 {% if messages %}
  {% for message in messages %}
   <div class="container m-auto mt-3 text-center">
@@ -15,18 +16,19 @@
  {% endfor %}
 {% endif %}
 
- <div class="row"><!-- top row -->
-  <div class="col-md-8"><!-- top col-12 -->
-   <div class="row"><!-- item-spec row -->
-    <div class="col-12 col-md-6">
+ <div class="row pt-3"><!-- top row -->
 
+  <div class="col-md-8"><!-- top col-8 -->
+
+    <div class="row">
+
+    <div class="col-12 col-md-6 mr-0"><!------------------------------------------------>
     {% if object.sold %}
      <img class="layered-image img-fluid ml-md-3 col-12" src="{{ object.image.url }}">
      <img class="image-overlay img-fluid" src="{% static 'img/sold-out.png' %}">
     {% else %}
      <img class="img-fluid ml-md-3 col-12" src="{{ object.image.url }}">
     {% endif %}
-
      <h5 class="pt-4 text-center">Item Specification</h5>
      <p class="pt-2 mb-2 text-center">
       <span class="key-item-detail">Condition:
@@ -37,74 +39,101 @@
      <p class="text-center">
       <span class="key-item-detail">Manufactured by:
       </span>Nation</p>
-    </div>
-    <div class="col-md-6 pt-4">
+    </div><!------------------------------------------------>
+
+    <div class="col-md-6 pt-2 mr-0"><!------------------------------------------------>
      <h3 class="text-center">{{ object.name }}</h3>
-      <i class="fas fa-euro-sign text-center w-100"></i>
-      <p class="item-price text-center">{{ object.price }}</p>
-     <div class="row pt-4">
+
        {% if object.seller ==  user %}
-       {% if object.today_date < object.finish_date %}
-        <div class="col-6">
-        {% if not object.sold %}
-         <a class="btn-auction btn btn-outline-warning btn-lg w-100"
-         href="{% url 'item-update' object.id %}">Update</a>
-         {% endif %}
-         {% endif %}
-         </div>
-        <div class="col-6">
-         {% if not object.sold %}
-         {% if object.today_date < object.finish_date %}
-         <a class="btn-buy btn btn-outline-danger btn-lg w-100"
-         href="{% url 'item-delete' object.id %}">Delete</a>
-         {% endif %}
-         {% endif %}
-        </div>
+       <div class="col-12">
+        <i class="fas fa-euro-sign text-center w-100"></i>
+        <p class="item-price text-center">{{ object.price }}</p>
+       </div>
+       {% if not object.sold or object.today_date < object.finish_date %}
+       <div class="row pb-4">
+       <div class="col-6">
+        <a class="btn-auction btn btn-outline-warning btn-lg w-100"
+        href="{% url 'item-update' object.id %}">Update</a>
+       </div>
+       <div class="col-6">
+        <a class="btn btn-outline-danger btn-lg w-100"
+        href="{% url 'item-delete' object.id %}">Delete</a>
+       </div>
+       </div>
+       {% else %}
+       <div class="row pb-4">
+       <div class="col-6">
+        <a class="disabled btn-auction btn btn-outline-secondary btn-lg w-100"
+        href="{% url 'item-update' object.id %}" style="color: #6c757d !important;">Update</a>
+       </div>
+       <div class="col-6">
+        <a class="disabled btn btn-outline-secondary btn-lg w-100"
+        href="{% url 'item-delete' object.id %}">Delete</a>
+       </div>
+       </div>
+       {% endif %}
        {% else %}
 
-        {% if object.in_auction %}
-         {% if not object.sold %}
-         {% if object.today_date < object.finish_date %}
-         <div class="col-6">
-          <p class="fas fa-hourglass-end text-center w-100"></p>
-          <p id="timer" class="text-center text-center">
-          {{ object.end_date|date:"F d, Y H:i:s" }}</p>
-          <a class="btn-auction btn btn-outline-warning btn-lg w-100"
-          data-toggle="modal" data-target="#bid-form">
-          Place Bid
-          </a>
-          {% endif %}
-          {% endif %}
-         </div>
-          {% if not object.sold %}
-          {% if object.today_date < object.finish_date %}
-         <div class="col-6">
-          <i class="fas fa-euro-sign text-center w-100"></i>
-          <p class="item-price text-center">{{ object.price }}</p>
-          <a class="btn-buy btn btn-outline-danger color-danger btn-lg w-100"
-          href="{% url 'buy' object.id %}">
-          Buy Now</a>
-          {% endif %}
-          {% endif %}
+
+         {% if not object.in_auction and not object.sold %}
+          <div class="offset-2 col-8">
+           <i class="fas fa-euro-sign text-center w-100"></i>
+           <p class="item-price text-center">{{ object.price }}</p>
+           <a class="btn-buy btn btn-outline-primary color-primary btn-lg w-100"
+           href="{% url 'buy' object.id %}">
+           Buy Now</a>
           </div>
-        {% else %}
-         <div class="offset-2 col-8">
+         {% elif not object.in_auction and object.sold %}
+          <p class="text-center text-muted">Sold for:</p>
           <i class="fas fa-euro-sign text-center w-100"></i>
           <p class="item-price text-center">{{ object.price }}</p>
-          {% if not object.sold %}
-          <a class="btn-buy btn btn-outline-danger color-danger btn-lg w-100"
-          href="{% url 'buy' object.id %}">
-          Buy Now</a>
-          {% else %}
-          <p>SOLD</p>
-          {% endif %}
-         </div>
+
+         {% elif object.in_auction %}
+          {% if object.sold %}
+          <p class="text-center text-muted">Sold for:</p>
+          <i class="fas fa-euro-sign text-center w-100"></i>
+          <p class="item-price text-center">{{ object.price }}</p>
+          {% elif object.today_date > object.finish_date %}
+           {% if bids|length %}
+            {% for bid in bids %}
+             {% if forloop.first %}
+              <p class="text-center text-muted">Winning Bid:</p>
+              <i class="fas fa-euro-sign text-center w-100"></i>
+              <p class="item-price text-center">{{ bid.amount }}</p>
+             {% endif %}
+            {%  endfor %}
+           {% else %}
+            <div class="offset-2 col-8 pt-3 pb-5">
+             <i class="fas fa-euro-sign text-center w-100"></i>
+             <p class="item-price text-center">{{ object.price }}</p>
+             <a class="btn-buy btn btn-outline-primary color-primary btn-lg w-100"
+             href="{% url 'buy' object.id %}">
+             Buy Now</a>
+            </div>
+           {% endif %}
+          {% elif object.today_date < object.finish_date %}
+           <div class="row pb-4">
+            <div class="col-6">
+             <p class="fas fa-hourglass-end text-center w-100"></p>
+             <p id="timer" class="text-center text-center">
+             {{ object.end_date|date:"F d, Y H:i:s" }}</p>
+             <a class="btn-auction btn btn-outline-warning btn-lg w-100"
+             data-toggle="modal" data-target="#bid-form">
+             Place Bid
+             </a>
+            </div>
+            <div class="col-6">
+             <i class="fas fa-euro-sign text-center w-100"></i>
+             <p class="item-price text-center">{{ object.price }}</p>
+             <a class="btn-buy btn btn-outline-primary color-primary btn-lg w-100"
+             href="{% url 'buy' object.id %}">
+             Buy Now</a>
+            </div>
+           </div>
+           {% endif %}
+         {% endif %}
         {% endif %}
 
-       {% endif %}
-
-
-      <div class="col-12 pt-5">
        <p class="mb-1"><span class="key-item-detail">Postage: </span>
         <i class="fas fa-euro-sign"></i>
         18.04 (approx. EUR 21.05) Express delivery to Ireland
@@ -114,12 +143,12 @@
        <p class="mb-0"><span class="key-item-detail">Payments:
         </span> <img id="img-paypal" src="{% static 'img/paypal.png' %}"></p>
        <p><span class="key-item-detail">Return: </span>30 days</p>
-      </div>
-     </div>
-    </div>
+</div><!------------------------------------------------>
+</div>
+    {% if object.in_auction %}
+    <div class="col-12 text-center pt-2 m-1"><!------------------------------------------------>
 
-    <div class="row pt-4 m-1 mx-4">
-     <h5 class="pb-2 col-12 m-0 pl-0">History</h5>
+     <h5 class="pb-2 m-0 pl-0">History</h5>
      <p class="#">
      4 Well-Known Traditional Chinese Clothes Types.
      The Hanfu, Zhongshan suit (Mao suit), Tang suit,
@@ -142,23 +171,20 @@
      It also had a far-reaching influence on neighboring Asian countries,
      such as Korea, Japan, and Vietnam. 2. Zhongshan Suit...
      </p>
-    </div>
-   </div><!-- item-spec row -->
+    </div><!------------------------------------------------>
+{% endif %}
+  </div><!-- top col-8 -->
 
-  </div><!-- top col-12 -->
 
-    {% if object.in_auction %}
-    <div class="col-12 col-md-4 border-left">
+    {% if object.in_auction or object.in_auction and object.seller ==  user%}
+    <div class="col-12 col-md-4 border-left"><!------------------------------------------------>
      <h5 class="pt-3 text-center">Bid History</h5>
      <div class="row">
-      {% if object.seller ==  user %}
-       <p id="timer" class="col-12 mb-0 text-center">
-        {{ object.end_date|date:"F d, Y H:i:s" }}
-       </p>
-      {% endif %}
       <div class="container my-2">
-       {% if object.today_date > object.finish_date %}
-       <p class="text-center">SOLD!</p>
+       {% if object.sold %}
+       <p class="text-center">Sold!</p>
+       {% elif object.today_date > object.finish_date %}
+       <p class="text-center">Time is up!</p>
        {% else %}
        <div id="progress-bar"></div>
        {% endif %}
@@ -175,6 +201,7 @@
      </div>
 
      {% for bid in bids %}
+     <hr class="my-1">
      <div class="row pt-3">
       <p class="bid-icon col-4 mb-0 text-center fas fa-user-alt"></p>
       <p class="bid-icon col-4 mb-0 text-center fas fa-euro-sign"></p>
@@ -183,10 +210,40 @@
       <p class="col-4 mb-0 text-center">{{ bid.amount }}</p>
       <p class="col-4 mb-0 text-center"> {{ bid.date|date:"d M Y, H:i:s" }}</p>
      </div>
-     <hr class="my-1">
      {% endfor %}
-    </div>
+    </div><!------------------------------------------------>
+
+    {% else %}
+
+    <div class="col-12 col-md-4 pr-3 text-center"><!------------------------------------------------>
+
+     <h5 class="pt-3 pb-2 text-center">History</h5>
+     <p class="#">
+     4 Well-Known Traditional Chinese Clothes Types.
+     The Hanfu, Zhongshan suit (Mao suit), Tang suit,
+     and cheongsam (qipao) are the four most distinctive
+     types of traditional Chinese clothing.
+     4 Well-Known Traditional Chinese Clothes Types
+     Each country in the world has its own unique traditional clothes,
+     from which people are able to distinguish one country from another,
+     and so it has been with China.
+     The Hanfu, Zhongshan suit (Mao suit), Tang suit, and cheongsam (qipao) are
+     the four most distinctive types of traditional Chinese clothing.
+     1. Hanfu hanfu
+     The Hanfu (' Han clothing' — the majority of Chinese are of Han ethnicity)
+     is the oldest of China's traditional clothes.
+     Legend traces it back to over 4,000 years ago when Huangdi's consort,
+     Leizu, made cloth with silk. It was
+     constantly improved throughout several dynasties.
+     Until the Han Dynasty, the Hanfu was adopted and vigorously promoted by
+     the ruling class. It then became the national clothing of the Han ethnic people.
+     It also had a far-reaching influence on neighboring Asian countries,
+     such as Korea, Japan, and Vietnam. 2. Zhongshan Suit...
+     </p>
+    </div><!------------------------------------------------>
+
     {% endif %}
+
  </div><!-- top row  -->
 </div><!-- container  -->
 

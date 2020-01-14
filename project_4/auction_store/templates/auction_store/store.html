@@ -79,47 +79,12 @@
   </div><!-- table-section-->
  </div><!-- col-4 -->
 
-
-
- <!-- <div class="col-8">
- {% for item in items %}
-  <div class="row float-right">
-   <div class="card text-center">
-    <div class="card-header">
-     {{ item.name }}
-    </div>
-
-   {% if item.sold or item.today_date >= item.finish_date %}
-     <img class="layered-image img-fluid ml-md-3 col-12" src="{{ item.image.url }}">
-     <img class="image-overlay img-fluid" src="{% static 'img/sold-out.png' %}">
-    {% else %}
-     <img class="img-fluid ml-md-3 col-12" src="{{ item.image.url }}">
-   {% endif %}
-
-    <div class="card-body">
-      <h5 class="card-title"><a href="{% url 'item-detail' item.id %}">{{ item.name }}</a></h5>
-      <p><span class="text-muted">from</span> <span class="font-italic">{{ item.seller }}</span></p>
-      <p class="text-center"><i class="fas fa-euro-sign"></i> {{ item.price }}</p>
-      <p class="card-text">{{ item.desc }}</p>
-     </div>
-
-    <div class="col-12 card-footer text-muted">
-     <small>Last updated: {{ item.start_date }}</small>
-    </div>
-  </div>
-  </div>
-  {% endfor %}
- </div> col-7 -->
-
 <div class="col-12 col-md-8 px-0">
-
  {% for item in items %}
  <div class="card text-center border border-white">
-
   <div class="card-header py-1">
-    <h5 class="card-title mb-0"><a href="{% url 'item-detail' item.id %}">{{ item.name }}</a></h5>
+   <h5 class="card-title"><a href="{% url 'item-detail' item.id %}">{{ item.name }}</a></h5>
   </div>
-
   <div class="card-body row py-0 pl-3">
    <div class="col-4 m-0 p-0">
     {% if item.sold %}
@@ -129,7 +94,7 @@
     <img class="layered-image img-fluid" src="{{ item.image.url }}">
     {% endif %}
     {% if not item.sold and item.today_date >= item.finish_date %}
-    <img class="image-overlay-store img-fluid" src="{% static 'img/auction.png' %}">
+    <img class="image-time-store img-fluid" src="{% static 'img/bell.png' %}">
     {% endif %}
    </div>
    <div class="col-7 py-2">
@@ -137,9 +102,8 @@
     <!--a href="#" class="btn btn-primary">Go somewhere</a-->
    </div>
   </div>
-
   <div class="card-footer text-muted py-1">
-   Last updated: {{ item.start_date }}
+   Last Bid: {{ item.start_date }}
   </div>
  </div>
  {% endfor %}
