@@ -2,36 +2,34 @@
 {% block content %}
 {% load static %}
 <div class="container">
+  <h3 class="text-center pt-4 pb-3">Win Auction Artifacts</h3>
  <div class="row">
-   <div class="col-12">
-    <h3 class="text-center pt-4 pb-3">Win Auction Artifacts</h3>
+  {% for bid in win_bids %}
+   {% if not bid.item.sold and bid.item.end_date < bid.today_date %}
+   <div class="col-6 col-md-4">
+     <div class="card text-center border border-white">
+     <div class="card-header py-1">
+      <h5 class="card-title mb-0"><a href="#">{{ bid.item.name }}</a></h5>
+     </div>
 
-     {% for bid in win_bids %}
-     {% if not bid.item.sold and bid.item.end_date < bid.today_date %}
-      <div class="card text-center border border-white">
-
-      <div class="card-header py-1">
-        <h5 class="card-title mb-0"><a href="#">{{ bid.item.name }}</a></h5>
-      </div>
-
-      <div class="card-body row py-0 pl-3">
+      <div class="card-body row py-0">
        <div class="col-4 m-0 p-0">
-        <img class="img-fluid" src="{{ item.image.url }}">
+        <img class="img-fluid" src="{{ bid.item.image.url }}">
        </div>
-       <div class="col-7 py-2">
-        <p class="text-left m-auto">{{ item.desc }}</p>
-        <a class="btn btn-outline-primary" href="{% url 'buy' bid.item.id %}">Buy</a>
+        <div class="col-7 py-3">
+        <a class="col-10 px-3 ml-3 btn btn-outline-primary" href="{% url 'confirm_buy' bid.item.id %}">Buy</a>
         <!--a href="#" class="btn btn-primary">Go somewhere</a-->
-       </div>
+        </div>
       </div>
 
       <div class="card-footer text-muted py-1">
        Winning Bid: {{ bid.date }}
       </div>
      </div>
-     {% endif %}
-     {% endfor %}
+
    </div>
+   {% endif %}
+     {% endfor %}
  </div>
 </div>
 {% endblock content %}}

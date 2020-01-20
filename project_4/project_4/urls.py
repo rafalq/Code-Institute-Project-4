@@ -19,7 +19,8 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from users import views as user_views
-from users.views import UserItemListView, CartListView, ItemBuyUpdateView
+from users.views import UserItemListView, CartListView,  ItemBuyAtAuctionView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,8 +31,8 @@ urlpatterns = [
     path('', include('auction_store.urls')),
     path('profile/history/', UserItemListView.as_view(), name='history'),
     path('profile/cart/', CartListView.as_view(), name='cart'),
-    path('profile/cart/<int:pk>/buy',
-         ItemBuyUpdateView.as_view(), name='buy'),
+    path('store/item/<int:pk>/confirm_buy/',
+         ItemBuyAtAuctionView.as_view(), name='confirm_buy'),
 ]
 
 if settings.DEBUG:

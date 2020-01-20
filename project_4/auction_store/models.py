@@ -6,28 +6,40 @@ from PIL import Image
 import datetime
 
 
-# def dtime():
-#     return timezone.now() + timezone.timedelta(days=1)
-
-
 class Item(models.Model):
     image = models.ImageField(upload_to='profile_pics', default='default.jpg')
     name = models.CharField(max_length=100)
     desc = models.TextField()
     price = models.IntegerField()
     start_date = models.DateTimeField(auto_now=True)
+    end_date = models.DateTimeField(null=True, blank=True)
     in_auction = models.BooleanField(default=False)
     start_auction_price = models.IntegerField(null=True, blank=True)
-    end_date = models.DateTimeField(null=True, blank=True)
-    seller = models.ForeignKey(User, on_delete=models.CASCADE)
     sold = models.BooleanField(default=False)
+    bought_at_auction = models.BooleanField(default=False)
+    seller = models.ForeignKey(User, on_delete=models.CASCADE)
     buyer = models.ForeignKey(
         User, null=True, related_name="buyer", on_delete=models.CASCADE)
 
-    # if img.height > 300 or img.width > 300:
-    #     output_size = (300, 300)
-    #     img.thumbnail(output_size)
-    #     img.save(self.image.path)
+    MILITARY = 'MILITARY'
+    PRIVATE = 'PRIVATE'
+    TOOLS = 'TOOLS'
+    TREASURE = 'TREASURE'
+    WRITINGS = 'WRITINGS'
+    OTHER = 'OTHER'
+    CATEGORY = [
+        (MILITARY, 'Military'),
+        (PRIVATE, 'Private'),
+        (TOOLS, 'Tools'),
+        (TREASURE, 'Treasure'),
+        (WRITINGS, 'Writings'),
+        (OTHER, 'Other'),
+    ]
+    category = models.CharField(
+        max_length=20,
+        choices=CATEGORY,
+        default=OTHER,
+    )
 
     def __str__(self):
         return self.name
@@ -38,16 +50,10 @@ class Item(models.Model):
     @property
     def today_date(self):
         return timezone.now()
-        # .isoformat()
 
     @property
     def finish_date(self):
         return self.end_date
-        # .isoformat()
-
-    # @property
-    # def compare_dates(self):
-    #     return datetime.now() > self.end_date
 
 
 class Bid(models.Model):
@@ -61,11 +67,3 @@ class Bid(models.Model):
     @property
     def today_date(self):
         return timezone.now()
-#         # .isoformat()
-
-# class Sold(models.Model):
-#     image = models.ImageField(upload_to='profile_pics', default='default.jpg')
-#     name = models.CharField(max_length=100)
-#     buyer = models.ForeignKey(
-#         User, null=True, related_name="buyer", on_delete=models.CASCADE)
-#     purchase_date = models.DateTimeField(null=True, blank=True)

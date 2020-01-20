@@ -23,7 +23,7 @@
     <link href="{% static 'bootstrap/bootstrap.min.css' %}" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic"
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic|IM+Fell+Great+Primer+SC|Roboto&display=swap"
     rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template -->
@@ -43,20 +43,26 @@
    <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
      <li class="nav-item active">
-      <a class="nav-item btn btn-link pl-0 pl-md-2 pt-md-2 active"
+      <a class="nav-item btn btn-link pl-0 pl-md-2 pt-md-2 font-weight-bolder"
       href="{% url 'auction_store-home' %}">Home
       <span class="sr-only">(current)</span>
       </a>
      </li>
      <li class="nav-item">
-      <a class="nav-item btn btn-link pl-0 pl-md-2 pt-md-2"
+      <a class="nav-item btn btn-link pl-0 pl-md-2 pt-md-2 font-weight-bolder"
       href="{% url 'auction_store-home' %}">About
       <span class="sr-only">(current)</span>
       </a>
      </li>
      <li class="nav-item">
-      <a class="nav-item btn btn-link pl-0 pl-md-2 pt-md-2 active"
-      href="{% url 'auction_store-store' %}">Store
+      <a class="nav-item btn btn-link pl-0 pl-md-2 pt-md-2 font-weight-bolder active"
+      href="{% url 'auction_store-store' %}"><i class="fas fa-gavel text-muted pr-1"></i>Store
+      <span class="sr-only">(current)</span>
+      </a>
+     </li>
+     <li class="nav-item">
+      <a class="nav-item btn btn-link pl-0 pl-md-2 pt-md-2 font-weight-bolder"
+      href="{% url 'auction_store-store' %}">Contact
       <span class="sr-only">(current)</span>
       </a>
      </li>
