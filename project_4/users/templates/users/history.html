@@ -3,31 +3,38 @@
 <div class="container">
  <div class="row">
   <div class="col-12 col-lg-4">
-    <h3 class="text-center pt-4 pb-3">Purchased</h3>
+    <h3 class="text-center pt-4 pb-3"><i class="fas fa-money-bill-alt  pr-1 text-muted"></i> Purchased</h3>
     {% for item in items %}
      {% if item.buyer == user %}
-      <p class="text-center">{{ item.name }}</p>
-      <p class="text-center">{{ item.buyer }}</p>
-      <hr>
+     <div class="row bg-light pt-2 mb-2">
+       <a href="{% url 'item-detail' item.id %}" class="col-12 text-center font-weight-bold mb-0">{{ item.name }}</a>
+       <p class="col-12 text-center mb-0"><i class="fas fa-euro-sign text-muted"></i> {{ item.sold_price }}</p>
+       <p class="col-12 text-center text-muted">{{ item.sold_date }}</p>
+      </div>
      {% endif %}
     {% endfor %}
   </div>
    <div class="col-12 col-lg-4">
-    <h3 class="text-center pt-4 pb-3">Auction</h3>
+    <h3 class="text-center pt-4 pb-3"><i class="fas fa-gavel pr-1 text-muted"></i> Your Bids</h3>
      {% for bid in bids %}
       {% if bid.bidder == user %}
-       <p class="col-12 text-center">{{ bid.item.name }} {{ bid.date }} {{ bid.amount }}</p>
-       <hr>
+      <div class="row bg-light pt-2 mb-2">
+       <a href="{% url 'item-detail' bid.item.id %}" class="col-12 text-center font-weight-bold mb-0">{{ bid.item.name }}</a>
+       <p class="col-12 text-center mb-0"><i class="fas fa-euro-sign text-muted"></i> {{ bid.amount }}</p>
+       <p class="col-12 text-center text-muted">{{ bid.date }}</p>
+      </div>
       {% endif %}
      {% endfor %}
    </div>
    <div class="col-12 col-lg-4">
-    <h3 class="text-center pt-4 pb-3">Your Sales</h3>
+    <h3 class="text-center pt-4 pb-3"><i class="fas fa-ad pr-1 text-muted"></i> Your Sales</h3>
     {% for item in items %}
      {% if item.seller == user %}
-      <p class="text-center">{{ item.name }}</p>
-      <p class="text-center">{{ item.seller }}</p>
-      <hr>
+      <div class="row bg-light pt-2 mb-2">
+       <a href="{% url 'item-detail' item.id %}" class="col-12 text-center font-weight-bold mb-0">{{ item.name }}</a>
+       <p class="col-12 text-center mb-0"><i class="fas fa-euro-sign text-muted"></i> {{ item.price }}</p>
+       <p class="col-12 text-center text-muted">{{ item.start_date }}</p>
+      </div>
      {% endif %}
     {% endfor %}
   </div>
