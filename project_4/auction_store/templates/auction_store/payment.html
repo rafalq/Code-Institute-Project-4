@@ -104,21 +104,49 @@ label {
 
 {% block content %}
 <script src="https://js.stripe.com/v3/"></script>
-<div class="container py-3">
-<div class="row text-center pt-3">
-  <h3 class="col-12">Payment</h3>
-  <p class="col-12"><small>Artifact: </small>{{ item.name }}</p>
-  <p class="col-12"><small>Price: </small>
-    <i class="fas fa-euro-sign text-center w-100"></i>{{ item.price }}</p>
-</div>
+
+<div class="container py-4">
+ <div class="row text-center">
+  <div class="col-md-8 offset-md-2 border border-dark py-3 px-0">
+  <h2 class="float-left pl-3"><i class="fas fa-money-check"></i></h2>
+  <h3 class="col-12 pr-5">Payment</h3>
+  <hr>
+  <h5 class="col-12"><small>Artifact: </small>{{ item.name }} <small class="pl-3">Price: </small>
+    <i class="fas fa-euro-sign"></i> {{ item.price }}</h5>
+  </div>
+ </div>
 <div class="form-row">
   <div class="col-md-8 offset-md-2">
-  <h5 class="pt-4 pl-4">Delivery Address</h5>
+  <h5 class="pt-5 pl-4 mb-0">Delivery Address</h5>
   <form action="" method="post" id="payment-form" name="payment-form">
     {%  csrf_token %}
-    <div class="col-12">
-     {{ order_form|crispy }}
-    </div>
+    <div class="form-row">
+     <div class="form-group col-12 mb-0">
+      {{ order_form.full_name|as_crispy_field }}
+     </div>
+     <div class="form-group col-12 col-md-6 mb-0">
+      {{ order_form.email|as_crispy_field }}
+     </div>
+     <div class="form-group col-12  col-md-6 mb-0">
+      {{ order_form.phone_number|as_crispy_field }}
+     </div>
+      <div class="form-group col-12 mb-0">
+       {{ order_form.street_address1|as_crispy_field }}
+      </div>
+      <div class="form-group col-12 mb-0">
+       {{ order_form.street_address2|as_crispy_field }}
+      </div>
+      <div class="form-group col-12 col-md-5 mb-0">
+       {{ order_form.town_or_city|as_crispy_field }}
+      </div>
+      <div class="form-group col-8 col-md-5 mb-0">
+       {{ order_form.country|as_crispy_field }}
+      </div>
+      <div class="form-group col-4 col-md-2 mb-0">
+       {{ order_form.postcode|as_crispy_field }}
+      </div>
+     </div>
+
     <div class="stripe-form-row bg-secondary p-3 mt-2">
       <label for="card-element" id="stripe-btn-label" class="text-white pb-1">
         Credit or debit card
