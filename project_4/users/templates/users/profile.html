@@ -1,34 +1,40 @@
 {% extends 'auction_store/base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="container">
+<div class="container py-3">
     <div class="row">
-        <div class="col-2 media">
-            <img class="img-fluid" src="{{ user.account.image.url }}">
-        </div>
-        <div class="col-5 media-body">
-            <h3 class="account-heading">{{ user.username }}</h3>
-            <p class="text-secondary">{{ user.email }}</p>
-            <p>Address: </p>
+        <div class="col-md-5">
+            <h3 class="account-heading text-center">{{ user.username }}</h3>
+            <p class="text-secondary text-center">{{ user.email }}</p>
+            <h5 class="text-center pt-2">Address </h5>
+            <p><small>Full Name:  </small>{{ user.account.full_name }}</p>
+            <p><small>Phone:   </small>{{ user.account.phone_number }}</p>
+            <p><small>Country:  </small>{{ user.account.country }}</p>
+            <p><small>Postcode:  </small>{{ user.account.postcode }}</p>
+            <p><small>Town/City:  </small>{{ user.account.town_or_city }}</p>
+            <p><small>Street Address 1:   </small>{{ user.account.street_address1 }}</p>
+            <p><small>Street Address 2:   </small>{{ user.account.street_address2 }}</p>
+            <p><small>County:   </small>{{ user.account.county }}</p>
 
         </div>
-        <div class="col-md-5">
+        <div class="col-md-7">
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <fieldset class="form-group">
-                    <legend class="border-bottom mb-4">Update</legend>
-                    {{ u_form|crispy }}
-                    {{ a_form|crispy }}
+                    <legend class="border-bottom mb-4 text-center">Update</legend>
+                    <div class="row">
+                      <div class="col-6">
+                       {{ u_form|crispy }}
+                      </div>
+                      <div class="col-6">
+                       {{ a_form|crispy }}
+                      </div>
+                    </div>
                 </fieldset>
-                <div class="form-group">
-                    <button class="btn btn-outline-danger" type="submit">Update</button>
+                <div class="form-group text-center">
+                    <button class="btn btn-outline-primary px-5" type="submit">Update</button>
                 </div>
             </form>
-            <div class="border-top pt-3">
-                <small class="text-muted">
-                    Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
-                </small>
-            </div>
         </div>
     </div>
 </div>

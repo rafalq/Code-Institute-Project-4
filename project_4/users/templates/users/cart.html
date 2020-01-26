@@ -1,35 +1,33 @@
 {% extends 'auction_store/base.html' %}
-{% block content %}
+
 {% load static %}
+
+{% block head_footer %}
+<link href="{% static 'css/footer.css' %}" rel="stylesheet">
+{% endblock head_footer %}
+
+{% block content %}
 <div class="container">
-  <h3 class="text-center pt-4 pb-3">Win Auction Artifacts</h3>
- <div class="row">
+ <h3 class="text-center pt-4 pb-3">Win Auction Artifacts</h3>
+<div class="row">
   {% for bid in win_bids %}
    {% if not bid.item.sold and bid.item.end_date < bid.today_date %}
-   <div class="col-6 col-md-4">
-     <div class="card text-center border border-white">
-     <div class="card-header py-1">
-      <h5 class="card-title mb-0"><a href="#">{{ bid.item.name }}</a></h5>
-     </div>
-
-      <div class="card-body row py-0">
-       <div class="col-4 m-0 p-0">
-        <img class="img-fluid" src="{{ bid.item.image.url }}">
-       </div>
-        <div class="col-7 py-3">
-        <a class="col-10 px-3 ml-3 btn btn-outline-primary" href="{% url 'confirm_buy' bid.item.id %}">Buy</a>
-        <!--a href="#" class="btn btn-primary">Go somewhere</a-->
+    <div class="col-12 col-md-5 py-3">
+     <section class="media content-section border border-secondary row p-3">
+      <img class="img-fluid col-6 pl-0" src="{{ bid.item.image.url }}">
+       <div class="media-body col-6 mb-0">
+        <div class="section-metadata">
+         <a class="mr-2" href="{% url 'item-detail' bid.item.id %}">{{ bid.item.name }}</a>
+         <p class="mb-0"><small class="text-muted">{{ bid.date }}</small></p>
+         <div>
+          <a class="btn btn-primary btn-sm mt-1 mb-1 px-5 mt-md-4 py-md-2" href="{% url 'payment' bid.item.id %}">Buy</a>
+         </div>
         </div>
-      </div>
-
-      <div class="card-footer text-muted py-1">
-       Winning Bid: {{ bid.date }}
-      </div>
-     </div>
-
-   </div>
+       </div>
+     </section>
+    </div>
    {% endif %}
-     {% endfor %}
+  {% endfor %}
  </div>
 </div>
 {% endblock content %}}

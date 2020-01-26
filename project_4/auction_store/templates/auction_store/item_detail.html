@@ -2,6 +2,7 @@
 {% block content %}
 {% load crispy_forms_tags %}
 {% load static %}
+{% load mathfilters %}
 <link rel="stylesheet" href="{% static 'css/progress-bar.css' %}">
 
 <div class="container-fluid pt-3">
@@ -20,10 +21,13 @@
      <p class="text-center">
       <span class="key-item-detail">Manufactured by:
       </span>Nation</p>
-    </div><!------------------------------------------------>
-    <div class="col-md-6 pt-2 mr-0"><!------------------------------------------------>
+    </div>
+
+    <div class="col-md-6 pt-2 mr-0">
      <h3 class="text-center">{{ object.name }}</h3>
+          <!---------------------- SELLER OPTIONS -------------------------->
        {% if object.seller ==  user %}
+          <!---------------------- SELLER NOT SOLD / AUCTION NOT FINISH -------------------------->
         {% if not object.sold and object.today_date < object.finish_date %}
         <div class="row py-4 mb-2">
          <div class="col-6">
@@ -40,6 +44,7 @@
           href="{% url 'item-delete' object.id %}">Delete</a>
          </div>
         </div>
+          <!---------------------- SELLER NOT SOLD / ONLY FOR SALE  -------------------------->
         {% elif not object.sold and not object.finish_date %}
         <i class="fas fa-euro-sign text-center w-100 mt-3 pt-1"></i>
         <p class="item-price text-center mb-0">{{ object.price }}</p>
@@ -54,18 +59,20 @@
          </div>
         </div>
         {% else %}
-
         <div class="col-12">
+          <!---------------------- SELLER SOLD ONLY FOR SALE -------------------------->
          {% if not object.in_auction and object.sold %}
           <p class="text-center text-muted">Sold for:</p>
           <i class="fas fa-euro-sign text-center w-100"></i>
           <p class="item-price text-center">{{ object.price }}</p>
          {% elif object.in_auction and object.sold %}
+          <!---------------------- SELLER SOLD DURING AUCTION -------------------------->
           {% if not object.bought_at_auction %}
            <p class="text-center text-muted">Sold for:</p>
            <i class="fas fa-euro-sign text-center w-100"></i>
            <p class="item-price text-center">{{ object.price }}</p>
            {% else %}
+          <!---------------------- SELLER SOLD TO WINNING BIDDER -------------------------->
              {% for bid in bids %}
               {% if forloop.first %}
                <p class="text-center text-muted">Sold for:</p>
@@ -74,6 +81,7 @@
               {% endif %}
              {% endfor %}
            {% endif %}
+          <!---------------------- SELLER NOT SOLD / WINNING BIDDER -------------------------->
           {% elif object.today_date > object.finish_date %}
            {% if bids|length %}
             {% for bid in bids %}
@@ -84,11 +92,13 @@
               {% endif %}
              {% endfor %}
             {% else %}
+          <!---------------------- SELLER FINISHED NOT SOLD / NO BIDS -------------------------->
              <i class="fas fa-euro-sign text-center w-100"></i>
              <p class="item-price text-center">{{ object.price }}</p>
            {% endif %}
           {% endif %}
         </div>
+          <!---------------------- SELLER AUCTION FINISHED OR SOLD / BLOCK BUTTONS -------------------------->
         <div class="row pb-4 pt-2">
          <div class="col-6">
           <a class="disabled btn-auction btn btn-outline-secondary btn-lg w-100"
@@ -102,25 +112,28 @@
        {% endif %}
       {% else %}
 
-
+          <!---------------------- BUYER NOT SOLD ONLY FOR SALE -------------------------->
          {% if not object.in_auction and not object.sold %}
           <div class="offset-2 col-8 pt-3 pb-5">
            <i class="fas fa-euro-sign text-center w-100"></i>
            <p class="item-price text-center">{{ object.price }}</p>
            <a class="btn-buy btn btn-outline-primary color-primary btn-lg w-100"
-           href="{% url 'buy' object.id %}">
-           Buy Now</a>
+            href="{% url 'payment' object.id %}">
+            Buy Now</a>
           </div>
+
+          <!---------------------- BUYER SOLD ONLY FOR SALE -------------------------->
          {% elif not object.in_auction and object.sold %}
           <p class="text-center text-muted">Sold for:</p>
           <i class="fas fa-euro-sign text-center w-100"></i>
           <p class="item-price text-center">{{ object.price }}</p>
-
          {% elif object.in_auction %}
+          <!---------------------- BUYER SOLD DURING AUCTION -------------------------->
           {% if not object.bought_at_auction and object.sold %}
           <p class="text-center text-muted">Sold for:</p>
           <i class="fas fa-euro-sign text-center w-100"></i>
           <p class="item-price text-center">{{ object.price }}</p>
+          <!---------------------- BUYER SOLD TO WINNING BIDDER -------------------------->
           {% elif object.bought_at_auction and object.sold %}
            {% for bid in bids %}
              {% if forloop.first %}
@@ -129,6 +142,7 @@
               <p class="item-price text-center">{{ bid.amount }}</p>
              {% endif %}
             {% endfor %}
+          <!---------------------- BUYER NOT SOLD / WINNING BID -------------------------->
           {% elif object.today_date > object.finish_date %}
            {% if bids|length %}
             {% for bid in bids %}
@@ -139,14 +153,16 @@
              {% endif %}
             {%  endfor %}
            {% else %}
+          <!---------------------- BUYER ?????????? -------------------------->
             <div class="offset-2 col-8 pt-3 pb-5">
              <i class="fas fa-euro-sign text-center w-100"></i>
              <p class="item-price text-center">{{ object.price }}</p>
              <a class="btn-buy btn btn-outline-primary color-primary btn-lg w-100"
-             href="{% url 'buy' object.id %}">
-             Buy Now</a>
+              href="{% url 'payment' object.id %}">
+              Buy Now</a>
             </div>
            {% endif %}
+          <!---------------------- BUYER NOT SOLD / AUCTION NOT FINISH -------------------------->
           {% elif object.today_date < object.finish_date %}
            <div class="row py-4 mb-2">
             <div class="col-6">
@@ -162,10 +178,10 @@
              <i class="fas fa-euro-sign text-center w-100"></i>
              <p class="item-price text-center">{{ object.price }}</p>
              <a class="btn-buy btn btn-outline-primary color-primary btn-lg w-100"
-             href="{% url 'buy' object.id %}">
-             Buy Now</a>
+              href="{% url 'payment' object.id %}">
+              Buy Now</a>
             </div>
-           </div>
+            </div>
            {% endif %}
          {% endif %}
         {% endif %}
@@ -283,7 +299,7 @@
  </div><!-- top row  -->
 </div><!-- container  -->
 
-<!--MODAL-->
+<!--BID MODAL-->
 {% if not object.sold %}
 <form method="POST">
 {% csrf_token %}
@@ -354,6 +370,17 @@
 </form>
 {% endif %}
 
+
+<script>
+//stripe button
+var stripeButton = document.getElementsByClassName('stripe-button-el');
+var i;
+for (i = 0; i < stripeButton.length; i++) {
+  stripeButton[i].firstChild.innerHTML = "Buy";
+}
+</script>
+
+{% if not object.sold and object.today_date < object.finish_date %}
 <script>
 var endDate = document.getElementById("timer").innerHTML;
 
@@ -363,14 +390,16 @@ var tday = new Date().getTime();
 
 
 var timeLeftRedirect = Math.floor(countDownDate - tday);
-console.log(timeLeftRedirect)
 // refresh/redirect after the time
   if(timeLeftRedirect > 0){
     window.setTimeout(function(){
       location.href = "http://localhost:8000/store";
     }, timeLeftRedirect);
 }
+
 </script>
+
 <script src="{% static 'js/progress.js' %}"></script>
 <script src="{% static 'js/progress-bar.js' %}"></script>
+{% endif %}
 {% endblock content %}

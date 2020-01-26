@@ -1,13 +1,14 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from users.models import Account
 from django.urls import reverse
 from PIL import Image
 import datetime
 
 
 class Item(models.Model):
-    image = models.ImageField(upload_to='profile_pics', default='default.jpg')
+    image = models.ImageField(upload_to='item_pics', default='default.jpg')
     name = models.CharField(max_length=100)
     desc = models.TextField()
     price = models.IntegerField()
@@ -67,3 +68,23 @@ class Bid(models.Model):
     @property
     def today_date(self):
         return timezone.now()
+
+
+class Order(models.Model):
+    date = models.DateField(auto_now=True)
+    stripe_id = models.CharField(max_length=40, default='')
+    account = models.ForeignKey(
+        Account, related_name="account", on_delete=models.SET_NULL, blank=True, null=True)
+    item = models.ForeignKey(
+        Item, related_name="artifact", on_delete=models.SET_NULL, blank=True, null=True)
+    full_name = models.CharField(max_length=50)
+    email = models.EmailField(max_length=50)
+    phone_number = models.CharField(max_length=20)
+    street_address1 = models.CharField(max_length=40)
+    street_address2 = models.CharField(max_length=40, blank=True, null=True)
+    town_or_city = models.CharField(max_length=40)
+    country = models.CharField(max_length=40)
+    postcode = models.CharField(max_length=20, blank=True, null=True)
+
+    def __str__(self):
+        return "{0}-{1}-{2}".format(self.id, self.date, self.full_name)

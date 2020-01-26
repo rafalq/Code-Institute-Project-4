@@ -23,3 +23,4 @@ var x = setInterval(function() {
       clearInterval(x);
       document.getElementById("timer").innerHTML = "TIME IS UP!";}
     }, 1000);
+

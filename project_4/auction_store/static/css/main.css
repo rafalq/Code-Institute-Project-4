@@ -220,10 +220,12 @@ p.item-price{
 .btn-auction:hover{
 	color: white !important;
 }
+
 .btn-buy{
-    color: #007bff !important;
+  color: #007bff !important;
 }
-.btn-buy:hover{
+.btn-buy:hover, .btn-buy:active{
+  background-color: #007bff !important;
 	color: white !important;
 }
 #img-paypal{

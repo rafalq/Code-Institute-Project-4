@@ -6,8 +6,9 @@ from django.contrib.auth.mixins import (
     LoginRequiredMixin,
     UserPassesTestMixin
 )
+from django.contrib.auth.models import User
+from .models import Account
 from django.contrib.messages.views import SuccessMessageMixin
-from auction_store.forms import BuyForm
 from django.views.generic import ListView, UpdateView
 from auction_store.models import Item, Bid
 from django.db.models import OuterRef, Subquery
@@ -29,11 +30,10 @@ def register(request):
 
 @login_required
 def profile(request):
+    account = Account.objects.get(user=request.user)
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
-        a_form = AccountUpdateForm(request.POST,
-                                   request.FILES,
-                                   instance=request.user.account)
+        a_form = AccountUpdateForm(request.POST, instance=request.user.account)
         if u_form.is_valid() and a_form.is_valid:
             u_form.save()
             a_form.save()
@@ -81,22 +81,3 @@ class CartListView(ListView):
     @property
     def today_date(self):
         return timezone.now()
-
-
-class ItemBuyAtAuctionView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    model = Item
-    form_class = BuyForm
-    success_url = '/store'
-    success_message = 'You have just bought...!'
-    template_name = 'auction_store/buy_form.html'
-
-    def form_valid(self, form):
-        item = self.get_object()
-
-        if not item.bought_at_auction:
-            form.instance.sold = True
-            form.instance.bought_at_auction = True
-            form.instance.buyer = self.request.user
-            return super().form_valid(form)
-
-        return super(ItemBuyAtAuctionView, self).form_invalid(form)

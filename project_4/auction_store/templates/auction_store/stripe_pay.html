@@ -1,0 +1,325 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Stripe Press</title><link rel="shortcut icon" href="https://d1wqzb5bdbcre6.cloudfront.net/5527aa500b7ed436f3fdb052938641d2ddb454f8/68747470733a2f2f66696c65732e7374726970652e636f6d2f66696c65732f665f746573745f6c31766b6e756647586c7a614e35616a6e35334f4c386f66"><script src="https://js.stripe.com/v3/"></script><link href="https://js.stripe.com/v3/fingerprinted/css/checkout-869f6527bfa61c8b54a9dd08919e9396.css" rel="stylesheet"><script data-avast-pam="y" type="text/javascript" name="AVAST_PAM_submitInjector">(function _submitInjector() {
+        var f = document.querySelectorAll("form")[0]; // eslint-disable-line no-undef
+        if (!f._avast_submit) {
+          f._avast_submit = f.submit;
+        }
+        try {
+          Object.defineProperty(f, "submit", {
+            get: function get() {
+              return function (prev_submit) {
+                prev_submit.call(this);
+
+                if (this._avast_inside_submit) {
+                  return;
+                }
+                this._avast_inside_submit = true;
+
+                var evt = document.createEvent("CustomEvent");
+                evt.initEvent("scriptsubmit", true, true); // bubbling & cancelable
+                this.dispatchEvent(evt);
+
+                delete this._avast_inside_submit;
+              }.bind(this, this._avast_submit);
+            },
+            set: function set(submitFunc) {
+              this._avast_submit = submitFunc;
+            }
+          });
+        } catch (ex) {
+          // ignored
+        }
+      })();
+    </script>
+    </head>
+      <body>
+        <noscript>You need to enable JavaScript to run this app.</noscript>
+        <div id="root">
+          <div class="App-Container App-Container flex-container justify-content-center">
+            <div class="App App--singleItem" style="margin-top: 0px;">
+              <div class="App-Overview"><header class="Header">
+                <div class="Header-Content Header-Content flex-container justify-content-space-between align-items-stretch">
+                  <div class="Header-Business Header-Business flex-item width-auto">
+                    <a class="Link Header-BusinessLink Link--primary" href="https://stripe.com/docs/payments/checkout?cancel=true#try-now" target="_self" aria-label="Previous page" title="Stripe Press">
+                      <div style="position: relative;">
+                        <div class="flex-container align-items-center">
+                          <svg class="InlineSVG Icon Header-BusinessLink-arrow mr2 Icon--sm" focusable="false" width="12" height="12" viewBox="0 0 16 16">
+                            <path d="M3.417 7H15a1 1 0 0 1 0 2H3.417l4.591 4.591a1 1 0 0 1-1.415 1.416l-6.3-6.3a1 1 0 0 1 0-1.414l6.3-6.3A1 1 0 0 1 8.008 2.41z" fill-rule="evenodd"></path>
+                          </svg>
+                          <div class="flex-container align-items-center">
+                            <div class="HeaderImage--icon HeaderImage--icon flex-item width-fixed HeaderImage--icon flex-container justify-content-center align-items-center">
+                              <img alt="Stripe Press" src="https://d1wqzb5bdbcre6.cloudfront.net/5527aa500b7ed436f3fdb052938641d2ddb454f8/68747470733a2f2f66696c65732e7374726970652e636f6d2f66696c65732f665f746573745f6c31766b6e756647586c7a614e35616a6e35334f4c386f66">
+                            </div>
+                            <div class="Header-BusinessLink-name-wrapper">
+                              <span class="Header-BusinessLink-label Text Text-color--gray800 Text-fontSize--14 Text-fontWeight--500">
+                                <span>Back
+                                </span>
+                              </span>
+                              <h1 class="Header-BusinessLink-name Text Text-color--gray800 Text-fontSize--14 Text-fontWeight--500 Text--truncate">Stripe Press
+                              </h1>
+                            </div>
+                          </div>
+                          <div class="Tag mx2">
+                            <span class="Text Text-color--orange Text-fontSize--11 Text-fontWeight--700 Text-transform--uppercase">Test
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </header>
+              <div class="ProductSummary mt6">
+                <div class="ProductSummary-ProductImageContainer">
+                  <div class="ProductImage-container">
+                    <img src="https://d1wqzb5bdbcre6.cloudfront.net/86b3495b299027a36286ad5cfb0d54b747571664/68747470733a2f2f66696c65732e7374726970652e636f6d2f66696c65732f665f746573745f454f4e63426e43434a6475527a59646f5451733947464c6d" alt="Product" class="ProductImage-image">
+                  </div>
+                </div>
+                <div class="ProductSummary-Info">
+                  <span class="Text Text-color--gray500 Text-fontSize--16 Text-fontWeight--500">Stubborn Attachments</span><span class="ProductSummary-TotalAmount Text Text-color--gray800 Text-fontWeight--600 Text--tabularNumbers" id="ProductSummary-TotalAmount">
+                    <span>$20.00</span
+                    </span>
+                    <span class="Text Text-color--gray500 Text-fontSize--14 Text-fontWeight--500" id="ProductSummary-Description">Pre-order</span>
+                  </div>
+                </div>
+              </div>
+              <div class="App-Payment"><div class="PaymentRequestOrHeader" style="height: 124px;">
+                <div class="PaymentHeaderContainer" style="opacity: 0; display: none;">
+                  <div class="PaymentHeader">
+                    <div class="Text Text-fontSize--20 Text-fontWeight--500">
+                      <span>Pay with card</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="ButtonAndDividerContainer" style="opacity: 1; display: block;">
+                  <div class="PaymentRequestButtonContainer StripeElement">
+                    <div class="__PrivateStripeElement" style="margin: 0px !important; padding: 0px !important; border: none !important; display: block !important; background: transparent !important; position: relative !important; opacity: 1 !important;">
+                      <iframe frameborder="0" allowtransparency="true" scrolling="no" name="__privateStripeFrame8" allowpaymentrequest="true" src="https://js.stripe.com/v3/elements-inner-payment-request-87a83a92e1e825251b088d64bbb9c4b6.html#style[paymentRequestButton][height]=44px&amp;style[paymentRequestButton][type]=default&amp;componentName=paymentRequestButton&amp;wait=false&amp;rtl=false&amp;keyMode=test&amp;apiKey=pk_test_jG9s3XMdSjZF9Kdm5g59zlYd&amp;origin=https%3A%2F%2Fcheckout.stripe.com&amp;referrer=https%3A%2F%2Fcheckout.stripe.com%2Fpay%2Fppage_1G4oAiFKnpzPB0MXok9QNPF2%23fidkdWxOYHwnPyd1blpxYHZxWm9CPHY2XUhhVm9fQzxOYWgwYjA8f2lcYScpJ3dgY2B3d2B3SndsYmxrJz8nbXFxdXY%252FKip2cXdsdWArZmpoJyknaWpmZGlgJz9rcGlpKSdobGF2Jz9%252BJ2JwbGEnPydjY2c1NWYyMyhgNGY8KDEzN2coPWQ2ZChkND1jMWRhMDdkNjMnKSdocGxhJz8nN2FgYGE8PTEoNDxhMygxZzc0KD0yNTUoYzxjNWE2ZjRmN2QwJykndmxhJz8nZjNkYzwyY2EoZjRmMigxMWc8KDw2NzIoNWQ9PWY9NzY0M2dmJ3gpJ2dgcWR2Jz9eWHgl&amp;controllerId=__privateStripeController1" title="Secure payment input frame" style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; user-select: none !important; height: 44px;"></iframe>
+                      <input class="__PrivateStripeElement-input" aria-hidden="true" aria-label=" " autocomplete="false" maxlength="1" style="border: none !important; display: block !important; position: absolute !important; height: 1px !important; top: 0px !important; left: 0px !important; padding: 0px !important; margin: 0px !important; width: 100% !important; opacity: 0 !important; background: transparent !important; pointer-events: none !important; font-size: 16px !important;">
+                    </div>
+                  </div>
+                  <div class="Divider">
+                    <hr>
+                    <p class="Divider-Text Text Text-color--gray400 Text-fontSize--14 Text-fontWeight--400">
+                      <span>Or pay with card</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <form novalidate="" class="AVAST_PAM_nonloginform">
+                <div class="App-Payment-Card App-Payment-Card flex-container spacing-16 direction-row wrap-wrap">
+                  <div class="flex-item width-12">
+                    <div class="FormFieldGroup">
+                      <div class="FormFieldGroup-labelContainer FormFieldGroup-labelContainer flex-container justify-content-space-between">
+                        <label for="email">
+                          <span class="Text Text-color--gray600 Text-fontSize--13 Text-fontWeight--500">
+                            <span>Email</span>
+                          </span>
+                        </label>
+                      </div>
+                      <fieldset class="FormFieldGroup-Fieldset" id="email-fieldset">
+                        <div class="FormFieldGroup-container">
+                          <div class="FormFieldGroup-child FormFieldGroup-child--width-12 FormFieldGroup-childLeft FormFieldGroup-childRight FormFieldGroup-childTop FormFieldGroup-childBottom">
+                            <div class="FormFieldInput">
+                              <span class="InputContainer" data-max="">
+                                <input class="CheckoutInput Input Input--empty" autocomplete="email" autocorrect="off" spellcheck="false" id="email" name="email" type="email" aria-invalid="false" value=""></span>
+                              </div>
+                            </div>
+                            <div style="opacity: 0; height: 0px;">
+                              <span class="FieldError Text Text-color--red Text-fontSize--13">
+                                <span>
+                                </span>
+                              </span>
+                            </div>
+                          </div>
+                        </fieldset>
+                      </div>
+                    </div>
+
+                    <div class="flex-item width-12">
+                      <div class="FormFieldGroup">
+                        <div class="FormFieldGroup-labelContainer FormFieldGroup-labelContainer flex-container justify-content-space-between">
+                          <label for="cardNumber-fieldset">
+                            <span class="Text Text-color--gray600 Text-fontSize--13 Text-fontWeight--500">
+                              <span>Card information</span>
+                            </span>
+                          </label>
+                        </div>
+
+                        <fieldset class="FormFieldGroup-Fieldset" id="cardNumber-fieldset">
+                          <div class="FormFieldGroup-container">
+                            <div class="FormFieldGroup-child FormFieldGroup-child--width-12 FormFieldGroup-childLeft FormFieldGroup-childRight FormFieldGroup-childTop">
+                              <div class="FormFieldInput">
+                                <span class="InputContainer" data-max="">
+                                  <input class="CheckoutInput CheckoutInput--tabularnums Input Input--empty" autocomplete="cc-number" autocorrect="off" spellcheck="false" id="cardNumber" name="cardNumber" inputmode="numeric" aria-label="Card number" placeholder="1234 1234 1234 1234" aria-invalid="false" value="">
+                                </span>
+                                <div class="FormFieldInput-Icons" style="opacity: 1;">
+                                  <div style="transform: none;">
+                                    <span class="FormFieldInput-IconsIcon is-visible">
+                                      <img src="https://js.stripe.com/v3/fingerprinted/img/visa-365725566f9578a9589553aa9296d178.svg"
+                                      alt="visa" class="BrandIcon">
+                                    </span>
+                                  </div>
+                                  <div style="transform: none;">
+                                    <span class="FormFieldInput-IconsIcon is-visible">
+                                      <img src="https://js.stripe.com/v3/fingerprinted/img/mastercard-4d8844094130711885b5e41b28c9848f.svg"
+                                      alt="mastercard" class="BrandIcon">
+                                    </span>
+                                  </div>
+                                  <div style="transform: none;">
+                                    <span class="FormFieldInput-IconsIcon is-visible">
+                                      <img src="https://js.stripe.com/v3/fingerprinted/img/amex-a49b82f46c5cd6a96a6e418a6ca1717c.svg"
+                                      alt="amex" class="BrandIcon">
+                                    </span>
+                                  </div>
+                                  <div class="CardFormFieldGroupIconOverflow">
+                                    <span class="CardFormFieldGroupIconOverflow-Item CardFormFieldGroupIconOverflow-Item--invisible" role="presentation">
+                                      <span class="FormFieldInput-IconsIcon" role="presentation">
+                                        <img src="https://js.stripe.com/v3/fingerprinted/img/unionpay-8a10aefc7295216c338ba4e1224627a1.svg" alt="unionpay" class="BrandIcon">
+                                      </span>
+                                    </span>
+                                    <span class="CardFormFieldGroupIconOverflow-Item CardFormFieldGroupIconOverflow-Item--invisible" role="presentation">
+                                      <span class="FormFieldInput-IconsIcon" role="presentation">
+                                        <img src="https://js.stripe.com/v3/fingerprinted/img/jcb-271fd06e6e7a2c52692ffa91a95fb64f.svg" alt="jcb" class="BrandIcon">
+                                      </span>
+                                    </span>
+                                    <span class="CardFormFieldGroupIconOverflow-Item CardFormFieldGroupIconOverflow-Item--invisible" role="presentation">
+                                      <span class="FormFieldInput-IconsIcon" role="presentation">
+                                        <img src="https://js.stripe.com/v3/fingerprinted/img/discover-ac52cd46f89fa40a29a0bfb954e33173.svg" alt="discover" class="BrandIcon">
+                                      </span>
+                                    </span>
+                                    <span class="CardFormFieldGroupIconOverflow-Item CardFormFieldGroupIconOverflow-Item--visible" role="presentation">
+                                      <span class="FormFieldInput-IconsIcon" role="presentation">
+                                        <img src="https://js.stripe.com/v3/fingerprinted/img/diners-fbcbd3360f8e3f629cdaa80e93abdb8b.svg" alt="diners" class="BrandIcon">
+                                      </span>
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="FormFieldGroup-child FormFieldGroup-child--width-6 FormFieldGroup-childLeft FormFieldGroup-childBottom">
+                              <div class="FormFieldInput">
+                                <span class="InputContainer" data-max="">
+                                  <input class="CheckoutInput CheckoutInput--tabularnums Input Input--empty" autocomplete="cc-exp" autocorrect="off" spellcheck="false" id="cardExpiry" name="cardExpiry" inputmode="numeric" aria-label="Expiration" placeholder="MM / YY" aria-invalid="false" value="">
+                                </span>
+                              </div>
+                            </div>
+                            <div class="FormFieldGroup-child FormFieldGroup-child--width-6 FormFieldGroup-childRight FormFieldGroup-childBottom">
+                              <div class="FormFieldInput has-icon">
+                                <span class="InputContainer" data-max="">
+                                  <input class="CheckoutInput CheckoutInput--tabularnums Input Input--empty" autocomplete="cc-csc" autocorrect="off" spellcheck="false" id="cardCvc" name="cardCvc" inputmode="numeric" aria-label="CVC" placeholder="CVC" aria-invalid="false" value="">
+                                </span>
+                                <div class="FormFieldInput-Icon is-loaded">
+                                  <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 21" class="Icon Icon--md">
+                                    <g fill="none" fill-rule="evenodd">
+                                      <g id="cvc" class="Icon-fill">
+                                        <g id="card" transform="translate(0 2)">
+                                          <path id="shape" d="M21.68 0H2c-.92 0-2 1.06-2 2v15c0 .94 1.08 2 2 2h25c.92 0 2-1.06 2-2V9.47a5.98 5.98 0 0 1-3 1.45V11c0 .66-.36 1-1 1H3c-.64 0-1-.34-1-1v-1c0-.66.36-1 1-1h17.53a5.98 5.98 0 0 1 1.15-9z" opacity=".2">
+                                          </path>
+                                          <path id="shape" d="M19.34 3H0v3h19.08a6.04 6.04 0 0 1 .26-3z" opacity=".3">
+                                          </path>
+                                        </g>
+                                        <g id="shape" transform="translate(18)">
+                                          <path d="M7 14A7 7 0 1 1 7 0a7 7 0 0 1 0 14zM4.22 4.1h-.79l-1.93.98v1l1.53-.8V9.9h1.2V4.1zm2.3.8c.57 0 .97.32.97.78 0 .5-.47.85-1.15.85h-.3v.85h.36c.72 0 1.21.36 1.21.88 0 .5-.48.84-1.16.84-.5 0-1-.16-1.52-.47v1c.56.24 1.12.37 1.67.37 1.31 0 2.21-.67 2.21-1.64 0-.68-.42-1.23-1.12-1.45.6-.2.99-.73.99-1.33C8.68 4.64 7.85 4 6.65 4a4 4 0 0 0-1.57.34v.98c.48-.27.97-.42 1.44-.42zm4.32 2.18c.73 0 1.24.43 1.24.99 0 .59-.51 1-1.24 1-.44 0-.9-.14-1.37-.43v1.03c.49.22.99.33 1.48.33.26 0 .5-.04.73-.1.52-.85.82-1.83.82-2.88l-.02-.42a2.3 2.3 0 0 0-1.23-.32c-.18 0-.37.01-.57.04v-1.3h1.44a5.62 5.62 0 0 0-.46-.92H9.64v3.15c.4-.1.8-.17 1.2-.17z">
+                                          </path>
+                                        </g>
+                                      </g>
+                                    </g>
+                                  </svg>
+                                </div>
+                              </div>
+                            </div>
+                            <div style="opacity: 0; height: 0px;">
+                              <span class="FieldError Text Text-color--red Text-fontSize--13">
+                                <span>
+                                </span>
+                              </span>
+                            </div>
+                          </div>
+                        </fieldset>
+                      </div>
+                    </div>
+
+
+
+
+
+
+                      <div class="flex-item width-12"></div>
+                      <div class="flex-item width-12">
+                        <button class="SubmitButton SubmitButton--incomplete" type="submit" style="background-color: rgb(61, 66, 78); color: rgb(255, 255, 255);">
+                          <div class="SubmitButton-Shimmer" style="background: linear-gradient(to right, rgba(61, 66, 78, 0) 0%, rgb(82, 87, 100) 50%, rgba(61, 66, 78, 0) 100%);">
+                          </div>
+                          <div class="SubmitButton-TextContainer">
+                            <span class="SubmitButton-Text SubmitButton-Text--current Text Text-fontWeight--500 Text--truncate">
+                              <span>Pay <span>$20.00</span>
+                            </span>
+                          </span>
+                          <span class="SubmitButton-Text SubmitButton-Text--pre Text Text-fontWeight--500 Text--truncate">
+                            <span>Processing...</span>
+                          </span>
+                        </div>
+                        <div class="SubmitButton-IconContainer">
+                          <div class="SubmitButton-Icon SubmitButton-Icon--pre">
+                            <div class="Icon Icon--md Icon--square">
+                                      <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                                        <path d="M3 7V5a5 5 0 1 1 10 0v2h.5a1 1 0 0 1 1 1v6a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2V8a1 1 0 0 1 1-1zm5 2.5a1 1 0 0 0-1 1v2a1 1 0 0 0 2 0v-2a1 1 0 0 0-1-1zM11 7V5a3 3 0 1 0-6 0v2z" fill="#ffffff" fill-rule="evenodd"></path>
+                                      </svg>
+                                    </div>
+                                  </div>
+                                  <div class="SubmitButton-Icon SubmitButton-SpinnerIcon SubmitButton-Icon--pre">
+                                    <div class="Icon Icon--md Icon--square">
+                                      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                                        <ellipse cx="12" cy="12" rx="10" ry="10" style="stroke: rgb(255, 255, 255);"></ellipse>
+                                      </svg>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="SubmitButton-CheckmarkIcon">
+                                  <div class="Icon Icon--md">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="14" focusable="false">
+                                      <path d="M 0.5 6 L 8 13.5 L 21.5 0" fill="transparent" stroke-width="2" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                  </div>
+                                </div>
+                              </button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+
+
+                      <footer class="App-Footer Footer">
+                        <div class="Footer-PoweredBy">
+                          <a class="Link Link--primary" href="https://stripe.com" target="_blank">
+                            <span class="Text Text-color--gray400 Text-fontSize--12 Text-fontWeight--400">
+                              <span>Powered by
+                                <img src="https://js.stripe.com/v3/fingerprinted/img/stripe-8ad2522ef8799d5985038700f8a07027.svg" alt="stripe" class="Icon Footer-PoweredBy-Icon Icon--md"></span>
+                                      </span>
+                                    </a>
+                                  </div>
+                                  <div class="Footer-Links">
+                                    <a class="Link mr3 Link--primary" href="https://stripe.com/checkout/terms" target="_blank">
+                                      <span class="Text Text-color--gray400 Text-fontSize--12 Text-fontWeight--400">
+                                        <span>Terms</span>
+                                      </span>
+                                    </a>
+                                    <a class="Link Link--primary" href="https://stripe.com/privacy" target="_blank">
+                                      <span class="Text Text-color--gray400 Text-fontSize--12 Text-fontWeight--400">
+                                        <span>Privacy</span>
+                                      </span>
+                                    </a>
+                                  </div>
+                                </footer>
+
+
+                              </div>
+                            </div>
+                          </div>
+                          <script type="text/javascript" src="https://js.stripe.com/v3/fingerprinted/js/checkout-e2c65b4ac31c1b345733f2a8d1bbbf6b.js"></script>
+                          <iframe frameborder="0" allowtransparency="true" scrolling="no" name="__privateStripeController1" allowpaymentrequest="true" src="https://js.stripe.com/v3/controller-ca29fa4b08854a508376c726b7f94108.html#apiKey=pk_test_jG9s3XMdSjZF9Kdm5g59zlYd&amp;betas[0]=google_pay_beta_1&amp;stripeJsId=a980e1f6-a828-4ac6-b50c-0c06459c3582&amp;origin=https%3A%2F%2Fcheckout.stripe.com&amp;referrer=https%3A%2F%2Fcheckout.stripe.com%2Fpay%2Fppage_1G4oAiFKnpzPB0MXok9QNPF2%23fidkdWxOYHwnPyd1blpxYHZxWm9CPHY2XUhhVm9fQzxOYWgwYjA8f2lcYScpJ3dgY2B3d2B3SndsYmxrJz8nbXFxdXY%252FKip2cXdsdWArZmpoJyknaWpmZGlgJz9rcGlpKSdobGF2Jz9%252BJ2JwbGEnPydjY2c1NWYyMyhgNGY8KDEzN2coPWQ2ZChkND1jMWRhMDdkNjMnKSdocGxhJz8nN2FgYGE8PTEoNDxhMygxZzc0KD0yNTUoYzxjNWE2ZjRmN2QwJykndmxhJz8nZjNkYzwyY2EoZjRmMigxMWc8KDw2NzIoNWQ9PWY9NzY0M2dmJ3gpJ2dgcWR2Jz9eWHgl&amp;controllerId=__privateStripeController1" aria-hidden="true" tabindex="-1" style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; visibility: hidden !important; position: fixed !important; height: 1px !important; pointer-events: none !important; user-select: none !important;"></iframe>
+                          <iframe frameborder="0" allowtransparency="true" scrolling="no" name="__privateStripeMetricsController0" allowpaymentrequest="true" src="https://js.stripe.com/v2/m/outer.html#url=https%3A%2F%2Fcheckout.stripe.com%2Fpay%2Fppage_1G4oAiFKnpzPB0MXok9QNPF2%23fidkdWxOYHwnPyd1blpxYHZxWm9CPHY2XUhhVm9fQzxOYWgwYjA8f2lcYScpJ3dgY2B3d2B3SndsYmxrJz8nbXFxdXY%252FKip2cXdsdWArZmpoJyknaWpmZGlgJz9rcGlpKSdobGF2Jz9%252BJ2JwbGEnPydjY2c1NWYyMyhgNGY8KDEzN2coPWQ2ZChkND1jMWRhMDdkNjMnKSdocGxhJz8nN2FgYGE8PTEoNDxhMygxZzc0KD0yNTUoYzxjNWE2ZjRmN2QwJykndmxhJz8nZjNkYzwyY2EoZjRmMigxMWc8KDw2NzIoNWQ9PWY9NzY0M2dmJ3gpJ2dgcWR2Jz9eWHgl&amp;title=Stripe%20Checkout&amp;referrer=https%3A%2F%2Fstripe.com%2Fdocs%2Fpayments%2Fcheckout&amp;muid=2deed984-19d6-4b21-8700-f9f0d3c1c2a5&amp;sid=c6af97fd-c1c7-44b9-9327-0a88c82316bc&amp;preview=true" aria-hidden="true" tabindex="-1" style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; visibility: hidden !important; position: fixed !important; height: 1px !important; pointer-events: none !important; user-select: none !important;"></iframe>
+                          <iframe frameborder="0" allowtransparency="true" scrolling="no" name="__privateStripeFrame6" allowpaymentrequest="true" src="https://js.stripe.com/v3/payment-request-inner-google-pay-845651dd737cc16faf7c847fcc1caaa5.html#authentication[apiKey]=pk_test_jG9s3XMdSjZF9Kdm5g59zlYd&amp;mids[guid]=NA&amp;mids[muid]=2deed984-19d6-4b21-8700-f9f0d3c1c2a5&amp;mids[sid]=c6af97fd-c1c7-44b9-9327-0a88c82316bc&amp;origin=https%3A%2F%2Fcheckout.stripe.com&amp;referrer=https%3A%2F%2Fcheckout.stripe.com%2Fpay%2Fppage_1G4oAiFKnpzPB0MXok9QNPF2%23fidkdWxOYHwnPyd1blpxYHZxWm9CPHY2XUhhVm9fQzxOYWgwYjA8f2lcYScpJ3dgY2B3d2B3SndsYmxrJz8nbXFxdXY%252FKip2cXdsdWArZmpoJyknaWpmZGlgJz9rcGlpKSdobGF2Jz9%252BJ2JwbGEnPydjY2c1NWYyMyhgNGY8KDEzN2coPWQ2ZChkND1jMWRhMDdkNjMnKSdocGxhJz8nN2FgYGE8PTEoNDxhMygxZzc0KD0yNTUoYzxjNWE2ZjRmN2QwJykndmxhJz8nZjNkYzwyY2EoZjRmMigxMWc8KDw2NzIoNWQ9PWY9NzY0M2dmJ3gpJ2dgcWR2Jz9eWHgl&amp;controllerId=__privateStripeController1" aria-hidden="true" tabindex="-1" style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; visibility: hidden !important; position: fixed !important; height: 1px !important; pointer-events: none !important; user-select: none !important;"></iframe>
+                        </body>
+                        </html>

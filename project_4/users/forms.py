@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.models import User
+from django.contrib.auth.forms import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import Account
 
@@ -21,6 +21,8 @@ class UserUpdateForm(forms.ModelForm):
 
 
 class AccountUpdateForm(forms.ModelForm):
+
     class Meta:
         model = Account
-        fields = ['image']
+        fields = ['full_name', 'phone_number', 'country', 'postcode',
+                  'town_or_city', 'street_address1', 'street_address2', 'county']

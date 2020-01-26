@@ -28,6 +28,22 @@
 
     <!-- Custom styles for this template -->
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
+
+    <!-- Custom footer -->
+    {% block head_footer %}
+    {% endblock head_footer %}
+
+    <!-- Custom styles for payment.html -->
+    {% block head_payment %}
+    {% endblock head_payment %}
+   <script
+    src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+    crossorigin="anonymous">
+   </script>
+
+    {% block head_js %}
+    {% endblock %}
 </head>
 
 <body>
