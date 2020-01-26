@@ -17,10 +17,14 @@ class Item(models.Model):
     in_auction = models.BooleanField(default=False)
     start_auction_price = models.IntegerField(null=True, blank=True)
     sold = models.BooleanField(default=False)
+    sold_date = models.DateTimeField(default=timezone.now)
+    sold_price = models.IntegerField(null=True, blank=True)
     bought_at_auction = models.BooleanField(default=False)
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
     buyer = models.ForeignKey(
         User, null=True, related_name="buyer", on_delete=models.CASCADE)
+    winner = models.ForeignKey(
+        User, null=True, related_name="winner", on_delete=models.CASCADE)
 
     MILITARY = 'MILITARY'
     PRIVATE = 'PRIVATE'
@@ -62,8 +66,6 @@ class Bid(models.Model):
     date = models.DateTimeField(default=timezone.now)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     bidder = models.ForeignKey(User, on_delete=models.CASCADE)
-    winner = models.ForeignKey(
-        User, null=True, related_name="winner", on_delete=models.CASCADE)
 
     @property
     def today_date(self):

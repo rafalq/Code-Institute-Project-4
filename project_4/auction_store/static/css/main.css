@@ -207,7 +207,9 @@ a:hover, a:focus {
   left: 5px;
   opacity: .8;
 }
-
+#filtered-img{
+  filter:grayscale(100%);
+}
 p.item-timer{
 	font-weight: bold;
 }

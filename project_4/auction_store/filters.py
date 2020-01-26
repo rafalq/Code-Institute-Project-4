@@ -12,6 +12,7 @@ class ItemFilter(django_filters.FilterSet):
     FORMAT_CHOICES = (
         ('all', 'All Listings'),
         ('auction', 'Auction'),
+        ('end_auction', 'Ended Auction'),
         ('sale', 'Only Sale'),
         ('sold', 'Sold')
     )
@@ -48,8 +49,12 @@ class ItemFilter(django_filters.FilterSet):
         if value == 'auction':
             queryset = queryset.filter(
                 end_date__gte=timezone.now(), in_auction=True)
+        elif value == 'end_auction':
+            queryset = queryset.filter(
+                end_date__lt=timezone.now(), sold=False, winner__isnull=False)
         elif value == 'sale':
-            queryset = queryset.filter(in_auction=False, sold=False)
+            queryset = queryset.filter(
+                sold=False, winner__isnull=True, end_date__lt=timezone.now())
         elif value == 'sold':
             queryset = queryset.filter(sold=True)
         else:

@@ -83,6 +83,7 @@ def payment(request, pk):  # new
                 source=request.POST['stripeToken']
             )
             item.sold = True
+            item.buyer = request.user
             item.save()
             order_form.save()
             messages.success(request, f'You have bought!')
@@ -106,6 +107,8 @@ class ItemListView(ListView):
         context = super().get_context_data(**kwargs)
         context['filter'] = ItemFilter(
             self.request.GET, queryset=self.get_queryset())
+        context['bids'] = Bid.objects.all()
+        context['items'] = Item.objects.all()
         return context
 
 
@@ -140,10 +143,14 @@ class ItemDetailView(FormMixin, LoginRequiredMixin, SuccessMessageMixin, DetailV
             if not bids and form.instance.amount > self.object.start_auction_price:
                 form.instance.item = self.object
                 form.instance.bidder = self.request.user
+                self.object.winner = self.request.user
+                self.object.save()
                 form.save()
             elif form.instance.amount > Bid.objects.last().amount:
                 form.instance.item = self.object
                 form.instance.bidder = self.request.user
+                self.object.winner = self.request.user
+                self.object.save()
                 form.save()
             else:
                 return super(ItemDetailView, self).form_invalid(form)

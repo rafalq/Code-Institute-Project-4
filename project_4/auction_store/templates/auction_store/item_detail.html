@@ -9,8 +9,24 @@
  <div class="row pt-3"><!-- top row -->
   <div class="col-md-8"><!-- top col-8 -->
    <div class="row">
-    <div class="col-12 col-md-6 mr-0"><!------------------------------------------------>
-     <img class="layered-image img-fluid ml-md-3 col-12" src="{{ object.image.url }}">
+    <div class="col-12 col-md-6 mr-0">
+
+    {% if item.sold %}
+     <img class="layered-image img-fluid" src="{{ item.image.url }}">
+     <img class="image-overlay-store img-fluid" src="{% static 'img/soldd.png' %}">
+    {% elif not item.sold and item.today_date <= item.finish_date %}
+     <img class="image-time-store img-fluid" src="{% static 'img/hammer.png' %}">
+     <img class="layered-image img-fluid" src="{{ item.image.url }}">
+    {% elif not item.sold and item.today_date >= item.finish_date %}
+     {% if bids|length %}
+     <img id="filtered-img" class="layered-image img-fluid" src="{{ item.image.url }}">
+     {% else %}
+     <img class="layered-image img-fluid" src="{{ item.image.url }}">
+     {% endif %}
+    {% else %}
+     <img class="layered-image img-fluid" src="{{ item.image.url }}">
+    {% endif %}
+
      <h5 class="pt-4 text-center">Item Specification</h5>
      <p class="pt-2 mb-2 text-center">
       <span class="key-item-detail">Condition:
