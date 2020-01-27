@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% load crispy_forms_field %}
 {% block head_payment %}
-
+{% load static %}
 <style>
 
 #stripe-btn-label {
@@ -63,11 +63,6 @@ label {
   color: #fa755a;
 }
 
-.stripe-form-row {
-  width: 70%;
-  float: left;
-}
-
 /**
  * The CSS shown here will not be introduced in the Quickstart guide, but shows
  * how you can use CSS to style your Element's container.
@@ -99,35 +94,51 @@ label {
 .StripeElement--webkit-autofill {
   background-color: #fefde5 !important;
 }
+footer {
+    position: absolute;
+    width: 100%;
+    bottom: -500px;
+  }
 </style>
 {% endblock head_payment %}
-
 {% block content %}
 <script src="https://js.stripe.com/v3/"></script>
 
-<div class="container py-4">
- <div class="row text-center">
-  <div class="col-md-8 offset-md-2 border border-dark py-3 px-0">
-  <h2 class="float-left pl-3"><i class="fas fa-money-check"></i></h2>
-  <h3 class="col-12 pr-5">Payment</h3>
-  <hr>
-  <h5 class="col-12"><small>Artifact: </small>{{ item.name }} <small class="pl-3">Price: </small>
-    <i class="fas fa-euro-sign"></i> {{ item.price }}</h5>
-  </div>
- </div>
-<div class="form-row">
-  <div class="col-md-8 offset-md-2">
-  <h5 class="pt-5 pl-4 mb-0">Delivery Address</h5>
-  <form action="" method="post" id="payment-form" name="payment-form">
+<div class="container">
+  <form action="" method="post" id="payment-form" name="payment-form" class="row text-center">
     {%  csrf_token %}
-    <div class="form-row">
+
+   <div class="col-md-6">
+    <div class="row border border-dark py-3 px-2">
+   <h2 class="float-left pl-3"><i class="fas fa-money-check"></i></h2>
+   <h3 class="col-12 text-center">Payment</h3>
+   <hr>
+   <h5 class="col-12"><small>Artifact: </small>{{ item.name }} <small class="pl-3">Price: </small>
+    <i class="fas fa-euro-sign"></i> {{ item.price }}</h5>
+    <div class="col-12 bg-secondary p-3 mt-2">
+     <label for="card-element" id="stripe-btn-label" class="text-white pb-1">
+      Credit or debit card
+     </label>
+      <div id="card-element" class="StripeElement StripeElement--empty">
+        <div class="__PrivateStripeElement" style="margin: 0px !important; padding: 0px !important; border: none !important; display: block !important; background: transparent !important; position: relative !important; opacity: 1 !important;">
+        </div>
+      </div>
+      <!-- Used to display form errors. -->
+      <div id="card-errors" role="alert"></div>
+    </div>
+    <button id="stripe-button" class="">Submit Payment</button>
+   </div>
+  </div>
+
+  <div class="col-md-6">
+  <h5 class="pt-3 mb-3">Delivery Address</h5>
      <div class="form-group col-12 mb-0">
       {{ order_form.full_name|as_crispy_field }}
      </div>
-     <div class="form-group col-12 col-md-6 mb-0">
+     <div class="form-group col-12 mb-0">
       {{ order_form.email|as_crispy_field }}
      </div>
-     <div class="form-group col-12  col-md-6 mb-0">
+     <div class="form-group col-12 mb-0">
       {{ order_form.phone_number|as_crispy_field }}
      </div>
       <div class="form-group col-12 mb-0">
@@ -136,33 +147,21 @@ label {
       <div class="form-group col-12 mb-0">
        {{ order_form.street_address2|as_crispy_field }}
       </div>
-      <div class="form-group col-12 col-md-5 mb-0">
+
+      <div class="row p-0 ">
+       <div class="form-group col-7 ml-4 mb-0">
        {{ order_form.town_or_city|as_crispy_field }}
-      </div>
-      <div class="form-group col-8 col-md-5 mb-0">
-       {{ order_form.country|as_crispy_field }}
-      </div>
-      <div class="form-group col-4 col-md-2 mb-0">
+       </div>
+       <div class="form-group col-3 pl-2 pr-2 ml-2 mr-2">
        {{ order_form.postcode|as_crispy_field }}
       </div>
      </div>
 
-    <div class="stripe-form-row bg-secondary p-3 mt-2">
-      <label for="card-element" id="stripe-btn-label" class="text-white pb-1">
-        Credit or debit card
-      </label>
-      <div id="card-element" class="StripeElement StripeElement--empty">
-        <div class="__PrivateStripeElement" style="margin: 0px !important; padding: 0px !important; border: none !important; display: block !important; background: transparent !important; position: relative !important; opacity: 1 !important;">
-        </div>
-      </div>
-      <!-- Used to display form errors. -->
-      <div id="card-errors" role="alert"></div>
-    </div>
-    <button id="stripe-button" class="mt-5">Submit Payment</button>
-
+     <div class="form-group col-12 mb-0">
+      {{ order_form.country|as_crispy_field }}
+     </div>
+   </div>
   </form>
-</div>
-</div>
 </div>
 
 <script type="text/javascript" nonce="">  // Create a Stripe client.
