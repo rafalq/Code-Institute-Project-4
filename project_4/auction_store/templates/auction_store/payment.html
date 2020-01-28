@@ -113,8 +113,8 @@ footer {
    <h2 class="float-left pl-3"><i class="fas fa-money-check"></i></h2>
    <h3 class="col-12 text-center">Payment</h3>
    <hr>
-   <h5 class="col-12"><small>Artifact: </small>{{ item.name }} <small class="pl-3">Price: </small>
-    <i class="fas fa-euro-sign"></i> {{ item.price }}</h5>
+   <h5 class="col-12"><small>Artifact: </small><a href="{% url 'item-detail' item.id %}">{{ item.name }}</a> <small class="pl-3">Price: </small>
+    <i class="fas fa-euro-sign"></i> {{ price }}</h5>
     <div class="col-12 bg-secondary p-3 mt-2">
      <label for="card-element" id="stripe-btn-label" class="text-white pb-1">
       Credit or debit card

@@ -41,7 +41,8 @@
 
     <div class="col-md-6 pt-2 mr-0">
      <h3 class="text-center">{{ object.name }}</h3>
-          <!---------------------- SELLER OPTIONS -------------------------->
+
+             <!---------------------- SELLER OPTIONS -------------------------->
        {% if object.seller ==  user %}
           <!---------------------- SELLER NOT SOLD / AUCTION NOT FINISH -------------------------->
         {% if not object.sold and object.today_date < object.finish_date %}
@@ -83,31 +84,16 @@
           <p class="item-price text-center">{{ object.price }}</p>
          {% elif object.in_auction and object.sold %}
           <!---------------------- SELLER SOLD DURING AUCTION -------------------------->
-          {% if not object.bought_at_auction %}
            <p class="text-center text-muted">Sold for:</p>
            <i class="fas fa-euro-sign text-center w-100"></i>
-           <p class="item-price text-center">{{ object.price }}</p>
-           {% else %}
-          <!---------------------- SELLER SOLD TO WINNING BIDDER -------------------------->
-             {% for bid in bids %}
-              {% if forloop.first %}
-               <p class="text-center text-muted">Sold for:</p>
-               <i class="fas fa-euro-sign text-center w-100"></i>
-               <p class="item-price text-center">{{ bid.amount }}</p>
-              {% endif %}
-             {% endfor %}
-           {% endif %}
+           <p class="item-price text-center">{{ sold_price }}</p>
           <!---------------------- SELLER NOT SOLD / WINNING BIDDER -------------------------->
           {% elif object.today_date > object.finish_date %}
            {% if bids|length %}
-            {% for bid in bids %}
-             {% if forloop.first %}
-              <p class="text-center text-muted">Winning Bid:</p>
-              <i class="fas fa-euro-sign text-center w-100"></i>
-              <p class="item-price text-center">{{ bid.amount }}</p>
-              {% endif %}
-             {% endfor %}
-            {% else %}
+            <p class="text-center text-muted">Winning Bid:</p>
+            <i class="fas fa-euro-sign text-center w-100"></i>
+            <p class="item-price text-center">{{ sold_price }}</p>
+           {% else %}
           <!---------------------- SELLER FINISHED NOT SOLD / NO BIDS -------------------------->
              <i class="fas fa-euro-sign text-center w-100"></i>
              <p class="item-price text-center">{{ object.price }}</p>
@@ -128,79 +114,71 @@
        {% endif %}
       {% else %}
 
-          <!---------------------- BUYER NOT SOLD ONLY FOR SALE -------------------------->
-         {% if not object.in_auction and not object.sold %}
-          <div class="offset-2 col-8 pt-3 pb-5">
+      <!---------------------- BUYER NOT SOLD -------------------------->
+       {% if not object.sold %}
+        {% if object.in_auction %}
+         {% if object.today_date < object.finish_date %}
+         <div class="row py-4 mb-2">
+          <div class="col-6">
+           <p class="fas fa-hourglass-end text-center w-100"></p>
+           <p id="timer" class="text-center text-center">
+           {{ object.end_date|date:"F d, Y H:i:s" }}</p>
+           <a class="btn-auction btn btn-outline-warning btn-lg w-100"
+           data-toggle="modal" data-target="#bid-form">
+           Place Bid
+           </a>
+          </div>
+          <div class="col-6">
            <i class="fas fa-euro-sign text-center w-100"></i>
            <p class="item-price text-center">{{ object.price }}</p>
            <a class="btn-buy btn btn-outline-primary color-primary btn-lg w-100"
             href="{% url 'payment' object.id %}">
             Buy Now</a>
           </div>
-
-          <!---------------------- BUYER SOLD ONLY FOR SALE -------------------------->
-         {% elif not object.in_auction and object.sold %}
-          <p class="text-center text-muted">Sold for:</p>
-          <i class="fas fa-euro-sign text-center w-100"></i>
-          <p class="item-price text-center">{{ object.price }}</p>
-         {% elif object.in_auction %}
-          <!---------------------- BUYER SOLD DURING AUCTION -------------------------->
-          {% if not object.bought_at_auction and object.sold %}
-          <p class="text-center text-muted">Sold for:</p>
-          <i class="fas fa-euro-sign text-center w-100"></i>
-          <p class="item-price text-center">{{ object.price }}</p>
-          <!---------------------- BUYER SOLD TO WINNING BIDDER -------------------------->
-          {% elif object.bought_at_auction and object.sold %}
+         </div>
+         {% else %}
+          {% if bids|length %}
+           <p class="text-center text-muted">Winning Bid:</p>
+           <i class="fas fa-euro-sign text-center w-100"></i>
            {% for bid in bids %}
-             {% if forloop.first %}
-              <p class="text-center text-muted">Sold for:</p>
-              <i class="fas fa-euro-sign text-center w-100"></i>
-              <p class="item-price text-center">{{ bid.amount }}</p>
-             {% endif %}
-            {% endfor %}
-          <!---------------------- BUYER NOT SOLD / WINNING BID -------------------------->
-          {% elif object.today_date > object.finish_date %}
-           {% if bids|length %}
-            {% for bid in bids %}
-             {% if forloop.first %}
-              <p class="text-center text-muted">Winning Bid:</p>
-              <i class="fas fa-euro-sign text-center w-100"></i>
-              <p class="item-price text-center">{{ bid.amount }}</p>
-             {% endif %}
-            {%  endfor %}
-           {% else %}
-          <!---------------------- BUYER ?????????? -------------------------->
-            <div class="offset-2 col-8 pt-3 pb-5">
-             <i class="fas fa-euro-sign text-center w-100"></i>
-             <p class="item-price text-center">{{ object.price }}</p>
-             <a class="btn-buy btn btn-outline-primary color-primary btn-lg w-100"
-              href="{% url 'payment' object.id %}">
-              Buy Now</a>
-            </div>
-           {% endif %}
-          <!---------------------- BUYER NOT SOLD / AUCTION NOT FINISH -------------------------->
-          {% elif object.today_date < object.finish_date %}
-           <div class="row py-4 mb-2">
-            <div class="col-6">
-             <p class="fas fa-hourglass-end text-center w-100"></p>
-             <p id="timer" class="text-center text-center">
-             {{ object.end_date|date:"F d, Y H:i:s" }}</p>
-             <a class="btn-auction btn btn-outline-warning btn-lg w-100"
-             data-toggle="modal" data-target="#bid-form">
-             Place Bid
-             </a>
-            </div>
-            <div class="col-6">
-             <i class="fas fa-euro-sign text-center w-100"></i>
-             <p class="item-price text-center">{{ object.price }}</p>
-             <a class="btn-buy btn btn-outline-primary color-primary btn-lg w-100"
-              href="{% url 'payment' object.id %}">
-              Buy Now</a>
-            </div>
-            </div>
-           {% endif %}
+            {% if forloop.first %}
+            <p class="item-price text-center">{{ bid.amount }}</p>
+            {% endif %}
+           {% endfor %}
+          {% else %}
+           <div class="offset-2 col-8 pt-3 pb-5">
+            <i class="fas fa-euro-sign text-center w-100"></i>
+            <p class="item-price text-center">{{ object.price }}</p>
+            <a class="btn-buy btn btn-outline-primary color-primary btn-lg w-100"
+            href="{% url 'payment' object.id %}">
+            Buy Now</a>
+           </div>
+          {% endif %}
          {% endif %}
+        {% else %}
+        <div class="offset-2 col-8 pt-3 pb-5">
+         <i class="fas fa-euro-sign text-center w-100"></i>
+         <p class="item-price text-center">{{ object.price }}</p>
+         <a class="btn-buy btn btn-outline-primary color-primary btn-lg w-100"
+          href="{% url 'payment' object.id %}">
+          Buy Now</a>
+        </div>
         {% endif %}
+      <!---------------------- BUYER SOLD -------------------------->
+        {% else %}
+        <p class="text-center text-muted">Sold for:</p>
+        <i class="fas fa-euro-sign text-center w-100"></i>
+        {% for order in orders %}
+        <p class="item-price text-center">{{ order.order_price }}</p>
+        {% endfor %}
+        {% endif %}
+      {% endif %}
+
+
+
+
+
+
 
        <p class="mb-1"><span class="key-item-detail">Postage: </span>
         <i class="fas fa-euro-sign"></i>

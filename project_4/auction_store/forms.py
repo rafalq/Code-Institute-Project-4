@@ -38,4 +38,11 @@ class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ['full_name', 'email', 'phone_number', 'street_address1',
-                  'street_address2', 'town_or_city', 'country', 'postcode']
+                  'street_address2', 'town_or_city', 'country', 'postcode',
+                  'order_price', 'buyer', 'item_name', 'order_id']
+        widgets = {
+            'order_price': forms.HiddenInput(),
+            'buyer': forms.HiddenInput(),
+            'item_name': forms.HiddenInput(),
+            'order_id': forms.HiddenInput(),
+        }

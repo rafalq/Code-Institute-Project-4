@@ -73,12 +73,13 @@ class Bid(models.Model):
 
 
 class Order(models.Model):
+    order_id = models.CharField(max_length=100, blank=True, null=True)
     date = models.DateField(auto_now=True)
+    order_price = models.CharField(max_length=40, blank=True, null=True)
+    buyer = models.ForeignKey(
+        User, on_delete=models.SET_NULL, blank=True, null=True, related_name="order_buyer")
+    item_name = models.CharField(max_length=100, blank=True, null=True)
     stripe_id = models.CharField(max_length=40, default='')
-    account = models.ForeignKey(
-        Account, related_name="account", on_delete=models.SET_NULL, blank=True, null=True)
-    item = models.ForeignKey(
-        Item, related_name="artifact", on_delete=models.SET_NULL, blank=True, null=True)
     full_name = models.CharField(max_length=50)
     email = models.EmailField(max_length=50)
     phone_number = models.CharField(max_length=20)
@@ -89,4 +90,4 @@ class Order(models.Model):
     postcode = models.CharField(max_length=20, blank=True, null=True)
 
     def __str__(self):
-        return "{0}-{1}-{2}".format(self.id, self.date, self.full_name)
+        return "{0}-{1}-{2}".format(self.id, self.date, self.item_name)

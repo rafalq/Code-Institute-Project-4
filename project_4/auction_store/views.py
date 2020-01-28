@@ -63,33 +63,59 @@ def search(request):
 def payment(request, pk):  # new
     token = request.GET.get('stripeToken')
     item = Item.objects.get(pk=pk)
+    bid = Bid.objects.filter(bidder=item.winner).last()
     order_form = OrderForm(request.POST)
     account = Account.objects.get(user=request.user)
     user = User.objects.get(id=request.user.id)
+
+    if item.in_auction:
+        if timezone.now() > item.finish_date:
+            if item.winner == None:
+                price = item.price
+                item.bought_at_auction = True
+            else:
+                price = bid.amount
+        else:
+            price = item.price
+            item.bought_at_auction = True
+    else:
+        price = item.price
+
     context = {
         'item': item,
         'order_form': order_form,
         'account': account,
-        'user': user
+        'user': user,
+        'price': price
     }
 
-    if request.method == 'POST':
+    if request.method == 'POST' and not item.sold:
         order_form = OrderForm(request.POST)
         if order_form.is_valid():
+
             charge = stripe.Charge.create(
-                amount=int(item.price * 100),
+                amount=int(price * 100),
                 currency='eur',
                 description=item.name,
                 source=request.POST['stripeToken']
             )
+
+            order_form.instance.order_price = price
+            order_form.instance.buyer = request.user
+            order_form.instance.order_id = item.id
+            order_form.instance.item_name = item.name
+            order_form.save()
             item.sold = True
+            item.sold_price = price
+            item.sold_date = timezone.now()
             item.buyer = request.user
             item.save()
-            order_form.save()
-            messages.success(request, f'You have bought!')
+
+            messages.success(request, f'Your order was successful!')
             return redirect('item-detail', item.id)
         else:
-            messages.warning(request, f'Provide your delivery address!')
+            messages.warning(
+                request, f'Invalid data received!')
             order_form = OrderForm(request.POST)
     else:
         order_form = OrderForm(request.POST)
@@ -126,6 +152,15 @@ class ItemDetailView(FormMixin, LoginRequiredMixin, SuccessMessageMixin, DetailV
             item=self.object).order_by('-id')
         context['form'] = BidForm(initial={'item': self.object})
         context['key'] = settings.STRIPE_PUBLISHABLE
+        context['orders'] = Order.objects.filter(order_id=self.object.id)
+
+        if self.object.winner == None:
+            context['sold_price'] = self.object.price
+        else:
+            bid = Bid.objects.filter(
+                item=self.object).last()
+            context['sold_price'] = bid.amount
+
         return context
 
     def post(self, request, *args, **kwargs):
@@ -172,7 +207,7 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
         if form.instance.in_auction and form.instance.start_auction_price == None:
             return super(ItemCreateView, self).form_invalid(form)
         elif form.instance.in_auction and form.instance.start_auction_price is not None:
-            form.instance.end_date = timezone.now() + timezone.timedelta(minutes=2)
+            form.instance.end_date = timezone.now() + timezone.timedelta(minutes=1)
             form.instance.seller = self.request.user
             return super().form_valid(form)
         else:
