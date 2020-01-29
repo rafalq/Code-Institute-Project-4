@@ -168,8 +168,8 @@ a {
   text-decoration: none;
 }
 a:hover, a:focus {
-    color: #5a7d9c;
-    text-decoration: none;
+  color: #5a7d9c;
+  text-decoration: none;
 }
 .badge.badge-pill{
 	background-color: transparent;
@@ -256,3 +256,35 @@ label[for="id_amount"]{
     font-size: 20px;
     margin-left: 5px;
 }
+/* history.html */
+.page-btn{
+  color: rgba(2, 59, 109, 1) !important;
+  border: none;
+  outline: none ;
+  box-shadow: none;
+
+}
+.page-btn:hover, .page-btn:focus {
+  background-color: rgba(2, 59, 109, 1) !important;
+  color: #fff !important;
+  border: none;
+  outline: none ;
+  box-shadow: none;
+}
+
+.page-btn:active{
+  background-color: rgba(2, 59, 109, 1) !important;
+  border: none;
+}
+.red{
+  color: red;
+}
+/*.badge-link{
+  position: relative;
+}
+#badge-total{
+  position: relative;
+  top: -50px;
+  right: -25px;
+}
+*/

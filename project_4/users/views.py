@@ -9,9 +9,10 @@ from django.contrib.auth.mixins import (
 from django.contrib.auth.models import User
 from .models import Account
 from django.contrib.messages.views import SuccessMessageMixin
-from django.views.generic import ListView, UpdateView
+from django.views.generic import ListView, UpdateView, View
 from auction_store.models import Item, Bid
 from django.db.models import OuterRef, Subquery
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def register(request):
@@ -21,7 +22,7 @@ def register(request):
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(
-                request, f'Your account has been created! You are now able to log in')
+                request, f'Your account has been created! You are now able to log in.')
             return redirect('login')
     else:
         form = UserRegisterForm()
@@ -56,6 +57,7 @@ class UserItemListView(ListView):
     template_name = 'users/history.html'
     context_object_name = 'items'
     ordering = ['-start_date']
+    paginate_by = 6
 
     def get_context_data(self, **kwargs):
         context = super(UserItemListView, self).get_context_data(**kwargs)
@@ -68,6 +70,7 @@ class CartListView(ListView):
     template_name = 'users/cart.html'
     context_object_name = 'items'
     ordering = ['-end_date']
+    paginate_by = 2
 
     def get_context_data(self, **kwargs):
         context = super(CartListView, self).get_context_data(**kwargs)
@@ -75,7 +78,7 @@ class CartListView(ListView):
         sq = Bid.objects.filter(item=OuterRef('item')).order_by(
             '-id')
         context['win_bids'] = Bid.objects.filter(bidder=self.request.user,
-                                                 pk=Subquery(sq.values('pk')[:1]))
+                                    pk=Subquery(sq.values('pk')[:1]))
         return context
 
     @property

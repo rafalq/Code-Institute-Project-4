@@ -36,6 +36,7 @@
     <!-- Custom styles for payment.html -->
     {% block head_payment %}
     {% endblock head_payment %}
+
    <script
     src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
@@ -87,7 +88,7 @@
 
     <ul class="navbar-nav pr-3">
      {% if user.is_authenticated %}
-      <li class="nav-item pt-md-1 px-md-3">
+      <li class="nav-item pt-md-1 px-lg-3">
        <a class="nav-link" href="{% url 'item-create' %}" role="button"
        data-toggle="tooltip" data-placement="bottom" title="Sell">
        <i class="nav-item fas fa-ad"></i>
@@ -100,7 +101,7 @@
             <i class="nav-item fas fa-user-alt"></i>
         </a>
     </li>
-    <li class="nav-item pt-md-1 px-md-3">
+    <li class="nav-item pt-md-1 px-lg-3">
         <a class="nav-link" href="{% url 'history' %}"
         role="button" data-toggle="tooltip"
         data-placement="bottom" title="History">
@@ -108,12 +109,9 @@
         </a>
     </li>
     <li class="nav-item pt-md-1 pr-md-3">
-     <a class="nav-link" href="{% url 'cart' %}" role="button"
+     <a class="nav-link badge-link" href="{% url 'cart' %}" role="button"
      data-toggle="tooltip" data-placement="bottom" title="Cart">
-      <i class="nav-item fas fa-cart-arrow-down"></i>
-      {% if item_count > 0 %}
-       <label class="badge badge-warning">{{ item_count }}</label>
-      {% endif %}
+      <i id="badge-total" class="nav-item fas fa-cart-arrow-down"></i>
      </a>
     </li>
     <li class="nav-item pt-md-1 pr-md-3">

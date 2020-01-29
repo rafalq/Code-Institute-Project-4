@@ -12,7 +12,7 @@ class Item(models.Model):
     name = models.CharField(max_length=100)
     desc = models.TextField()
     price = models.IntegerField()
-    start_date = models.DateTimeField(auto_now=True)
+    start_date = models.DateTimeField(auto_now_add=True)
     end_date = models.DateTimeField(null=True, blank=True)
     in_auction = models.BooleanField(default=False)
     start_auction_price = models.IntegerField(null=True, blank=True)
@@ -45,6 +45,16 @@ class Item(models.Model):
         choices=CATEGORY,
         default=OTHER,
     )
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        image = Image.open(self.image.path)
+
+        if image.height > 300 or image.width > 300:
+            output_size = (300, 300)
+            image.thumbnail(output_size)
+            image.save(self.image.path)
 
     def __str__(self):
         return self.name

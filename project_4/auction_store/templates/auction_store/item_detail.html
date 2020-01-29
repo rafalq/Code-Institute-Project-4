@@ -174,12 +174,6 @@
         {% endif %}
       {% endif %}
 
-
-
-
-
-
-
        <p class="mb-1"><span class="key-item-detail">Postage: </span>
         <i class="fas fa-euro-sign"></i>
         18.04 (approx. EUR 21.05) Express delivery to Ireland
@@ -364,24 +358,8 @@
 </form>
 {% endif %}
 
-
-<script>
-//stripe button
-var stripeButton = document.getElementsByClassName('stripe-button-el');
-var i;
-for (i = 0; i < stripeButton.length; i++) {
-  stripeButton[i].firstChild.innerHTML = "Buy";
-}
-</script>
-
-{% if not object.sold and object.today_date < object.finish_date %}
 <script>
 var endDate = document.getElementById("timer").innerHTML;
-
-var countDownDate = new Date(endDate).getTime();
-
-var tday = new Date().getTime();
-
 
 var timeLeftRedirect = Math.floor(countDownDate - tday);
 // refresh/redirect after the time
@@ -390,10 +368,9 @@ var timeLeftRedirect = Math.floor(countDownDate - tday);
       location.href = "http://localhost:8000/store";
     }, timeLeftRedirect);
 }
-
 </script>
 
 <script src="{% static 'js/progress.js' %}"></script>
 <script src="{% static 'js/progress-bar.js' %}"></script>
-{% endif %}
+
 {% endblock content %}

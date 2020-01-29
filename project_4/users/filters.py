@@ -31,7 +31,7 @@ class ItemFilter(django_filters.FilterSet):
 
     class Meta:
         model = Item
-        fields = ['category', 'price']
+        fields = ['winner', 'price']
 
     def filter_by_sort(self, queryset, name, value):
         if value == 'newest':

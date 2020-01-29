@@ -27,6 +27,7 @@ from django.contrib.auth.decorators import login_required
 import datetime
 from django.conf import settings
 import stripe
+from django.core.paginator import Paginator
 
 stripe.api_key = settings.STRIPE_SECRET
 
@@ -127,14 +128,19 @@ class ItemListView(ListView):
     model = Item
     template_name = 'auction_store/store.html'
     context_object_name = 'items'
+    filterset_class = ItemFilter
     ordering = ['-start_date']
+    paginate_by = 5
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.filterset = self.filterset_class(
+            self.request.GET, queryset=queryset)
+        return self.filterset.qs.distinct()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['filter'] = ItemFilter(
-            self.request.GET, queryset=self.get_queryset())
-        context['bids'] = Bid.objects.all()
-        context['items'] = Item.objects.all()
+        context['filterset'] = self.filterset
         return context
 
 
@@ -200,14 +206,14 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
     model = Item
     form_class = CreateForm
     success_url = '/store'
-    success_message = 'You have just created ...!'
+    success_message = 'Well Done!'
     template_name = 'auction_store/create_form.html'
 
     def form_valid(self, form):
         if form.instance.in_auction and form.instance.start_auction_price == None:
             return super(ItemCreateView, self).form_invalid(form)
         elif form.instance.in_auction and form.instance.start_auction_price is not None:
-            form.instance.end_date = timezone.now() + timezone.timedelta(minutes=1)
+            form.instance.end_date = timezone.now() + timezone.timedelta(minutes=20)
             form.instance.seller = self.request.user
             return super().form_valid(form)
         else:

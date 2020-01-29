@@ -12,16 +12,16 @@
     {% csrf_token %}
     <div class="form-row">
       <div class="form-group col-12 font-weight-bold text-white mb-0">
-        {{ filter.form.category|as_crispy_field }}
+        {{ filterset.form.category|as_crispy_field }}
       </div>
       <div class="form-group col-12 font-weight-bold text-white mb-0">
-       {{ filter.form.price|as_crispy_field }}
+       {{ filterset.form.price|as_crispy_field }}
       </div>
       <div class="form-group col-12 font-weight-bold text-white mb-0">
-        {{ filter.form.format|as_crispy_field }}
+        {{ filterset.form.format|as_crispy_field }}
       </div>
       <div class="form-group col-12 font-weight-bold text-white mb-0">
-        {{ filter.form.sort|as_crispy_field }}
+        {{ filterset.form.sort|as_crispy_field }}
       </div>
     </div>
     <button class="btn btn-warning col-6 offset-3 mt-2"
@@ -31,7 +31,7 @@
  </div>
 
 <div class="col-12 col-lg-9 px-0">
- {% for item in filter.qs %}
+ {% for item in object_list %}
  <div class="row card-row my-1">
   <div class="col-12 col-lg-4 p-0">
     {% if item.sold %}
@@ -75,12 +75,33 @@
  </div>
  {% endfor %}
 </div><!-- col-8 -->
-
 </div><!-- row -->
+{% if is_paginated %}
+<div class="text-center pt-3 pb-2">
+  {% if page_obj.has_previous %}
+    <a class="btn btn-outline mb-4 page-btn" href="?page=1">First</a>
+    <a class="btn btn-outline mb-4 page-btn" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+  {% endif %}
+
+  {% for num in page_obj.paginator.page_range %}
+    {% if page_obj.number == num %}
+      <a class="btn  mb-4 page-btn" href="?page={{ num }}">{{ num }}</a>
+    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+      <a class="btn btn-outline mb-4 page-btn" href="?page={{ num }}">{{ num }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if page_obj.has_next %}
+    <a class="btn btn-outline mb-4 page-btn" href="?page={{ page_obj.next_page_number }}">Next</a>
+    <a class="btn btn-outline mb-4 page-btn" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+  {% endif %}
+</div>
+{% endif %}
 </div><!-- container -->
+
 <script>
   var euroSign = document.getElementById('id_price');
-  euroSign.setAttribute("placeholder", "EURO");;
+  euroSign.setAttribute("placeholder", "€");
 </script>
 {% endblock %}
 

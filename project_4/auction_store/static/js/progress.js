@@ -40,4 +40,3 @@ bidBtn.addEventListener("click", function(){
     alert("Offer must be higher than the last bid!");
   }
   });
-
