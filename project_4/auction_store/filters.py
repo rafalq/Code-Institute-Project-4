@@ -6,8 +6,14 @@ from .models import *
 
 class ItemFilter(django_filters.FilterSet):
 
-    price = django_filters.NumberFilter(
-        label='Price (less than)', lookup_expr='lt')
+    # price = django_filters.NumberFilter()
+    price_g = django_filters.NumberFilter(label='€ Price',
+                                          field_name='price', lookup_expr='gt')
+    price_l = django_filters.NumberFilter(label='Range',
+                                          field_name='price', lookup_expr='lt')
+
+    # price = django_filters.NumberFilter(
+    #     label='Price (less than)', lookup_expr='lt')
 
     FORMAT_CHOICES = (
         ('all', 'All Listings'),
