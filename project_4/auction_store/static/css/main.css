@@ -36,12 +36,23 @@ h6 {
 	width: auto ;
 }
 .nav-item{
-    color: rgba(2, 59, 109, 1) !important;
+    color: rgba(2, 59, 109, 1);
     font-size: 20px;
 }
 .nav-item:hover{
-    color: rgba(2, 59, 109, 0.65) !important;
+    color: rgba(2, 59, 109, 0.65);
     text-decoration: none;
+}
+.badge-red{
+  color: red!important;
+}
+.badge-cart{
+  font-size: 12px;
+  padding: 1px 4px;
+  border-radius: 50%;
+  position: relative;
+  bottom: 12px;
+  left: -3px;
 }
 #register-link:hover{
     color: rgba(167, 29, 42, 0.65) !important;
@@ -51,6 +62,24 @@ h6 {
     color: rgba(0, 123, 255, 0.65) !important;
     text-decoration: none;
 }
+#nav-search-btn{
+  padding: 6px 15px;
+}
+/*#id_multi_name_fields{
+    padding: 0px !important;
+    margin-right: .25rem !important;
+    padding-left: .25rem !important;
+   /* px-md-3*/
+.first-active-style{
+  text-align: center;
+  box-shadow: 3px 2px 8px #dc3545;
+}
+/*.first-active-text{
+  text-align: center;
+  text-shadow: 3px 4px 5px #dc3545;
+  color: #dc3545 !important;
+}*/
+
 /* auction-section */
 .carousel{
 	margin-top: 2rem;
@@ -276,9 +305,9 @@ label[for="id_amount"]{
   background-color: rgba(2, 59, 109, 1) !important;
   border: none;
 }
-.red{
+/*.red{
   color: red;
-}
+}*/
 /*.badge-link{
   position: relative;
 }

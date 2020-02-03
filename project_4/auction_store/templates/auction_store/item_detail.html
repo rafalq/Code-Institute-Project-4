@@ -5,15 +5,15 @@
 {% load mathfilters %}
 <link rel="stylesheet" href="{% static 'css/progress-bar.css' %}">
 
-<div class="container-fluid pt-3">
+<div class="container-fluid pt-1 px-5">
  <div class="row pt-3"><!-- top row -->
   <div class="col-md-8"><!-- top col-8 -->
    <div class="row">
-    <div class="col-12 col-md-6 mr-0">
+    <div class="col-12 col-md-6 mr-0 pl-4 pt-2">
 
     {% if item.sold %}
      <img class="layered-image img-fluid" src="{{ item.image.url }}">
-     <img class="image-overlay-store img-fluid" src="{% static 'img/soldd.png' %}">
+     <img class="image-overlay-store img-fluid pr-3" src="{% static 'img/soldd.png' %}">
     {% elif not item.sold and item.today_date <= item.finish_date %}
      <img class="image-time-store img-fluid" src="{% static 'img/hammer.png' %}">
      <img class="layered-image img-fluid" src="{{ item.image.url }}">

@@ -1,19 +1,19 @@
 import django_filters
 from .models import *
-# from django.utils import timezone
-# import datetime
+from django.db.models import Q
 
 
 class ItemFilter(django_filters.FilterSet):
 
-    # price = django_filters.NumberFilter()
     price_g = django_filters.NumberFilter(label='€ Price',
                                           field_name='price', lookup_expr='gt')
     price_l = django_filters.NumberFilter(label='Range',
                                           field_name='price', lookup_expr='lt')
+    multi_name_fields = django_filters.CharFilter(label='',
+        method='filter_by_all_name_fields')
 
-    # price = django_filters.NumberFilter(
-    #     label='Price (less than)', lookup_expr='lt')
+    # manufacturer__name = django_filters.CharFilter(lookup_expr='icontains')
+    # start_date = filters.DateTimeFilter(field_name='pub_date', lookup_expr='gte')
 
     FORMAT_CHOICES = (
         ('all', 'All Listings'),
@@ -22,6 +22,7 @@ class ItemFilter(django_filters.FilterSet):
         ('sale', 'Only Sale'),
         ('sold', 'Sold')
     )
+
     format = django_filters.ChoiceFilter(
         label="Buying Format", choices=FORMAT_CHOICES, method='filter_by_format')
 
@@ -37,7 +38,8 @@ class ItemFilter(django_filters.FilterSet):
 
     class Meta:
         model = Item
-        fields = ['category', 'price']
+        fields = ['category', 'price', 'name', 'desc',
+                  'price', 'seller', 'buyer', 'category', 'winner']
 
     def filter_by_sort(self, queryset, name, value):
         if value == 'newest':
@@ -51,7 +53,6 @@ class ItemFilter(django_filters.FilterSet):
         return queryset.order_by(x)
 
     def filter_by_format(self, queryset, name, value):
-
         if value == 'auction':
             queryset = queryset.filter(
                 end_date__gte=timezone.now(), in_auction=True, sold=False)
@@ -66,3 +67,7 @@ class ItemFilter(django_filters.FilterSet):
         else:
             queryset = queryset.all()
         return queryset
+
+    def filter_by_all_name_fields(self, queryset, name, value):
+        return queryset.filter(
+            Q(name__icontains=value) | Q(category__icontains=value) | Q(desc__icontains=value) | Q(price__icontains=value) | Q(seller__username=value) | Q(buyer__username=value) | Q(winner__username=value))

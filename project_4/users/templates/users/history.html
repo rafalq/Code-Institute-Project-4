@@ -11,22 +11,65 @@
 {% endblock head_footer %}
 
 {% block content %}
-<div class="container">
- <div class="row">
-  <div class="col-12 col-lg-4">
-    <h3 class="text-center pt-4 pb-3"><i class="fas fa-money-bill-alt  pr-1 text-muted"></i> Purchased</h3>
+<div class="container-fluid">
+  <div class="row m-auto">
+
+  <div class="col-12 col-lg-3">
+    {% if user.account.buyer_active %}
+    <h3 class="text-center pt-4 pb-3 text-danger">
+      <i class="fas fa-money-bill-alt pr-1 text-danger"></i>
+    Purchased</h3>
     {% for item in items %}
      {% if item.buyer == user %}
-     <div class="row bg-light pt-2 mb-2">
+      <div class="row bg-light pt-2 mb-2 first-active-buyer">
        <a href="{% url 'item-detail' item.id %}" class="col-12 text-center font-weight-bold mb-0">{{ item.name }}</a>
        <p class="col-12 text-center mb-0"><i class="fas fa-euro-sign text-muted"></i> {{ item.sold_price }}</p>
        <p class="col-12 text-center text-muted">{{ item.sold_date }}</p>
       </div>
      {% endif %}
     {% endfor %}
+    <script>
+      document.getElementsByClassName("first-active-buyer")[0].setAttribute("class", "first-active-style");
+     </script>
+    {% else %}
+    <h3 class="text-center pt-4 pb-3">
+      <i class="fas fa-money-bill-alt  pr-1 text-muted"></i>
+    Purchased</h3>
+
+    {% for item in items %}
+     {% if item.buyer == user %}
+      <div class="row bg-light pt-2 mb-2">
+       <a href="{% url 'item-detail' item.id %}" class="col-12 text-center font-weight-bold mb-0">{{ item.name }}</a>
+       <p class="col-12 text-center mb-0"><i class="fas fa-euro-sign text-muted"></i> {{ item.sold_price }}</p>
+       <p class="col-12 text-center text-muted">{{ item.sold_date }}</p>
+      </div>
+     {% endif %}
+    {% endfor %}
+    {% endif %}
   </div>
-   <div class="col-12 col-lg-4">
-    <h3 class="text-center pt-4 pb-3"><i class="fas fa-gavel pr-1 text-muted"></i> Your Bids</h3>
+
+
+   <div class="col-12 col-lg-3 mx-2">
+    {% if user.account.winner_active %}
+    <h3 class="text-center pt-4 pb-3 text-danger">
+      <i class="fas fa-gavel pr-1 text-danger"></i>
+    Your Bids</h3>
+    {% for bid in bids %}
+      {% if bid.bidder == user %}
+      <div class="row bg-light pt-2 mb-2 first-active-winner">
+       <a href="{% url 'item-detail' bid.item.id %}" class="col-12 text-center font-weight-bold mb-0">{{ bid.item.name }}</a>
+       <p class="col-12 text-center mb-0"><i class="fas fa-euro-sign text-muted"></i> {{ bid.amount }}</p>
+       <p class="col-12 text-center text-muted">{{ bid.date }}</p>
+      </div>
+      {% endif %}
+     {% endfor %}
+     <script>
+      document.getElementsByClassName("first-active-winner")[0].setAttribute("class", "first-active-style");
+     </script>
+    {% else %}
+    <h3 class="text-center pt-4 pb-3">
+      <i class="fas fa-gavel pr-1 text-muted"></i>
+    Your Bids</h3>
      {% for bid in bids %}
       {% if bid.bidder == user %}
       <div class="row bg-light pt-2 mb-2">
@@ -36,9 +79,30 @@
       </div>
       {% endif %}
      {% endfor %}
+     {% endif %}
    </div>
-   <div class="col-12 col-lg-4">
-    <h3 class="text-center pt-4 pb-3"><i class="fas fa-ad pr-1 text-muted"></i> Your Sales</h3>
+
+   <div class="col-12 col-lg-3">
+    {% if user.account.seller_active %}
+    <h3 class="text-center pt-4 pb-3 text-danger">
+      <i class="fas fa-ad pr-1 text-danger"></i>
+    Your Sales</h3>
+    {% for item in items %}
+     {% if item.seller == user %}
+      <div class="row bg-light pt-2 mb-2 first-active-seller">
+       <a href="{% url 'item-detail' item.id %}" class="col-12 text-center font-weight-bold mb-0">{{ item.name }}</a>
+       <p class="col-12 text-center mb-0"><i class="fas fa-euro-sign text-muted"></i> {{ item.price }}</p>
+       <p class="col-12 text-center text-muted">{{ item.start_date }}</p>
+      </div>
+     {% endif %}
+    {% endfor %}
+    <script>
+      document.getElementsByClassName("first-active-seller")[0].setAttribute("class", "first-active-style");
+     </script>
+    {% else %}
+    <h3 class="text-center pt-4 pb-3">
+      <i class="fas fa-ad pr-1 text-muted"></i>
+    Your Sales</h3>
     {% for item in items %}
      {% if item.seller == user %}
       <div class="row bg-light pt-2 mb-2">
@@ -48,30 +112,9 @@
       </div>
      {% endif %}
     {% endfor %}
-  </div>
- </div>
-
-{% if is_paginated %}
-<div class="text-center pt-3 pb-2">
-  {% if page_obj.has_previous %}
-    <a class="btn btn-outline mb-4 page-btn" href="?page=1">First</a>
-    <a class="btn btn-outline mb-4 page-btn" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-  {% endif %}
-
-  {% for num in page_obj.paginator.page_range %}
-    {% if page_obj.number == num %}
-      <a class="btn  mb-4 page-btn" href="?page={{ num }}">{{ num }}</a>
-    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-      <a class="btn btn-outline mb-4 page-btn" href="?page={{ num }}">{{ num }}</a>
     {% endif %}
-  {% endfor %}
-
-  {% if page_obj.has_next %}
-    <a class="btn btn-outline mb-4 page-btn" href="?page={{ page_obj.next_page_number }}">Next</a>
-    <a class="btn btn-outline mb-4 page-btn" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
-  {% endif %}
+  </div>
 </div>
-{% endif %}
-
-</div>
+ </div>
+</script>
 {% endblock content %}

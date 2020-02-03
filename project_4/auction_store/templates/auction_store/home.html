@@ -1,8 +1,9 @@
 {% extends 'auction_store/base.html' %}
-{% block content %}
 {% load static %}
+
+{% block content %}
 <div class="row bg-primary">
- <p id="home-top-banner" class="col-12 mt-3 text-warning text-center">Our Latest Offers!</p>
+ <p id="home-top-banner" class="col-12 my-1 text-warning text-center">Our Latest Offers!</p>
 </div>
 <div class="container">
  <div id="carouselExampleIndicators" class="carousel slide d-none d-lg-block mb-0" data-ride="carousel">
@@ -77,74 +78,8 @@
 
 <section class="categories text-center bg-light">
  <div class="container">
-  <form action="{% url 'search' %}" method="GET" class="row">
-   <div class="col-6 col-md-2">
-    <div class="categories-item mx-auto mb-5 mb-lg-0">
-     <input class="search-input-cat form-control p-0 mr-1 pl-1 px-md-3"
-     type="text" name="q" value="Military" aria-label="Military">
-     <button class="search-btn-cat" type="submit">
-      <div class="categories-item home-cat-item mx-auto mb-5 mb-lg-0">
-       <img class="img-fluid rounded mb-3 p-2" src="{% static 'img/military.png' %}">
-       <h5>Military</h5>
-     </button>
-      </div>
-    </div>
-   <div class="col-6 col-md-2">
-    <div class="categories-item mx-auto mb-5 mb-lg-0">
-     <input class="search-input-cat form-control p-0 mr-1 pl-1 px-md-3"
-     type="text" name="q" value="Private" aria-label="Private">
-     <button class="search-btn-cat" type="submit">
-      <div class="categories-item home-cat-item mx-auto mb-5 mb-lg-0">
-       <img class="img-fluid rounded mb-3 p-2" src="{% static 'img/private.png' %}">
-       <h5>Private</h5>
-     </button>
-     </div>
-   </div>
-   <div class="col-6 col-md-2">
-    <div class="categories-item mx-auto mb-5 mb-lg-0">
-     <input class="search-input-cat form-control p-0 mr-1 pl-1 px-md-3"
-     type="text" name="q" value="Tools" aria-label="Tools">
-     <button class="search-btn-cat" type="submit">
-      <div class="categories-item home-cat-item mx-auto mb-5 mb-lg-0">
-       <img class="img-fluid rounded mb-3 p-2" src="{% static 'img/tools.png' %}">
-       <h5>Tools</h5>
-     </button>
-      </div>
-    </div>
-   <div class="col-6 col-md-2">
-    <div class="categories-item mx-auto mb-5 mb-lg-0">
-     <input class="search-input-cat form-control p-0 mr-1 pl-1 px-md-3"
-     type="text" name="q" value="Treasure" aria-label="Treasure">
-     <button class="search-btn-cat" type="submit">
-      <div class="categories-item home-cat-item mx-auto mb-5 mb-lg-0">
-       <img class="img-fluid rounded mb-3 p-2" src="{% static 'img/treasure.png' %}">
-       <h5>Treasure</h5>
-     </button>
-      </div>
-   </div>
-   <div class="col-6 col-md-2">
-    <div class="categories-item mx-auto mb-5 mb-lg-0">
-     <input class="search-input-cat form-control p-0 mr-1 pl-1 px-md-3"
-     type="text" name="q" value="Writing" aria-label="Writing">
-     <button class="search-btn-cat" type="submit">
-      <div class="categories-item home-cat-item mx-auto mb-5 mb-lg-0">
-       <img class="img-fluid rounded mb-3 p-2" src="{% static 'img/writing.png' %}">
-       <h5>Writing</h5>
-     </button>
-      </div>
-   </div>
-   <div class="col-6 col-md-2">
-    <div class="categories-item mx-auto mb-5 mb-lg-0">
-     <input class="search-input-cat form-control p-0 mr-1 pl-1 px-md-3"
-     type="text" name="q" value="Other" aria-label="Other">
-     <button class="search-btn-cat" type="submit">
-      <div class="categories-item home-cat-item mx-auto mb-5 mb-lg-0">
-       <img class="img-fluid rounded mb-3 p-2" src="{% static 'img/other.png' %}">
-       <h5>Other</h5>
-     </button>
-      </div>
-   </div>
-  </form>
+
+   <h4>About</h4>
  </div>
 </section>
 

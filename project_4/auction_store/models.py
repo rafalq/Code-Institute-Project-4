@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
-from users.models import Account
+from users.models import Account, Cart
 from django.urls import reverse
 from PIL import Image
 import datetime
@@ -22,9 +22,14 @@ class Item(models.Model):
     bought_at_auction = models.BooleanField(default=False)
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
     buyer = models.ForeignKey(
-        User, null=True, related_name="buyer", on_delete=models.CASCADE)
+        User, null=True, blank=True, related_name="buyer", on_delete=models.CASCADE)
     winner = models.ForeignKey(
         User, null=True, related_name="winner", on_delete=models.CASCADE)
+    cart = models.ForeignKey(
+        Cart, on_delete=models.SET_NULL, blank=True, null=True)
+    seller_active = models.BooleanField(default=True)
+    buyer_active = models.BooleanField(default=False)
+    winner_active = models.BooleanField(default=False)
 
     MILITARY = 'MILITARY'
     PRIVATE = 'PRIVATE'

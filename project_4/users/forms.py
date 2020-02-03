@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import User
-from django.contrib.auth.forms import UserCreationForm
-from .models import Account
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from .models import Account, Cart
 
 
 class UserRegisterForm(UserCreationForm):
@@ -25,4 +25,22 @@ class AccountUpdateForm(forms.ModelForm):
     class Meta:
         model = Account
         fields = ['full_name', 'phone_number', 'country', 'postcode',
-                  'town_or_city', 'street_address1', 'street_address2', 'county']
+                  'town_or_city', 'street_address1', 'street_address2', 'county', 'cart']
+
+
+class CartForm(forms.ModelForm):
+    class Meta:
+        model = Cart
+        fields = ['total', 'owner']
+
+
+class LoginForm(AuthenticationForm):
+    class Meta:
+        model = User
+        fields = ['username']
+
+
+class CartUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Cart
+        fields = ['total']

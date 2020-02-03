@@ -6,8 +6,12 @@ from .models import *
 
 class ItemFilter(django_filters.FilterSet):
 
-    price = django_filters.NumberFilter(
-        label='Price (less than)', lookup_expr='lt')
+    price = django_filters.NumberFilter()
+    price__gt = django_filters.NumberFilter(field_name='price', lookup_expr='gt')
+    price__lt = django_filters.NumberFilter(field_name='price', lookup_expr='lt')
+
+    # price = django_filters.NumberFilter(
+    #     label='Price (less than)', lookup_expr='lt')
 
     FORMAT_CHOICES = (
         ('all', 'All Listings'),
@@ -31,7 +35,7 @@ class ItemFilter(django_filters.FilterSet):
 
     class Meta:
         model = Item
-        fields = ['winner', 'price']
+        fields = ['winner', 'price': ['lt', 'gt']]
 
     def filter_by_sort(self, queryset, name, value):
         if value == 'newest':

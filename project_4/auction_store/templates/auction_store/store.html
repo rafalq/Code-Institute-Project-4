@@ -1,15 +1,27 @@
 {% extends 'auction_store/base.html' %}
-{% block content %}
+
 {% load static %}
 {% load crispy_forms_tags %}
 {% load crispy_forms_field %}
+
+{% block nav-search %}
+<form action="" method="GET">
+  <li class="nav-item row pt-2">
+  {% csrf_token %}
+   <div class="p-0 m-0 col-8 pt-1">
+   {{ filterset.form.multi_name_fields|as_crispy_field }}
+   </div>
+   <button id="nav-search-btn" class="btn btn-outline-primary mt-1 mb-3 ml-2" type="submit">Search</button>
+</li>
+{% endblock nav-search %}
+
+{% block content %}
 <div class="container-fluid mt-2"><!-- container -->
 <div class="row">
 
  <div class="col-12 col-lg-3 mt-2 mb-5 px-5 ">
   <div class="row bg-primary p-3">
-  <form action="" method="GET">
-    {% csrf_token %}
+
     <div class="form-row">
       <div class="form-group col-12 font-weight-bold text-center text-white mb-0">
         {{ filterset.form.category|as_crispy_field }}
@@ -29,12 +41,14 @@
         {{ filterset.form.sort|as_crispy_field }}
       </div>
     </div>
-    <button class="btn btn-warning col-6 offset-3 mt-2"
+    <button class="btn btn-warning col-8 offset-2 mt-2"
     type="submit">Search</button>
   </form>
 </div>
  </div>
-
+{% for result in results %}
+  <h3>{{ result.name }}</h3>
+{% endfor %}
 <div class="col-12 col-lg-9 px-0">
  {% for item in object_list %}
  <div class="row card-row my-1">
@@ -67,7 +81,7 @@
       {% endif %}
     </h5>
    </div>
-   <div class="card-body">
+   <div class="card-body py-1">
     <div class="col-12 py-1">
       <p class="text-left m-auto">{{ item.desc }}</p>
     </div>
