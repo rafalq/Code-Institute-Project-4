@@ -35,6 +35,14 @@ def home(request):
     items_auction = Item.objects.filter(
         in_auction=True).order_by('id')
     items = Item.objects.all()
+
+    # if the history was checked
+    if request.user.is_authenticated:
+        user = request.user
+        if user.account.history_active == False:
+            user.account.history_checked = True
+            user.account.save()
+
     context = {
         'items_auction': items_auction,
         'items': items,
@@ -156,7 +164,7 @@ def payment(request, pk):
 # displays all available items for sale / search option
 
 
-class ItemListView(ListView):
+class ItemListView(ListView, LoginRequiredMixin):
     model = Item
     template_name = 'auction_store/store.html'
     context_object_name = 'items'
@@ -172,6 +180,7 @@ class ItemListView(ListView):
         # UPDATE THE CART AND HISTORY
         # place the won artifacts in the cart if the auction is over
         # update the users histories
+
         items = Item.objects.all()
         for item in items:
             # check if the artifact is at auction

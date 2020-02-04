@@ -53,11 +53,11 @@ def register(request):
 def profile(request):
     items = Item.objects.all()
     account = Account.objects.get(user=request.user)
-    if account.history_checked == True:
-        account.history_checked = False
-        account.seller_active = False
-        account.buyer_active = False
-        account.winner_active = False
+    if account.history_active == False:
+        account.history_checked = True
+        # account.seller_active = False
+        # account.buyer_active = False
+        # account.winner_active = False
         account.save()
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
@@ -81,8 +81,9 @@ def profile(request):
 
 
 def login_request(request):
-    form = LoginForm(request=request, data=request.POST)
+    form = LoginForm()
     if request.method == 'POST':
+        form = LoginForm(request=request, data=request.POST)
         if form.is_valid():
             username = request.POST['username']
             password = request.POST['password']
@@ -117,10 +118,10 @@ def login_request(request):
         else:
             messages.error(request, "Invalid username or password.")
             form = LoginForm(request=request, data=request.POST)
-
-    return render(request=request,
-                  template_name="users/login.html",
-                  context={"form": form})
+    context = {
+        'form': form
+    }
+    return render(request, "users/login.html", context)
 
 
 @login_required

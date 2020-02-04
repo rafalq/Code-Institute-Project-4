@@ -11,13 +11,13 @@
 {% endblock head_footer %}
 
 {% block content %}
-<div class="container-fluid">
+
   <div class="row m-auto">
 
   <div class="col-12 col-lg-3">
     {% if user.account.buyer_active %}
     <h3 class="text-center pt-4 pb-3 text-danger">
-      <i class="fas fa-money-bill-alt pr-1 text-danger"></i>
+      <i class="fas fa-money-bill-alt history-icon text-danger"></i>
     Purchased</h3>
     {% for item in items %}
      {% if item.buyer == user %}
@@ -33,7 +33,7 @@
      </script>
     {% else %}
     <h3 class="text-center pt-4 pb-3">
-      <i class="fas fa-money-bill-alt  pr-1 text-muted"></i>
+      <i class="fas fa-money-bill-alt history-icon text-muted"></i>
     Purchased</h3>
 
     {% for item in items %}
@@ -52,7 +52,7 @@
    <div class="col-12 col-lg-3 mx-2">
     {% if user.account.winner_active %}
     <h3 class="text-center pt-4 pb-3 text-danger">
-      <i class="fas fa-gavel pr-1 text-danger"></i>
+      <i class="fas fa-gavel history-icon text-danger"></i>
     Your Bids</h3>
     {% for bid in bids %}
       {% if bid.bidder == user %}
@@ -68,7 +68,7 @@
      </script>
     {% else %}
     <h3 class="text-center pt-4 pb-3">
-      <i class="fas fa-gavel pr-1 text-muted"></i>
+      <i class="fas fa-gavel history-icon text-muted"></i>
     Your Bids</h3>
      {% for bid in bids %}
       {% if bid.bidder == user %}
@@ -85,7 +85,7 @@
    <div class="col-12 col-lg-3">
     {% if user.account.seller_active %}
     <h3 class="text-center pt-4 pb-3 text-danger">
-      <i class="fas fa-ad pr-1 text-danger"></i>
+      <i class="fas fa-ad history-icon text-danger"></i>
     Your Sales</h3>
     {% for item in items %}
      {% if item.seller == user %}
@@ -101,7 +101,7 @@
      </script>
     {% else %}
     <h3 class="text-center pt-4 pb-3">
-      <i class="fas fa-ad pr-1 text-muted"></i>
+      <i class="fas fa-ad history-icon text-muted"></i>
     Your Sales</h3>
     {% for item in items %}
      {% if item.seller == user %}
@@ -115,6 +115,6 @@
     {% endif %}
   </div>
 </div>
- </div>
+
 </script>
 {% endblock content %}

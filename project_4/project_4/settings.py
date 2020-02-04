@@ -133,8 +133,16 @@ MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-# LOGIN_REDIRECT_URL = 'auction_store-home'
-# LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'auction_store-home'
+LOGIN_URL = 'login'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
+
 
 # CELERY_BROKER_URL = 'redis://h:p373761d9fc88db3a7d08f3dff09a78c6f16e723c1d87606d1ca3423b30e50957@ec2-52-30-174-7.eu-west-1.compute.amazonaws.com:9779'
 
