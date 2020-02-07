@@ -1,156 +1,164 @@
-{% load static %}
 <!DOCTYPE html>
-<html lang="en"><!------?????????????????????????????????-->
+{% load static %}
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ <meta name="description" content="">
+ <meta name="author" content="">
 
-    {% if page_title %}
-    <title>{{ page_title }}</title>
-    {% else %}
-    <title>Artifa</title>
-    {% endif %}
+ {% if page_title %}
+  <title>{{ page_title }}</title>
+ {% else %}
+  <title>Artifa</title>
+ {% endif %}
 
-    <!-- Fontawesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css"
-    integrity="sha384-rtJEYb85SiYWgfpCr0jn174XgJTn4rptSOQsMroFBPQSGLdOC5IbubP6lJ35qoM9"
-    crossorigin="anonymous">
+ <!-- Fontawesome -->
+ <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css"
+ integrity="sha384-rtJEYb85SiYWgfpCr0jn174XgJTn4rptSOQsMroFBPQSGLdOC5IbubP6lJ35qoM9"
+ crossorigin="anonymous">
 
-    <!-- Bootstrap core CSS -->
-    <link href="{% static 'bootstrap/bootstrap.min.css' %}" rel="stylesheet">
+ <!-- Bootstrap core CSS -->
+ <link href="{% static 'bootstrap/bootstrap.min.css' %}" rel="stylesheet">
 
-    <!-- Custom fonts for this template -->
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic|IM+Fell+Great+Primer+SC|Roboto&display=swap"
-    rel="stylesheet" type="text/css">
+ <!-- Custom fonts for this template -->
+ <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic|IM+Fell+Great+Primer+SC|Roboto&display=swap"
+ rel="stylesheet" type="text/css">
 
-    <!-- Custom styles for this template -->
-    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+ <!-- Custom styles for this template -->
+ <link href="{% static 'css/main.css' %}" rel="stylesheet">
 
-    <!-- Custom footer -->
-    {% block head_footer %}
-    {% endblock head_footer %}
+ <!-- Custom footer -->
+ {% block head_footer %}
+ {% endblock head_footer %}
 
-    <!-- Custom styles for payment.html -->
-    {% block head_payment %}
-    {% endblock head_payment %}
+ <!-- Custom styles for payment.html -->
+ {% block head_payment %}
+ {% endblock head_payment %}
 
-   <script
-    src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
-    crossorigin="anonymous">
-   </script>
+ <script
+ src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+ integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+ crossorigin="anonymous">
+ </script>
 
-    {% block head_js %}
-    {% endblock %}
+ {% block head_js %}
+ {% endblock %}
 </head>
 
-<body><!------?????????????????????????????????-->
-  <!-- Navbar  -->
- <nav class="navbar navbar-expand-lg navbar-light bg-light static-top pl-4 pr-4"><!------?????????????????????????????????-->
+<body>
+ <header>
+ <nav class="navbar navbar-expand-lg navbar-light bg-light static-top pl-4 pr-4">
   <a class="navbar-brand font-weight-bold" href="{% url 'auction_store-home' %}">ARTIFA</a>
-   <button class="navbar-toggler" type="button"
+  <button class="navbar-toggler" type="button"
    data-toggle="collapse" data-target="#navbarSupportedContent"
    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-   </button>
-
-   <div class="collapse navbar-collapse" id="navbarSupportedContent"><!--            !!!!          -->
-    <ul class="navbar-nav mr-auto">
-     <li class="nav-item active">
-      <a class="nav-item btn btn-link pl-0 pl-md-2 pt-md-2 font-weight-bolder"
+   <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+   <ul class="navbar-nav mr-auto">
+    <li class="nav-item active">
+     <a class="nav-item btn btn-link text-muted pl-0 pl-md-2 pt-md-2"
       href="{% url 'auction_store-home' %}">Home
       <span class="sr-only">(current)</span>
-      </a>
-     </li>
-     <li class="nav-item">
-      <a class="nav-item btn btn-link pl-0 pl-md-2 pt-md-2 font-weight-bolder"
+     </a>
+    </li>
+    <li class="nav-item">
+     <a class="nav-item btn btn-link text-muted pl-0 pl-md-2 pt-md-2"
       href="{% url 'auction_store-home' %}">About
       <span class="sr-only">(current)</span>
-      </a>
-     </li>
-     <li class="nav-item">
-      <a class="nav-item btn btn-link pl-0 pl-md-2 pt-md-2 font-weight-bolder active"
-      href="{% url 'auction_store-store' %}"><i class="fas fa-gavel text-muted pr-1"></i>Store
+     </a>
+    </li>
+    <li class="nav-item">
+     <a class="nav-item btn btn-link text-muted pl-0 pl-md-2 pt-md-2 active"
+      href="{% url 'auction_store-store' %}">
+      Store
       <span class="sr-only">(current)</span>
-      </a>
-     </li>
-     <li class="nav-item">
-      <a class="nav-item btn btn-link pl-0 pl-md-2 pt-md-2 font-weight-bolder"
+     </a>
+    </li>
+    <li class="nav-item">
+     <a class="nav-item btn btn-link text-muted pl-0 pl-md-2 pt-md-2"
       href="{% url 'auction_store-store' %}">Contact
       <span class="sr-only">(current)</span>
-      </a>
-     </li>
-    </ul>
-
-    <ul class="navbar-nav pr-4 pt-3">
-     {% if user.is_authenticated %}
-      <li class="nav-item pt-md-1 px-lg-3">
-       <a class="nav-link" href="{% url 'item-create' %}" role="button"
-       data-toggle="tooltip" data-placement="bottom" title="Sell">
-       <i class="nav-item fas fa-ad"></i>
-       </a>
-      </li>
-      <li class="nav-item pt-md-1 pr-md-1">
-        <a class="nav-link" href="{% url 'profile' %}" id="navbarDropdown" role="button"
-        data-toggle="tooltip" data-placement="bottom" title="Your Account"
-        aria-haspopup="true" aria-expanded="false">
-            <i class="nav-item fas fa-user-alt"></i>
-        </a>
-      </li>
-      <li class="nav-item pt-md-1 px-lg-2">
-        <a class="nav-link" href="{% url 'history' %}"
-        role="button" data-toggle="tooltip"
-        data-placement="bottom" title="History">
-        {% if user.account.history_active %}
-         <i class="nav-item fas fa-history text-danger"></i>
-        {% else %}
-         <i class="nav-item fas fa-history"></i>
-        {% endif %}
-        </a>
-      </li>
-      {% if user.account.cart.total > 0 %}
-      <li class="nav-item pt-md-1">
-        <a class="nav-link badge-link" href="{% url 'cart' %}" role="button"
-        data-toggle="tooltip" data-placement="bottom" title="Cart">
-        <i class="fas fa-cart-arrow-down text-danger">
-          <span class="badge badge-cart badge-danger">{{ user.account.cart.total }}</span>
-        </i>
-        </a>
-      </li>
+     </a>
+    </li>
+   </ul>
+   <!-- User Panel -->
+   {% if user.is_authenticated %}
+   <ul class="navbar-nav pr-4 pt-1">
+    <!-- Sell -->
+    <li class="nav-item pt-md-1 px-lg-3">
+     <a class="nav-link" href="{% url 'item-create' %}" role="button"
+      data-toggle="tooltip" data-placement="bottom" title="Sell">
+      <i class="nav-item fas fa-ad"></i>
+     </a>
+    </li>
+    <!-- Account -->
+    <li class="nav-item pt-md-1 pr-md-1">
+     <a class="nav-link" href="{% url 'profile' %}" id="navbarDropdown" role="button"
+      data-toggle="tooltip" data-placement="bottom" title="Your Account"
+      aria-haspopup="true" aria-expanded="false">
+      <i class="nav-item fas fa-user-alt"></i>
+     </a>
+    </li>
+    <!-- History -->
+    <li class="nav-item pt-md-1 px-lg-2">
+     <a class="nav-link" href="{% url 'history' %}"
+      role="button" data-toggle="tooltip"
+      data-placement="bottom" title="History">
+      {% if user.account.history_active %}
+       <i class="active-navbar-icon nav-item fas fa-history text-primary"></i>
       {% else %}
-      <li class="nav-item pt-md-1 pr-md-3 pl-md-1">
-       <a class="nav-link badge-link" href="{% url 'cart' %}" role="button"
-        data-toggle="tooltip" data-placement="bottom" title="Cart">
-        <i id="badge-total" class="nav-item fas fa-cart-arrow-down"></i>
-       </a>
-      </li>
+       <i class="nav-item fas fa-history"></i>
       {% endif %}
-      <li class="nav-item pt-md-1 pr-md-4">
-        <a class="nav-link" href="{% url 'logout' %}" role="button"
-        data-toggle="tooltip" data-placement="bottom" title="Logout">
-            <i class="nav-item fas fa-sign-out-alt"></i>
-        </a>
-      </li>
+     </a>
+    </li>
+    {% if user.account.cart.total > 0 %}
+    <li class="nav-item pt-md-1">
+     <a class="nav-link badge-link" href="{% url 'cart' %}" role="button"
+      data-toggle="tooltip" data-placement="bottom" title="Cart">
+      <i class="active-navbar-icon fas fa-cart-arrow-down text-primary">
+       <span class="badge badge-cart badge-warning">{{ user.account.cart.total }}</span>
+      </i>
+     </a>
+    </li>
     {% else %}
-      <li class="nav-item pb-md-4">
-        <a id="register-link" class="btn btn-link text-danger pr-0 pr-md-3 pt-md-3"
-        href="{% url 'register' %}">Register</a>
-      </li>
-      <li class="nav-item pr-md-5">
-        <a id="login-link" class="btn btn-link text-primary pr-0 pr-md-3 pt-md-3 mr-md-2"
-        href="{% url 'login' %}">Login</a>
-      </li>
+    <li class="nav-item pt-md-1 pr-md-3 pl-md-1">
+     <a class="nav-link badge-link" href="{% url 'cart' %}" role="button"
+      data-toggle="tooltip" data-placement="bottom" title="Cart">
+      <i id="badge-total" class="nav-item fas fa-cart-arrow-down"></i>
+     </a>
+    </li>
     {% endif %}
+    <li class="nav-item pt-md-1 pr-md-4">
+     <a class="nav-link" href="{% url 'logout' %}" role="button"
+      data-toggle="tooltip" data-placement="bottom" title="Logout">
+      <i class="nav-item fas fa-sign-out-alt"></i>
+     </a>
+    </li>
+   </ul>
+   <!-- Login / Register Panel -->
+   {% else %}
+   <ul class="navbar-nav pr-4 pt-3">
+    <li class="nav-item pb-md-4">
+     <a id="login-link" class="btn btn-link text-primary pr-0 pr-md-3 pt-md-3 mr-md-2"
+      href="{% url 'login' %}">Login</a>
+    </li>
+    <li class="nav-item pr-md-5">
+     <a id="register-link" class="btn btn-link text-danger pr-0 pr-md-3 pt-md-3"
+      href="{% url 'register' %}">Register</a>
+    </li>
+    {% endif %}
+    <!-- Search Field for Store Page -->
     {% block nav-search %}
     {% endblock nav-search %}
-    </ul>
-   </div>
- </nav>
+   </ul>
 
-  {% if messages %}
+  </div>
+ </nav>
+ <!-- Flash Message -->
+ {% if messages %}
   {% for message in messages %}
    <div class="container-fluid m-auto mt-3 text-center">
     <div class="alert alert-{{ message.tags }} mb-0 py-1">
@@ -159,30 +167,31 @@
    </div>
   {% endfor %}
  {% endif %}
+</header>
 
-  {% block content %}
-  {% endblock %}
+<!-- Main Block Content  -->
+{% block content %}
+{% endblock content %}
 
-    <!-- Footer -->
-<footer class="footer bg-light py-4">
- <div class="container">
-  <div class="row">
+<!-- Footer -->
+<footer class="footer bg-light pt-4 pb-2 mt-3">
+  <div class="row px-5 py-2">
    <div class="col-lg-6 h-100 text-center text-lg-left my-auto pb-md-4">
     <ul class="list-inline mb-2">
      <li class="list-inline-item">
-      <a href="#">About</a>
+      <a class="text-muted footer-link" href="#">About</a>
      </li>
      <li class="list-inline-item">&sdot;</li>
      <li class="list-inline-item">
-      <a href="#">Contact</a>
+      <a class="text-muted footer-link" href="#">Contact</a>
      </li>
      <li class="list-inline-item">&sdot;</li>
      <li class="list-inline-item">
-      <a href="#">Terms of Use</a>
+      <a class="text-muted footer-link" href="#">Terms of Use</a>
      </li>
      <li class="list-inline-item">&sdot;</li>
      <li class="list-inline-item">
-      <a href="#">Privacy Policy</a>
+      <a class="text-muted footer-link" href="#">Privacy Policy</a>
      </li>
     </ul>
     <p class="text-muted small mb-4 mb-lg-0">
@@ -193,38 +202,27 @@
     <ul class="list-inline mb-0">
      <li class="list-inline-item mr-3">
       <a href="#">
-      <i class="fab fa-facebook fa-2x fa-fw"></i>
+      <i class="fab fa-facebook fa-2x fa-fw text-muted footer-link"></i>
       </a>
      </li>
      <li class="list-inline-item mr-3">
       <a href="#">
-      <i class="fab fa-twitter-square fa-2x fa-fw"></i>
+      <i class="fab fa-twitter-square fa-2x fa-fw text-muted footer-link"></i>
       </a>
      </li>
      <li class="list-inline-item">
       <a href="#">
-      <i class="fab fa-instagram fa-2x fa-fw"></i>
+      <i class="fab fa-instagram fa-2x fa-fw text-muted footer-link"></i>
       </a>
      </li>
     </ul>
    </div>
   </div>
- </div>
 </footer>
-
 <!-- Bootstrap core JavaScript -->
 <script src="{% static 'js/jquery.min.js' %}"></script>
 <script src="{% static 'bootstrap/bootstrap.bundle.min.js' %}"></script>
 <!-- JavaScript-->
 <script src="{% static 'js/script.js' %}"></script>
-
-</body><!------?????????????????????????????????-->
-</html><!------?????????????????????????????????-->
-
-<!--
-    {% if user.is_superuser %}
-    <li class="nav-item pt-md-2 pr-md-3">
-        <a class="nav-link" href="#" role="button" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="fas fa-sign-out-alt"></i>Add New</a>
-    </li>
-    {% endif %}
-    -->
+</body>
+</html>

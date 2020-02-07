@@ -51,6 +51,7 @@ urlpatterns = [
          name='password_reset_complete'),
     path('', include('auction_store.urls')),
     path('profile/history/', user_views.history, name='history'),
+    # path('profile/history/', HistoryListView.as_view(), name='history'),
     path('profile/cart/', CartListView.as_view(), name='cart'),
 ]
 

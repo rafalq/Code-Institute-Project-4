@@ -10,7 +10,7 @@ class ItemFilter(django_filters.FilterSet):
     price_l = django_filters.NumberFilter(label='Range',
                                           field_name='price', lookup_expr='lt')
     multi_name_fields = django_filters.CharFilter(label='',
-        method='filter_by_all_name_fields')
+                                                  method='filter_by_all_name_fields')
 
     # manufacturer__name = django_filters.CharFilter(lookup_expr='icontains')
     # start_date = filters.DateTimeFilter(field_name='pub_date', lookup_expr='gte')
@@ -24,7 +24,7 @@ class ItemFilter(django_filters.FilterSet):
     )
 
     format = django_filters.ChoiceFilter(
-        label="Buying Format", choices=FORMAT_CHOICES, method='filter_by_format')
+        label="Format", choices=FORMAT_CHOICES, method='filter_by_format')
 
     SORT_CHOICES = (
         ('newest', 'Newest'),
@@ -35,6 +35,14 @@ class ItemFilter(django_filters.FilterSet):
 
     sort = django_filters.ChoiceFilter(
         label="Sort", choices=SORT_CHOICES, method='filter_by_sort')
+
+    SELLER_CHOICES = (
+        ('artifa', 'Artifa'),
+        ('private', 'Private'),
+    )
+
+    seller = django_filters.ChoiceFilter(
+        label="Seller", choices=SELLER_CHOICES, method='filter_by_seller')
 
     class Meta:
         model = Item
@@ -67,6 +75,13 @@ class ItemFilter(django_filters.FilterSet):
         else:
             queryset = queryset.all()
         return queryset
+
+    def filter_by_seller(self, queryset, name, value):
+        if value == 'artifa':
+            queryset = queryset.filter(seller__username="admin")
+        elif value == 'private':
+            queryset = queryset.exclude(seller__username="admin")
+        return queryset.order_by('seller')
 
     def filter_by_all_name_fields(self, queryset, name, value):
         return queryset.filter(

@@ -1,43 +1,29 @@
 import django_filters
-from .models import *
-# from django.utils import timezone
-# import datetime
+from auction_store.models import Item, Bid
+from django.db.models import Q
 
 
-class ItemFilter(django_filters.FilterSet):
+class SaleHistoryFilter(django_filters.FilterSet):
 
-    price = django_filters.NumberFilter()
-    price__gt = django_filters.NumberFilter(field_name='price', lookup_expr='gt')
-    price__lt = django_filters.NumberFilter(field_name='price', lookup_expr='lt')
-
-    # price = django_filters.NumberFilter(
-    #     label='Price (less than)', lookup_expr='lt')
-
-    FORMAT_CHOICES = (
-        ('all', 'All Listings'),
-        ('auction', 'Auction'),
-        ('end_auction', 'Ended Auction'),
-        ('sale', 'Only Sale'),
-        ('sold', 'Sold')
-    )
-    format = django_filters.ChoiceFilter(
-        label="Buying Format", choices=FORMAT_CHOICES, method='filter_by_format')
-
-    SORT_CHOICES = (
+    SALE_CHOICES = (
         ('newest', 'Newest'),
         ('oldest', 'Oldest'),
         ('low_price', 'Low Price'),
-        ('high_price', 'High Price'),
+        ('high_price', 'High Price')
     )
 
-    sort = django_filters.ChoiceFilter(
-        label="Sort", choices=SORT_CHOICES, method='filter_by_sort')
+    sale = django_filters.ChoiceFilter(
+        label='', choices=SALE_CHOICES, method='filter_by_sale')
+
+    multi_name_fields = django_filters.CharFilter(label='',
+                                                  method='filter_by_all_name_fields')
 
     class Meta:
         model = Item
-        fields = ['winner', 'price': ['lt', 'gt']]
+        fields = ['price', 'name',
+                  'price', 'seller', 'buyer']
 
-    def filter_by_sort(self, queryset, name, value):
+    def filter_by_sale(self, queryset, name, value):
         if value == 'newest':
             x = '-start_date'
         elif value == 'oldest':
@@ -48,19 +34,60 @@ class ItemFilter(django_filters.FilterSet):
             x = 'price'
         return queryset.order_by(x)
 
-    def filter_by_format(self, queryset, name, value):
 
-        if value == 'auction':
-            queryset = queryset.filter(
-                end_date__gte=timezone.now(), in_auction=True, sold=False)
-        elif value == 'end_auction':
-            queryset = queryset.filter(
-                end_date__lt=timezone.now(), sold=False, in_auction=True)
-        elif value == 'sale':
-            queryset = queryset.filter(
-                sold=False, winner__isnull=True, end_date__lt=timezone.now())
-        elif value == 'sold':
-            queryset = queryset.filter(sold=True)
-        else:
-            queryset = queryset.all()
-        return queryset
+class PurchaseHistoryFilter(django_filters.FilterSet):
+
+    PURCHASE_CHOICES = (
+        ('newest', 'Newest'),
+        ('oldest', 'Oldest'),
+        ('low_price', 'Low Price'),
+        ('high_price', 'High Price')
+    )
+
+    purchase = django_filters.ChoiceFilter(
+        label='', choices=PURCHASE_CHOICES, method='filter_by_purchase')
+
+
+    class Meta:
+        model = Item
+        fields = ['sold_price', 'name',
+                  'price', 'seller', 'buyer']
+
+    def filter_by_purchase(self, queryset, name, value):
+        if value == 'newest':
+            x = '-sold_date'
+        elif value == 'oldest':
+            x = 'sold_date'
+        elif value == 'high_price':
+            x = '-sold_price'
+        elif value == 'low_price':
+            x = 'sold_price'
+        return queryset.order_by(x)
+
+
+class BidHistoryFilter(django_filters.FilterSet):
+
+    BID_SORT_CHOICES = (
+        ('newest', 'Newest'),
+        ('oldest', 'Oldest'),
+        ('low_bid', 'Low Bid'),
+        ('high_bid', 'High Bid')
+    )
+
+    bid_sort = django_filters.ChoiceFilter(
+        label='', choices=BID_SORT_CHOICES, method='filter_by_bid_sort')
+
+    class Meta:
+        model = Bid
+        fields = ['amount', 'date', 'bidder']
+
+    def filter_by_bid_sort(self, queryset, name, value):
+        if value == 'newest':
+            x = '-date'
+        elif value == 'oldest':
+            x = 'date'
+        elif value == 'high_bid':
+            x = '-amount'
+        elif value == 'low_bid':
+            x = 'amount'
+        return queryset.order_by(x)

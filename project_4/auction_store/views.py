@@ -32,9 +32,9 @@ stripe.api_key = settings.STRIPE_SECRET
 
 
 def home(request):
-    items_auction = Item.objects.filter(
-        in_auction=True).order_by('id')
-    items = Item.objects.all()
+    # items_auction = Item.objects.filter(
+    #     in_auction=True).order_by('id')
+    # items = Item.objects.all()
 
     # if the history was checked
     if request.user.is_authenticated:
@@ -43,11 +43,11 @@ def home(request):
             user.account.history_checked = True
             user.account.save()
 
-    context = {
-        'items_auction': items_auction,
-        'items': items,
-    }
-    return render(request, 'auction_store/home.html', context)
+    # context = {
+    #     'items_auction': items_auction,
+    #     'items': items,
+    # }
+    return render(request, 'auction_store/home.html')
 
 
 def search(request):
@@ -92,7 +92,7 @@ def payment(request, pk):
     order_form = OrderForm(request.POST)
     account = Account.objects.get(user=request.user)
     user = User.objects.get(id=request.user.id)
-
+    order_form = OrderForm(instance=request.user.account)
     # assign the price
     if item.in_auction:
         if timezone.now() > item.finish_date:
@@ -240,7 +240,6 @@ class ItemListView(ListView, LoginRequiredMixin):
                 #         winner.history_active = True
                 #         winner.winner_active = True
                 #         winner.save()
-
         return self.filterset.qs.distinct()
 
     def get_context_data(self, **kwargs):
@@ -263,8 +262,8 @@ class ItemDetailView(FormMixin, LoginRequiredMixin, SuccessMessageMixin, DetailV
         context['bids'] = Bid.objects.filter(
             item=self.object).order_by('-id')
         context['form'] = BidForm(initial={'item': self.object})
-        context['key'] = settings.STRIPE_PUBLISHABLE
-        context['orders'] = Order.objects.filter(order_id=self.object.id)
+        # context['key'] = settings.STRIPE_PUBLISHABLE
+        # context['orders'] = Order.objects.filter(order_id=self.object.id)
 
         if self.object.winner == None:
             context['sold_price'] = self.object.price

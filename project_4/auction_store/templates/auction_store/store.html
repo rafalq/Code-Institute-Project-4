@@ -3,7 +3,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% load crispy_forms_field %}
-
+{% load my_tags %}
 {% block nav-search %}
 <form action="" method="GET">
   <li class="nav-item row pt-2">
@@ -16,7 +16,7 @@
 {% endblock nav-search %}
 
 {% block content %}
-<div class="container-fluid mt-2"><!-- container -->
+<!-- row -->
 <div class="row">
 
  <div class="col-12 col-lg-3 mt-2 mb-5 px-5 ">
@@ -38,6 +38,9 @@
         {{ filterset.form.format|as_crispy_field }}
       </div>
       <div class="form-group col-12 font-weight-bold text-center text-white mb-0">
+        {{ filterset.form.seller|as_crispy_field }}
+      </div>
+      <div class="form-group col-12 font-weight-bold text-center text-white mb-0">
         {{ filterset.form.sort|as_crispy_field }}
       </div>
     </div>
@@ -46,10 +49,13 @@
   </form>
 </div>
  </div>
-{% for result in results %}
-  <h3>{{ result.name }}</h3>
-{% endfor %}
+
 <div class="col-12 col-lg-9 px-0">
+  <div class="row bg-primary">
+ <p id="home-top-banner" class="col-12 my-1 text-warning text-center">
+   <strong>Artifacts: </strong>{{ page_obj.start_index }}—{{ page_obj.end_index }}
+ </p>
+</div>
  {% for item in object_list %}
  <div class="row card-row my-1">
   <div class="col-12 col-lg-4 p-0">
@@ -73,7 +79,7 @@
    <div class="card h-100 text-center border border-white">
     <div class="card-header py-1 bg-muted">
     <h5 class="card-title m-0">
-      <a href="{% url 'item-detail' item.id %}">{{ item.name }}</a>
+      <a class="text-dark" href="{% url 'item-detail' item.id %}">{{ item.name }}</a>
       {% if not item.sold and item.today_date <= item.finish_date %}
       <i class="fas fa-hourglass-half auction_lasts pl-1 text-secondary"></i>
       {% elif not item.sold and item.today_date >= item.finish_date %}
@@ -83,11 +89,14 @@
    </div>
    <div class="card-body py-1">
     <div class="col-12 py-1">
+      <p class="text-left m-auto">Price: {{ item.price }}</p>
+      <p class="text-left m-auto">Date: {{ item.start_date }}</p>
+      <p class="text-left m-auto">Seller: {{ item.seller }}</p>
       <p class="text-left m-auto">{{ item.desc }}</p>
     </div>
    </div>
    <div class="card-footer text-muted p-0">
-    Last Bid: {{ item.start_date }}
+    Start Date: {{ item.start_date }}
    </div>
    </div>
   </div>
@@ -95,11 +104,56 @@
  {% endfor %}
 </div><!-- col-8 -->
 </div><!-- row -->
+
+{% if is_paginated %}
+<p class="col-12 h5 text-center mb-0 mt-2">
+
+  </p>
+<div class="col-12 text-center pt-3 pb-2">
+  {% if page_obj.has_previous %}
+    <a class="btn btn-outline page-btn text-dark pt-0"
+    href="?{% param_replace page=1 %}">
+    First
+    <i class="fas fa-angle-double-left"></i>
+    </a>
+    {% if page_obj.previous_page_number != 1 %}
+    <a class="btn btn-outline page-btn text-dark pt-0"
+    href="?{% param_replace page=page_obj.previous_page_number %}">
+    Previous
+    <i class="fas fa-angle-left"></i>
+    </a>
+    {% endif %}
+
+  {% endif %}
+
+  <a class="page-nos text-secondary font-weight-bolder p-2">Page {{ page_obj.number }} of {{ paginator.num_pages }}</a>
+
+  {% if page_obj.has_next %}
+    {% if page_obj.next_page_number != paginator.num_pages %}
+    <a class="btn btn-outline page-btn text-dark pt-0"
+    href="?{% param_replace page=page_obj.next_page_number %}">
+    <i class="fas fa-angle-right"></i>
+    Next
+    </a>
+    {% endif %}
+    <a class="btn btn-outline page-btn text-dark pt-0"
+    href="?{% param_replace page=paginator.num_pages %}">
+    <i class="fas fa-angle-double-right"></i>
+    Last
+    </a>
+  {% endif %}
+</div>
+{% endif %}
+
+
+
+<!--
 {% if is_paginated %}
 <div class="text-center pt-3 pb-2">
   {% if page_obj.has_previous %}
     <a class="btn btn-outline mb-4 page-btn" href="?page=1">First</a>
-    <a class="btn btn-outline mb-4 page-btn" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    <a class="btn btn-outline mb-4 page-btn"
+    href="?page={{ page_obj.previous_page_number }}">Previous</a>
   {% endif %}
 
   {% for num in page_obj.paginator.page_range %}
@@ -116,13 +170,16 @@
   {% endif %}
 </div>
 {% endif %}
-</div><!-- container -->
-
+-->
 <script>
+  //prevent from picking beyond 0
   var fromHold = document.getElementById('id_price_g');
   fromHold.setAttribute("placeholder", "From");
   var toHold = document.getElementById('id_price_l');
+
   toHold.setAttribute("placeholder", "To");
+  price_g = document.getElementById('id_price_g').setAttribute("min", "0");
+  price_l = document.getElementById('id_price_l').setAttribute("min", "0");
 </script>
 {% endblock %}
 

@@ -1,120 +1,290 @@
 {% extends 'auction_store/base.html' %}
 {% load static %}
-{% block head_footer %}
-<style>
-  /*footer {
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-}*/
-</style>
-{% endblock head_footer %}
-
+{% load crispy_forms_tags %}
+{% load crispy_forms_field %}
+{% load my_tags %}
 {% block content %}
+<div id="history-wrapper" class="container"><!-- container -->
+ <div class="row mt-2 text-center"><!-- row1 input -->
+  <div class="col-12 py-3 bg-secondary">
+   <i class="fas fa-search text-white pr-2"></i>
+   <input type="text" id="myInput" onkeyup="searchHistrory()" class="col-8 px-4" placeholder="Search for names.." title="Type in a name">
+  </div>
+ </div><!-- row1 input -->
 
-  <div class="row m-auto">
+ <div class="row m-auto"><!-- row2 -->
 
-  <div class="col-12 col-lg-3">
-    {% if user.account.buyer_active %}
+  <!----------------------- Purchased Section ----------------------->
+  <div class="col-12 col-md-4 px-md-0">
+   {% if user.account.buyer_active %}<!-- 1 -->
     <h3 class="text-center pt-4 pb-3 text-danger">
-      <i class="fas fa-money-bill-alt history-icon text-danger"></i>
-    Purchased</h3>
-    {% for item in items %}
-     {% if item.buyer == user %}
-      <div class="row bg-light pt-2 mb-2 first-active-buyer">
-       <a href="{% url 'item-detail' item.id %}" class="col-12 text-center font-weight-bold mb-0">{{ item.name }}</a>
-       <p class="col-12 text-center mb-0"><i class="fas fa-euro-sign text-muted"></i> {{ item.sold_price }}</p>
-       <p class="col-12 text-center text-muted">{{ item.sold_date }}</p>
+     <i class="fas fa-money-bill-alt history-icon text-danger"></i>
+      Purchased
+    </h3>
+    <form class="col-10 offset-2 m-0 mb-2 ml-4 pr-2" action="" method="GET" name="purchase">
+     {% csrf_token %}
+      <div class="row bg-secondary pt-3 pb-0 pr-5">
+        <div class="form-group col-10 pr-1 font-weight-bold text-white mb-0">
+          {{ purchase_filter.form.purchase|as_crispy_field }}
+        </div>
+        <div class="form-group col-2 mt-1 pr-1 pl-2 mb-1 font-weight-bold text-white">
+         <button class="text-secondary" type="submit" name="btnpurchase"> Search </button>
+        </div>
       </div>
-     {% endif %}
-    {% endfor %}
-    <script>
-      document.getElementsByClassName("first-active-buyer")[0].setAttribute("class", "first-active-style");
-     </script>
-    {% else %}
+    </form>
+    <div class="history-scroll"><!-- Scroll -->
+    {% for item in purchase_filter.qs %}<!-- 2 -->
+     {% if item.buyer == user %} <!-- 3 -->
+     <a href="{% url 'item-detail' item.id %}"
+        class="row bg-light pt-2 pl-4 mb-2 ml-4 col-12 text-center mb-0">
+          <p class="pl-3">
+           <span class="first-active-buyer badge badge-danger d-none">New</span>
+           <span class="text-dark font-weight-bold">{{ item.name }}</span>
+           <br>
+           <span class="text-secondary">
+            <i class="fas fa-euro-sign text-muted"></i> {{ item.sold_price }}
+           </span>
+           <br>
+           <span class="text-secondary">
+            {{ item.sold_date }}
+           </span>
+          </p>
+        </a>
+       <script>
+        document.getElementsByClassName("first-active-buyer")[0].classList.remove("d-none");
+       </script>
+     {% endif %} <!-- 3 -->
+    {% endfor %}<!-- 2 -->
+    </div><!-- Scroll -->
+
+    {% else %} <!-- 1 -->
+
     <h3 class="text-center pt-4 pb-3">
       <i class="fas fa-money-bill-alt history-icon text-muted"></i>
-    Purchased</h3>
-
-    {% for item in items %}
-     {% if item.buyer == user %}
-      <div class="row bg-light pt-2 mb-2">
-       <a href="{% url 'item-detail' item.id %}" class="col-12 text-center font-weight-bold mb-0">{{ item.name }}</a>
-       <p class="col-12 text-center mb-0"><i class="fas fa-euro-sign text-muted"></i> {{ item.sold_price }}</p>
-       <p class="col-12 text-center text-muted">{{ item.sold_date }}</p>
+      Purchased
+    </h3>
+    <form class="col-10 offset-2 m-0 mb-2 ml-4 pr-2" action="" method="GET" name="purchase">
+     {% csrf_token %}
+      <div class="row bg-secondary pt-3 pb-0 pr-5">
+       <div class="form-group col-10 pr-1 font-weight-bold text-white mb-0">
+        {{ purchase_filter.form.purchase|as_crispy_field }}
+       </div>
+      <div class="form-group col-2 mt-1 pr-1 pl-2 mb-1 font-weight-bold text-white">
+       <button class="text-secondary" type="submit" name="btnpurchase"> Search </button>
       </div>
-     {% endif %}
-    {% endfor %}
-    {% endif %}
+      </div>
+    </form>
+    <div class="history-scroll">
+     {% for item in purchase_filter.qs %}<!-- 2 -->
+      {% if item.buyer == user %}<!-- 4 -->
+      <a href="{% url 'item-detail' item.id %}"
+        class="row bg-light pt-2 pl-4 mb-2 ml-4 col-12 text-center  mb-0">
+          <p class="pl-3">
+           <span class="text-dark font-weight-bold">{{ item.name }}</span>
+           <br>
+           <span class="text-secondary">
+            <i class="fas fa-euro-sign text-muted"></i> {{ item.sold_price }}
+           </span>
+           <br>
+           <span class="text-secondary">
+            {{ item.sold_date }}
+           </span>
+          </p>
+        </a>
+     {% endif %}<!-- 4 -->
+    {% endfor %}<!-- 2 -->
+    </div>
+    {% endif %}<!-- 1 -->
   </div>
 
 
-   <div class="col-12 col-lg-3 mx-2">
-    {% if user.account.winner_active %}
+  <!----------------------- Sale Section ----------------------->
+  <div class="col-12 col-md-4 px-md-0">
+   {% if user.account.seller_active %}
     <h3 class="text-center pt-4 pb-3 text-danger">
-      <i class="fas fa-gavel history-icon text-danger"></i>
-    Your Bids</h3>
-    {% for bid in bids %}
-      {% if bid.bidder == user %}
-      <div class="row bg-light pt-2 mb-2 first-active-winner">
-       <a href="{% url 'item-detail' bid.item.id %}" class="col-12 text-center font-weight-bold mb-0">{{ bid.item.name }}</a>
-       <p class="col-12 text-center mb-0"><i class="fas fa-euro-sign text-muted"></i> {{ bid.amount }}</p>
-       <p class="col-12 text-center text-muted">{{ bid.date }}</p>
-      </div>
+     <i class="fas fa-ad history-icon text-danger"></i>
+     Your Sales
+    </h3>
+    <form class="col-10 offset-2 m-0 mb-2 ml-4 pr-2" action="" method="GET" name="sale">
+     {% csrf_token %}
+      <div class="row bg-secondary pt-3 pb-0 pr-5">
+       <div class="form-group col-10 pr-1 font-weight-bold text-white mb-0">
+        {{ sale_filter.form.sale|as_crispy_field }}
+       </div>
+       <div class="form-group col-2 mt-1 pr-1 pl-2 mb-1 font-weight-bold text-white">
+         <button class="text-secondary" type="submit" name="btnsale"> Search </button>
+        </div>
+     </div>
+    </form>
+    <div class="history-scroll">
+     {% for item in sale_filter.qs %}
+      {% if item.seller == user %}
+        <a href="{% url 'item-detail' item.id %}"
+         class="row bg-light pt-2 pl-4 mb-2 ml-4 col-12 text-center mb-0">
+          <p class="pl-3">
+           <span class="first-active-seller badge badge-danger d-none">New</span>
+           <span class="text-dark font-weight-bold">{{ item.name }}</span>
+           <br>
+           <span class="text-secondary">
+            <i class="fas fa-euro-sign text-muted"></i> {{ item.price }}
+           </span>
+           <br>
+           <span class="text-secondary">
+            {{ item.start_date }}
+           </span>
+          </p>
+        </a>
       {% endif %}
      {% endfor %}
      <script>
-      document.getElementsByClassName("first-active-winner")[0].setAttribute("class", "first-active-style");
+      document.getElementsByClassName("first-active-seller")[0].classList.remove("d-none");
      </script>
-    {% else %}
-    <h3 class="text-center pt-4 pb-3">
-      <i class="fas fa-gavel history-icon text-muted"></i>
-    Your Bids</h3>
-     {% for bid in bids %}
-      {% if bid.bidder == user %}
-      <div class="row bg-light pt-2 mb-2">
-       <a href="{% url 'item-detail' bid.item.id %}" class="col-12 text-center font-weight-bold mb-0">{{ bid.item.name }}</a>
-       <p class="col-12 text-center mb-0"><i class="fas fa-euro-sign text-muted"></i> {{ bid.amount }}</p>
-       <p class="col-12 text-center text-muted">{{ bid.date }}</p>
-      </div>
-      {% endif %}
-     {% endfor %}
-     {% endif %}
-   </div>
+     </script>
+    </div>
 
-   <div class="col-12 col-lg-3">
-    {% if user.account.seller_active %}
-    <h3 class="text-center pt-4 pb-3 text-danger">
-      <i class="fas fa-ad history-icon text-danger"></i>
-    Your Sales</h3>
-    {% for item in items %}
-     {% if item.seller == user %}
-      <div class="row bg-light pt-2 mb-2 first-active-seller">
-       <a href="{% url 'item-detail' item.id %}" class="col-12 text-center font-weight-bold mb-0">{{ item.name }}</a>
-       <p class="col-12 text-center mb-0"><i class="fas fa-euro-sign text-muted"></i> {{ item.price }}</p>
-       <p class="col-12 text-center text-muted">{{ item.start_date }}</p>
+  {% else %}
+
+   <h3 class="text-center pt-4 pb-3">
+    <i class="fas fa-ad history-icon text-muted"></i>
+     Your Sales
+   </h3>
+   <form class="col-10 offset-2 m-0 mb-2 ml-4 pr-2" action="" method="GET" name="sale">
+     {% csrf_token %}
+      <div class="row bg-secondary pt-3 pb-0 pr-5">
+       <div class="form-group col-10 pr-1 font-weight-bold text-white mb-0">
+        {{ sale_filter.form.sale|as_crispy_field }}
+       </div>
+      <div class="form-group col-2 mt-1 pr-1 pl-2 mb-1 font-weight-bold text-white">
+       <button class="text-secondary" type="submit" name="btnsale"> Search </button>
       </div>
+    </div>
+   </form>
+   <div class="history-scroll">
+    {% for item in sale_filter.qs %}
+     {% if item.seller == user %}
+       <a href="{% url 'item-detail' item.id %}"
+         class="row bg-light pt-2 pl-4 mb-2 ml-4 col-12 text-center  mb-0">
+          <p class="pl-3">
+           <span class="text-dark font-weight-bold">{{ item.name }}</span>
+           <br>
+           <span class="text-secondary">
+            <i class="fas fa-euro-sign text-muted"></i> {{ item.price }}
+           </span>
+           <br>
+           <span class="text-secondary">
+            {{ item.start_date }}
+           </span>
+          </p>
+        </a>
      {% endif %}
     {% endfor %}
-    <script>
-      document.getElementsByClassName("first-active-seller")[0].setAttribute("class", "first-active-style");
-     </script>
-    {% else %}
-    <h3 class="text-center pt-4 pb-3">
-      <i class="fas fa-ad history-icon text-muted"></i>
-    Your Sales</h3>
-    {% for item in items %}
-     {% if item.seller == user %}
-      <div class="row bg-light pt-2 mb-2">
-       <a href="{% url 'item-detail' item.id %}" class="col-12 text-center font-weight-bold mb-0">{{ item.name }}</a>
-       <p class="col-12 text-center mb-0"><i class="fas fa-euro-sign text-muted"></i> {{ item.price }}</p>
-       <p class="col-12 text-center text-muted">{{ item.start_date }}</p>
-      </div>
-     {% endif %}
-    {% endfor %}
+  </div>
     {% endif %}
   </div>
-</div>
 
+  <!----------------------- Bid Section ----------------------->
+  <div class="col-12 col-md-4 px-md-0"><!-- col -->
+   {% if user.account.winner_active %}
+    <h3 class="text-center pt-4 pb-3 text-danger">
+     <i class="fas fa-gavel history-icon text-danger"></i>
+     Your Bids
+    </h3>
+    <form class="col-10 offset-2 m-0 mb-2 ml-4 pr-2" action="" method="GET" name="bid">
+     {% csrf_token %}
+      <div class="row bg-secondary pt-3 pb-0 pr-5">
+       <div class="form-group col-10 pr-1 font-weight-bold text-white mb-0">
+        {{ bid_filter.form.bid_sort|as_crispy_field }}
+       </div>
+       <div class="form-group col-2 mt-1 pr-1 pl-2 mb-1 font-weight-bold text-white">
+        <button class="text-secondary" type="submit" name="btnbid"> Search </button>
+       </div>
+     </div>
+    </form>
+    <div class="history-scroll">
+     {% for bid in bid_filter.qs %}
+      {% if bid.bidder == user %}
+       <a href="{% url 'item-detail' bid.item.id %}"
+         class="row bg-light pt-2 pl-4 mb-2 ml-4 col-12 text-center mb-0">
+          <p class="pl-3">
+           <span class="first-active-winner badge badge-danger d-none">New</span>
+           <span class="text-dark font-weight-bold">{{ bid.item.name }}</span>
+           <br>
+           <span class="text-secondary">
+            <i class="fas fa-euro-sign text-muted"></i> {{ bid.amount }}
+           </span>
+           <br>
+           <span class="text-secondary">
+            {{ bid.date }}
+           </span>
+          </p>
+        </a>
+      {% endif %}
+     {% endfor %}
+     <script>
+      document.getElementsByClassName("first-active-winner")[0].classList.remove("d-none");
+     </script>
+     </script>
+    </div>
+
+   {% else %}
+
+   <h3 class="text-center pt-4 pb-3">
+    <i class="fas fa-gavel history-icon text-muted"></i>
+     Your Bids</h3>
+    <form class="col-10 offset-2 m-0 mb-2 ml-4 pr-2" action="" method="GET" name="purchase">
+     {% csrf_token %}
+      <div class="row bg-secondary pt-3 pb-0 pr-5">
+       <div class="form-group col-10 pr-1 font-weight-bold text-white mb-0">
+        {{ bid_filter.form.bid_sort|as_crispy_field }}
+       </div>
+       <div class="form-group col-2 mt-1 pr-1 pl-2 mb-1 font-weight-bold text-white">
+        <button class="text-secondary" type="submit" name="btnbid"> Search </button>
+       </div>
+     </div>
+    </form>
+    <div class="history-scroll">
+     {% for bid in bid_filter.qs %}
+      {% if bid.bidder == user %}
+       <a href="{% url 'item-detail' bid.item.id %}"
+         class="row bg-light pt-2 pl-4 mb-2 ml-4 col-12 text-center mb-0">
+          <p class="pl-3">
+           <span class="text-dark font-weight-bold">{{ bid.item.name }}</span>
+           <br>
+           <span class="text-secondary">
+            <i class="fas fa-euro-sign text-muted"></i> {{ bid.amount }}
+           </span>
+           <br>
+           <span class="text-secondary">
+            {{ bid.date }}
+           </span>
+          </p>
+        </a>
+      {% endif %}
+     {% endfor %}
+    </div>
+     {% endif %}
+   </div>
+ </div><!-- row2 -->
+
+<script>
+function searchHistrory() {
+    var input, filter, historyWrapper, a, p, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    historyWrapper = document.getElementById("history-wrapper");
+    a = historyWrapper.getElementsByTagName("a");
+
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < a.length; i++) {
+        p = a[i].getElementsByTagName("p")[0];
+        txtValue = p.textContent || p.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            a[i].style.display = "";
+        } else {
+            a[i].style.display = "none";
+        }
+    }
+}
 </script>
+</div><!-- container -->
 {% endblock content %}

@@ -26,21 +26,24 @@ h6 {
 }
 
 /* navbar */
-
 .navbar-brand{
-  font-family: 'IM Fell Great Primer SC', serif;
+  font-family: serif;
 	font-size: 45px;
-  text-shadow: 3px 2px #b1b1b1;
+  text-shadow: 3px 2px #a2a2a2;
 }
 #search-input{
 	width: auto ;
 }
 .nav-item{
-    color: rgba(2, 59, 109, 1);
-    font-size: 20px;
+    /*color: rgba(2, 59, 109, 1);*/
+    font-size: 19px;
 }
 .nav-item:hover{
-    color: rgba(2, 59, 109, 0.65);
+    color: #000000 !important;
+    text-decoration: none;
+}
+.nav-item:focus, .nav-item:active{
+    color: #000000 !important;
     text-decoration: none;
 }
 .badge-red{
@@ -65,19 +68,12 @@ h6 {
 #nav-search-btn{
   padding: 6px 15px;
 }
-/*#id_multi_name_fields{
-    padding: 0px !important;
-    margin-right: .25rem !important;
-    padding-left: .25rem !important;
-   /* px-md-3*/
-.first-active-style{
-  text-align: center;
-  box-shadow: 3px 2px 8px #dc3545;
-}
 .history-icon{
-    font-size: 20px;
+  font-size: 20px;
 }
-
+.active-navbar-icon:hover{
+  color: #005bbd !important;
+}
 /* auction-section */
 .carousel{
 	margin-top: 2rem;
@@ -117,6 +113,7 @@ h6 {
 #home-top-banner{
   font-size: 24px;
   font-weight: 700;
+  text-shadow: 1px 2px #000000;
 }
 @media screen and (max-width: 1199px) and (min-width: 992px){
 	#just-added-wrapper{
@@ -133,18 +130,55 @@ h6 {
 	overflow-y: scroll;
 }
 
-.categories {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-}
+.about {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  color: #ffffff;
+  text-shadow: 1px 2px #000000;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+              url("/static/img/about.jpg") no-repeat center center;
 
-.categories .categories-item {
+  background-size: 960px 530px;
+  height: 82vh;
+  /*width: 100vw;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url("../static/img/about.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+*/
+  /*display: flex;
+  align-items: center;
+  justify-content: center;*/
+}
+#contact {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  color: #ffffff;
+  text-shadow: 1px 2px #000000;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+              url("/static/img/contact.jpg") no-repeat center center;
+
+  background-size: 930px 600px;
+  height: 70vh;
+  width: 79vw;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url("../static/img/about.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+*/
+  /*display: flex;
+  align-items: center;
+  justify-content: center;*/
+}
+/*.categories .categories-item {
   max-width: 18rem;
 }
 
 .categories .categories-item img {
   box-shadow: 0px 5px 5px 0px #adb5bd;
-}
+}*/
 .search-input-cat{
   display: none;
 }
@@ -166,7 +200,9 @@ footer.footer {
   padding-top: 4rem;
   padding-bottom: 4rem;
 }
-
+.footer-link:hover{
+  color: #000000 !important;
+}
 					/*** store.html ***/
 #euro-crispy{
   margin-top: 30px;
@@ -283,25 +319,34 @@ label[for="id_amount"]{
     font-size: 20px;
     margin-left: 5px;
 }
+
 /* history.html */
+.history-scroll {
+  /*background-color: lightblue;*/
+  width: auto;
+  height: 500px;
+  overflow: auto;
+}
+/*.history-filter{
+  margin: 0px !important;
+}*/
 .page-btn{
-  color: rgba(2, 59, 109, 1) !important;
   border: none;
   outline: none ;
   box-shadow: none;
 
 }
 .page-btn:hover, .page-btn:focus {
-  background-color: rgba(2, 59, 109, 1) !important;
-  color: #fff !important;
   border: none;
   outline: none ;
   box-shadow: none;
 }
 
 .page-btn:active{
-  background-color: rgba(2, 59, 109, 1) !important;
   border: none;
+}
+.page-nos{
+  font-size: 18px;
 }
 /*.red{
   color: red;
