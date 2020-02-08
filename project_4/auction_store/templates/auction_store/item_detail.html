@@ -5,11 +5,11 @@
 {% load mathfilters %}
 <link rel="stylesheet" href="{% static 'css/progress-bar.css' %}">
 
-<div class="container-fluid pt-1 px-5">
+<div class="container-fluid pt-1 px-3 mt-2">
  <div class="row pt-3"><!-- top row -->
   <div class="col-md-8"><!-- top col-8 -->
    <div class="row">
-    <div class="col-12 col-md-6 mr-0 pl-4 pt-2">
+    <div class="col-12 col-md-6 mr-0 pl-4 pt-2 pr-md-0">
 
     {% if item.sold %}
      <img class="layered-image img-fluid" src="{{ item.image.url }}">
@@ -27,44 +27,53 @@
      <img class="layered-image img-fluid" src="{{ item.image.url }}">
     {% endif %}
 
-     <h5 class="pt-4 text-center">Item Specification</h5>
-     <p class="pt-2 mb-2 text-center">
-      <span class="key-item-detail">Condition:
+     <h5 class="pt-4 ml-4">
+      <i class="fas fa-info-circle pr-1"></i>
+      Item Specification
+     </h5>
+     <p class="pt-2 mb-2">
+      <span class="key-item-detail ml-5 text-muted">Condition:
       </span>Very Good</p>
-     <p class="mb-2 text-center">
-      <span class="key-item-detail">Origin Country:
+     <p class="mb-2 ">
+      <span class="key-item-detail ml-5 text-muted">Origin Country:
       </span>China</p>
-     <p class="text-center">
-      <span class="key-item-detail">Manufactured by:
+     <p class="">
+      <span class="key-item-detail ml-5 text-muted">Manufactured by:
       </span>Nation</p>
     </div>
 
-    <div class="col-md-6 pt-2 mr-0">
-     <h3 class="text-center">{{ object.name }}</h3>
+    <div class="col-12 col-md-6 pt-2 pl-md-0">
+     <h3 class="text-center pb-3">{{ object.name }}</h3>
 
              <!---------------------- SELLER OPTIONS -------------------------->
        {% if object.seller ==  user %}
           <!---------------------- SELLER NOT SOLD / AUCTION NOT FINISH -------------------------->
         {% if not object.sold and object.today_date < object.finish_date %}
-        <div class="row py-4 mb-2">
+        <div class="row pt-2 pb-4 mb-2">
          <div class="col-6">
-          <p class="fas fa-hourglass-end text-center w-100"></p>
+          <p class="fas fa-hourglass-half text-center w-100"></p>
           <p id="timer" class="text-center text-center">
           {{ object.end_date|date:"F d, Y H:i:s" }}</p>
           <a class="btn-auction btn btn-outline-warning btn-lg w-100"
           href="{% url 'item-update' object.id %}">Update</a>
          </div>
          <div class="col-6">
-          <i class="fas fa-euro-sign text-center w-100"></i>
-          <p class="item-price text-center">{{ object.price }}</p>
+          <p class="fas fa-tag text-center w-100"></p>
+          <p class="item-price text-center">
+           <i class="fas fa-euro-sign text-center euro-sign-item"></i>
+            {{ object.price }}
+          </p>
           <a class="btn btn-outline-danger btn-lg w-100"
           href="{% url 'item-delete' object.id %}">Delete</a>
          </div>
         </div>
           <!---------------------- SELLER NOT SOLD / ONLY FOR SALE  -------------------------->
         {% elif not object.sold and not object.finish_date %}
-        <i class="fas fa-euro-sign text-center w-100 mt-3 pt-1"></i>
-        <p class="item-price text-center mb-0">{{ object.price }}</p>
+        <p class="col-12 text-center mb-0"><i class="fas fa-tag price-tag-item"></i></p>
+        <p class="item-price text-center mb-0">
+         <i class="fas fa-euro-sign text-muted euro-sign-item"></i>
+         {{ object.price }}
+        </p>
         <div class="row py-4 mb-2">
          <div class="col-6">
           <a class="btn-auction btn btn-outline-warning btn-lg w-100"
@@ -120,7 +129,7 @@
          {% if object.today_date < object.finish_date %}
          <div class="row py-4 mb-2">
           <div class="col-6">
-           <p class="fas fa-hourglass-end text-center w-100"></p>
+           <p class="fas fa-hourglass-half text-center w-100"></p>
            <p id="timer" class="text-center text-center">
            {{ object.end_date|date:"F d, Y H:i:s" }}</p>
            <a class="btn-auction btn btn-outline-warning btn-lg w-100"
@@ -129,8 +138,11 @@
            </a>
           </div>
           <div class="col-6">
-           <i class="fas fa-euro-sign text-center w-100"></i>
-           <p class="item-price text-center">{{ object.price }}</p>
+           <p class="fas fa-tag text-center w-100"></p>
+           <p class="item-price text-center">
+            <i class="fas fa-euro-sign text-center euro-sign-item"></i>
+             {{ object.price }}
+           </p>
            <a class="btn-buy btn btn-outline-primary color-primary btn-lg w-100"
             href="{% url 'payment' object.id %}">
             Buy Now</a>
@@ -174,21 +186,33 @@
         {% endif %}
       {% endif %}
 
-       <p class="mb-1"><span class="key-item-detail">Postage: </span>
-        <i class="fas fa-euro-sign"></i>
-        18.04 (approx. EUR 21.05) Express delivery to Ireland
+       <p class="mb-1">
+        <span class="key-item-detail text-muted">Postage: </span>
+        EUR 18.04 (approx. EUR 21.05)
+        <br>
+        Express delivery to Ireland
        </p>
        <p class="mb-1 mt-2">
-        <span class="key-item-detail">Delivery: </span>8 - 14 days</p>
-       <p class="mb-0"><span class="key-item-detail">Payments:
-        </span> <img id="img-paypal" src="{% static 'img/paypal.png' %}"></p>
-       <p><span class="key-item-detail">Return: </span>30 days</p>
+        <span class="key-item-detail text-muted">Delivery: </span>
+        8 - 14 days</p>
+       <p class="mb-2">
+        <span class="key-item-detail text-muted">Payments:
+        </span>
+        <i class="fab fa-cc-stripe stripe-icon-item pl-1"></i>
+       </p>
+       <p>
+        <span class="key-item-detail text-muted">Return: </span>
+        30 days
+       </p>
 </div><!------------------------------------------------>
 </div>
     {% if object.in_auction %}
     <div class="col-12 text-center pt-4 m-1"><!------------------------------------------------>
 
-     <h5 class="pb-2 m-0 pl-0">History</h5>
+     <h5 class="pb-2 m-0 pl-0">
+      <i class="fab fa-fort-awesome"></i>
+       History
+     </h5>
      <p class="#">
      4 Well-Known Traditional Chinese Clothes Types.
      The Hanfu, Zhongshan suit (Mao suit), Tang suit,
@@ -206,11 +230,10 @@
      Legend traces it back to over 4,000 years ago when Huangdi's consort,
      Leizu, made cloth with silk. It was
      constantly improved throughout several dynasties.
-     Until the Han Dynasty, the Hanfu was adopted and vigorously promoted by
-     the ruling class. It then became the national clothing of the Han ethnic people.
-     It also had a far-reaching influence on neighboring Asian countries,
-     such as Korea, Japan, and Vietnam. 2. Zhongshan Suit...
      </p>
+     <div>
+     <a class="btn btn-primary text-warning font-weight-bold">Read more...</a>
+     </div>
     </div><!------------------------------------------------>
 {% endif %}
   </div><!-- top col-8 -->
@@ -218,7 +241,10 @@
 
     {% if object.in_auction %}
     <div class="col-12 col-md-4 border-left"><!------------------------------------------------>
-     <h5 class="pt-3 text-center">Bid History</h5>
+     <h5 class="pt-3 text-center">
+      <i class="fas fa-gavel gavel-icon-item"></i>
+       Bid History
+     </h5>
      <div class="row">
       <div class="container my-2">
        {% if object.sold %}
@@ -232,32 +258,43 @@
      </div>
      <div class="row my-2">
       <p id="start-date" class="col-12 text-center">
-      Start date: {{ object.start_date|date:"F d, Y H:i:s" }}
+       <i class="far fa-play-circle"></i>
+        {{ object.start_date|date:"F d, Y H:i:s" }}
       </p>
       <p id="start-date" class="col-12 text-center">
-      End Date: {{ object.end_date|date:"F d, Y H:i:s" }}
+       <i class="far fa-stop-circle"></i>
+       {{ object.end_date|date:"F d, Y H:i:s" }}
       </p>
-      <p class="col-12 text-center">Starting Bid: <strong>EUR {{ object.start_auction_price}}</strong></p>
+      <p class="col-12 text-center">
+       <small class="text-muted">Starting Bid: </small>
+       <strong>EUR {{ object.start_auction_price}}</strong>
+      </p>
      </div>
-
-     {% for bid in bids %}
-     <hr class="my-1">
-     <div class="row pt-3">
-      <p class="bid-icon col-4 mb-0 text-center fas fa-user-alt"></p>
-      <p class="bid-icon col-4 mb-0 text-center fas fa-euro-sign"></p>
-      <p class="bid-icon col-4 mb-0 text-center far fa-clock"></p>
-      <p class="col-4 mb-0 text-center">{{ bid.bidder }}</p>
-      <p class="col-4 mb-0 text-center">{{ bid.amount }}</p>
-      <p class="col-4 mb-0 text-center"> {{ bid.date|date:"d M Y, H:i:s" }}</p>
+     <div class="row">
+      <div class="bid-scroll">
+       {% for bid in bids %}
+       <hr class="my-1">
+       <div class="row pt-3">
+        <p class="bid-icon col-4 mb-0 text-center fas fa-user-alt"></p>
+        <p class="bid-icon col-4 mb-0 text-center fas fa-euro-sign"></p>
+        <p class="bid-icon col-4 mb-0 text-center far fa-clock"></p>
+        <p class="col-4 mb-0 text-center">{{ bid.bidder }}</p>
+        <p class="col-4 mb-0 text-center">{{ bid.amount }}</p>
+        <p class="col-4 mb-0 text-center"> {{ bid.date|date:"d M Y, H:i:s" }}</p>
+       </div>
+       {% endfor %}
+      </div>
      </div>
-     {% endfor %}
     </div><!------------------------------------------------>
 
     {% else %}
 
     <div class="col-12 col-md-4 pr-3 text-center"><!------------------------------------------------>
 
-     <h5 class="pt-3 pb-2 text-center">History</h5>
+     <h5 class="pt-3 pb-2 text-center">
+      <i class="fab fa-fort-awesome pr-1"></i>
+       History
+     </h5>
      <p class="#">
      4 Well-Known Traditional Chinese Clothes Types.
      The Hanfu, Zhongshan suit (Mao suit), Tang suit,
@@ -270,15 +307,10 @@
      The Hanfu, Zhongshan suit (Mao suit), Tang suit, and cheongsam (qipao) are
      the four most distinctive types of traditional Chinese clothing.
      1. Hanfu hanfu
-     The Hanfu (' Han clothing' — the majority of Chinese are of Han ethnicity)
-     is the oldest of China's traditional clothes.
-     Legend traces it back to over 4,000 years ago when Huangdi's consort,
-     Leizu, made cloth with silk. It was
-     constantly improved throughout several dynasties.
-     Until the Han Dynasty, the Hanfu was adopted and vigorously promoted by
-     the ruling class. It then became the national clothing of the Han ethnic people.
-     It also had a far-reaching influence on neighboring Asian countries,
-     such as Korea, Japan, and Vietnam. 2. Zhongshan Suit...
+     The Hanfu (' Han clothing' — the majority of Chinese are of Han ethnicity)...
+     <div>
+     <a class="btn btn-primary text-warning font-weight-bold">Read more...</a>
+     </div>
      </p>
     </div><!------------------------------------------------>
 

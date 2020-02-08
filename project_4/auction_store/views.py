@@ -32,62 +32,26 @@ stripe.api_key = settings.STRIPE_SECRET
 
 
 def home(request):
-    # items_auction = Item.objects.filter(
-    #     in_auction=True).order_by('id')
-    # items = Item.objects.all()
-
-    # if the history was checked
     if request.user.is_authenticated:
         user = request.user
         if user.account.history_active == False:
             user.account.history_checked = True
             user.account.save()
-
-    # context = {
-    #     'items_auction': items_auction,
-    #     'items': items,
-    # }
     return render(request, 'auction_store/home.html')
-
-
-def search(request):
-    query = request.GET.get('q')
-    items = Item.objects.filter(Q(
-        name__icontains=query) | Q(
-        category__icontains=query) | Q(
-        desc__icontains=query) | Q(
-        price__icontains=query) | Q(
-        seller__username__icontains=query) | Q(
-        buyer__username__icontains=query))
-
-    paginator = Paginator(items, 5)
-    page = request.GET.get('page')
-    page_obj = paginator.get_page(page)
-
-    context = {
-        'items': items,
-        'page_obj': page_obj
-    }
-    return render(request, 'auction_store/results.html', context)
 
 
 @login_required
 def payment(request, pk):
     if request.user.is_authenticated:
         winner = request.user
-        # check if the auction is finish
+        # find  items which their auctions are finish
+        # and weren't bought during the auction
         won_artifacts = Item.objects.filter(
             sold=False, end_date__lte=datetime.date.today())
-        for art in won_artifacts:
-            # if the winner is user
-            if art.winner == request.user:
-                cart = True
-                break
-            else:
-                cart = False
 
     token = request.GET.get('stripeToken')
     item = Item.objects.get(pk=pk)
+    # find the latest bid for assigning the price
     bid = Bid.objects.filter(bidder=item.winner).last()
     order_form = OrderForm(request.POST)
     account = Account.objects.get(user=request.user)
@@ -95,13 +59,16 @@ def payment(request, pk):
     order_form = OrderForm(instance=request.user.account)
     # assign the price
     if item.in_auction:
+        # the auction finished but no bidder
         if timezone.now() > item.finish_date:
             if item.winner == None:
                 price = item.price
                 item.bought_at_auction = True
             else:
+                # the auction finished, at least 1 bidder
                 price = bid.amount
         else:
+            # the auction not finished, item will be bought for the sale price
             price = item.price
             item.bought_at_auction = True
     else:
@@ -118,36 +85,36 @@ def payment(request, pk):
     if request.method == 'POST' and not item.sold:
         order_form = OrderForm(request.POST)
         if order_form.is_valid():
-
             charge = stripe.Charge.create(
                 amount=int(price * 100),
                 currency='eur',
                 description=item.name,
                 source=request.POST['stripeToken']
             )
-
+            # create the order object
             order_form.instance.order_price = price
             order_form.instance.buyer = request.user
             order_form.instance.order_id = item.id
             order_form.instance.item_name = item.name
             order_form.save()
-
+            # update the item's fields connecting to the selling
             item.sold = True
             item.sold_price = price
             item.sold_date = timezone.now()
             item.buyer = request.user
             item.save()
-
-            the_user = Account.objects.get(user=request.user)
+            # update the user's cart
             the_cart = Cart.objects.get(owner=request.user)
             the_cart.total -= 1
+            # update the user's history
+            the_user = Account.objects.get(user=request.user)
             the_user.history_active = True
             the_user.history_checked = False
             the_user.buyer_active = True
-            # if the_cart.total == 0:
-            #     the_cart = None
             the_user.save()
             the_cart.save()
+            # if the_cart.total == 0:
+            #     the_cart = None
 
             messages.success(request, f'Your order was successful!')
             return redirect('item-detail', item.id)
@@ -187,21 +154,21 @@ class ItemListView(ListView, LoginRequiredMixin):
             if item.finish_date != None:
                 # check: 1. the auction is finish?
                        # 2. there is at least 1 bidder?
-                       # 3. was it not in the cart already?
+                       # 3. hase it not been in the cart already?
                 if (item.finish_date < item.today_date and
                         item.winner != None and item.cart == None):
                     # if the above are true - update the cart
                     the_cart = Cart.objects.get(owner=item.winner)
-                    winner = Account.objects.get(user=item.winner)
                     item.cart = the_cart
-                    winner.cart = the_cart
-                    # add the item to the cart's amount
+                    # add the item to the cart's items amount
                     the_cart.total += 1
+                    winner = Account.objects.get(user=item.winner)
                     # update the user's history
                     winner.winner_active = True
                     the_cart.save()
                     winner.save()
                     item.save()
+
             # update the seller's history if the item has just been put in sale
             seller = Account.objects.get(user=item.seller)
             if item.seller_active:
@@ -233,13 +200,7 @@ class ItemListView(ListView, LoginRequiredMixin):
                     # update only once
                     item.buyer_active = False
                     item.save()
-                # let know the bidder about the new highest bid
-                # if item.winner_active:
-                #     if item.winner != None:
-                #         winner = Account.objects.get(user=item.winner)
-                #         winner.history_active = True
-                #         winner.winner_active = True
-                #         winner.save()
+
         return self.filterset.qs.distinct()
 
     def get_context_data(self, **kwargs):
@@ -262,8 +223,6 @@ class ItemDetailView(FormMixin, LoginRequiredMixin, SuccessMessageMixin, DetailV
         context['bids'] = Bid.objects.filter(
             item=self.object).order_by('-id')
         context['form'] = BidForm(initial={'item': self.object})
-        # context['key'] = settings.STRIPE_PUBLISHABLE
-        # context['orders'] = Order.objects.filter(order_id=self.object.id)
 
         if self.object.winner == None:
             context['sold_price'] = self.object.price
@@ -324,9 +283,8 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
     template_name = 'auction_store/create_form.html'
 
     def form_valid(self, form):
-        if form.instance.in_auction and form.instance.start_auction_price == None:
-            return super(ItemCreateView, self).form_invalid(form)
-        elif form.instance.in_auction and form.instance.start_auction_price is not None:
+        if form.instance.start_auction_price is not None:
+            form.instance.in_auction = True
             form.instance.end_date = timezone.now() + timezone.timedelta(minutes=30)
             form.instance.seller = self.request.user
             return super().form_valid(form)

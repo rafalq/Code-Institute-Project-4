@@ -276,8 +276,20 @@ a:hover, a:focus {
 p.item-timer{
 	font-weight: bold;
 }
+.price-tag-item{
+  font-size: 25px;
+}
+.euro-sign-item{
+  font-size: 14px;
+}
 p.item-price{
-	font-size: 25px;
+	font-size: 17px;
+}
+.stripe-icon-item{
+  font-size: 25px;
+}
+.gavel-icon-item{
+  font-size: 15px;
 }
 .btn-auction{
     color: #ffc107 !important;
@@ -300,6 +312,12 @@ p.item-price{
 p.bid-icon{
     font-size: 12px;
     color: #adabab;
+}
+.bid-scroll{
+  height: 500px;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 span.key-item-detail{
     font-size: 14px;
@@ -325,7 +343,8 @@ label[for="id_amount"]{
   /*background-color: lightblue;*/
   width: auto;
   height: 500px;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 /*.history-filter{
   margin: 0px !important;
@@ -360,3 +379,11 @@ label[for="id_amount"]{
   right: -25px;
 }
 */
+
+
+/* cart.html */
+.cart-scroll{
+  width: 2000px;
+  overflow-y: hidden;
+  overflow-x: scroll;
+}

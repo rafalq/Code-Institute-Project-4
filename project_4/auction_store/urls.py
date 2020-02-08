@@ -17,7 +17,5 @@ urlpatterns = [
          ItemUpdateView.as_view(), name='item-update'),
     path('store/item/<int:pk>/delete/',
          ItemDeleteView.as_view(), name='item-delete'),
-    path('results/', views.search, name='search'),
     path('store/item/<int:pk>/payment/', views.payment, name='payment'),
-
 ]

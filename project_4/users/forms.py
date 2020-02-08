@@ -25,13 +25,17 @@ class AccountUpdateForm(forms.ModelForm):
     class Meta:
         model = Account
         fields = ['full_name', 'phone_number', 'country', 'postcode',
-                  'town_or_city', 'street_address1', 'street_address2', 'county', 'cart']
+                  'town_or_city', 'street_address1', 'street_address2', 'county']
 
 
 class CartForm(forms.ModelForm):
     class Meta:
         model = Cart
         fields = ['total', 'owner']
+        widgets = {
+            'total': forms.HiddenInput(),
+            'owner': forms.HiddenInput(),
+        }
 
 
 class LoginForm(AuthenticationForm):

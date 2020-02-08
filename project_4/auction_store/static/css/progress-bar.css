@@ -1,9 +1,10 @@
 .container {
-  height: 30px;
+  height: 20px;
 }
 .container #progress-bar {
   height: 100%;
-  -webkit-transition-property: width;-webkit-transition-duration: 10s;
+  -webkit-transition-property: width;
+  -webkit-transition-duration: 10s;
   -webkit-transition-timing-function: linear;
   transition-property: width;
   transition-timing-function: linear;

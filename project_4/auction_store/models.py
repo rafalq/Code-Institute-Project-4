@@ -10,12 +10,15 @@ import datetime
 class Item(models.Model):
     image = models.ImageField(upload_to='item_pics', default='default.jpg')
     name = models.CharField(max_length=100)
-    desc = models.TextField()
-    price = models.IntegerField()
+    short = models.CharField(
+        max_length=50, default='Short Description', verbose_name="Short Description")
+    desc = models.TextField(max_length=900, verbose_name="History")
+    price = models.IntegerField(verbose_name="Price (EURO)")
     start_date = models.DateTimeField(auto_now_add=True)
     end_date = models.DateTimeField(null=True, blank=True)
     in_auction = models.BooleanField(default=False)
-    start_auction_price = models.IntegerField(null=True, blank=True)
+    start_auction_price = models.IntegerField(
+        null=True, blank=True,  verbose_name="Auction Price (EURO)")
     sold = models.BooleanField(default=False)
     sold_date = models.DateTimeField(default=timezone.now)
     sold_price = models.IntegerField(null=True, blank=True)

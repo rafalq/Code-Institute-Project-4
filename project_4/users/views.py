@@ -35,7 +35,7 @@ def today_date(self):
 
 def register(request):
     items = Item.objects.all()
-
+    form = UserRegisterForm()
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         cart_form = CartForm(request.POST)
@@ -195,29 +195,67 @@ class CartListView(ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(CartListView, self).get_context_data(**kwargs)
+
         context['bids2'] = Bid.objects.all().order_by("-id")
         sq = Bid.objects.filter(item=OuterRef('item')).order_by(
             '-id')
+
+        # find all latest bidders if the auction finish to get those ones who are users
         context['win_bids'] = Bid.objects.filter(bidder=self.request.user,
                                                  pk=Subquery(sq.values('pk')[:1]))
+
+        # find won artifacts to update item's cart field
+        # and the user's cart
         items = Item.objects.all()
         for item in items:
-            if item.finish_date != None:
+            # the auction is finished, there was at least 1 bidder
+            if item.sold == False and item.finish_date != None:
                 if (item.finish_date < item.today_date and
                         item.winner != None and item.cart == None):
+                    # get the winner's cart
                     the_cart = Cart.objects.get(owner=item.winner)
-                    winner = Account.objects.get(user=item.winner)
+                    # assign the name of the winner's cart to the item's
                     item.cart = the_cart
-                    winner.cart = the_cart
+                    item.save()
+                    # add the won item amount to the cart's total
                     the_cart.total += 1
                     the_cart.save()
-                    winner.save()
-                    item.save()
+
+                    # POTRZEBNE ?????????
+                    # get the account of the winner
+                    # winner = Account.objects.get(user=item.winner)
+                    # winner.cart = the_cart
+                    # winner.save()
+
+            # update the history as checked if the user has already seen it
             seller = Account.objects.get(user=item.seller)
             if seller.history_active == False:
                 seller.history_checked = True
                 seller.save()
         return context
+
+
+# items = Item.objects.all()
+#         # find won artifacts
+#         for item in items:
+#             # the auction is finished and there was at least 1 bidder
+#             if item.sold == False and item.finish_date != None:
+#                 if (item.finish_date < item.today_date and
+#                         item.winner != None and item.cart == None):
+#                     the_cart = Cart.objects.get(owner=item.winner)
+#                     winner = Account.objects.get(user=item.winner)
+#                     item.cart = the_cart
+#                     winner.cart = the_cart
+#                     the_cart.total += 1
+#                     the_cart.save()
+#                     winner.save()
+#                     item.save()
+#             seller = Account.objects.get(user=item.seller)
+#             if seller.history_active == False:
+#                 seller.history_checked = True
+#                 seller.save()
+#         return context
+
 
 # @login_required
 # def history(request):

@@ -2,7 +2,8 @@
 {% block content %}
 <div class="container">
  <h3 class="text-center pt-4 pb-3">Your Won Auctions</h3>
-<div class="row ml-md-5 mr-md-0">
+ <div class="row ml-md-5 mr-md-0">
+  <div class="cart-scroll">
   {% for bid in win_bids %}
    {% if not bid.item.sold and bid.item.end_date < bid.today_date %}
     <div class="col-12 col-md-5 m-1">
@@ -21,16 +22,7 @@
     </div>
    {% endif %}
   {% endfor %}
+  </div>
  </div>
-
- <script>
-  // var total = document.getElementsByClassName("artifact");
-  // console.log('Artifacts Array: ' + total)
-  // var artAmount = total.length;
-  // var redCol = document.getElementById("badge-total");
-  // if(artAmount > 0){
-  //   console.log('Amount: ' + artAmount)
-  //   redCol.style.color = "red";
-  // }
- </script>
+</div>
 {% endblock %}

@@ -6,6 +6,10 @@
 {% block content %}
 <div class="container my-4"><!-- container -->
  <div class="row">
+  <legend class="border-bottom mb-4 text-center font-weight-bolder">
+   <i class="nav-item fas fa-ad text-muted pr-1"></i>
+   For Sale
+  </legend>
   <div class="col-8 offset-2">
     <form action="" method="POST" enctype="multipart/form-data">
      {% csrf_token %}
@@ -16,25 +20,32 @@
        <div class="form-group col-12">
         {{ form.name|as_crispy_field }}
        </div>
-       <div class="form-group col-md-4 offset-md-1">
+       <div class="form-group col-12 col-md-4">
         {{ form.category|as_crispy_field }}
        </div>
-       <div class="form-group col-md-4 offset-md-2">
+       <div class="form-group col-12 col-md-4">
         {{ form.price|as_crispy_field }}
         <p class="text-muted text-center">
         <small>* Price just in sales!</small>
        </p>
        </div>
-       <div class="border border-secondary row py-4 mb-3">
-       <div class="form-group col-md-4 offset-md-1 mt-4 pl-5">
-        {{ form.in_auction|as_crispy_field }}
-       </div>
-       <div class="form-group col-md-4 offset-md-2">
+       <div class="form-group col-12 col-md-4">
         {{ form.start_auction_price|as_crispy_field }}
+        <p class="text-muted text-center">
+         <small>
+          *The Starting Bid.
+          <br>
+          Leave blank if the artifact is not at auction!
+         </small>
+        </p>
        </div>
-       <p class="text-muted text-center col-md-8 offset-md-2">
-        <small>* Tick the checkbox and type your Start Auction Price (the starting bid) if you put up the artifact for auction!</small>
-       </p>
+       <div class="form-group col-12">
+        {{ form.short|as_crispy_field }}
+        <p class="text-muted">
+         <small>
+          *Appears only in the artifact's description in the store
+         </small>
+        </p>
        </div>
        <div class="form-group col-12">
         {{ form.desc|as_crispy_field }}
@@ -46,4 +57,8 @@
   </div>
  </div>
 </div>
+<script>
+  price_g = document.getElementById('id_price').setAttribute("min", "1");
+  price_l = document.getElementById('id_start_auction_price').setAttribute("min", "1");
+</script>
 {% endblock %}
