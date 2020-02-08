@@ -24,7 +24,7 @@ class Account(models.Model):
         Cart, on_delete=models.SET_NULL, blank=True, null=True)
     history_active = models.BooleanField(default=False)
     history_checked = models.BooleanField(default=False)
-    seller_active = models.BooleanField(default=True)
+    seller_active = models.BooleanField(default=False)
     buyer_active = models.BooleanField(default=False)
     winner_active = models.BooleanField(default=False)
 

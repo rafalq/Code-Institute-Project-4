@@ -383,6 +383,7 @@ label[for="id_amount"]{
 
 /* cart.html */
 .cart-scroll{
+  height: 300px;
   width: 2000px;
   overflow-y: hidden;
   overflow-x: scroll;
