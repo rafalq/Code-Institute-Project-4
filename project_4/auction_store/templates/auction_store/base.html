@@ -29,9 +29,9 @@
  <!-- Custom styles for this template -->
  <link href="{% static 'css/main.css' %}" rel="stylesheet">
 
- <!-- Custom footer -->
- {% block head_footer %}
- {% endblock head_footer %}
+ <!-- Progress Bar -->
+ {% block progress_bar %}
+ {% endblock progress_bar %}
 
  <!-- Custom styles for payment.html -->
  {% block head_payment %}
@@ -44,11 +44,10 @@
  </script>
 
  {% block head_js %}
- {% endblock %}
+ {% endblock head_js %}
 </head>
 
 <body>
- <header>
  <nav class="navbar navbar-expand-lg navbar-light bg-light static-top pl-4 pr-4">
   <a class="navbar-brand font-weight-bold" href="{% url 'auction_store-home' %}">ARTIFA</a>
   <button class="navbar-toggler" type="button"
@@ -66,7 +65,7 @@
     </li>
     <li class="nav-item">
      <a class="nav-item btn btn-link text-muted pl-0 pl-md-2 pt-md-2"
-      href="{% url 'auction_store-home' %}">About
+      href="{% url 'auction_store-home' %}#about">About
       <span class="sr-only">(current)</span>
      </a>
     </li>
@@ -79,30 +78,32 @@
     </li>
     <li class="nav-item">
      <a class="nav-item btn btn-link text-muted pl-0 pl-md-2 pt-md-2"
-      href="{% url 'auction_store-store' %}">Contact
+        href="{% url 'auction_store-home' %}#contact">
+       Contact
       <span class="sr-only">(current)</span>
      </a>
     </li>
    </ul>
-   <!-- User Panel -->
+
+<!-- User Panel -->
    {% if user.is_authenticated %}
-   <ul class="navbar-nav pr-4 pt-1">
-    <!-- Sell -->
+   <ul id="user-navbar" class="navbar-nav pr-4">
+<!-- Sell -->
     <li class="nav-item pt-md-1 px-lg-3">
      <a class="nav-link" href="{% url 'item-create' %}" role="button"
       data-toggle="tooltip" data-placement="bottom" title="Sell">
       <i class="nav-item fas fa-ad"></i>
      </a>
     </li>
-    <!-- Account -->
+<!-- Account -->
     <li class="nav-item pt-md-1 pr-md-1">
      <a class="nav-link" href="{% url 'profile' %}" id="navbarDropdown" role="button"
-      data-toggle="tooltip" data-placement="bottom" title="Your Account"
+      data-toggle="tooltip" data-placement="bottom" title="Account"
       aria-haspopup="true" aria-expanded="false">
       <i class="nav-item fas fa-user-alt"></i>
      </a>
     </li>
-    <!-- History -->
+<!-- History -->
     <li class="nav-item pt-md-1 px-lg-2">
      <a class="nav-link" href="{% url 'history' %}"
       role="button" data-toggle="tooltip"
@@ -114,12 +115,12 @@
       {% endif %}
      </a>
     </li>
-    {% if user.account.cart.total > 0 %}
+    {% if user.cart.total > 0 %}
     <li class="nav-item pt-md-1">
-     <a class="nav-link badge-link" href="{% url 'cart' %}" role="button"
+     <a id="blue-cart" class="nav-link badge-link" href="{% url 'cart' %}" role="button"
       data-toggle="tooltip" data-placement="bottom" title="Cart">
       <i class="active-navbar-icon fas fa-cart-arrow-down text-primary">
-       <span class="badge badge-cart badge-warning">{{ user.account.cart.total }}</span>
+       <span class="badge badge-cart badge-warning">{{ user.cart.total }}</span>
       </i>
      </a>
     </li>
@@ -138,7 +139,8 @@
      </a>
     </li>
    </ul>
-   <!-- Login / Register Panel -->
+
+<!-- Login / Register Panel -->
    {% else %}
    <ul class="navbar-nav pr-4 pt-3">
     <li class="nav-item pb-md-4">
@@ -150,14 +152,16 @@
       href="{% url 'register' %}">Register</a>
     </li>
     {% endif %}
-    <!-- Search Field for Store Page -->
+
+<!-- Search Field for Store Page -->
     {% block nav-search %}
     {% endblock nav-search %}
-   </ul>
 
+   </ul>
   </div>
  </nav>
- <!-- Flash Message -->
+
+<!-- Flash Message -->
  {% if messages %}
   {% for message in messages %}
    <div class="container-fluid m-auto mt-3 text-center">
@@ -167,23 +171,28 @@
    </div>
   {% endfor %}
  {% endif %}
-</header>
 
 <!-- Main Block Content  -->
 {% block content %}
 {% endblock content %}
 
-<!-- Footer -->
-<footer class="footer bg-light pt-4 pb-2 mt-3">
-  <div class="row px-5 py-2">
-   <div class="col-lg-6 h-100 text-center text-lg-left my-auto pb-md-4">
+<footer class="navbar pt-4 pb-2 bg-light w-100">
+   <div class="col-lg-8 h-100 text-center text-lg-left my-auto pb-md-4 pl-lg-5">
     <ul class="list-inline mb-2">
      <li class="list-inline-item">
-      <a class="text-muted footer-link" href="#">About</a>
+      <a class="text-muted footer-link" href="{% url 'auction_store-home' %}">Home</a>
      </li>
      <li class="list-inline-item">&sdot;</li>
      <li class="list-inline-item">
-      <a class="text-muted footer-link" href="#">Contact</a>
+      <a class="text-muted footer-link" href="{% url 'auction_store-store' %}">Store</a>
+     </li>
+     <li class="list-inline-item">&sdot;</li>
+     <li class="list-inline-item">
+      <a class="text-muted footer-link" href="{% url 'auction_store-home' %}#about">About</a>
+     </li>
+     <li class="list-inline-item">&sdot;</li>
+     <li class="list-inline-item">
+      <a class="text-muted footer-link" href="{% url 'auction_store-home' %}#contact">Contact</a>
      </li>
      <li class="list-inline-item">&sdot;</li>
      <li class="list-inline-item">
@@ -198,7 +207,7 @@
     &copy; Your Website 2019. All Rights Reserved.
     </p>
    </div>
-   <div class="col-lg-6 h-100 text-center text-lg-right my-auto pb-md-2">
+   <div class="col-lg-4 h-100 text-center text-lg-right my-auto pb-md-2  pr-lg-5">
     <ul class="list-inline mb-0">
      <li class="list-inline-item mr-3">
       <a href="#">
@@ -217,12 +226,14 @@
      </li>
     </ul>
    </div>
-  </div>
 </footer>
+
 <!-- Bootstrap core JavaScript -->
 <script src="{% static 'js/jquery.min.js' %}"></script>
 <script src="{% static 'bootstrap/bootstrap.bundle.min.js' %}"></script>
+
 <!-- JavaScript-->
 <script src="{% static 'js/script.js' %}"></script>
+
 </body>
 </html>

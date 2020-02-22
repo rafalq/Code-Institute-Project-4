@@ -5,8 +5,12 @@
 {% load my_tags %}
 {% block content %}
 <div id="history-wrapper" class="container"><!-- container -->
- <div class="row mt-2 text-center"><!-- row1 input -->
-  <div class="col-12 py-3 bg-secondary">
+ <legend class="border-bottom my-4 text-center font-weight-bolder">
+  <i class="nav-item fas fa-history text-muted pr-1"></i>
+   History
+ </legend>
+ <div class="row my-3 text-center"><!-- row1 input -->
+  <div class="col-12 py-2 px-2 bg-secondary">
    <i class="fas fasorttext-white pr-2"></i>
    <input type="text" id="myInput" onkeyup="searchHistrory()" class="col-8 px-4" placeholder="Search for names..." title="Type in a name">
   </div>
@@ -16,10 +20,10 @@
   <!----------------------- Purchased Section ----------------------->
   <div class="col-12 col-md-4 px-md-0">
    {% if user.account.buyer_active %}
-    <h3 class="text-center pt-4 pb-3 text-danger">
+    <h4 class="text-center pt-4 pb-3 text-danger">
      <i class="fas fa-money-bill-alt history-icon text-danger"></i>
       Purchased
-    </h3>
+    </h4>
     <form class="col-10 offset-2 m-0 mb-2 ml-4 pr-2" action="" method="GET" name="purchase">
      {% csrf_token %}
       <div class="row bg-secondary pt-3 pb-0 pr-5">
@@ -58,10 +62,10 @@
 
     {% else %}
 
-    <h3 class="text-center pt-4 pb-3">
+    <h4 class="text-center pt-4 pb-3">
       <i class="fas fa-money-bill-alt history-icon text-muted"></i>
       Purchased
-    </h3>
+    </h4>
     <form class="col-10 offset-2 m-0 mb-2 ml-4 pr-2" action="" method="GET" name="purchase">
      {% csrf_token %}
       <div class="row bg-secondary pt-3 pb-0 pr-5">
@@ -99,10 +103,10 @@
   <!----------------------- Sale Section ----------------------->
   <div class="col-12 col-md-4 px-md-0">
    {% if user.account.seller_active %}
-    <h3 class="text-center pt-4 pb-3 text-danger">
+    <h4 class="text-center pt-4 pb-3 text-danger">
      <i class="fas fa-ad history-icon text-danger"></i>
      Your Sales
-    </h3>
+    </h4>
     <form class="col-10 offset-2 m-0 mb-2 ml-4 pr-2" action="" method="GET" name="sale">
      {% csrf_token %}
       <div class="row bg-secondary pt-3 pb-0 pr-5">
@@ -142,10 +146,10 @@
 
   {% else %}
 
-   <h3 class="text-center pt-4 pb-3">
+   <h4 class="text-center pt-4 pb-3">
     <i class="fas fa-ad history-icon text-muted"></i>
      Your Sales
-   </h3>
+   </h4>
    <form class="col-10 offset-2 m-0 mb-2 ml-4 pr-2" action="" method="GET" name="sale">
      {% csrf_token %}
       <div class="row bg-secondary pt-3 pb-0 pr-5">
@@ -183,10 +187,10 @@
   <!----------------------- Bid Section ----------------------->
   <div class="col-12 col-md-4 px-md-0"><!-- col -->
    {% if user.account.winner_active %}
-    <h3 class="text-center pt-4 pb-3 text-danger">
+    <h4 class="text-center pt-4 pb-3 text-danger">
      <i class="fas fa-gavel history-icon text-danger"></i>
      Your Bids
-    </h3>
+    </h4>
     <form class="col-10 offset-2 m-0 mb-2 ml-4 pr-2" action="" method="GET" name="bid">
      {% csrf_token %}
       <div class="row bg-secondary pt-3 pb-0 pr-5">
@@ -226,9 +230,9 @@
 
    {% else %}
 
-   <h3 class="text-center pt-4 pb-3">
+   <h4 class="text-center pt-4 pb-3">
     <i class="fas fa-gavel history-icon text-muted"></i>
-     Your Bids</h3>
+     Your Bids</h4>
     <form class="col-10 offset-2 m-0 mb-2 ml-4 pr-2" action="" method="GET" name="purchase">
      {% csrf_token %}
       <div class="row bg-secondary pt-3 pb-0 pr-5">
@@ -272,7 +276,7 @@ function searchHistrory() {
     historyWrapper = document.getElementById("history-wrapper");
     a = historyWrapper.getElementsByTagName("a");
 
-    // Loop through all list items, and hide those who don't match thesortquery
+    // Loop through all list items, and hide those that don't match thesortquery
     for (i = 0; i < a.length; i++) {
         p = a[i].getElementsByTagName("p")[0];
         txtValue = p.textContent || p.innerText;

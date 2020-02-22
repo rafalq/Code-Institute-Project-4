@@ -12,9 +12,6 @@ class ItemFilter(django_filters.FilterSet):
     multi_name_fields = django_filters.CharFilter(label='',
                                                   method='filter_by_all_name_fields')
 
-    # manufacturer__name = django_filters.CharFilter(lookup_expr='icontains')
-    # start_date = filters.DateTimeFilter(field_name='pub_date', lookup_expr='gte')
-
     FORMAT_CHOICES = (
         ('all', 'All Listings'),
         ('auction', 'Auction'),
@@ -37,7 +34,7 @@ class ItemFilter(django_filters.FilterSet):
         label="Sort", choices=SORT_CHOICES, method='filter_by_sort')
 
     SELLER_CHOICES = (
-        ('artifa', 'Artifa'),
+        ('store', 'Store'),
         ('private', 'Private'),
     )
 
@@ -69,7 +66,7 @@ class ItemFilter(django_filters.FilterSet):
                 end_date__lt=timezone.now(), sold=False, in_auction=True)
         elif value == 'sale':
             queryset = queryset.filter(
-                sold=False, winner__isnull=True, end_date__lt=timezone.now())
+                Q(sold=False, winner__isnull=True, end_date__lt=timezone.now()) | Q(sold=False, in_auction=False))
         elif value == 'sold':
             queryset = queryset.filter(sold=True)
         else:
@@ -77,10 +74,10 @@ class ItemFilter(django_filters.FilterSet):
         return queryset
 
     def filter_by_seller(self, queryset, name, value):
-        if value == 'artifa':
-            queryset = queryset.filter(seller__username="admin")
+        if value == 'store':
+            queryset = queryset.filter(seller__is_superuser=True)
         elif value == 'private':
-            queryset = queryset.exclude(seller__username="admin")
+            queryset = queryset.exclude(seller__is_superuser=True)
         return queryset.order_by('seller')
 
     def filter_by_all_name_fields(self, queryset, name, value):

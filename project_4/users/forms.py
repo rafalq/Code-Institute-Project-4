@@ -21,7 +21,6 @@ class UserUpdateForm(forms.ModelForm):
 
 
 class AccountUpdateForm(forms.ModelForm):
-
     class Meta:
         model = Account
         fields = ['full_name', 'phone_number', 'country', 'postcode',
@@ -31,10 +30,9 @@ class AccountUpdateForm(forms.ModelForm):
 class CartForm(forms.ModelForm):
     class Meta:
         model = Cart
-        fields = ['total', 'owner']
+        fields = ['total']
         widgets = {
             'total': forms.HiddenInput(),
-            'owner': forms.HiddenInput(),
         }
 
 
@@ -42,9 +40,3 @@ class LoginForm(AuthenticationForm):
     class Meta:
         model = User
         fields = ['username']
-
-
-class CartUpdateForm(forms.ModelForm):
-    class Meta:
-        model = Cart
-        fields = ['total']

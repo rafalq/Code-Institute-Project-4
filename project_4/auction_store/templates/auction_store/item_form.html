@@ -1,20 +1,67 @@
 {% extends 'auction_store/base.html' %}
+{% load static %}
 {% load crispy_forms_tags %}
+{% load crispy_forms_field %}
+
 {% block content %}
-<div class="container py-3">
+<div class="container my-4"><!-- container -->
  <div class="row">
+  <legend class="border-bottom mb-4 text-center font-weight-bolder">
+   <i class="nav-item fas fa-edit text-muted pr-1"></i>
+   <span class="h2 font-weight-bold">Update</span>
+  </legend>
   <div class="col-8 offset-2">
-  <form method="POST" enctype="multipart/form-data">
-  {% csrf_token %}
-   <fieldset class="form-group">
-    <legend class="border-bottom mb-4">Artifact</legend>
-    {{ form|crispy }}
-   </fieldset>
-   <div class="form-group">
-     <button class="btn btn-outline-primary" type="submit">Submit</button>
-   </div>
-  </form>
+    <form action="" method="POST" enctype="multipart/form-data">
+     {% csrf_token %}
+      <div class="form-row">
+       <div class="form-group col-12">
+        {{ form.image|as_crispy_field }}
+       </div>
+       <div class="form-group col-12">
+        {{ form.name|as_crispy_field }}
+       </div>
+       <div class="form-group col-12 col-lg-6">
+        {{ form.category|as_crispy_field }}
+       </div>
+       <div class="form-group col-12 col-lg-6">
+        {{ form.price|as_crispy_field }}
+        <p class="text-muted text-center">
+        <small>* Price just in sales!</small>
+       </p>
+       </div>
+       <div class="form-group col-12">
+        {{ form.short|as_crispy_field }}
+        <p class="text-muted">
+         <small>
+          *Appears only in the artifact's description in the store
+         </small>
+        </p>
+       </div>
+       <div class="form-group col-lg-6">
+        {{ form.condition|as_crispy_field }}
+       </div>
+       <div class="form-group col-lg-6">
+        {{ form.origin_country|as_crispy_field }}
+       </div>
+       <div class="form-group col-12">
+        {{ form.known_owners|as_crispy_field }}
+       </div>
+       <div class="form-group col-12">
+        {{ form.desc|as_crispy_field }}
+       </div>
+       {% if request.user.is_superuser %}
+       <div class="form-group col-12">
+        {{ form.link_read_more|as_crispy_field }}
+       </div>
+       {% endif %}
+      </div>
+      <button class="btn btn-primary px-5"
+      type="submit">Submit</button>
+    </form>
   </div>
  </div>
-</div>
-{% endblock content %}
+</div><!-- container -->
+<script>
+  price_g = document.getElementById('id_price').setAttribute("min", "1");
+</script>
+{% endblock %}

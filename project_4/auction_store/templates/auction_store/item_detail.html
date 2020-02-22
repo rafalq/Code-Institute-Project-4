@@ -1,19 +1,23 @@
 {% extends 'auction_store/base.html' %}
-{% block content %}
-{% load crispy_forms_tags %}
+
 {% load static %}
+
+{% block progress_bar %}
+ <link rel="stylesheet" href="{% static 'css/progress-bar.css' %}">
+{% endblock progress_bar %}
+
+{% load crispy_forms_tags %}
 {% load mathfilters %}
-<link rel="stylesheet" href="{% static 'css/progress-bar.css' %}">
 
-<div class="container-fluid pt-1 px-3 mt-2">
- <div class="row pt-3"><!-- top row -->
-  <div class="col-md-8"><!-- top col-8 -->
-   <div class="row">
-    <div class="col-12 col-md-6 mr-0 pl-4 pt-2 pr-md-0">
-
+{% block content %}
+<div class="container"><!-- Container -->
+ <div class="col-12 col-lg-8 float-left">
+  <div class="row"><!-- TOP row -->
+   <div class="col-12 col-lg-6 pt-3"><!-- IMAGE col -->
     {% if item.sold %}
      <img class="layered-image img-fluid" src="{{ item.image.url }}">
-     <img class="image-overlay-store img-fluid pr-3" src="{% static 'img/soldd.png' %}">
+     <img class="image-overlay-item-lg img-fluid pr-3 d-none d-lg-block" src="{% static 'img/soldd.png' %}">
+     <img class="image-overlay-item img-fluid pr-3 d-block d-lg-none" src="{% static 'img/soldd.png' %}">
     {% elif not item.sold and item.today_date <= item.finish_date %}
      <img class="image-time-store img-fluid" src="{% static 'img/hammer.png' %}">
      <img class="layered-image img-fluid" src="{{ item.image.url }}">
@@ -26,300 +30,340 @@
     {% else %}
      <img class="layered-image img-fluid" src="{{ item.image.url }}">
     {% endif %}
+   </div><!-- Image -->
 
-     <h5 class="pt-4 ml-4">
-      <i class="fas fa-info-circle pr-1"></i>
-      Item Specification
-     </h5>
-     <p class="pt-2 mb-2">
-      <span class="key-item-detail ml-5 text-muted">Condition:
-      </span>Very Good</p>
-     <p class="mb-2 ">
-      <span class="key-item-detail ml-5 text-muted">Origin Country:
-      </span>China</p>
-     <p class="">
-      <span class="key-item-detail ml-5 text-muted">Manufactured by:
-      </span>Nation</p>
+
+<!---------------------- SELLER OPTIONS -------------------------->
+   <div class="col-12 col-lg-6 pt-5"><!-- TITLE col -->
+    <h3 class="text-center pb-3">{{ object.name }}</h3>
+<!---------------------- SELLER OPTIONS -------------------------->
+    {% if object.seller ==  user %}
+<!---------------------- SELLER NOT SOLD / AUCTION NOT FINISH -------------------------->
+    {% if not object.sold and object.today_date < object.finish_date %}
+     <div class="row pt-2 pb-4 mb-2">
+      <div class="col-6">
+       <p class="fas fa-hourglass-half text-center text-warning w-100"></p>
+       <p id="timer" class="text-center text-center font-weight-bold bg-light">
+        {{ object.end_date|date:"F d, Y H:i:s" }}
+       </p>
+       <a class="btn-auction btn btn-outline-warning btn-lg w-100"
+          href="{% url 'item-update' object.id %}">Update</a>
+      </div>
+      <div class="col-6">
+       <p class="fas fa-coins text-center text-primary mb-3 w-100"></p>
+       <p class="item-price-bid text-center font-weight-bold bg-light">
+        <i class="fas fa-euro-sign text-center euro-sign-item"></i>
+        {{ object.price }}
+       </p>
+       <a class="btn btn-outline-danger btn-lg w-100"
+          href="{% url 'item-delete' object.id %}">Delete</a>
+      </div>
+     </div>
+<!---------------------- SELLER NOT SOLD / ONLY FOR SALE  -------------------------->
+    {% elif not object.sold and not object.finish_date %}
+    <p class="col-12 text-center mb-0"></p>
+    <p class="fas fa-coins text-center text-primary w-100"
+        data-toggle="tooltip" data-placement="top" title="Price"></p>
+    <p class="item-price text-center mb-0">
+     <i class="fas fa-euro-sign text-center euro-sign-item text-muted"></i>
+     {{ object.price }}
+    </p>
+    <div class="row py-4 mb-2">
+     <div class="col-6">
+      <a class="btn-auction btn btn-outline-warning btn-lg w-100"
+         href="{% url 'item-update' object.id %}">Update</a>
+     </div>
+     <div class="col-6">
+      <a class="btn btn-outline-danger btn-lg w-100"
+         href="{% url 'item-delete' object.id %}">Delete</a>
+     </div>
     </div>
-
-    <div class="col-12 col-md-6 pt-2 pl-md-0">
-     <h3 class="text-center pb-3">{{ object.name }}</h3>
-
-             <!---------------------- SELLER OPTIONS -------------------------->
-       {% if object.seller ==  user %}
-          <!---------------------- SELLER NOT SOLD / AUCTION NOT FINISH -------------------------->
-        {% if not object.sold and object.today_date < object.finish_date %}
-        <div class="row pt-2 pb-4 mb-2">
-         <div class="col-6">
-          <p class="fas fa-hourglass-half text-center w-100"></p>
-          <p id="timer" class="text-center text-center">
-          {{ object.end_date|date:"F d, Y H:i:s" }}</p>
-          <a class="btn-auction btn btn-outline-warning btn-lg w-100"
-          href="{% url 'item-update' object.id %}">Update</a>
-         </div>
-         <div class="col-6">
-          <p class="fas fa-tag text-center w-100"></p>
-          <p class="item-price text-center">
-           <i class="fas fa-euro-sign text-center euro-sign-item"></i>
-            {{ object.price }}
-          </p>
-          <a class="btn btn-outline-danger btn-lg w-100"
-          href="{% url 'item-delete' object.id %}">Delete</a>
-         </div>
-        </div>
-          <!---------------------- SELLER NOT SOLD / ONLY FOR SALE  -------------------------->
-        {% elif not object.sold and not object.finish_date %}
-        <p class="col-12 text-center mb-0"><i class="fas fa-tag price-tag-item"></i></p>
-        <p class="item-price text-center mb-0">
-         <i class="fas fa-euro-sign text-muted euro-sign-item"></i>
-         {{ object.price }}
-        </p>
-        <div class="row py-4 mb-2">
-         <div class="col-6">
-          <a class="btn-auction btn btn-outline-warning btn-lg w-100"
-          href="{% url 'item-update' object.id %}">Update</a>
-         </div>
-         <div class="col-6">
-          <a class="btn btn-outline-danger btn-lg w-100"
-          href="{% url 'item-delete' object.id %}">Delete</a>
-         </div>
-        </div>
-        {% else %}
-        <div class="col-12">
-          <!---------------------- SELLER SOLD ONLY FOR SALE -------------------------->
-         {% if not object.in_auction and object.sold %}
-          <p class="text-center text-muted">Sold for:</p>
-          <i class="fas fa-euro-sign text-center w-100"></i>
-          <p class="item-price text-center">{{ object.price }}</p>
-         {% elif object.in_auction and object.sold %}
-          <!---------------------- SELLER SOLD DURING AUCTION -------------------------->
-           <p class="text-center text-muted">Sold for:</p>
-           <i class="fas fa-euro-sign text-center w-100"></i>
-           <p class="item-price text-center">{{ sold_price }}</p>
-          <!---------------------- SELLER NOT SOLD / WINNING BIDDER -------------------------->
-          {% elif object.today_date > object.finish_date %}
-           {% if bids|length %}
-            <p class="text-center text-muted">Winning Bid:</p>
-            <i class="fas fa-euro-sign text-center w-100"></i>
-            <p class="item-price text-center">{{ sold_price }}</p>
-           {% else %}
-          <!---------------------- SELLER FINISHED NOT SOLD / NO BIDS -------------------------->
-             <i class="fas fa-euro-sign text-center w-100"></i>
-             <p class="item-price text-center">{{ object.price }}</p>
-           {% endif %}
-          {% endif %}
-        </div>
-          <!---------------------- SELLER AUCTION FINISHED OR SOLD / BLOCK BUTTONS -------------------------->
-        <div class="row pb-4 pt-2">
-         <div class="col-6">
-          <a class="disabled btn-auction btn btn-outline-secondary btn-lg w-100"
-          href="#" style="color: #6c757d !important;">Update</a>
-         </div>
-         <div class="col-6">
-          <a class="disabled btn btn-outline-secondary btn-lg w-100"
-          href="#">Delete</a>
-         </div>
-        </div>
-       {% endif %}
-      {% else %}
-
-      <!---------------------- BUYER NOT SOLD -------------------------->
-       {% if not object.sold %}
-        {% if object.in_auction %}
-         {% if object.today_date < object.finish_date %}
-         <div class="row py-4 mb-2">
-          <div class="col-6">
-           <p class="fas fa-hourglass-half text-center w-100"></p>
-           <p id="timer" class="text-center text-center">
-           {{ object.end_date|date:"F d, Y H:i:s" }}</p>
-           <a class="btn-auction btn btn-outline-warning btn-lg w-100"
-           data-toggle="modal" data-target="#bid-form">
-           Place Bid
-           </a>
-          </div>
-          <div class="col-6">
-           <p class="fas fa-tag text-center w-100"></p>
-           <p class="item-price text-center">
-            <i class="fas fa-euro-sign text-center euro-sign-item"></i>
-             {{ object.price }}
-           </p>
-           <a class="btn-buy btn btn-outline-primary color-primary btn-lg w-100"
-            href="{% url 'payment' object.id %}">
-            Buy Now</a>
-          </div>
-         </div>
-         {% else %}
-          {% if bids|length %}
-           <p class="text-center text-muted">Winning Bid:</p>
-           <i class="fas fa-euro-sign text-center w-100"></i>
-           {% for bid in bids %}
-            {% if forloop.first %}
-            <p class="item-price text-center">{{ bid.amount }}</p>
-            {% endif %}
-           {% endfor %}
-          {% else %}
-           <div class="offset-2 col-8 pt-3 pb-5">
-            <i class="fas fa-euro-sign text-center w-100"></i>
-            <p class="item-price text-center">{{ object.price }}</p>
-            <a class="btn-buy btn btn-outline-primary color-primary btn-lg w-100"
-            href="{% url 'payment' object.id %}">
-            Buy Now</a>
-           </div>
-          {% endif %}
-         {% endif %}
-        {% else %}
-        <div class="offset-2 col-8 pt-3 pb-5">
-         <i class="fas fa-euro-sign text-center w-100"></i>
-         <p class="item-price text-center">{{ object.price }}</p>
-         <a class="btn-buy btn btn-outline-primary color-primary btn-lg w-100"
-          href="{% url 'payment' object.id %}">
-          Buy Now</a>
-        </div>
-        {% endif %}
-      <!---------------------- BUYER SOLD -------------------------->
-        {% else %}
-        <p class="text-center text-muted">Sold for:</p>
-        <i class="fas fa-euro-sign text-center w-100"></i>
-        {% for order in orders %}
-        <p class="item-price text-center">{{ order.order_price }}</p>
-        {% endfor %}
-        {% endif %}
-      {% endif %}
-
-       <p class="mb-1">
-        <span class="key-item-detail text-muted">Postage: </span>
-        EUR 18.04 (approx. EUR 21.05)
-        <br>
-        Express delivery to Ireland
-       </p>
-       <p class="mb-1 mt-2">
-        <span class="key-item-detail text-muted">Delivery: </span>
-        8 - 14 days</p>
-       <p class="mb-2">
-        <span class="key-item-detail text-muted">Payments:
-        </span>
-        <i class="fab fa-cc-stripe stripe-icon-item pl-1"></i>
-       </p>
-       <p>
-        <span class="key-item-detail text-muted">Return: </span>
-        30 days
-       </p>
-</div><!------------------------------------------------>
-</div>
-    {% if object.in_auction %}
-    <div class="col-12 text-center pt-4 m-1"><!------------------------------------------------>
-
-     <h5 class="pb-2 m-0 pl-0">
-      <i class="fab fa-fort-awesome"></i>
-       History
-     </h5>
-     <p class="#">
-     4 Well-Known Traditional Chinese Clothes Types.
-     The Hanfu, Zhongshan suit (Mao suit), Tang suit,
-     and cheongsam (qipao) are the four most distinctive
-     types of traditional Chinese clothing.
-     4 Well-Known Traditional Chinese Clothes Types
-     Each country in the world has its own unique traditional clothes,
-     from which people are able to distinguish one country from another,
-     and so it has been with China.
-     The Hanfu, Zhongshan suit (Mao suit), Tang suit, and cheongsam (qipao) are
-     the four most distinctive types of traditional Chinese clothing.
-     1. Hanfu hanfu
-     The Hanfu (' Han clothing' — the majority of Chinese are of Han ethnicity)
-     is the oldest of China's traditional clothes.
-     Legend traces it back to over 4,000 years ago when Huangdi's consort,
-     Leizu, made cloth with silk. It was
-     constantly improved throughout several dynasties.
+    {% else %}
+    <div class="col-12">
+<!---------------------- SELLER SOLD ONLY FOR SALE -------------------------->
+     {% if not object.in_auction and object.sold %}
+     <p class="text-center text-muted text-danger h5">Sold for:</p>
+     <p class="item-price text-center mb-0">
+      <i class="fas fa-euro-sign text-center euro-sign-item text-muted"></i>
+      {{ object.sold_price }}
      </p>
-     <div>
-     <a class="btn btn-primary text-warning font-weight-bold">Read more...</a>
-     </div>
-    </div><!------------------------------------------------>
-{% endif %}
-  </div><!-- top col-8 -->
-
-
-    {% if object.in_auction %}
-    <div class="col-12 col-md-4 border-left"><!------------------------------------------------>
-     <h5 class="pt-3 text-center">
-      <i class="fas fa-gavel gavel-icon-item"></i>
-       Bid History
-     </h5>
-     <div class="row">
-      <div class="container my-2">
-       {% if object.sold %}
-       <p class="text-center text-danger font-weight-bold h4">Sold!</p>
-       {% elif object.today_date > object.finish_date %}
-       <p class="text-center text-danger font-weight-bold h4">Time is up!</p>
-       {% else %}
-       <div id="progress-bar"></div>
-       {% endif %}
-      </div>
-     </div>
-     <div class="row my-2">
-      <p id="start-date" class="col-12 text-center">
-       <i class="far fa-play-circle"></i>
-        {{ object.start_date|date:"F d, Y H:i:s" }}
-      </p>
-      <p id="start-date" class="col-12 text-center">
-       <i class="far fa-stop-circle"></i>
-       {{ object.end_date|date:"F d, Y H:i:s" }}
-      </p>
-      <p class="col-12 text-center">
-       <small class="text-muted">Starting Bid: </small>
-       <strong>EUR {{ object.start_auction_price}}</strong>
-      </p>
-     </div>
-     <div class="row">
-      <div class="bid-scroll">
+     {% elif object.in_auction and object.sold %}
+<!---------------------- SELLER SOLD DURING AUCTION -------------------------->
+     <p class="text-center text-danger h5">Sold for:</p>
+     <p class="item-price text-center mb-0">
+      <i class="fas fa-euro-sign text-center euro-sign-item text-muted"></i>
+      {{ object.sold_price }}
+     </p>
+<!---------------------- SELLER NOT SOLD / WINNING BIDDER -------------------------->
+     {% elif object.today_date > object.finish_date %}
+      {% if bids|length %}
        {% for bid in bids %}
-       <hr class="my-1">
-       <div class="row pt-3">
-        <p class="bid-icon col-4 mb-0 text-center fas fa-user-alt"></p>
-        <p class="bid-icon col-4 mb-0 text-center fas fa-euro-sign"></p>
-        <p class="bid-icon col-4 mb-0 text-center far fa-clock"></p>
-        <p class="col-4 mb-0 text-center">{{ bid.bidder }}</p>
-        <p class="col-4 mb-0 text-center">{{ bid.amount }}</p>
-        <p class="col-4 mb-0 text-center"> {{ bid.date|date:"d M Y, H:i:s" }}</p>
-       </div>
+        {% if forloop.first %}
+        <p class="text-center text-warning h5">Winning Bid:</p>
+        <p class="item-price text-center mb-0">
+         <i class="fas fa-euro-sign text-center euro-sign-item text-muted"></i>
+         {{ bid.amount }}
+        </p>
+        {% endif %}
        {% endfor %}
-      </div>
+     {% else %}
+<!---------------------- SELLER FINISHED NOT SOLD / NO BIDS -------------------------->
+     <p class="fas fa-coins text-center text-primary w-100"
+        data-toggle="tooltip" data-placement="top" title="Price"></p>
+     <p class="item-price text-center mb-0">
+      <i class="fas fa-euro-sign text-center euro-sign-item text-muted"></i>
+      {{ object.price }}
+     </p>
+     {% endif %}
+    {% endif %}
+    </div>
+<!---------------------- SELLER AUCTION FINISHED OR SOLD / BLOCK BUTTONS -------------------------->
+    <div class="row pb-5 pt-4">
+     <div class="col-6 text-center">
+      <a class="disabled btn-auction btn btn-outline-secondary btn-lg w-100 text-center "
+         href="#" style="color: #6c757d !important;">Update</a>
      </div>
-    </div><!------------------------------------------------>
-
+     <div class="col-6">
+      <a class="disabled btn btn-outline-secondary btn-lg text-center w-100"
+         href="#">Delete</a>
+     </div>
+    </div>
+    {% endif %}
     {% else %}
 
-    <div class="col-12 col-md-4 pr-3 text-center"><!------------------------------------------------>
-
-     <h5 class="pt-3 pb-2 text-center">
-      <i class="fab fa-fort-awesome pr-1"></i>
-       History
-     </h5>
-     <p class="#">
-     4 Well-Known Traditional Chinese Clothes Types.
-     The Hanfu, Zhongshan suit (Mao suit), Tang suit,
-     and cheongsam (qipao) are the four most distinctive
-     types of traditional Chinese clothing.
-     4 Well-Known Traditional Chinese Clothes Types
-     Each country in the world has its own unique traditional clothes,
-     from which people are able to distinguish one country from another,
-     and so it has been with China.
-     The Hanfu, Zhongshan suit (Mao suit), Tang suit, and cheongsam (qipao) are
-     the four most distinctive types of traditional Chinese clothing.
-     1. Hanfu hanfu
-     The Hanfu (' Han clothing' — the majority of Chinese are of Han ethnicity)...
-     <div>
-     <a class="btn btn-primary text-warning font-weight-bold">Read more...</a>
+<!---------------------- BUYER NOT SOLD -------------------------->
+     {% if not object.sold %}
+      {% if object.in_auction %}
+       {% if object.today_date < object.finish_date %}
+       <div class="row py-4 mb-2">
+        <div class="col-6">
+         <p class="fas fa-hourglass-half text-center text-warning w-100"></p>
+         <p id="timer" class="text-center text-center font-weight-bold bg-light">
+          {{ object.end_date|date:"F d, Y H:i:s" }}</p>
+         <a class="btn-auction btn btn-outline-warning btn-lg w-100"
+            data-toggle="modal" data-target="#bid-form">
+          Place Bid
+         </a>
+        </div>
+        <div class="col-6">
+         <p class="fas fa-coins text-center text-primary w-100 mb-2"></p>
+         <p class="item-price-bid text-center mt-2 font-weight-bold bg-light">
+          <i class="fas fa-euro-sign text-center euro-sign-item text-muted"></i>
+          {{ object.price }}
+         </p>
+         <a class="btn-buy btn btn-outline-primary color-primary btn-lg w-100"
+            href="{% url 'payment' object.id %}">
+            Buy Now
+         </a>
+        </div>
+       </div>
+     {% else %}
+      {% if bids|length %}
+      <p class="text-center text-warning mb-0">Winning Bid:</p>
+       {% for bid in bids %}
+        {% if forloop.first %}
+        <p class="item-price text-center mr-1">
+         <i class="fas fa-euro-sign text-center euro-sign-item text-muted"></i>
+         {{ bid.amount }}
+        </p>
+        {% endif %}
+       {% endfor %}
+      {% else %}
+      <div class="offset-2 col-8 pt-3 pb-4">
+       <p class="fas fa-coins text-center w-100 text-primary
+          data-toggle="tooltip" data-placement="top" title="Price"></p>
+       <p class="item-price text-center mb-4">
+        <i class="fas fa-euro-sign text-center euro-sign-item text-muted"></i>
+        {{ object.price }}
+       </p>
+       <a class="btn-buy btn btn-outline-primary color-primary btn-lg w-100"
+          href="{% url 'payment' object.id %}">
+        Buy Now
+       </a>
+      </div>
+      {% endif %}
+     {% endif %}
+    {% else %}
+     <div class="offset-2 col-8 pt-3 pb-4">
+      <p class="fas fa-coins text-center w-100 text-primary"
+         data-toggle="tooltip" data-placement="top" title="Price"></p>
+      <p class="item-price text-center">
+       <i class="fas fa-euro-sign text-center euro-sign-item text-muted"></i>
+       {{ object.price }}
+      </p>
+      <a class="btn-buy btn btn-outline-primary color-primary btn-lg w-100"
+         href="{% url 'payment' object.id %}">
+       Buy Now
+      </a>
      </div>
-     </p>
-    </div><!------------------------------------------------>
-
     {% endif %}
+<!---------------------- BUYER SOLD -------------------------->
+   {% else %}
+    <p class="text-center text-danger mb-0">Sold for:</p>
+    <p class="item-price text-center mr-1">
+     <i class="fas fa-euro-sign text-center euro-sign-item text-muted"></i>
+     {{ object.sold_price }}
+    </p>
+    {% endif %}
+   {% endif %}
+   </div>
+  </div>
 
- </div><!-- top row  -->
-</div><!-- container  -->
+  <div class="row"><!-- Item Specs -->
+   <div class="col-12 col-md-6">
+    <h5 class="pt-3 ml-4">
+     <i class="fas fa-info-circle pr-1 text-muted"></i>
+      Item Specification
+     </h5>
+     <p class="pt-2 mb-0 ml-5">
+      <span class="key-item-detail text-muted">Seller: </span>
+      {{ object.seller }}
+     </p>
+     <p class="pt-2 mb-2 ml-5">
+      <span class="key-item-detail text-muted">Condition: </span>
+      {{ object.condition }}
+     </p>
+     <p class="mb-2 ml-5">
+      <span class="key-item-detail text-muted">Origin Country: </span>
+      {{ object.origin_country }}
+     </p>
+     <p class="mb-2 ml-5">
+      <span class="key-item-detail text-muted">Known Owners: </span>
+      {{ object.known_owners }}
+     </p>
+   </div><!-- Item Specs -->
+   <div class="col-12 col-md-6"><!-- Delivery Info -->
+    <h5 class="pt-3 ml-4">
+     <i class="fas fa-truck pr-1 text-muted"></i>
+      Delivery Info
+     </h5>
+    <p class="mb-1 ml-5">
+     <span class="key-item-detail text-muted">Postage: </span>
+      EUR 18.04 (approx. EUR 21.05)
+      <br>
+      Express delivery to Ireland
+     </p>
+     <p class="mb-1 mt-2 ml-5">
+      <span class="key-item-detail text-muted">Delivery: </span>
+      8 - 14 days
+     </p>
+     <p class="mb-2 ml-5">
+      <span class="key-item-detail text-muted">Payments:</span>
+      <i class="fab fa-cc-stripe stripe-icon-item pl-1"></i>
+     </p>
+     <p class=" ml-5">
+      <span class="key-item-detail text-muted">Return: </span>
+      30 days
+     </p>
+   </div><!-- Delivery Info -->
+  </div><!-- MIDDLE row -->
 
-<!--BID MODAL-->
+  {% if object.in_auction %}
+  <div class="row my-2"><!-- BOTTOM row -->
+   <div class="col-12">
+    <h5 class="pt-3 ml-4">
+     <i class="fab fa-fort-awesome pr-2 text-muted"></i>
+     Artifact's History
+    </h5>
+    <p class="mb-1 ml-5">
+     {{ object.desc }}
+    </p>
+    {% if object.seller.is_superuser %}
+    <div class="mb-3 ml-5">
+     <a class="btn btn-primary text-white font-weight-bold text-center mt-2"
+        href="{{ object.link_read_more }}">
+      Read more...
+     </a>
+    </div>
+    {% endif %}
+   </div>
+  </div><!-- BOTTOM row -->
+  {% endif %}
+ </div><!-- COL 8 -->
+
+ <div class="col-12 col-lg-4 bg-light pt-3 float-right"><!-- COL 4 -->
+  {% if object.in_auction %}
+  <h5 class="pt-3 text-center">
+   <i class="fas fa-gavel gavel-icon-item text-muted"></i>
+    Bid History
+   </h5>
+{% if object.sold %}
+   <div class="col-12 py-3">
+    <div class="col-6 offset-5 pb-3">
+     <img height="40px" class="rounded-circle bg-danger" src="{% static 'img/sold-bid.png' %}" alt="A sold sign image"
+          data-toggle="tooltip" data-placement="top" title="Sold">
+    </div>
+    {% elif object.today_date > object.finish_date %}
+    <div class="col-6 offset-5 pb-3">
+     <img height="40px" class="rounded-circle bg-warning" src="{% static 'img/hammer-2.png' %}"
+          alt="A gavel in a hand image" data-toggle="tooltip" data-placement="top" title="Auction Off">
+    </div>
+   </div>
+  {% else %}
+<!--------------------- Progress Bar --------------------->
+  <div id="row-prog-bar" class="col-12 pt-1 pb-3 pr-4 bg-dark">
+   <p class="m-0 text-center text-white"><small>Auction Timer</small></p>
+   <div class="row">
+    <i id="icon-prog-bar" class="far fa-clock col-1 pt-2 pr-4 text-warning"></i>
+     <div class="container-prog-bar my-2 border border-muted col-10 px-0 bg-white">
+      <div id="progress-bar" class="bg-warning"
+           data-toggle="tooltip" data-placement="top"
+           title="Time Left">
+      </div>
+     </div>
+    </div>
+   </div>
+  {% endif %}
+   <div class="row mt-4 bg-light">
+    <p id="start-date" class="col-12 pt-2 text-center">
+     <i class="far fa-play-circle text-muted"></i>
+     {{ object.start_date|date:"F d, Y H:i:s" }}
+    </p>
+    <p class="col-12 text-center">
+     <i class="far fa-stop-circle text-muted"></i>
+     {{ object.end_date|date:"F d, Y H:i:s" }}
+    </p>
+    <p class="col-12 text-center">
+     <small class="text-muted">Starting Bid: </small>
+     <strong>EUR {{ object.start_auction_price}}</strong>
+    </p>
+   </div>
+   <div class="row bg-light">
+    <div class="bid-scroll">
+    {% for bid in bids %}
+    <hr class="my-1">
+     <div class="row pt-3">
+      <p class="bid-icon col-4 mb-0 text-center fas fa-user-alt"></p>
+      <p class="bid-icon col-4 mb-0 text-center fas fa-euro-sign"></p>
+      <p class="bid-icon col-4 mb-0 text-center far fa-clock"></p>
+      <p class="col-4 mb-0 text-center">{{ bid.bidder }}</p>
+      <p class="col-4 mb-0 text-center">{{ bid.amount }}</p>
+      <p class="col-4 mb-0 text-center"> {{ bid.date|date:"d M Y, H:i:s" }}</p>
+     </div>
+    {% endfor %}
+    </div>
+   </div>
+   {% else %}
+    <div class="col-12 text-center">
+     <h5 class="pt-3 pb-2 text-center">
+      <i class="fab fa-fort-awesome pr-2 text-muted"></i>
+       Artifact's History
+     </h5>
+     <div class="pb-3">
+      <p class="#">{{ object.desc }}</p>
+      {% if object.seller.is_superuser %}
+      <a class="blue-button btn btn-primary text-white font-weight-bold mt-2"
+         href="{{ object.link_read_more }}">
+       Read more...
+      </a>
+      {% endif %}
+     </div>
+    </div>
+   {% endif %}
+ </div><!-- COL 4 -->
+</div><!-- CONTAINER -->
+
+<!-------------------------------- BID MODAL -------------------------------->
 {% if not object.sold %}
 <form method="POST">
 {% csrf_token %}
@@ -330,13 +374,26 @@
   <div class="modal-header">
   {% for bid in bids %}
    {% if forloop.first %}
-   <h5 class="modal-title" id="exampleModalLabel">EUR {{ bid.amount }}</h5>
+   <h5 class="modal-title" id="exampleModalLabel"
+    data-toggle="tooltip" data-placement="top"
+    title="Previous Bid"
+    style="cursor: help;">
+    EUR {{ bid.amount }}</h5>
    {% endif %}
   {% endfor %}
   {% if not bids %}
    <h5 class="modal-title" id="exampleModalLabel">EUR {{ object.start_auction_price}}</h5>
   {% endif %}
-   <p>{{ object.end_date|date:"F d, Y H:i:s" }} | {{ bids.count }} Bids<p>
+   <p>
+    <span
+    data-toggle="tooltip" data-placement="bottom"
+    title="Auction Finish Date"
+    style="cursor: help;>
+    <i class="far fa-stop-circle text-muted"></i>
+    {{ object.end_date|date:"F d, Y H:i:s" }}
+    </span>
+    | {{ bids.count }} Bids
+   <p>
    <button type="button" class="close"
    data-dismiss="modal" aria-label="Close">
     <span aria-hidden="true">&times;</span>
@@ -389,20 +446,27 @@
  </div>
 </form>
 {% endif %}
-
-<script>
-var endDate = document.getElementById("timer").innerHTML;
-
-var timeLeftRedirect = Math.floor(countDownDate - tday);
-// refresh/redirect after the time
-  if(timeLeftRedirect > 0){
-    window.setTimeout(function(){
-      location.href = "http://localhost:8000/store";
-    }, timeLeftRedirect);
-}
-</script>
-
 <script src="{% static 'js/progress.js' %}"></script>
 <script src="{% static 'js/progress-bar.js' %}"></script>
+<script>
 
+// display the progress bar only in Chrome
+var isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+if(!isChrome){
+  document.getElementById("row-prog-bar").style.display = "none";
+}
+
+var timeLeftReload = Math.floor(countDownDate - tday);
+// refresh the page after the time to display new info after the auction finished
+// limited to 24 days
+  if(timeLeftReload > 0){
+    window.setTimeout(function(){
+      location.reload();
+    }, timeLeftReload+1000);
+}
+
+// allows to pick numbers greater than 0
+document.getElementById('id_amount').setAttribute("min", "0");
+</script>
 {% endblock content %}
+

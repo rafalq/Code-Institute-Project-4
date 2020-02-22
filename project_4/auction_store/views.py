@@ -28,10 +28,33 @@ from django.conf import settings
 import stripe
 from django.core.paginator import Paginator
 
+
 stripe.api_key = settings.STRIPE_SECRET
 
 
 def home(request):
+    # Update the cart
+    items = Item.objects.all()
+    for item in items:
+        # check if the artifact is at auction
+        if item.finish_date != None:
+            # check: 1. the auction is finish?
+                   # 2. there is at least 1 bidder?
+                   # 3. has it not been in the cart yet?
+            if (item.finish_date < item.today_date and
+                    item.winner != None and item.cart == None):
+                # if the above are true - update the cart
+                the_cart = Cart.objects.get(user=item.winner)
+                item.cart = the_cart
+                # add the item to the cart's items amount
+                the_cart.total += 1
+                winner = Account.objects.get(user=item.winner)
+                # update the user's history
+                winner.winner_active = True
+                the_cart.save()
+                winner.save()
+                item.save()
+    # Update the history anytime the user is logged in
     if request.user.is_authenticated:
         user = request.user
         if user.account.history_active == False:
@@ -42,10 +65,31 @@ def home(request):
 
 @login_required
 def payment(request, pk):
+    # Update the cart
+    items = Item.objects.all()
+    for item in items:
+        # check if the artifact is at auction
+        if item.finish_date != None:
+            # check: 1. the auction is finish?
+                   # 2. is there at least 1 bidder?
+                   # 3. has it not been in a cart yet?
+            if (item.finish_date < item.today_date and
+                    item.winner != None and item.cart == None):
+                # if the above are true - update the item's field cart
+                the_cart = Cart.objects.get(user=item.winner)
+                item.cart = the_cart
+                # add the item to the cart's items amount
+                the_cart.total += 1
+                winner = Account.objects.get(user=item.winner)
+                # update the user's history
+                winner.winner_active = True
+                the_cart.save()
+                winner.save()
+                item.save()
     if request.user.is_authenticated:
         winner = request.user
-        # find  items which their auctions are finish
-        # and weren't bought during the auction
+        # find items whose auctions are finish
+        # and those that weren't bought during the auction
         won_artifacts = Item.objects.filter(
             sold=False, end_date__lte=datetime.date.today())
 
@@ -97,14 +141,14 @@ def payment(request, pk):
             order_form.instance.order_id = item.id
             order_form.instance.item_name = item.name
             order_form.save()
-            # update the item's fields connecting to the selling
+            # update the item's fields connecting to the purchase
             item.sold = True
             item.sold_price = price
             item.sold_date = timezone.now()
             item.buyer = request.user
             item.save()
             # update the user's cart
-            the_cart = Cart.objects.get(owner=request.user)
+            the_cart = Cart.objects.get(user=request.user)
             the_cart.total -= 1
             # update the user's history
             the_user = Account.objects.get(user=request.user)
@@ -113,8 +157,6 @@ def payment(request, pk):
             the_user.buyer_active = True
             the_user.save()
             the_cart.save()
-            # if the_cart.total == 0:
-            #     the_cart = None
 
             messages.success(request, f'Your order was successful!')
             return redirect('item-detail', item.id)
@@ -127,9 +169,10 @@ def payment(request, pk):
 
     return render(request, 'auction_store/payment.html', context)
 
-# STORE
-# displays all available items for sale / search option
 
+# STORE
+# displays all available items for sale
+# search option
 
 class ItemListView(ListView, LoginRequiredMixin):
     model = Item
@@ -145,20 +188,20 @@ class ItemListView(ListView, LoginRequiredMixin):
             self.request.GET, queryset=queryset)
 
         # UPDATE THE CART AND HISTORY
-        # place the won artifacts in the cart if the auction is over
+        # place all won artifacts in the cart if the auction is over
         # update the users histories
 
         items = Item.objects.all()
         for item in items:
             # check if the artifact is at auction
-            if item.finish_date != None:
+            if item.in_auction:
                 # check: 1. the auction is finish?
-                       # 2. there is at least 1 bidder?
-                       # 3. hase it not been in the cart already?
+                       # 2. is there at least 1 bidder?
+                       # 3. has it not been in the cart yet?
                 if (item.finish_date < item.today_date and
                         item.winner != None and item.cart == None):
                     # if the above are true - update the cart
-                    the_cart = Cart.objects.get(owner=item.winner)
+                    the_cart = Cart.objects.get(user=item.winner)
                     item.cart = the_cart
                     # add the item to the cart's items amount
                     the_cart.total += 1
@@ -231,6 +274,27 @@ class ItemDetailView(FormMixin, LoginRequiredMixin, SuccessMessageMixin, DetailV
                 item=self.object).last()
             context['sold_price'] = bid.amount
 
+        # Update the cart
+        items = Item.objects.all()
+        for item in items:
+            # check if the artifact is at auction
+            if item.finish_date != None:
+                # check: 1. the auction is finish?
+                       # 2. is there at least 1 bidder?
+                       # 3. has it not been in the cart yet?
+                if (item.finish_date < item.today_date and
+                        item.winner != None and item.cart == None):
+                    # if the above are true - update the cart
+                    the_cart = Cart.objects.get(user=item.winner)
+                    item.cart = the_cart
+                    # add the item to the cart's items amount
+                    the_cart.total += 1
+                    winner = Account.objects.get(user=item.winner)
+                    # update the user's history
+                    winner.winner_active = True
+                    the_cart.save()
+                    winner.save()
+                    item.save()
         return context
 
     def post(self, request, *args, **kwargs):
@@ -279,13 +343,12 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
     model = Item
     form_class = CreateForm
     success_url = '/store'
-    success_message = 'Well Done!'
     template_name = 'auction_store/create_form.html'
 
     def form_valid(self, form):
         if form.instance.start_auction_price is not None:
             form.instance.in_auction = True
-            form.instance.end_date = timezone.now() + timezone.timedelta(minutes=30)
+            form.instance.end_date = timezone.now() + timezone.timedelta(days=24)
             form.instance.seller = self.request.user
             return super().form_valid(form)
         else:
@@ -295,7 +358,9 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
 
 class ItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Item
-    fields = ['image', 'name', 'category', 'desc', 'price']
+    fields = ['image', 'name', 'category',
+              'price', 'short', 'condition',
+              'origin_country', 'known_owners', 'desc', 'link_read_more']
 
     def form_valid(self, form):
         item = self.get_object()

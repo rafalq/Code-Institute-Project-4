@@ -6,181 +6,181 @@
 {% load my_tags %}
 {% block nav-search %}
 <form action="" method="GET">
-  <li class="nav-item row pt-2">
+ <li class="nav-item row pt-2">
   {% csrf_token %}
-   <div class="p-0 m-0 col-8 pt-1">
+   <div class="p-0 m-0 ml-2 col-7 pt-2">
    {{ filterset.form.multi_name_fields|as_crispy_field }}
    </div>
    <button id="nav-search-btn" class="btn btn-outline-primary mt-1 mb-3 ml-2" type="submit">Search</button>
-</li>
+ </li>
 {% endblock nav-search %}
 
 {% block content %}
-<!-- row -->
-<div class="row">
-
- <div class="col-12 col-lg-3 mt-2 mb-5 px-5 ">
-  <div class="row bg-primary p-3">
-
-    <div class="form-row">
-      <div class="form-group col-12 font-weight-bold text-center text-white mb-0">
-        {{ filterset.form.category|as_crispy_field }}
+<div class="container pr-0">
+ <div class="row">
+  <div class="col-12 col-lg-3">
+    <div class="form-row bg-primary p-2">
+     <div class="form-group col-12 font-weight-bold text-center text-white mb-0">
+      {{ filterset.form.category|as_crispy_field }}
+     </div>
+     <div class="form-row col-12 font-weight-bold text-white mb-0">
+      <div class="form-group col-6 font-weight-bold text-white text-right mb-0 ">
+       {{ filterset.form.price_g|as_crispy_field }}
       </div>
-      <div class="row font-weight-bold text-white mb-0">
-       <div class="form-group col-6 pr-1 font-weight-bold text-white text-right mb-0 ">
-        {{ filterset.form.price_g|as_crispy_field }}
-       </div>
-       <div class="form-group col-6 pl-1 font-weight-bold text-white mb-0">
-        {{ filterset.form.price_l|as_crispy_field }}
-       </div>
+      <div class="form-group col-6 pr-0 font-weight-bold text-white mb-0">
+       {{ filterset.form.price_l|as_crispy_field }}
       </div>
-      <div class="form-group col-12 font-weight-bold text-center text-white mb-0">
-        {{ filterset.form.format|as_crispy_field }}
-      </div>
-      <div class="form-group col-12 font-weight-bold text-center text-white mb-0">
-        {{ filterset.form.seller|as_crispy_field }}
-      </div>
-      <div class="form-group col-12 font-weight-bold text-center text-white mb-0">
-        {{ filterset.form.sort|as_crispy_field }}
-      </div>
+     </div>
+     <div class="form-group col-12 font-weight-bold text-center text-white mb-0">
+      {{ filterset.form.format|as_crispy_field }}
+     </div>
+     <div class="form-group col-12 font-weight-bold text-center text-white mb-0">
+      {{ filterset.form.seller|as_crispy_field }}
+     </div>
+     <div class="form-group col-12 font-weight-bold text-center text-white mb-0">
+      {{ filterset.form.sort|as_crispy_field }}
+     </div>
+     <button class="btn btn-warning col-8 offset-2 mt-2"
+      type="submit">Search</button>
     </div>
-    <button class="btn btn-warning col-8 offset-2 mt-2"
-    type="submit">Search</button>
-  </form>
-</div>
- </div>
-
-<div class="col-12 col-lg-9 px-0">
-  <div class="row bg-primary">
- <p id="home-top-banner" class="col-12 my-1 text-warning text-center">
-   <strong>Artifacts: </strong>{{ page_obj.start_index }}—{{ page_obj.end_index }}
- </p>
-</div>
- {% for item in object_list %}
- <div class="row card-row my-1">
-  <div class="col-12 col-lg-4 p-0">
-    {% if item.sold %}
-     <img class="layered-image img-fluid" src="{{ item.image.url }}">
-     <img class="image-overlay-store img-fluid" src="{% static 'img/soldd.png' %}">
-    {% elif not item.sold and item.today_date <= item.finish_date %}
-     <img class="image-time-store img-fluid" src="{% static 'img/hammer.png' %}">
-     <img class="layered-image img-fluid" src="{{ item.image.url }}">
-    {% elif not item.sold and item.today_date >= item.finish_date %}
-     {% if item.winner is None %}
-      <img class="layered-image img-fluid" src="{{ item.image.url }}">
-     {% else %}
-      <img id="filtered-img" class="layered-image img-fluid" src="{{ item.image.url }}">
-     {% endif %}
-    {% else %}
-     <img class="layered-image img-fluid" src="{{ item.image.url }}">
-    {% endif %}
+   </form>
   </div>
-  <div class="col-12 col-lg-8 p-0">
-   <div class="card h-100 text-center border border-white">
-    <div class="card-header py-1 bg-muted">
-    <h5 class="card-title m-0">
-      <a class="text-dark" href="{% url 'item-detail' item.id %}">{{ item.name }}</a>
-      {% if not item.sold and item.today_date <= item.finish_date %}
-      <i class="fas fa-hourglass-half auction_lasts pl-1 text-secondary"></i>
+
+  <div class="col-12 col-lg-9"><!-- col-lg-9 -->
+   <div class="row bg-primary mt-3 mt-lg-0">
+    <p id="home-top-banner" class="col-12 my-1 text-warning text-center">
+    <strong>Artifacts: </strong>{{ page_obj.start_index }}—{{ page_obj.end_index }}
+    </p>
+   </div>
+
+   {% for item in object_list %}
+    <div class="row card-row mb-2"><!-- card-row -->
+     <div class="store-card-img col-12 col-lg-5 px-0">
+      {% if item.sold %}
+       <img class="img-fluid layered-image" src="{{ item.image.url }}" alt="{{ item.name }} Image">
+       <img class="d-none d-md-block image-overlay-store-md img-fluid" src="{% static 'img/soldd.png' %}">
+       <img class="d-block d-sm-block d-md-none image-overlay-store-sm img-fluid" src="{% static 'img/soldd.png' %}" alt="Sold Sign Image">
+      {% elif not item.sold and item.today_date <= item.finish_date %}
+       <img class="image-time-store img-fluid" src="{% static 'img/hammer.png' %}" alt="Gavel Image">
+       <img class="image-card-store img-fluid layered-image" src="{{ item.image.url }}" alt="{{ item.name }} Image">
       {% elif not item.sold and item.today_date >= item.finish_date %}
-      <i class="fas fa-hourglass-end auction_lasts pl-1 text-secondary"></i>
+      {% if item.winner is None %}
+       <img class="image-card-store img-fluid layered-image" src="{{ item.image.url }}" alt="{{ item.name }} Image">
+      {% else %}
+       <img id="filtered-img" class="img-fluid  layered-image" src="{{ item.image.url }}" alt="{{ item.name }} Image">
       {% endif %}
-    </h5>
-   </div>
-   <div class="card-body py-1">
-    <div class="col-12 py-1">
-      <p class="text-left m-auto">Price: {{ item.price }}</p>
-      <p class="text-left m-auto">Date: {{ item.start_date }}</p>
-      <p class="text-left m-auto">Seller: {{ item.seller }}</p>
-      <p class="text-left m-auto">{{ item.desc }}</p>
+      {% else %}
+       <img class="image-card-store img-fluid layered-image" src="{{ item.image.url }}" alt="{{ item.name }} Image">
+      {% endif %}
     </div>
+    <div class="col-12 col-lg-7 px-0">
+    <div class="card text-center" style="height: 100%;"><!-- card -->
+     <div class="card-header py-1 bg-dark">
+      <h5 class="card-title m-0 py-2">
+       <a class="h4 item-title-store text-white" href="{% url 'item-detail' item.id %}">
+       {{ item.name }}
+       </a>
+       {% if not item.sold and item.today_date <= item.finish_date %}
+       <i class="fas fa-hourglass-half auction_lasts pl-1 text-warning"></i>
+       {% elif not item.sold and item.today_date >= item.finish_date %}
+       <i class="fas fa-hourglass-end auction_lasts pl-1 text-warning"></i>
+       {% endif %}
+      </h5>
+     </div>
+    <div class="card-body col-12 p-0 py-1 p-2"><!-- card body -->
+      <p class="text-left m-auto py-1 pl-2 pl-lg-0">
+       <i class="fas fa-coins text-muted pr-2"
+        data-toggle="tooltip" data-placement="top" title="Price"></i>
+       <span class="h5 font-weight-bold">{{ item.price }}</span>
+       <i class="fas fa-euro-sign euro-sign-item"></i>
+       {% if item.category == 'Military' %}
+        <img src="{% static 'img/military.png' %}" class="float-right pr-3 pb-4" alt="Two Crossed Swords On Shield"
+         data-toggle="tooltip" data-placement="top" title="Military Category">
+       {% elif item.category == 'Private' %}
+        <img src="{% static 'img/private.png' %}" class="float-right pr-3 pb-4" alt="Safe Box"
+         data-toggle="tooltip" data-placement="top" title="Private Category">
+       {% elif item.category == 'Tools' %}
+        <img src="{% static 'img/tools.png' %}" class="float-right pr-3 pb-4" alt="Machine Cogs"
+         data-toggle="tooltip" data-placement="top" title="Tools Category">
+       {% elif item.category == 'Treasure' %}
+        <img src="{% static 'img/treasure.png' %}" class="float-right pr-3 pb-4" alt="Locked Chest"
+         data-toggle="tooltip" data-placement="top" title="Treasure Category">
+       {% elif item.category == 'Artistic' %}
+        <img src="{% static 'img/artistic.png' %}" class="float-right pr-3 pb-4" alt="Paint Brush and Palette"
+         data-toggle="tooltip" data-placement="top" title="Artistic Category">
+       {% else %}
+        <img src="{% static 'img/other.png' %}" class="float-right pr-3 pb-4" alt="Three Dots"
+         data-toggle="tooltip" data-placement="top" title="Other Category">
+       {% endif %}
+      </p>
+      <p class="text-left m-auto pb-1 pl-2 pl-lg-0">
+       <i class="fas fa-hand-holding-usd text-muted pr-2"
+        data-toggle="tooltip" data-placement="top" title="Seller"></i>
+       {{ item.seller }}</p>
+      <p class="text-left m-auto pl-2 pl-lg-0">
+       <i class="fas fa-info-circle text-muted pr-2"></i>
+       {{ item.short }}
+      </p>
+    </div><!-- card body -->
+
+    <div class="card-footer p-0">
+     <i class="fas fa-calendar-alt text-muted pr-2"
+      data-toggle="tooltip" data-placement="top" title="Start Date"></i></i>
+     <span class="font-weight-bold"> {{ item.start_date }} </span>
+    </div>
+
+   </div><!-- card -->
    </div>
-   <div class="card-footer text-muted p-0">
-    Start Date: {{ item.start_date }}
-   </div>
-   </div>
-  </div>
+   </div><!-- card-row -->
+   {% endfor %}
+  </div><!-- col-lg-9 -->
+
  </div>
- {% endfor %}
-</div><!-- col-8 -->
-</div><!-- row -->
+</div>
 
+<!-- Pagination -->
 {% if is_paginated %}
-<p class="col-12 h5 text-center mb-0 mt-2">
-
-  </p>
-<div class="col-12 text-center pt-3 pb-2">
+<div class="col-12 text-center pt-3 pb-2 bg-secondary">
   {% if page_obj.has_previous %}
-    <a class="btn btn-outline page-btn text-dark pt-0"
+    <a class="btn btn-outline page-btn text-white pt-0"
     href="?{% param_replace page=1 %}">
     First
     <i class="fas fa-angle-double-left"></i>
     </a>
     {% if page_obj.previous_page_number != 1 %}
-    <a class="btn btn-outline page-btn text-dark pt-0"
+    <a class="btn btn-outline page-btn text-white pt-0"
     href="?{% param_replace page=page_obj.previous_page_number %}">
     Previous
     <i class="fas fa-angle-left"></i>
     </a>
     {% endif %}
-
   {% endif %}
-
-  <a class="page-nos text-secondary font-weight-bolder p-2">Page {{ page_obj.number }} of {{ paginator.num_pages }}</a>
-
+  <a class="page-nos text-white font-weight-bolder p-2">Page {{ page_obj.number }} of {{ paginator.num_pages }}</a>
   {% if page_obj.has_next %}
     {% if page_obj.next_page_number != paginator.num_pages %}
-    <a class="btn btn-outline page-btn text-dark pt-0"
+    <a class="btn btn-outline page-btn text-white pt-0"
     href="?{% param_replace page=page_obj.next_page_number %}">
     <i class="fas fa-angle-right"></i>
     Next
     </a>
     {% endif %}
-    <a class="btn btn-outline page-btn text-dark pt-0"
+    <a class="btn btn-outline page-btn text-white pt-0"
     href="?{% param_replace page=paginator.num_pages %}">
     <i class="fas fa-angle-double-right"></i>
     Last
     </a>
   {% endif %}
 </div>
-{% endif %}
-
-
-
-<!--
-{% if is_paginated %}
-<div class="text-center pt-3 pb-2">
-  {% if page_obj.has_previous %}
-    <a class="btn btn-outline mb-4 page-btn" href="?page=1">First</a>
-    <a class="btn btn-outline mb-4 page-btn"
-    href="?page={{ page_obj.previous_page_number }}">Previous</a>
-  {% endif %}
-
-  {% for num in page_obj.paginator.page_range %}
-    {% if page_obj.number == num %}
-      <a class="btn  mb-4 page-btn" href="?page={{ num }}">{{ num }}</a>
-    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-      <a class="btn btn-outline mb-4 page-btn" href="?page={{ num }}">{{ num }}</a>
-    {% endif %}
-  {% endfor %}
-
-  {% if page_obj.has_next %}
-    <a class="btn btn-outline mb-4 page-btn" href="?page={{ page_obj.next_page_number }}">Next</a>
-    <a class="btn btn-outline mb-4 page-btn" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
-  {% endif %}
 </div>
 {% endif %}
--->
+
 <script>
-  //prevent from picking beyond 0
   var fromHold = document.getElementById('id_price_g');
   fromHold.setAttribute("placeholder", "From");
   var toHold = document.getElementById('id_price_l');
   toHold.setAttribute("placeholder", "To");
-
+//prevent from picking beyond 1
   price_g = document.getElementById('id_price_g').setAttribute("min", "1");
   price_l = document.getElementById('id_price_l').setAttribute("min", "1");
 </script>
-{% endblock %}
-
-
+{% endblock content %}

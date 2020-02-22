@@ -3,11 +3,11 @@ from django.contrib.auth.models import User
 
 
 class Cart(models.Model):
-    owner = models.CharField(max_length=100, blank=True, null=True)
-    total = models.IntegerField(blank=True, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    total = models.IntegerField(default=0)
 
     def __str__(self):
-        return f"{self.owner}'s Cart"
+        return f"{self.user.username}'s Cart"
 
 
 class Account(models.Model):
@@ -20,8 +20,6 @@ class Account(models.Model):
     street_address1 = models.CharField(max_length=40, blank=True, null=True)
     street_address2 = models.CharField(max_length=40, blank=True, null=True)
     county = models.CharField(max_length=40, blank=True, null=True)
-    cart = models.ForeignKey(
-        Cart, on_delete=models.SET_NULL, blank=True, null=True)
     history_active = models.BooleanField(default=False)
     history_checked = models.BooleanField(default=False)
     seller_active = models.BooleanField(default=False)

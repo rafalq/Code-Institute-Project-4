@@ -2,183 +2,222 @@
 {% load static %}
 
 {% block content %}
-<main class="container px-0">
-<div class="row bg-primary">
- <p id="home-top-banner" class="col-12 my-1 text-warning text-center">Our Latest Offers!</p>
-</div>
-<div class="container">
- <div id="carouselExampleIndicators" class="carousel slide d-none d-lg-block mb-0 mt-2" data-ride="carousel">
-  <ol class="carousel-indicators">
-   <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-   <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-   <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
- <div class="carousel-inner">
-  <div class="carousel-item active">
-   <div class="row">
-    <img class="col-lg-6 order-lg-2 text-white carousel-img" src="{% static 'img/tools.jpg' %}" alt="Image">
-    <img class="col-lg-6 order-lg-2 text-white carousel-img" src="{% static 'img/tools-2.jpg' %}" alt="Image">
-   </div>
+<main class="container">
+
+<!-- Top Banner -->
+ <div class="col-12">
+  <div class="row bg-primary">
+   <p id="home-top-banner" class="col-12 my-1 text-warning text-center">Our Latest Offers!</p>
   </div>
-  <div class="carousel-item">
-   <div class="row">
-    <img class="col-lg-6 order-lg-2 text-white carousel-img" src="{% static 'img/writing.jpg' %}">
-    <img class="col-lg-6 order-lg-2 text-white carousel-img" src="{% static 'img/military.jpg' %}">
-   </div>
-  </div>
-  <div class="carousel-item">
-   <div class="row">
-    <img class="col-lg-6 order-lg-2 text-white carousel-img" src="{% static 'img/treasure.jpg' %}">
-    <img class="col-lg-6 order-lg-2 text-white carousel-img" src="{% static 'img/private.jpg' %}">
-   </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-   <span class="carousel-control-prev-icon" aria-hidden="true" style="color: black !important"></span>
-   <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-   <span class="carousel-control-next-icon" aria-hidden="true"></span>
-   <span class="sr-only">Next</span>
-  </a>
  </div>
-</div>
-<!-- Images slides for small resolution -->
-<div id="carouselExampleIndicators" class="carousel slide d-block d-lg-none mb-0 mt-2" data-ride="carousel">
- <ol class="carousel-indicators">
+
+<!-- Carousel -->
+ <section class="col-12 p-0 py-2">
+  <div id="carouselExampleIndicators" class="carousel slide d-none d-lg-block" data-ride="carousel">
+   <ol class="carousel-indicators">
     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
- </ol>
-<div class="carousel-inner">
- <div class="carousel-item active">
-  <div class="row">
-   <img class="col-12 order-lg-2 text-white carousel-img" src="{% static 'img/tools.jpg' %}">
+   </ol>
+   <div class="carousel-inner" style="width:100%; max-height: 360px !important;">
+    <div class="carousel-item active">
+     <div class="row">
+      <img class="col-lg-6 order-lg-2 px-0 text-white carousel-img" src="{% static 'img/thors-hammer.jpg' %}" alt="Image">
+      <img class="col-lg-6 order-lg-2 px-0 text-white carousel-img" src="{% static 'img/nebra-sky-disk.jpg' %}" alt="Image">
+     </div>
+    </div>
+    <div class="carousel-item">
+     <div class="row">
+      <img class="col-lg-6 order-lg-2 px-0 text-white carousel-img" src="{% static 'img/baby-bottle.jpg' %}" alt="Image">
+      <img class="col-lg-6 order-lg-2 px-0 text-white carousel-img" src="{% static 'img/encrusted-dagger.jpg' %}" alt="Image">
+     </div>
+    </div>
+    <div class="carousel-item">
+     <div class="row">
+      <img class="col-lg-6 order-lg-2 px-0 text-white carousel-img" src="{% static 'img/james-ossuary.jpg' %}" alt="Image">
+      <img class="col-lg-6 order-lg-2 px-0 text-white carousel-img" src="{% static 'img/trundholm-sun-chariot.jpg' %}" alt="Image">
+     </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+     <span class="carousel-control-prev-icon" aria-hidden="true" style="color: black !important"></span>
+     <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+     <span class="carousel-control-next-icon" aria-hidden="true"></span>
+     <span class="sr-only">Next</span>
+    </a>
+   </div>
   </div>
- </div>
- <div class=" carousel-item">
-  <div class="row">
-   <img class="col-12 order-lg-2 text-white carousel-img" src="{% static 'img/treasure.jpg' %}">
+<!-- Carousel for smaller resolutions -->
+  <div id="carouselExampleIndicators" class="carousel slide d-block d-lg-none mb-0 mt-2" data-ride="carousel">
+   <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+   </ol>
+   <div class="carousel-inner" style="width:100%; max-height: 360px !important;">
+    <div class="carousel-item active">
+     <div class="row">
+      <img class="col-12 order-lg-2 text-white carousel-img" src="{% static 'img/thors-hammer.jpg' %}" alt="Image">
+     </div>
+    </div>
+    <div class=" carousel-item">
+     <div class="row">
+      <img class="col-12 order-lg-2 text-white carousel-img" src="{% static 'img/baby-bottle.jpg' %}" alt="Image">
+     </div>
+    </div>
+    <div class="carousel-item">
+     <div class="row">
+      <img class="col-12 order-lg-2 text-white carousel-img" src="{% static 'img/trundholm-sun-chariot.jpg' %}" alt="Image">
+     </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+     <span class="carousel-control-prev-icon" aria-hidden="true" style="color: black !important"></span>
+     <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+     <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </a>
+   </div>
   </div>
- </div>
- <div class="carousel-item">
-  <div class="row">
-   <img class="col-12 order-lg-2 text-white carousel-img" src="{% static 'img/writing.jpg' %}">
-  </div>
- </div>
- <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-  <span class="carousel-control-prev-icon" aria-hidden="true" style="color: black !important"></span>
-  <span class="sr-only">Previous</span>
- </a>
- <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-  <span class="carousel-control-next-icon" aria-hidden="true"></span>
- </a>
- </div>
-</div>
+ </section>
 
-<!-- About -->
-<section class="about bg-light px-3 my-2">
- <h4 class="col-12 text-center pb-2"><i class="fas fa-question-circle text-warning"></i> Who We Are</h4>
- <div class="row">
- <div class="col-6"
- <blockquote class="blockquote" cite="https://en.wikipedia.org/wiki/Artifact_(archaeology)">
-  <em><small>
-  "An artifact, or artefact (see American and British English spelling differences),
-  is something made or given shape by humans, such as a tool or a work of art,
-  especially an object of archaeological interest."
-  </small></em>
-  <footer class="blockquote-footer"><cite class=""title="Wikipedia">Wikipedia</cite></footer>
- </blockquote>
- <p class="py-3">Whether you are looking for a unique or luxurious or precious artefact
- – if it exists in the world, it probably is for sale on <strong>Artifa</strong>.
-  Our mission is to be the world’s favorite destination for
-  discovering great value and unique selection.</p>
-  <p class="pb-3">We also give our client an opportunity to sell their own artifacts.
-  If you have any unique item and you are bored with them, use our
-  <i class="fas fa-external-link-square-alt text-warning"></i>
-  <a class="text-light" href="{% url 'auction_store-store' %}"> Store!</a>
- </p>
- </div>
- <div class="col-6 text-right">
-  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-  Artifa is a online store that selling rare items. Ipsum has been the industry's standard dummy text ever since the 1500s,
-  when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-  It has survived not only five centuries, but also the leap into electronic typesetting,
-  remaining essentially unchanged.</p>
-  <p>
-  It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-  and more recently with desktop publishing software like Aldus PageMaker including
-  versions of Lorem Ipsum.
-  </p>
- </div>
-</div>
-</section>
+<!-- About Section -->
+ <section id="about" class="col-12 about bg-light p-4"
+          style="
+            color: #ffffff;
+            text-shadow: 1px 2px #000000;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                      url('/static/img/about.jpg') no-repeat center;
+            background-origin: border-box;
+            background-size: cover;
+            height: auto;
+            width: auto;
+            align-items: center;">
+  <h4 class="col-12 text-center pb-2">
+   <i class="fas fa-question-circle text-warning"></i>
+    Who We Are
+  </h4>
+  <div class="row">
+   <div class="col-6">
+    <blockquote class="blockquote" cite="https://en.wikipedia.org/wiki/Artifact_(archaeology)">
+     <em>
+      <small>
+      "An artifact, or artefact (see American and British English spelling differences),
+       is something made or given shape by humans, such as a tool or a work of art,
+       especially an object of archaeological interest."
+      </small>
+     </em>
+     <div class="blockquote-footer"><cite class=""title="Wikipedia">Wikipedia</cite></div>
+    </blockquote>
+    <p>Artifa is an online store that sells rare items.
+       Our website is the destination for European collectors
+       to buy and sell the world’s most important historic works of art, design, jewels.
+    </p>
+    <p>
+     We are a brand new store founded in 2020 but we are very sentimental and still live in the past missing all its treasure.
+    </p>
+   </div>
+   <div class="col-6 text-right">
+    <p class="py-1">We understood the global reach online auction markets have.
+                    We also know that there are many people like us who wish to get back all those wonderful items we lost.</p>
+    <p class="">Whether you are looking for a unique or luxurious or precious artefact
+                    – if it exists in the world, it probably is for sale on
+                    <strong>Artifa</strong>.
+                    Our mission is to be the world’s favorite destination for
+                    discovering great value and unique selection.
+    </p>
+    <p>We also give our client an opportunity to sell their own artifacts.
+     If you have any unique item and you are bored with them, use our
+     <i class="fas fa-external-link-square-alt text-warning"></i>
+     <a class="text-light" href="{% url 'auction_store-store' %}"> Store!</a>
+    </p>
+   </div>
+  </div>
+ </section>
 
 <!-- Jumbotron -->
-<div class="jumbotron p-4 m-auto bg-primary text-warning">
- <img id="jumbotron-icon" class="float-left mt-md-3 mr-md-3 d-none d-md-block" src="../static/img/001-pay.png">
- <div class="row">
-  <h1 class="col-md-8 display-5 text-md-left text-center">The fastest way to checkout </h1>
-  <p class="lead col-md-8 text-md-left text-center">You can pay your item with your credit card!</p>
+ <div class="col-12 p-0 py-2">
+  <div class="jumbotron p-5 m-auto bg-primary text-warning">
+   <img id="jumbotron-icon" class="float-left mt-md-3 mr-md-3 d-none d-md-block" src="../static/img/001-pay.png">
+   <a href="{% url 'auction_store-store' %}"
+      class="jumbotron-button
+            col-2 mt-4 mr-5 pt-2 float-right
+            d-none d-md-inline
+            btn btn-outline-warning
+            text-warning text-center font-weight-bolder">
+      Shop Now
+    </a>
+   <div class="row">
+    <h1 class="col-12 display-5 text-md-left text-center">The fastest way to checkout </h1>
+    <p class="lead col-12 text-center text-md-left">You can pay your item with your credit card!</p>
+   </div>
+   <a href="{% url 'auction_store-store' %}"
+      class="jumbotron-button d-block d-md-none col-6 offset-3 btn btn-outline-warning text-warning">
+      Shop Now
+   </a>
+  </div>
  </div>
- <a id="jumbotron-button-md" href="{% url 'auction_store-store' %}" class="jumbotron-button jumbotron-button-hover d-none d-md-block btn btn-outline-warning float-right text-warning font-weight-bolder">Shop Now</a>
- <a href="{% url 'auction_store-store' %}" class="jumbotron-button jumbotron-button-hover d-block d-md-none col-6 offset-3 btn btn-outline-warning text-warning">Shop Now</a>
-</div>
 
-<div id="just-added-wrapper" class="row mt-1 no-gutters">
- <div class="col-12 col-md-4 jumbotron mb-0 px-3 text-center">
-  <h4 class="pt-md-5">Now At Auction... </h4>
-  <p class="mb-0">Bid Today!</p>
-  <p>Become the owner of the artifact!</p>
- </div>
-<div id="home-scrollspy" class="col-12 col-md-8">
- <div class="row">
-  <a href="{% url 'auction_store-store' %}">
-    <img class="col-12 order-lg-2 text-white" src='../static/img/military.jpg'>
-  </a>
-  <a href="{% url 'auction_store-store' %}">
-   <img class="col-12 order-lg-2 text-white" src='../static/img/private.jpg'>
-  <a href="{% url 'auction_store-store' %}">
-   <img class="col-12 order-lg-2 text-white" src='../static/img/tools.jpg'>
-  </a>
-  <a href="{% url 'auction_store-store' %}">
-   <img class="col-12 order-lg-2 text-white" src='../static/img/treasure.jpg'>
-  </a>
-  <a href="{% url 'auction_store-store' %}">
-   <img class="col-12 order-lg-2 text-white" src='../static/img/tools-2.jpg'>
-  </a>
- </div>
-</div>
-</div>
-</div>
+<!-- Jumbo.2 -->
+ <section class="col-12 p-0 py-2">
+  <div id="just-added-wrapper" class="row no-gutters">
+   <div class="jumbotron col-12 col-md-5 mb-0 px-3 pl-md-5 text-center">
+    <h2 class="pt-md-5 mt-md-4">Now At Auction... </h2>
+    <p class="mb-0 h4">Bid Today!</p>
+    <p class="pt-1">Become the owner of an artifact!</p>
+   </div>
+   <div id="home-scrollspy" class="col-12 pl-5 col-md-6 offset-md-1 mr-md-0">
+    <div class="row mr-0" style="max-width: 450px; height: 100% !important;>
+     <a href="{% url 'auction_store-store' %}">
+      <img class="col-12 order-lg-2 text-white" src='../static/img/james-ossuary.jpg'>
+     </a>
+     <a href="{% url 'auction_store-store' %}">
+      <img class="col-12 order-lg-2 text-white" src='../static/img/thors-hammer.jpg'>
+     <a href="{% url 'auction_store-store' %}">
+      <img class="col-12 order-lg-2 text-white" src='../static/img/nebra-sky-disk.jpg'>
+     </a>
+     <a href="{% url 'auction_store-store' %}">
+      <img class="col-12 order-lg-2 text-white" src='../static/img/ubaid-lizard.jpg'>
+     </a>
+     <a href="{% url 'auction_store-store' %}">
+      <img class="col-12 order-lg-2 text-white" src='../static/img/quipu-of-caral.jpg'>
+     </a>
+  </div>
+ </section>
 
-
-
-<section id="contact" class="ml-3 mt-2">
-<h3 class="contact-heading uppercase text-center">Any Questions?</h3>
-<p class="uppercase text-center font-weight-bold text-warning">Contact Us!</p>
-
-<form>
-<div class="row px-3">
-<div class="col-12 col-md-6 pr-1">
-<input type="text" name="name" id="name" class="form-control mb-2" placeholder="Name" required />
-<input type="phone" name="phone" id="phone" class="form-control mb-2" placeholder="Phone" required />
-<input type="email" name="email" id="emailaddress" class="form-control mb-2" placeholder="Email" required />
-</div>
-
-<div class="col-12 col-md-6 pl-1">
-<textarea rows="5" name="message" id="message" class="form-control mb-2" placeholder="Your message" required></textarea>
-</div>
-</div>
-<div class="row text-center">
-<div class="col-8 offset-2">
-<button class="btn btn-primary btn-form px-5 text-warning font-weight-bolder" type="submit">Send</button>
-</div>
-</div>
-
-</form>
-</section>
-
-
-
+<!-- Contact Section -->
+ <section id="contact" class="mt-2">
+          <!--style="
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            color: #ffffff;
+            text-shadow: 1px 2px #000000;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                        url({% static 'contact.jpg' %}) no-repeat center center;
+            background-origin: border-box;
+            background-size: cover;
+            height: auto;
+            width: auto;"-->
+  <h3 class="contact-heading uppercase text-center">Any Questions?</h3>
+   <p class="uppercase text-center font-weight-bold text-warning">Contact Us!</p>
+    <form>
+     <div class="row px-5">
+      <div class="col-12 col-md-6">
+       <input type="text" name="name" id="name" class="form-control mb-2" placeholder="Name" required />
+       <input type="phone" name="phone" id="phone" class="form-control mb-2" placeholder="Phone" required />
+       <input type="email" name="email" id="emailaddress" class="form-control mb-2" placeholder="Email" required />
+      </div>
+      <div class="col-12 col-md-6">
+       <textarea rows="5" name="message" id="message" class="form-control mb-2" placeholder="Your message" required></textarea>
+      </div>
+     </div>
+     <div class="row text-center">
+      <div class="col-8 offset-2 pt-2">
+       <button class="btn btn-primary btn-form px-5 text-warning font-weight-bolder" type="submit">Send</button>
+      </div>
+     </div>
+    </form>
+ </section>
 </main>
 {% endblock content %}
