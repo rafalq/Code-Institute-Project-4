@@ -1,1 +1,1 @@
-https://travis-ci.com/rafalq/Code-Institute-Project-4.svg?token=qAUnRqnak3C9xDgqZxRq&branch=master
+[![Build Status](https://travis-ci.com/rafalq/Code-Institute-Project-4.svg?token=qAUnRqnak3C9xDgqZxRq&branch=master)](https://travis-ci.com/rafalq/Code-Institute-Project-4)
