@@ -29,7 +29,7 @@ import stripe
 from django.core.paginator import Paginator
 
 
-# stripe.api_key = settings.STRIPE_SECRET
+stripe.api_key = settings.STRIPE_SECRET
 
 
 def home(request):
