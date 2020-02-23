@@ -145,6 +145,7 @@ AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 # STATICFILES_LOCATION = 'static/'
 # STATICFILES_STORAGE = 'custom_storages.StaticStorage'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 MEDIAFILES_LOCATION = 'media'
