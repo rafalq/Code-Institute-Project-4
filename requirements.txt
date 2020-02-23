@@ -25,7 +25,6 @@ django-storages==1.9.1
 dnspython==1.16.0
 docutils==0.15.2
 entrypoints==0.3
-env==0.1.0
 flake8==3.7.9
 Flask==1.1.1
 Flask-PyMongo==2.3.0
