@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-import env
+# import env
 import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -167,4 +167,4 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
 
 STRIPE_PUBLISHABLE = os.getenv('STRIPE_PUBLISHABLE')
-# STRIPE_SECRET = os.getenv('STRIPE_SECRET')
+STRIPE_SECRET = os.getenv('STRIPE_SECRET')
