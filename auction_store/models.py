@@ -78,6 +78,7 @@ class Item(models.Model):
         choices=CONDITION
     )
 
+    # resizing images working only locally
     # def save(self, *args, **kwargs):
     #     super().save(*args, **kwargs)
 

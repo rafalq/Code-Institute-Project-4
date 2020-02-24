@@ -25,10 +25,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 #(os.environ.get('DEBUG_VALUE') == 'True')
 
-# DEBUG = True
 
 ALLOWED_HOSTS = ['code-institute-project-4.herokuapp.com']
 
@@ -94,6 +93,8 @@ DATABASES = {
 }
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Code Inst's way - not working
 # DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
 
 
