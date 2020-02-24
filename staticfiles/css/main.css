@@ -102,7 +102,7 @@ footer.footer {
 #about{
   color: #ffffff;
   text-shadow: 1px 2px #000000;
-  background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5)),
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
             url("/static/img/about.jpg") no-repeat center;
   background-origin: border-box;
   background-size: cover;
