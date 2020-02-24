@@ -9,7 +9,7 @@
 
 {% block content %}
 <script src="https://js.stripe.com/v3/"></script>
-<div class="container">
+<div class="container-fluid" style="height: auto">
  <form action="" method="post" id="payment-form" name="payment-form">
   {%  csrf_token %}
    <div class="row bg-light">
@@ -24,7 +24,7 @@
      </a>
     </p>
     <p class="col-12 mt-3 text-center">
-     <span class="text-light bg-secondary px-2 py-3 ">
+     <span class="px-2 py-3 ">
       <i class="fas fa-coins pr-1"></i>
       <span class="font-weight-bold h4">{{ price }}</span>
       <i class="fas fa-euro-sign euro-sign-item"></i>
@@ -89,7 +89,7 @@
          </div>
          <button id="stripe-button" class="">Submit Payment</button>
        </div>
-       <p class="col-3 offset-9"><small>* Field Required</small></p>
+       <p class="col-12 pb-5"><small class="float-right">* Field Required</small></p>
      </div>
    </div>
  </form>
