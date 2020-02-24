@@ -162,7 +162,7 @@ def payment(request, pk):
             return redirect('item-detail', item.id)
         else:
             messages.warning(
-                request, f'Invalid data received!')
+                request, f'Invalid data received! Please, try again.')
             order_form = OrderForm(request.POST)
     else:
         order_form = OrderForm(request.POST)
