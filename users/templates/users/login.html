@@ -11,9 +11,11 @@
        {{ form|crispy }}
       </fieldset>
       <div class="form-group">
-       <button class="btn btn-outline-primary px-4" type="submit">Login</button>
-       <small class="text-muted ml-2">
-        <a class="ml-3" href="{% url 'password_reset' %}">Forgot Password?</a>
+       <div class="col-12 p-0 mb-3">
+        <button class="btn btn-outline-primary px-4" type="submit">Login</button>
+       </div>
+       <small class="text-muted col-12 p-0">
+        <a href="{% url 'password_reset' %}">Forgot Password?</a>
        </small>
       </div>
      </form>
