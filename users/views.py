@@ -37,7 +37,7 @@ def register(request):
     form = UserRegisterForm()
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
-        if form.is_valid:
+        if form.is_valid():
             form.save()
             messages.success(
                 request, f'Your account has been created! You are now able to log in.')
@@ -63,7 +63,7 @@ def profile(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         a_form = AccountUpdateForm(request.POST, instance=request.user.account)
-        if u_form.is_valid() and a_form.is_valid:
+        if u_form.is_valid() and a_form.is_valid():
             u_form.save()
             a_form.save()
             messages.success(request, f'Your account has been updated!')

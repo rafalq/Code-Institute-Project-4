@@ -106,7 +106,7 @@ footer.footer {
   color: #ffffff;
   text-shadow: 1px 2px #000000;
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-            url("/static/img/about.jpg") no-repeat center;
+            url("/static/img/about.1af259a2a175.jpg") no-repeat center;
   background-origin: border-box;
   background-size: cover;
   height: auto;
@@ -131,7 +131,7 @@ a.jumbotron-button:hover{
   color: #ffffff;
   text-shadow: 1px 2px #000000;
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-              url("/static/img/contact.jpg") no-repeat center center;
+              url("/static/img/contact.d42675645a19.jpg") no-repeat center center;
   background-origin: border-box;
   background-size: cover;
   height: auto;

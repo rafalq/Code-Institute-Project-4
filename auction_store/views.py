@@ -303,6 +303,7 @@ class ItemDetailView(FormMixin, LoginRequiredMixin, SuccessMessageMixin, DetailV
         if form.is_valid():
             return self.form_valid(form)
         else:
+            messages.warning(request, f'The bid failed!')
             return self.form_invalid(form)
 
     def form_valid(self, form):
@@ -319,6 +320,7 @@ class ItemDetailView(FormMixin, LoginRequiredMixin, SuccessMessageMixin, DetailV
                 the_bidder.account.history_checked = False
                 the_bidder.account.save()
                 self.object.save()
+                messages.success(self.request, f'The bid was successful! For more details, check the Bid History below...')
                 form.save()
             elif form.instance.amount > Bid.objects.last().amount:
                 form.instance.item = self.object
@@ -329,8 +331,10 @@ class ItemDetailView(FormMixin, LoginRequiredMixin, SuccessMessageMixin, DetailV
                 the_bidder.account.history_checked = False
                 the_bidder.account.save()
                 self.object.save()
+                messages.success(self.request, f'The bid was successful! For more details, check the Bid History below...')
                 form.save()
             else:
+                messages.warning(self.request, f'The bid failed! The amount needs to be higher than the last bid.')
                 return super(ItemDetailView, self).form_invalid(form)
 
         return super(ItemDetailView, self).form_valid(form)

@@ -85,6 +85,12 @@ footer.footer {
   font-weight: 700;
   text-shadow: 1px 2px #000000;
 }
+
+/*working only in Chrome Dev Tools*/
+/*.carousel-sm-img{
+  max-height: 210px !important;
+}*/
+
 @media screen and (max-width: 1199px) and (min-width: 992px){
   #just-added-wrapper{
     width: 930px;
