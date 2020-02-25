@@ -287,7 +287,7 @@
    <i class="fas fa-gavel gavel-icon-item text-muted"></i>
     Bid History
    </h5>
-{% if object.sold %}
+   {% if object.sold %}
    <div class="col-12 py-3">
     <div class="col-6 offset-5 pb-3">
      <img height="40px" class="rounded-circle bg-danger" src="{% static 'img/sold-bid.png' %}" alt="A sold sign image"
@@ -329,7 +329,7 @@
     </p>
    </div>
    <div class="row bg-light">
-    <div class="bid-scroll">
+    <div class="bid-scroll d-none d-lg-block">
     {% for bid in bids %}
     <hr class="my-1">
      <div class="row pt-3">
@@ -341,6 +341,30 @@
       <p class="col-4 mb-0 text-center"> {{ bid.date|date:"d M Y, H:i:s" }}</p>
      </div>
     {% endfor %}
+    </div>
+    <div class="d-block d-lg-none col-12">
+     <div class="row bg-primary text-center p-2">
+     <a class="col-12 h5 text-warning font-weight-bold" data-toggle="collapse" href="#collapseExample"
+      role="button" aria-expanded="false" aria-controls="collapseExample">
+      Display Bids
+      <i class="fas fa-chevron-circle-down"></i>
+     </a>
+     </div>
+    <div class="collapse pt-3" id="collapseExample">
+     <div class="card card-body pt-0">
+     {% for bid in bids %}
+      <hr class="m-0">
+       <div class="row pt-3">
+        <p class="bid-icon col-4 mb-0 text-center fas fa-user-alt"></p>
+        <p class="bid-icon col-4 mb-0 text-center fas fa-euro-sign"></p>
+        <p class="bid-icon col-4 mb-0 text-center far fa-clock"></p>
+        <p class="col-4 mb-0 text-center">{{ bid.bidder }}</p>
+        <p class="col-4 mb-0 text-center">{{ bid.amount }}</p>
+        <p class="col-4 mb-0 text-center"> {{ bid.date|date:"d M Y, H:i:s" }}</p>
+       </div>
+     {% endfor %}
+     </div>
+    </div>
     </div>
    </div>
    {% else %}
@@ -392,7 +416,7 @@
     <i class="far fa-stop-circle text-muted"></i>
     {{ object.end_date|date:"F d, Y H:i:s" }}
     </span>
-    | {{ bids.count }} Bids
+    <span class="text-primary font-weight-bold">|</span> {{ bids.count }} Bids
    <p>
    <button type="button" class="close"
    data-dismiss="modal" aria-label="Close">
@@ -457,8 +481,8 @@ if(!isChrome){
 }
 
 var timeLeftReload = Math.floor(countDownDate - tday);
-// refresh the page after the time to display new info after the auction finished
-// limited to 24 days
+// refresh the page time to display new info after the auction finished
+// limited to 24 days (Javascript Limitation)
   if(timeLeftReload > 0){
     window.setTimeout(function(){
       location.reload();
@@ -466,7 +490,10 @@ var timeLeftReload = Math.floor(countDownDate - tday);
 }
 
 // allows to pick numbers greater than 0
-document.getElementById('id_amount').setAttribute("min", "0");
+var bidInput = document.getElementById('id_amount');
+var lastBid = document.getElementById('exampleModalLabel').textContent.split(' ').pop();
+bidInput.setAttribute("min", parseInt(lastBid)+1);
+bidInput.setAttribute("placeholder", "higher than "+lastBid);
 </script>
 {% endblock content %}
 
