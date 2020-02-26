@@ -34,7 +34,7 @@
 
 
 <!---------------------- SELLER OPTIONS -------------------------->
-   <div class="col-12 col-lg-6 pt-5"><!-- TITLE col -->
+   <div class="col-12 col-lg-6 pt-4 mt-4"><!-- TITLE col -->
     <h3 class="text-center pb-3">{{ object.name }}</h3>
 <!---------------------- SELLER OPTIONS -------------------------->
     {% if object.seller ==  user %}
@@ -343,7 +343,7 @@
     {% endfor %}
     </div>
     <div class="d-block d-lg-none col-12">
-     <div class="row bg-secondary text-center p-2">
+     <div class="row bg-dark text-center p-2">
      <a class="col-12 h5 mb-0 text-warning font-weight-bold" data-toggle="collapse" href="#collapseExample"
       role="button" aria-expanded="false" aria-controls="collapseExample">
       Display Bids
@@ -494,6 +494,7 @@
 </form>
 </div>
 {% endif %}
+<script src="{% static 'js/script.js' %}"></script>
 <script src="{% static 'js/progress.js' %}"></script>
 <script src="{% static 'js/progress-bar.js' %}"></script>
 <script>

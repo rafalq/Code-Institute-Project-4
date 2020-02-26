@@ -41,7 +41,7 @@
        </div>
       </div>
     </form>
-    <div class="collapse pt-3" id="collapsePurchaseNew">
+    <div class="collapse in show pt-3" id="collapsePurchaseNew">
      <div class="history-scroll">
      {% for item in purchase_filter.qs %}
       {% if item.buyer == user %}
@@ -90,7 +90,7 @@
       </div>
      </div>
     </form>
-    <div class="collapse pt-3" id="collapsePurchase">
+    <div class="collapse in show pt-3" id="collapsePurchase">
     <div class="history-scroll">
      {% for item in purchase_filter.qs %}
       {% if item.buyer == user %}
@@ -139,7 +139,7 @@
       </div>
      </div>
     </form>
-    <div class="collapse pt-3" id="collapseSellNew">
+    <div class="collapse in show pt-3" id="collapseSellNew">
      <div class="history-scroll">
      {% for item in sale_filter.qs %}
       {% if item.seller == user %}
@@ -188,7 +188,7 @@
       </div>
     </div>
    </form>
-   <div class="collapse pt-3" id="collapseSell">
+   <div class="collapse in show pt-3" id="collapseSell">
     <div class="history-scroll">
     {% for item in sale_filter.qs %}
      {% if item.seller == user %}
@@ -229,7 +229,8 @@
        <div class="form-group col-2 mt-1 pr-1 px-lg-1 pl-2 mb-1 font-weight-bold text-white">
         <button class="text-secondary px-4 px-sm-5 px-md-2 px-lg-3" type="submit" name="btnbid">Sort</button>
        </div>
-       <div class="col-1 mt-1 ml-4 ml-sm-5 ml-lg-2 pr-0 pl-0 font-weight-bold">
+
+       <div class="col-1 mt-1 ml-4 ml-sm-5 ml-md-2 ml-lg-3 pr-0 pl-0 font-weight-bold">
        <a class="h4 ml-4 pl-4 pl-lg-2 text-light font-weight-bold" data-toggle="collapse" href="#collapseBidNew"
           role="button" aria-expanded="false" aria-controls="collapseBidNew">
         <i class="fas fa-caret-down"></i>
@@ -237,7 +238,7 @@
       </div>
      </div>
     </form>
-    <div class="collapse pt-3" id="collapseBidNew">
+    <div class="collapse in show pt-3" id="collapseBidNew">
      <div class="history-scroll">
      {% for bid in bid_filter.qs %}
       {% if bid.bidder == user %}
@@ -263,6 +264,7 @@
      </script>
      </div>
     </div>
+
    {% else %}
 
    <h4 class="text-center pt-4 pb-3">
@@ -285,7 +287,7 @@
       </div>
      </div>
     </form>
-    <div class="collapse pt-3" id="collapseBid">
+    <div class="collapse in show pt-3" id="collapseBid">
      <div class="history-scroll">
      {% for bid in bid_filter.qs %}
       {% if bid.bidder == user %}
