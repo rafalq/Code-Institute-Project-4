@@ -389,110 +389,87 @@
 
 <!-------------------------------- BID MODAL -------------------------------->
 {% if not object.sold %}
+<form method="POST">
+{% csrf_token %}
  <div class="modal fade" id="bid-form" tabindex="-1" role="dialog"
-      aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <form method="POST">
-   {% csrf_token %}
-    <div class="modal-dialog" role="document">
-     <div class="modal-content">
-      <div class="modal-header">
-       <div class="row pl-lg-5">
-        {% for bid in bids %}
-         {% if forloop.first %}
-          <div class="col-12">
-           <div class="col-10 float-left pl-0">
-           <h5 class="last-bid modal-title" id="exampleModalLabel"
-               data-toggle="tooltip" data-placement="top"
-               title="Previous Bid"
-               style="cursor: help;">
-            EUR {{ bid.amount }}
-           </h5>
-          {% endif %}
-         {% endfor %}
-         {% if not bids %}
-          <h5 class="last-bid modal-title" id="exampleModalLabel">EUR {{ object.start_auction_price}}</h5>
-         {% endif %}
-       </div>
-       <div class="col-2 float-right p-lg-0 pr-2">
-         <button type="button" class="close"
-                 data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-         </button>
-       </div>
-      </div>
-      <div class="col-12 pt-2">
-       <span data-toggle="tooltip" data-placement="bottom"
-             title="Auction Finish Date"
-             style="cursor: help;">
-        <i class="far fa-stop-circle text-muted"></i>
-        {{ object.end_date|date:"F d, Y H:i:s" }}
-       </span>
-       <span class="text-primary font-weight-bold px-1">|</span> {{ bids.count }} Bids
-      </div>
-     </div>
-    </div>
-
-  <div class="modal-body">
-   <div class="row">
-    <div class="row text-center">
+ aria-labelledby="exampleModalLabel" aria-hidden="true">
+ <div class="modal-dialog" role="document">
+ <div class="modal-content">
+  <div class="modal-header row no-gutters">
+  {% for bid in bids %}
+   {% if forloop.first %}
+   <h5 class="col-10 modal-title last-bid" id="exampleModalLabel"
+    data-toggle="tooltip" data-placement="top"
+    title="Previous Bid"
+    style="cursor: help;">
+    EUR {{ bid.amount }}</h5>
+   {% endif %}
+  {% endfor %}
+  {% if not bids %}
+   <h5 class="col-10 modal-title last-bid" id="exampleModalLabel">EUR {{ object.start_auction_price}}</h5>
+  {% endif %}
+   <button type="button" class="close col-2"
+   data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+   </button>
+   <p class="col-12">
+    <span data-toggle="tooltip" data-placement="bottom"
+    title="Auction Finish Date"
+    style="cursor: help;">
+    {{ object.end_date|date:"F d, Y H:i:s" }}
+    </span>
+    | {{ bids.count }} Bids
+   </p>
+  </div>
+  <div class="modal-body row no-gutters">
+   <div class="col-12 text-center">
     {% for bid in bids %}
      {% if forloop.first %}
-     <div class="col-12 m-0 mb-3">
       <button type="button"
-      class="fixed-btn px-5 btn btn-outline-primary">
+      class="fixed-btn col-lg-6 py-2 mb-2 text-center p-2 btn btn-outline-primary">
       EUR {{ bid.amount|add:1 }}
       </button>
-    </div>
-    <div class="col-12 m-0 mb-3">
       <button type="button"
-      class="fixed-btn px-5 btn btn-outline-primary">
+      class="fixed-btn col-lg-6 py-2 mb-2 text-center p-2 btn btn-outline-primary">
       EUR {{ bid.amount|add:2 }}
       </button>
-     </div>
-     <div class="col-12 m-0 mb-3">
       <button type="button"
-      class="fixed-btn px-5 btn btn-outline-primary">
+      class="fixed-btn col-lg-6 py-2 mb-2 text-center p-2 btn btn-outline-primary">
       EUR {{ bid.amount|add:4 }}
       </button>
-     </div>
      {% endif %}
     {% endfor %}
     {% if not bids %}
-    <div class="col-12 m-0 mb-3">
       <button type="button"
-      class="fixed-btn px-5 btn btn-outline-primary">
+      class="fixed-btn col-8 col-lg-6 py-2 mb-2 text-center btn btn-outline-primary">
       EUR {{ object.start_auction_price|add:1 }}
       </button>
-    </div>
-    <div class="col-12 col-lg-4 m-0 mb-3">
       <button type="button"
-      class="fixed-btn px-5 btn btn-outline-primary">
+      class="fixed-btn col-8 col-lg-6 py-2 mb-2 text-center btn btn-outline-primary">
       EUR {{ object.start_auction_price|add:2 }}
       </button>
-     </div>
-     <div class="col-12 m-0 mb-3">
       <button type="button"
-      class="fixed-btn px-5 btn btn-outline-primary">
+      class="fixed-btn col-8 col-lg-6 py-2 mb-2 text-center btn btn-outline-primary">
       EUR {{ object.start_auction_price|add:4 }}
       </button>
-     </div>
      {% endif %}
    </div>
-   <div class="row pl-4 pb-2">
-    <div class="col-8 col-lg-10">
-     {{form|crispy}}
+   <hr class="py-2 mt-3 mb-0">
+   <div class="row">
+    <div class="col-12 pt-2">
+    <div class="col-sm-9 pr-0 float-left">
+    {{form|crispy}}
     </div>
-    <div class="col-4 col-lg-2 pl-0">
-     <button id="bid-btn" type="submit" name="bid_form"
-             class="btn btn-primary px-lg-5 px-4">Bid</button>
+    <div class="col-sm-3 float-right">
+    <button id="bid-btn" type="submit" name="bid_form" class="btn btn-primary px-5">Bid</button>
     </div>
+    </div>
+</div>
    </div>
   </div>
+  </div>
  </div>
-</div>
-</div>
 </form>
-</div>
 {% endif %}
 <script src="{% static 'js/script.js' %}"></script>
 <script src="{% static 'js/progress.js' %}"></script>
@@ -522,4 +499,3 @@ bidInput.setAttribute("min", parseInt(lastBid)+1);
 bidInput.setAttribute("placeholder", "higher than "+lastBid);
 </script>
 {% endblock content %}
-

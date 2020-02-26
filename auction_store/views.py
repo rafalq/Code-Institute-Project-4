@@ -354,7 +354,7 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         if form.instance.start_auction_price is not None:
             form.instance.in_auction = True
-            form.instance.end_date = timezone.now() + timezone.timedelta(days=24)
+            form.instance.end_date = timezone.now() + timezone.timedelta(minutes=60)
             form.instance.seller = self.request.user
             return super().form_valid(form)
         else:
