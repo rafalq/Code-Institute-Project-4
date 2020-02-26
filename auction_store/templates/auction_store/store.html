@@ -54,6 +54,7 @@
    </div>
 
    {% for item in object_list %}
+   <a href="{% url 'item-detail' item.id %}" class="text-dark">
     <div class="row card-row mb-2"><!-- card-row -->
      <div class="store-card-img col-12 col-lg-5 px-0">
       {% if item.sold %}
@@ -76,16 +77,16 @@
     <div class="col-12 col-lg-7 px-0">
     <div class="card text-center" style="height: 100%;"><!-- card -->
      <div class="card-header py-1 bg-dark">
-      <h5 class="card-title m-0 py-2">
-       <a class="h4 item-title-store text-white" href="{% url 'item-detail' item.id %}">
+      <h4 class="card-title m-0 py-2 item-title-store text-white">
+
        {{ item.name }}
-       </a>
+
        {% if not item.sold and item.today_date <= item.finish_date %}
        <i class="fas fa-hourglass-half auction_lasts pl-1 text-warning"></i>
        {% elif not item.sold and item.today_date >= item.finish_date %}
        <i class="fas fa-hourglass-end auction_lasts pl-1 text-warning"></i>
        {% endif %}
-      </h5>
+      </h4>
      </div>
     <div class="card-body col-12 p-0 py-1 p-2"><!-- card body -->
       <p class="text-left m-auto py-1 pl-2 pl-lg-0">
@@ -132,6 +133,7 @@
    </div><!-- card -->
    </div>
    </div><!-- card-row -->
+   </a>
    {% endfor %}
   </div><!-- col-lg-9 -->
 
