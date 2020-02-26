@@ -433,47 +433,46 @@
     </div>
 
   <div class="modal-body">
-   <div class="row ml-lg-2">
-    <div class="row pl-lg-5 text-center">
+   <div class="row">
+    <div class="row text-center">
     {% for bid in bids %}
      {% if forloop.first %}
-
-     <div class="col-12 col-lg-4 m-0 mb-3">
+     <div class="col-12 m-0 mb-3">
       <button type="button"
-      class="fixed-btn px-5 px-lg-4 btn btn-outline-primary">
+      class="fixed-btn px-5 btn btn-outline-primary">
       EUR {{ bid.amount|add:1 }}
       </button>
     </div>
-    <div class="col-12 col-lg-4 m-0 mb-3">
+    <div class="col-12 m-0 mb-3">
       <button type="button"
-      class="fixed-btn px-5 px-lg-4 btn btn-outline-primary">
+      class="fixed-btn px-5 btn btn-outline-primary">
       EUR {{ bid.amount|add:2 }}
       </button>
      </div>
-     <div class="col-12 col-lg-4 m-0 mb-3">
+     <div class="col-12 m-0 mb-3">
       <button type="button"
-      class="fixed-btn px-5 px-lg-4 btn btn-outline-primary">
+      class="fixed-btn px-5 btn btn-outline-primary">
       EUR {{ bid.amount|add:4 }}
       </button>
      </div>
      {% endif %}
     {% endfor %}
     {% if not bids %}
-    <div class="col-12 col-lg-4 m-0 mb-3">
+    <div class="col-12 m-0 mb-3">
       <button type="button"
-      class="fixed-btn px-5 px-lg-4 btn btn-outline-primary">
+      class="fixed-btn px-5 btn btn-outline-primary">
       EUR {{ object.start_auction_price|add:1 }}
       </button>
     </div>
     <div class="col-12 col-lg-4 m-0 mb-3">
       <button type="button"
-      class="fixed-btn px-5 px-lg-4 btn btn-outline-primary">
+      class="fixed-btn px-5 btn btn-outline-primary">
       EUR {{ object.start_auction_price|add:2 }}
       </button>
      </div>
-     <div class="col-12 col-lg-4 m-0 mb-3">
+     <div class="col-12 m-0 mb-3">
       <button type="button"
-      class="fixed-btn px-5 px-lg-4 btn btn-outline-primary">
+      class="fixed-btn px-5 btn btn-outline-primary">
       EUR {{ object.start_auction_price|add:4 }}
       </button>
      </div>
