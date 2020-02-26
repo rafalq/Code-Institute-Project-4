@@ -122,7 +122,6 @@ class Order(models.Model):
         User, on_delete=models.SET_NULL, blank=True, null=True, related_name="order_buyer")
     item_name = models.CharField(max_length=100, blank=True, null=True)
     full_name = models.CharField(max_length=50, verbose_name="Full Name*")
-    email = models.EmailField(max_length=50, verbose_name="Email*")
     phone_number = models.CharField(
         max_length=20, verbose_name="Phone Number*")
     street_address1 = models.CharField(

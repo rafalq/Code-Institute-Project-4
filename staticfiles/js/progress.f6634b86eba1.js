@@ -29,14 +29,3 @@ for(var i = 0; i < fixedAmountBtn.length; i++){
   amountInput.value = bidAmount;
   });
 }
-
-var bidBtn = document.getElementById("bid-btn");
-
-bidBtn.addEventListener("click", function(){
-  var modalLabel = document.getElementById("exampleModalLabel").innerHTML;
-  var x = modalLabel.split(" ");
-  var bidAmount = parseInt(x[1]);
-  if (amountInput.value <= bidAmount){
-    alert("Offer must be higher than the last bid!");
-  }
-  });
