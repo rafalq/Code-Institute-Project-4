@@ -186,14 +186,8 @@ a.jumbotron-button:hover{
 }
 .image-overlay-item {
   position: absolute;
-  top: -30px;
-  left: 25px;
-  opacity: .8;
-}
-.image-overlay-item-lg {
-  position: absolute;
-  top: -5px;
-  left: 20px;
+  top: 0px;
+  left: 0px;
   opacity: .8;
 }
 #filtered-img{
