@@ -15,13 +15,12 @@ class Item(models.Model):
         max_length=250, verbose_name="Short Description")
     origin_country = models.CharField(max_length=50)
     previous_owners = models.CharField(
-        max_length=200, verbose_name="Previous Owners", default="...")
+        max_length=200, verbose_name="Previous Owners")
     desc = models.TextField(max_length=900, verbose_name="History")
     link_read_more = models.CharField(
         null=True, blank=True, max_length=900, verbose_name="Read More Link Address")
     price = models.IntegerField(verbose_name="Price (EURO)")
     start_date = models.DateTimeField(auto_now_add=True)
-    # end_date = models.DateTimeField(null=True, blank=True)
     in_auction = models.BooleanField(default=False)
     start_auction_price = models.IntegerField(
         null=True, blank=True, verbose_name="Auction Price (EURO)")
@@ -78,15 +77,6 @@ class Item(models.Model):
         max_length=20,
         choices=CONDITION
     )
-
-    # class EndDate(models.Choices):
-    #     HOURS = timezone.now() + timezone.timedelta(hours=24), '24H'
-    #     DAYS = timezone.now() + timezone.timedelta(days=3), '3 Days'
-    #     WEEK = timezone.now() + timezone.timedelta(days=7), '1 Week'
-    #     THREE_WEEKS = timezone.now() + timezone.timedelta(days=21), '3 Weeks'
-
-    # end_date = models.DateTimeField(
-    #     null=True, blank=True, choices=EndDate.choices)
 
     HOURS = timezone.now() + timezone.timedelta(hours=24)
     DAYS = timezone.now() + timezone.timedelta(days=3)
