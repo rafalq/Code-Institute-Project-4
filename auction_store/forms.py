@@ -10,6 +10,7 @@ class BidForm(forms.ModelForm):
 
 
 class CreateForm(forms.ModelForm):
+
   class Meta:
     model = Item
     fields = ['image', 'name', 'category',
