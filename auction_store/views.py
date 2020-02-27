@@ -255,7 +255,6 @@ class ItemListView(ListView, LoginRequiredMixin):
 class ItemDetailView(FormMixin, LoginRequiredMixin, SuccessMessageMixin, DetailView):
     model = Item
     form_class = BidForm
-    success_message = "Bid!"
 
     def get_success_url(self):
         return reverse('item-detail', kwargs={'pk': self.object.id})
@@ -352,9 +351,16 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
     template_name = 'auction_store/create_form.html'
 
     def form_valid(self, form):
-        if form.instance.start_auction_price is not None:
+        if form.instance.start_auction_price is not None and form.instance.end_date is None:
+            messages.warning(
+                self.request, f'Make sure both fields "Auction Price" and "Auction Period" are filled in if your artifact goes for auction!')
+            return super(ItemCreateView, self).form_invalid(form)
+        elif form.instance.start_auction_price is None and form.instance.end_date is not None:
+            messages.warning(
+                self.request, f'Make sure both fields "Auction Price" and "Auction Period" are filled in if your artifact goes for auction!')
+            return super(ItemCreateView, self).form_invalid(form)
+        elif form.instance.start_auction_price is not None and form.instance.end_date is not None:
             form.instance.in_auction = True
-            form.instance.end_date = timezone.now() + timezone.timedelta(minutes=60)
             form.instance.seller = self.request.user
             return super().form_valid(form)
         else:
@@ -366,7 +372,7 @@ class ItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Item
     fields = ['image', 'name', 'category',
               'price', 'short', 'condition',
-              'origin_country', 'known_owners', 'desc', 'link_read_more']
+              'origin_country', 'previous_owners', 'desc', 'link_read_more']
 
     def form_valid(self, form):
         item = self.get_object()
