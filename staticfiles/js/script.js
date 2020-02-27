@@ -1,7 +1,6 @@
 // Use the end_date from the Item django model
 if(document.getElementById("timer").innerHTML != null){
  var endDate = document.getElementById("timer").innerHTML;
-}
 // Set the date we're counting down to
 var countDownDate = new Date(endDate).getTime();
 
@@ -24,3 +23,4 @@ var x = setInterval(function() {
       clearInterval(x);
       document.getElementById("timer").innerHTML = "Auction Off!";}
     }, 1000);
+}

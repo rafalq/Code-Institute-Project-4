@@ -1,3 +1,4 @@
+if(document.getElementById("timer").innerHTML != null){
 // Use the end_date from the Item django model
 var endDate = document.getElementById("timer").innerHTML;
 
@@ -17,3 +18,4 @@ addEventListener('load', function() {
   progressBar.style.transitionDuration = secondsStr;
   progressBar.style.width = '0px';
 });
+}

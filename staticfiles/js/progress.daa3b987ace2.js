@@ -1,3 +1,4 @@
+if(document.getElementById("timer").innerHTML != null){
 // Use the end_date from the Item django model
 var endDate = document.getElementById("timer").innerHTML;
 var startDate = document.getElementById("start-date").innerHTML;
@@ -17,6 +18,7 @@ var progressNow = Math.floor((timeLeft * 100) / timeFromStart) ;
 var progressStr = progressNow + "%";
 var progressBar = document.getElementById("progress-bar")
 progressBar.style.width = progressStr;
+}
 
 var fixedAmountBtn = document.getElementsByClassName("fixed-btn")
 var amountInput = document.getElementById("id_amount")
