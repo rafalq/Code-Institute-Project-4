@@ -79,15 +79,15 @@ class Item(models.Model):
     )
 
     HOURS = timezone.now() + timezone.timedelta(hours=24)
-    DAYS = timezone.now() + timezone.timedelta(days=3)
-    WEEK = timezone.now() + timezone.timedelta(days=7)
-    THREE_WEEKS = timezone.now() + timezone.timedelta(days=21)
+    FOUR = timezone.now() + timezone.timedelta(days=4)
+    TWELVE = timezone.now() + timezone.timedelta(days=12)
+    TWENTY_FOUR = timezone.now() + timezone.timedelta(days=24)
 
     END_DATE = [
         (HOURS, '24H'),
-        (DAYS, '3 Days'),
-        (WEEK, '1 Week'),
-        (THREE_WEEKS, '3 Weeks'),
+        (FOUR, '4 Days'),
+        (TWELVE, '12 days'),
+        (TWENTY_FOUR, '24 Days'),
     ]
     end_date = models.DateTimeField(
         null=True, blank=True, verbose_name="Auction Period", choices=END_DATE)
