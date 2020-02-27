@@ -115,10 +115,19 @@
          data-toggle="tooltip" data-placement="top" title="Other Category">
        {% endif %}
       </p>
+      {% if object.seller.is_superuser %}
       <p class="text-left m-auto pb-1 pl-2 pl-lg-0">
        <i class="fas fa-hand-holding-usd text-muted pr-2"
         data-toggle="tooltip" data-placement="top" title="Seller"></i>
-       {{ item.seller }}</p>
+       Artifa
+      </p>
+      {% else %}
+      <p class="text-left m-auto pb-1 pl-2 pl-lg-0">
+       <i class="fas fa-hand-holding-usd text-muted pr-2"
+        data-toggle="tooltip" data-placement="top" title="Seller"></i>
+       {{ item.seller }}
+      </p>
+      {% endif %}
       <p class="text-left m-auto pl-2 pl-lg-0">
        <i class="fas fa-info-circle text-muted pr-2"></i>
        {{ item.short }}
