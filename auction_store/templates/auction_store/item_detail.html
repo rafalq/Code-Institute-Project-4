@@ -16,8 +16,7 @@
    <div class="col-12 col-lg-6 pt-3"><!-- IMAGE col -->
     {% if item.sold %}
      <img class="layered-image img-fluid" src="{{ item.image.url }}">
-     <img class="image-overlay-item-lg img-fluid pr-3 d-none d-lg-block" src="{% static 'img/soldd.png' %}">
-     <img class="image-overlay-item img-fluid pr-3 d-block d-lg-none" src="{% static 'img/soldd.png' %}">
+     <img class="image-overlay-item img-fluid pr-3" src="{% static 'img/soldd.png' %}">
     {% elif not item.sold and item.today_date <= item.finish_date %}
      <img class="image-time-store img-fluid" data-toggle="tooltip" data-placement="bottom" title="Auction" src="{% static 'img/hammer.png' %}">
      <img class="layered-image img-fluid" src="{{ item.image.url }}">
