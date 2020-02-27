@@ -16,8 +16,10 @@
 {% endblock nav-search %}
 
 {% block content %}
-<div class="container pr-0">
- <div class="row">
+<div class="container-fluid pr-0"><!--  CONTAINER  -->
+
+ <div class="row"><!--  MAIN ROW  -->
+
   <div class="col-12 col-lg-3">
     <div class="form-row bg-primary p-2">
      <div class="form-group col-12 font-weight-bold text-center text-white mb-0">
@@ -40,11 +42,11 @@
      <div class="form-group col-12 font-weight-bold text-center text-white mb-0">
       {{ filterset.form.sort|as_crispy_field }}
      </div>
-     <button class="btn btn-warning col-8 offset-2 mt-2"
-      type="submit">Search</button>
+     <button class="btn btn-warning col-8 offset-2 mt-2" type="submit">Search</button>
+    </div>
     </div>
    </form>
-  </div>
+
 
   <div class="col-12 col-lg-9"><!-- col-lg-9 -->
    <div class="row bg-primary mt-3 mt-lg-0">
@@ -55,14 +57,15 @@
 
    {% for item in object_list %}
    <a href="{% url 'item-detail' item.id %}" class="text-dark">
-    <div class="row card-row mb-2"><!-- card-row -->
-     <div class="store-card-img col-12 col-lg-5 px-0">
+    <div class="row card-row mb-2 px-2 px-lg-0"><!-- card-row -->
+
+     <div class="store-card-img col-12 col-lg-5">
       {% if item.sold %}
        <img class="img-fluid layered-image" src="{{ item.image.url }}" alt="{{ item.name }} Image">
        <img class="d-none d-md-block image-overlay-store-md img-fluid" src="{% static 'img/soldd.png' %}">
        <img class="d-block d-sm-block d-md-none image-overlay-store-sm img-fluid" src="{% static 'img/soldd.png' %}" alt="Sold Sign Image">
       {% elif not item.sold and item.today_date <= item.finish_date %}
-       <img class="image-time-store img-fluid" src="{% static 'img/hammer.png' %}" alt="Gavel Image">
+       <img class="image-time-store img-fluid" src="{% static 'img/hammer.png' %}" data-toggle="tooltip" data-placement="bottom" title="Auction" src="{% static 'img/hammer.png' %}"alt="Gavel Image">
        <img class="image-card-store img-fluid layered-image" src="{{ item.image.url }}" alt="{{ item.name }} Image">
       {% elif not item.sold and item.today_date >= item.finish_date %}
       {% if item.winner is None %}
@@ -74,13 +77,13 @@
        <img class="image-card-store img-fluid layered-image" src="{{ item.image.url }}" alt="{{ item.name }} Image">
       {% endif %}
     </div>
+
     <div class="col-12 col-lg-7 px-0">
     <div class="card text-center" style="height: 100%;"><!-- card -->
+
      <div class="card-header py-1 bg-dark">
       <h4 class="card-title m-0 py-2 item-title-store text-white">
-
        {{ item.name }}
-
        {% if not item.sold and item.today_date <= item.finish_date %}
        <i class="fas fa-hourglass-half auction_lasts pl-1 text-warning"></i>
        {% elif not item.sold and item.today_date >= item.finish_date %}
@@ -88,6 +91,7 @@
        {% endif %}
       </h4>
      </div>
+
     <div class="card-body col-12 p-0 py-1 p-2"><!-- card body -->
       <p class="text-left m-auto py-1 pl-2 pl-lg-0">
        <i class="fas fa-coins text-muted pr-2"
@@ -126,11 +130,13 @@
 
     <div class="card-footer p-0">
      <i class="fas fa-calendar-alt text-muted pr-2"
-      data-toggle="tooltip" data-placement="top" title="Start Date"></i></i>
+      data-toggle="tooltip" data-placement="top" title="Start Date"></i>
      <span class="font-weight-bold"> {{ item.start_date }} </span>
     </div>
 
    </div><!-- card -->
+
+
    </div>
    </div><!-- card-row -->
    </a>

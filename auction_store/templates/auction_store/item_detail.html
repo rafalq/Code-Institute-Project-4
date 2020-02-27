@@ -19,7 +19,7 @@
      <img class="image-overlay-item-lg img-fluid pr-3 d-none d-lg-block" src="{% static 'img/soldd.png' %}">
      <img class="image-overlay-item img-fluid pr-3 d-block d-lg-none" src="{% static 'img/soldd.png' %}">
     {% elif not item.sold and item.today_date <= item.finish_date %}
-     <img class="image-time-store img-fluid" src="{% static 'img/hammer.png' %}">
+     <img class="image-time-store img-fluid" data-toggle="tooltip" data-placement="bottom" title="Auction" src="{% static 'img/hammer.png' %}">
      <img class="layered-image img-fluid" src="{{ item.image.url }}">
     {% elif not item.sold and item.today_date >= item.finish_date %}
      {% if bids|length %}
@@ -34,7 +34,7 @@
 
 
 <!---------------------- SELLER OPTIONS -------------------------->
-   <div class="col-12 col-lg-6 pt-4 mt-4"><!-- TITLE col -->
+   <div class="col-12 col-lg-6 pt-lg-4 mt-lg-4"><!-- TITLE col -->
     <h3 class="text-center pb-3">{{ object.name }}</h3>
 <!---------------------- SELLER OPTIONS -------------------------->
     {% if object.seller ==  user %}
@@ -344,7 +344,7 @@
     </div>
     <div class="d-block d-lg-none col-12">
      <div class="row bg-dark text-center p-2">
-     <a class="col-12 h5 mb-0 text-warning font-weight-bold" data-toggle="collapse" href="#collapseExample"
+     <a class="col-12 h5 mb-0 pb-2 text-warning font-weight-bold" data-toggle="collapse" href="#collapseExample"
       role="button" aria-expanded="false" aria-controls="collapseExample">
       Display Bids
       <i class="fas fa-chevron-circle-down"></i>

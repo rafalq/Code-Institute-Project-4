@@ -27,6 +27,12 @@
  rel="stylesheet" type="text/css">
 
  <!-- Custom styles for this template -->
+ <style>
+   i.active-navbar-icon:hover{
+      color: #0059b9 !important;
+   }
+ </style>
+
  <link href="{% static 'css/main.css' %}" rel="stylesheet">
 
  <!-- Progress Bar -->
@@ -89,14 +95,14 @@
    {% if user.is_authenticated %}
    <ul id="user-navbar" class="navbar-nav pr-4">
 <!-- Sell -->
-    <li class="nav-item pt-md-1 px-lg-3">
+    <li class="nav-item pt-lg-1 px-lg-3">
      <a class="nav-link" href="{% url 'item-create' %}" role="button"
       data-toggle="tooltip" data-placement="bottom" title="Sell">
       <i class="nav-item fas fa-ad"></i>
      </a>
     </li>
 <!-- Account -->
-    <li class="nav-item pt-md-1 pr-md-1">
+    <li class="nav-item pt-lg-1 pr-lg-1">
      <a class="nav-link" href="{% url 'profile' %}" id="navbarDropdown" role="button"
       data-toggle="tooltip" data-placement="bottom" title="Account"
       aria-haspopup="true" aria-expanded="false">
@@ -104,7 +110,7 @@
      </a>
     </li>
 <!-- History -->
-    <li class="nav-item pt-md-1 px-lg-2">
+    <li class="nav-item pt-lg-1 px-lg-2">
      <a class="nav-link" href="{% url 'history' %}"
       role="button" data-toggle="tooltip"
       data-placement="bottom" title="History">
@@ -115,8 +121,9 @@
       {% endif %}
      </a>
     </li>
+<!-- Cart -->
     {% if user.cart.total > 0 %}
-    <li class="nav-item pt-md-1">
+    <li class="nav-item pt-lg-1">
      <a id="blue-cart" class="nav-link badge-link" href="{% url 'cart' %}" role="button"
       data-toggle="tooltip" data-placement="bottom" title="Cart">
       <i class="active-navbar-icon fas fa-cart-arrow-down text-primary">
@@ -125,14 +132,15 @@
      </a>
     </li>
     {% else %}
-    <li class="nav-item pt-md-1 pr-md-3 pl-md-1">
+    <li class="nav-item pt-lg-1 pr-lg-3 pl-lg-1">
      <a class="nav-link badge-link" href="{% url 'cart' %}" role="button"
       data-toggle="tooltip" data-placement="bottom" title="Cart">
       <i id="badge-total" class="nav-item fas fa-cart-arrow-down"></i>
      </a>
     </li>
     {% endif %}
-    <li class="nav-item pt-md-1 pr-md-4">
+<!-- Logout -->
+    <li class="nav-item pt-lg-1 pr-lg-3">
      <a class="nav-link" href="{% url 'logout' %}" role="button"
       data-toggle="tooltip" data-placement="bottom" title="Logout">
       <i class="nav-item fas fa-sign-out-alt"></i>
