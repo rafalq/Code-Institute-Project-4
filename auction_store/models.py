@@ -86,14 +86,14 @@ class Item(models.Model):
     twenty_four = datetime.datetime.now(
         tz=pytz.UTC) + datetime.timedelta(days=24)
 
-    END_DATE = [
+    end_date = [
         (hours, '24H'),
         (four, '4 Days'),
         (twelve, '12 days'),
         (twenty_four, '24 Days'),
     ]
     end_date = models.DateTimeField(
-        null=True, blank=True, verbose_name="Auction Period", choices=END_DATE)
+        null=True, blank=True, verbose_name="Auction Period", choices=end_date)
 
     # resizing images working only locally
     # def save(self, *args, **kwargs):
