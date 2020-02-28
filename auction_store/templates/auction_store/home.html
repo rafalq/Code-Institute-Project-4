@@ -13,7 +13,7 @@
 
 <!-- Carousel -->
  <section class="col-12 p-0 py-2">
-  <div id="carouselExampleIndicators" class="carousel slide d-none d-md-block" data-ride="carousel">
+  <div id="carouselExampleIndicators" class="carousel slide d-none d-lg-block" data-ride="carousel">
    <ol class="carousel-indicators">
     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -22,20 +22,20 @@
    <div class="carousel-inner" style="width:100%; max-height: 360px !important;">
     <div class="carousel-item active">
      <div class="row">
-      <img class="col-lg-6 order-lg-2 px-0 text-white carousel-img" src="{% static 'img/thors-hammer.jpg' %}" alt="Image">
-      <img class="col-lg-6 order-lg-2 px-0 text-white carousel-img" src="{% static 'img/nebra-sky-disk.jpg' %}" alt="Image">
+      <img class="img-fluid col-lg-6 order-lg-2 px-0 text-white carousel-img" src="{% static 'img/thors-hammer.jpg' %}" alt="Image">
+      <img class="img-fluid col-lg-6 order-lg-2 px-0 text-white carousel-img" src="{% static 'img/nebra-sky-disk.jpg' %}" alt="Image">
      </div>
     </div>
     <div class="carousel-item">
      <div class="row">
-      <img class="col-lg-6 order-lg-2 px-0 text-white carousel-img" src="{% static 'img/baby-bottle.jpg' %}" alt="Image">
-      <img class="col-lg-6 order-lg-2 px-0 text-white carousel-img" src="{% static 'img/encrusted-dagger.jpg' %}" alt="Image">
+      <img class="img-fluid col-lg-6 order-lg-2 px-0 text-white carousel-img" src="{% static 'img/baby-bottle.jpg' %}" alt="Image">
+      <img class="img-fluid col-lg-6 order-lg-2 px-0 text-white carousel-img" src="{% static 'img/encrusted-dagger.jpg' %}" alt="Image">
      </div>
     </div>
     <div class="carousel-item">
      <div class="row">
-      <img class="col-lg-6 order-lg-2 px-0 text-white carousel-img" src="{% static 'img/james-ossuary.jpg' %}" alt="Image">
-      <img class="col-lg-6 order-lg-2 px-0 text-white carousel-img" src="{% static 'img/trundholm-sun-chariot.jpg' %}" alt="Image">
+      <img class="img-fluid col-lg-6 order-lg-2 px-0 text-white carousel-img" src="{% static 'img/james-ossuary.jpg' %}" alt="Image">
+      <img class="img-fluid col-lg-6 order-lg-2 px-0 text-white carousel-img" src="{% static 'img/trundholm-sun-chariot.jpg' %}" alt="Image">
      </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -49,26 +49,26 @@
    </div>
   </div>
 <!-- Carousel for smaller resolutions -->
-  <div id="ScarouselExampleIndicators" class="carousel slide d-block d-md-none mb-0 mt-2 px-0" data-ride="carousel">
+  <div id="ScarouselExampleIndicators" class="carousel slide d-block d-lg-none mb-0 mt-2 px-0" data-ride="carousel">
    <ol class="carousel-indicators">
     <li data-target="#ScarouselExampleIndicators" data-slide-to="0" class="active"></li>
     <li data-target="#ScarouselExampleIndicators" data-slide-to="1"></li>
     <li data-target="#ScarouselExampleIndicators" data-slide-to="2"></li>
    </ol>
-   <div class="carousel-inner">
+   <div class="carousel-inner" style="width:100%; max-height: 360px !important;">
     <div class="carousel-item active">
      <div class="row">
-      <img class="col-12 d-block text-white carousel-img carousel-sm-img" src="{% static 'img/thors-hammer.jpg' %}" alt="Image">
+      <img class="img-fluid col-12 d-block text-white carousel-img carousel-sm-img" src="{% static 'img/thors-hammer.jpg' %}" alt="Image">
      </div>
     </div>
     <div class="carousel-item">
      <div class="row">
-      <img class="col-12 d-block text-white carousel-img carousel-sm-img" src="{% static 'img/baby-bottle.jpg' %}" alt="Image">
+      <img class="img-fluid col-12 d-block text-white carousel-img carousel-sm-img" src="{% static 'img/baby-bottle.jpg' %}" alt="Image">
      </div>
     </div>
     <div class="carousel-item">
      <div class="row">
-      <img class="col-12 d-block text-white carousel-img carousel-sm-img" src="{% static 'img/trundholm-sun-chariot.jpg' %}" alt="Image">
+      <img class="img-fluid col-12 d-block text-white carousel-img carousel-sm-img" src="{% static 'img/trundholm-sun-chariot.jpg' %}" alt="Image">
      </div>
     </div>
     <a class="carousel-control-prev" href="#ScarouselExampleIndicators" role="button" data-slide="prev">
@@ -129,21 +129,21 @@
 <!-- Jumbotron -->
  <div class="col-12 p-0 py-2">
   <div class="jumbotron p-5 m-auto bg-primary text-warning">
-   <img id="jumbotron-icon" class="float-left mt-md-3 mr-md-3 d-none d-md-block" src="../static/img/001-pay.png">
+   <img id="jumbotron-icon" class="float-left mt-lg-3 mr-lg-3 d-none d-lg-block" src="../static/img/001-pay.png">
    <a href="{% url 'auction_store-store' %}"
       class="jumbotron-button
             col-2 mt-4 mr-5 pt-2 float-right
-            d-none d-md-inline
+            d-none d-lg-inline
             btn btn-outline-warning
             text-warning text-center font-weight-bolder">
       Shop Now
     </a>
    <div class="row">
-    <h1 class="col-12 display-5 text-md-left text-center">The fastest way to checkout </h1>
-    <p class="lead col-12 text-center text-md-left">You can pay your item with your credit card!</p>
+    <h1 class="col-12 display-5 text-lg-left text-center">The fastest way to checkout </h1>
+    <p class="lead col-12 text-center text-lg-left">You can pay your item with your credit card!</p>
    </div>
    <a href="{% url 'auction_store-store' %}"
-      class="jumbotron-button d-block d-md-none col-6 offset-3 btn btn-outline-warning text-warning">
+      class="jumbotron-button d-block d-lg-none col-6 offset-3 btn btn-outline-warning text-warning">
       Shop Now
    </a>
   </div>
@@ -152,26 +152,26 @@
 <!-- Jumbo.2 -->
  <section class="col-12 p-0 py-2">
   <div id="just-added-wrapper" class="row no-gutters">
-   <div class="jumbotron col-12 col-md-5 mb-0 px-3 pl-md-5 pr-md-0 text-center">
-    <h2 class="pt-md-5 mt-md-4">Now At Auction... </h2>
-    <p class="mb-0 h4"><span class="bg-danger text-light px-2 py-1">Bid Today!</span></p>
-    <p class="pt-1">Become the owner of an artifact!</p>
+   <div class="jumbotron col-12 col-lg-5 mb-0 px-3 pl-lg-5 pr-lg-0 text-center">
+    <h2 class="pt-lg-5 mt-lg-4">Now At Auction... </h2>
+    <p class="mb-0 h4"><span class="bg-danger text-light px-2 pt-1 pb-2">Bid Today!</span></p>
+    <p class="pt-2">Become the owner of an artifact!</p>
    </div>
-   <div id="home-scrollspy" class="col-12 pl-5 col-md-6 offset-md-1 mr-md-0">
-    <div class="row mr-0" style="max-width: 450px; height: 100% !important;>
+   <div id="home-scrollspy" class="col-12 pl-lg-5 col-lg-6 offset-lg-1 mr-lg-0">
+    <div class="row mr-0" style="max-width: 450px; height: auto !important;>
      <a href="{% url 'auction_store-store' %}">
-      <img class="col-12 order-lg-2 text-white" src='../static/img/james-ossuary.jpg'>
+      <img class="img-fluid col-12 order-lg-2 text-white" src='../static/img/james-ossuary.jpg'>
      </a>
      <a href="{% url 'auction_store-store' %}">
-      <img class="col-12 order-lg-2 text-white" src='../static/img/thors-hammer.jpg'>
+      <img class="img-fluid col-12 order-lg-2 text-white" src='../static/img/thors-hammer.jpg'>
      <a href="{% url 'auction_store-store' %}">
-      <img class="col-12 order-lg-2 text-white" src='../static/img/nebra-sky-disk.jpg'>
+      <img class="img-fluid col-12 order-lg-2 text-white" src='../static/img/nebra-sky-disk.jpg'>
      </a>
      <a href="{% url 'auction_store-store' %}">
-      <img class="col-12 order-lg-2 text-white" src='../static/img/ubaid-lizard.jpg'>
+      <img class="img-fluid col-12 order-lg-2 text-white" src='../static/img/ubaid-lizard.jpg'>
      </a>
      <a href="{% url 'auction_store-store' %}">
-      <img class="col-12 order-lg-2 text-white" src='../static/img/quipu-of-caral.jpg'>
+      <img class="img-fluid col-12 order-lg-2 text-white" src='../static/img/quipu-of-caral.jpg'>
      </a>
   </div>
  </section>
@@ -182,12 +182,12 @@
    <p class="uppercase text-center font-weight-bold text-warning">Contact Us!</p>
     <form>
      <div class="row px-5">
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-lg-6">
        <input type="text" name="name" id="name" class="form-control mb-2" placeholder="Name" required />
        <input type="phone" name="phone" id="phone" class="form-control mb-2" placeholder="Phone" required />
        <input type="email" name="email" id="emailaddress" class="form-control mb-2" placeholder="Email" required />
       </div>
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-lg-6">
        <textarea rows="5" name="message" id="message" class="form-control mb-2" placeholder="Your message" required></textarea>
       </div>
      </div>
