@@ -23,6 +23,7 @@ from django.utils import timezone
 from .filters import ItemFilter
 from django.contrib.auth.decorators import login_required
 import datetime
+import pytz
 from django.conf import settings
 import stripe
 from django.core.paginator import Paginator
@@ -350,16 +351,9 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
     template_name = 'auction_store/create_form.html'
 
     def form_valid(self, form):
-        if form.instance.start_auction_price is not None and form.instance.end_date is None:
-            messages.warning(
-                self.request, f'Make sure both fields "Auction Price" and "Auction Period" are filled in if your artifact goes for auction!')
-            return super(ItemCreateView, self).form_invalid(form)
-        elif form.instance.start_auction_price is None and form.instance.end_date is not None:
-            messages.warning(
-                self.request, f'Make sure both fields "Auction Price" and "Auction Period" are filled in if your artifact goes for auction!')
-            return super(ItemCreateView, self).form_invalid(form)
-        elif form.instance.start_auction_price is not None and form.instance.end_date is not None:
+        if form.instance.start_auction_price is not None:
             form.instance.in_auction = True
+            form.instance.end_date = timezone.now() + timezone.timedelta(days=24)
             form.instance.seller = self.request.user
             messages.info(self.request, f'The item is now for sale!')
             return super().form_valid(form)

@@ -2,6 +2,8 @@ from django import forms
 from .models import Bid, Item, Order
 from users.models import Cart
 
+END_DATE = ['24H', '4 Day', '10 Days']
+
 
 class BidForm(forms.ModelForm):
   class Meta:
@@ -14,7 +16,7 @@ class CreateForm(forms.ModelForm):
   class Meta:
     model = Item
     fields = ['image', 'name', 'category',
-              'price', 'start_auction_price', 'end_date',
+              'price', 'start_auction_price', 'e_date',
               'condition', 'origin_country', 'previous_owners',
               'short', 'desc', 'link_read_more']
     widgets = {'start_date': forms.HiddenInput()}

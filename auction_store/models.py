@@ -18,6 +18,7 @@ class Item(models.Model):
     previous_owners = models.CharField(
         max_length=200, verbose_name="Previous Owners")
     desc = models.TextField(max_length=900, verbose_name="History")
+    end_date = models.DateTimeField(null=True, blank=True)
     link_read_more = models.CharField(
         null=True, blank=True, max_length=900, verbose_name="Read More Link Address")
     price = models.IntegerField(verbose_name="Price (EURO)")
@@ -80,20 +81,19 @@ class Item(models.Model):
     )
 
     # works only locally, heroku issue
-    hours = datetime.datetime.now(tz=pytz.UTC) + datetime.timedelta(hours=24)
-    four = datetime.datetime.now(tz=pytz.UTC) + datetime.timedelta(days=4)
-    twelve = datetime.datetime.now(tz=pytz.UTC) + datetime.timedelta(days=12)
-    twenty_four = datetime.datetime.now(
-        tz=pytz.UTC) + datetime.timedelta(days=24)
+    hours = '24H'
+    four = '4 Days'
+    twelve = '12 Days'
+    twenty_four = '24 Days'
 
-    end_date = [
+    en_date = [
         (hours, '24H'),
         (four, '4 Days'),
         (twelve, '12 days'),
         (twenty_four, '24 Days'),
     ]
-    end_date = models.DateTimeField(
-        null=True, blank=True, verbose_name="Auction Period", choices=end_date)
+    e_date = models.DateTimeField(
+        null=True, blank=True, verbose_name="Auction Period", choices=en_date)
 
     # resizing images working only locally
     # def save(self, *args, **kwargs):
