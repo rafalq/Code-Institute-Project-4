@@ -79,17 +79,17 @@ class Item(models.Model):
         choices=CONDITION
     )
 
-    HOURS = datetime.datetime.now(tz=pytz.UTC) + datetime.timedelta(hours=24)
-    FOUR = datetime.datetime.now(tz=pytz.UTC) + datetime.timedelta(days=4)
-    TWELVE = datetime.datetime.now(tz=pytz.UTC) + datetime.timedelta(days=12)
-    TWENTY_FOUR = datetime.datetime.now(
+    hours = datetime.datetime.now(tz=pytz.UTC) + datetime.timedelta(hours=24)
+    four = datetime.datetime.now(tz=pytz.UTC) + datetime.timedelta(days=4)
+    twelve = datetime.datetime.now(tz=pytz.UTC) + datetime.timedelta(days=12)
+    twenty_four = datetime.datetime.now(
         tz=pytz.UTC) + datetime.timedelta(days=24)
 
     END_DATE = [
-        (HOURS, '24H'),
-        (FOUR, '4 Days'),
-        (TWELVE, '12 days'),
-        (TWENTY_FOUR, '24 Days'),
+        (hours, '24H'),
+        (four, '4 Days'),
+        (twelve, '12 days'),
+        (twenty_four, '24 Days'),
     ]
     end_date = models.DateTimeField(
         null=True, blank=True, verbose_name="Auction Period", choices=END_DATE)
