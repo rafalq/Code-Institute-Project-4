@@ -79,6 +79,7 @@ class Item(models.Model):
         choices=CONDITION
     )
 
+    # works only locally, heroku issue
     hours = datetime.datetime.now(tz=pytz.UTC) + datetime.timedelta(hours=24)
     four = datetime.datetime.now(tz=pytz.UTC) + datetime.timedelta(days=4)
     twelve = datetime.datetime.now(tz=pytz.UTC) + datetime.timedelta(days=12)
