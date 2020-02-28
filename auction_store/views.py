@@ -301,7 +301,6 @@ class ItemDetailView(FormMixin, LoginRequiredMixin, SuccessMessageMixin, DetailV
         if form.is_valid():
             return self.form_valid(form)
         else:
-            messages.warning(request, f'The bid failed!')
             return self.form_invalid(form)
 
     def form_valid(self, form):
@@ -362,9 +361,11 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
         elif form.instance.start_auction_price is not None and form.instance.end_date is not None:
             form.instance.in_auction = True
             form.instance.seller = self.request.user
+            messages.info(self.request, f'The item is now for sale!')
             return super().form_valid(form)
         else:
             form.instance.seller = self.request.user
+            messages.info(self.request, f'The item is now for sale!')
             return super().form_valid(form)
 
 
@@ -378,6 +379,7 @@ class ItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         item = self.get_object()
         if not item.sold:
             form.instance.seller = self.request.user
+            messages.info(self.request, f'The item has been updated!')
             return super().form_valid(form)
 
         return super(ItemUpdateView, self).form_invalid(form)
@@ -391,10 +393,15 @@ class ItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class ItemDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Item
-    success_url = '/'
+    success_url = '/store'
+    success_message = "The item has been removed successfully!"
 
     def test_func(self):
         item = self.get_object()
         if self.request.user == item.seller:
             return True
         return False
+
+    def delete(self, request, *args, **kwargs):
+        messages.warning(self.request, self.success_message)
+        return super().delete(request, *args, **kwargs)
