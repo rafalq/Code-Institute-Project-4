@@ -41,7 +41,8 @@
     {% if not object.sold and object.today_date < object.finish_date %}
      <div class="row pt-2 pb-4 mb-2">
       <div class="col-6">
-       <p class="fas fa-hourglass-half text-center text-warning w-100"></p>
+       <p class="fas fa-hourglass-half text-center text-warning w-100"
+        data-toggle="tooltip" data-placement="top" title="Auction ends in..."></p>
        <p id="timer" class="text-center text-center font-weight-bold bg-light">
         {{ object.end_date|date:"F d, Y H:i:s" }}
        </p>
@@ -49,7 +50,8 @@
           href="{% url 'item-update' object.id %}">Update</a>
       </div>
       <div class="col-6">
-       <p class="fas fa-coins text-center text-primary mb-3 w-100"></p>
+       <p class="fas fa-coins text-center text-primary mb-3 w-100"
+          data-toggle="tooltip" data-placement="top" title="Buy Now Price"></p>
        <p class="item-price-bid text-center font-weight-bold bg-light">
         <i class="fas fa-euro-sign text-center euro-sign-item"></i>
         {{ object.price }}
@@ -62,7 +64,7 @@
     {% elif not object.sold and not object.finish_date %}
     <p class="col-12 text-center mb-0"></p>
     <p class="fas fa-coins text-center text-primary w-100"
-        data-toggle="tooltip" data-placement="top" title="Price"></p>
+        data-toggle="tooltip" data-placement="top" title="Buy Now Price"></p>
     <p class="item-price text-center mb-0">
      <i class="fas fa-euro-sign text-center euro-sign-item text-muted"></i>
      {{ object.price }}
@@ -108,7 +110,7 @@
      {% else %}
 <!---------------------- SELLER FINISHED NOT SOLD / NO BIDS -------------------------->
      <p class="fas fa-coins text-center text-primary w-100"
-        data-toggle="tooltip" data-placement="top" title="Price"></p>
+        data-toggle="tooltip" data-placement="top" title="Buy Now Price"></p>
      <p class="item-price text-center mb-0">
       <i class="fas fa-euro-sign text-center euro-sign-item text-muted"></i>
       {{ object.price }}
@@ -136,7 +138,8 @@
        {% if object.today_date < object.finish_date %}
        <div class="row py-4 mb-2">
         <div class="col-6">
-         <p class="fas fa-hourglass-half text-center text-warning w-100"></p>
+         <p class="fas fa-hourglass-half text-center text-warning w-100"
+            data-toggle="tooltip" data-placement="top" title="Auction ends in..."></p>
          <p id="timer" class="text-center text-center font-weight-bold bg-light">
           {{ object.end_date|date:"F d, Y H:i:s" }}</p>
          <a class="btn-auction btn btn-outline-warning btn-lg w-100"
@@ -145,7 +148,8 @@
          </a>
         </div>
         <div class="col-6">
-         <p class="fas fa-coins text-center text-primary w-100 mb-2"></p>
+         <p class="fas fa-coins text-center text-primary w-100 mb-2"
+            data-toggle="tooltip" data-placement="top" title="Buy Now Price"></p>
          <p class="item-price-bid text-center mt-2 font-weight-bold bg-light">
           <i class="fas fa-euro-sign text-center euro-sign-item text-muted"></i>
           {{ object.price }}
@@ -170,7 +174,7 @@
       {% else %}
       <div class="offset-2 col-8 pt-3 pb-4">
        <p class="fas fa-coins text-center w-100 text-primary
-          data-toggle="tooltip" data-placement="top" title="Price"></p>
+          data-toggle="tooltip" data-placement="top" title="Buy Now Price"></p>
        <p class="item-price text-center mb-4">
         <i class="fas fa-euro-sign text-center euro-sign-item text-muted"></i>
         {{ object.price }}
@@ -185,7 +189,7 @@
     {% else %}
      <div class="offset-2 col-8 pt-3 pb-4">
       <p class="fas fa-coins text-center w-100 text-primary"
-         data-toggle="tooltip" data-placement="top" title="Price"></p>
+         data-toggle="tooltip" data-placement="top" title="Buy Now Price"></p>
       <p class="item-price text-center">
        <i class="fas fa-euro-sign text-center euro-sign-item text-muted"></i>
        {{ object.price }}
@@ -227,8 +231,8 @@
       {{ object.origin_country }}
      </p>
      <p class="mb-2 ml-5">
-      <span class="key-item-detail text-muted">Known Owners: </span>
-      {{ object.known_owners }}
+      <span class="key-item-detail text-muted">Previous Owners: </span>
+      {{ object.previous_owners }}
      </p>
    </div><!-- Item Specs -->
    <div class="col-12 col-md-6"><!-- Delivery Info -->
