@@ -16,10 +16,10 @@ class CreateForm(forms.ModelForm):
   class Meta:
     model = Item
     fields = ['image', 'name', 'category',
-              'price', 'start_auction_price', 'e_date',
+              'price', 'start_auction_price',
               'condition', 'origin_country', 'previous_owners',
               'short', 'desc', 'link_read_more']
-    widgets = {'start_date': forms.HiddenInput()}
+    # widgets = {'start_date': forms.HiddenInput()}
 
 
 class OrderForm(forms.ModelForm):
