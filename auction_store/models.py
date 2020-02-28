@@ -6,6 +6,7 @@ from django.urls import reverse
 from PIL import Image
 from django.utils import timezone
 import datetime
+import pytz
 
 
 class Item(models.Model):
@@ -78,10 +79,11 @@ class Item(models.Model):
         choices=CONDITION
     )
 
-    HOURS = timezone.now() + timezone.timedelta(hours=24)
-    FOUR = timezone.now() + timezone.timedelta(days=4)
-    TWELVE = timezone.now() + timezone.timedelta(days=12)
-    TWENTY_FOUR = timezone.now() + timezone.timedelta(days=24)
+    HOURS = datetime.datetime.now(tz=pytz.UTC) + datetime.timedelta(hours=24)
+    FOUR = datetime.datetime.now(tz=pytz.UTC) + datetime.timedelta(days=4)
+    TWELVE = datetime.datetime.now(tz=pytz.UTC) + datetime.timedelta(days=12)
+    TWENTY_FOUR = datetime.datetime.now(
+        tz=pytz.UTC) + datetime.timedelta(days=24)
 
     END_DATE = [
         (HOURS, '24H'),
