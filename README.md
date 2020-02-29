@@ -201,48 +201,60 @@ The responsiveness was checked in Chrome Development Tools.
 The rest tests were run manually.
 	
 Click the logo and verify being redirected to home page.
-Click the 'Home' link and verify being redirected to home page.
-Click the 'About' link and verify being redirected to the 'About' section on the home page.
-Click the 'Store' link and verify being redirected to the store.html page.
-Click the 'Contact' link and verify being redirected to the 'Contact' section on the home page.
+
+Click the `Home` link and verify being redirected to home page.
+
+Click the `About` link and verify being redirected to the `About` section on the home page.
+
+Click the `Store` link and verify being redirected to the store.html page.
+
+Click the `Contact` link and verify being redirected to the `Contact` section on the home page.
 	
-Click the 'Login' link and verify being redirected to the login.html page.
-Click the 'Register' link and verify being redirected to the register.html page.
+Click the `Login` link and verify being redirected to the `login.html` page.
 
-Log in and hover over each icons in the right side of the `navbar`, verify if they display(starting from the left): 'Sell', 'Account', 'History', 'Cart'.
-Click the 'Sell' icon and verify being redirected to the create_form.html page.
-Click the 'Account' icon and verify being redirected to the create_form.html page.
-Click the 'History' icon and verify being redirected to the history.html page.
-Click the 'Cart' icon and verify being redirected to the cart.html page.
+Click the `Register` link and verify being redirected to the `register.html` page.
 
-Click the 'Home' link and then the left and the right carousel button.
-Click the 'Home' link and then the 'Shop Now' button in the middle of the page and verify being redirected to the store.html page.
 
-Log in, click the 'Store' link and then click anyone of item titles available on the page,
-verify being redirected to the item_detail.html page.
+Log in and hover over each icons in the right side of the `navbar`, verify if they display (starting from the left): `Sell`, `Account`, `History`, `Cart`.
+
+Click the `Sell` icon and verify being redirected to the `create_form.html` page.
+
+Click the `Account` icon and verify being redirected to the `create_form.html` page.
+
+Click the `History` icon and verify being redirected to the `history.html` page.
+
+Click the `Cart` icon and verify being redirected to the `cart.html` page.
+
+Click the `Home` link and then the left and the right carousel button.
+
+Click the `Home` link and then the `Shop Now` button in the middle of the page and verify being redirected to the `store.html` page.
+
+Log in, click the `Store` link and then click anyone of item titles available on the page,
+verify being redirected to the `item_detail.html` page.
 
 On the above page click the Place Bid button and verify if a modal comes up.
-Press each of the buttons available there and verify if they are working, then click the Cancel button in the top right corner of the modal.
-On the same page as above click the Buy Now button and verify being redirected to the payment.html page.
+Press each of the buttons available there and verify if they are working, then click the `Cancel` button in the top right corner of the modal.
+On the same page as above click the `Buy Now` button and verify being redirected to the `payment.html` page.
 
-On the payment page click the name of the item and verify being redirected to this item_detail.html page.
+On the payment page click the name of the item and verify being redirected to this `item_detail.html` page.
 	
  __Javascript__
  
 All tests were run manually.
 
-Go to the Contact section on the home page and type an email address without "@", verify that an error message appears.
+Go to the `Contact` section on the home page and type an email address without "@", verify that an error message appears.
 In the same section, leave one of the fields blank and press the Send button, verify that an error message appears.
 
-Log in, got to the store.html page and then go to one of the items page. Verify that the progress bar and the numeric-style clock are working accurately. Refresh the page; check if the progress of the progress bar was not reset (only in Chrome).
-Log in, got to the store.html and then go to one of the items page containing the "Buy Now" button. Click this and on the payment.html at the bottom of the form, type for the card number a number different than the [Basic test card numbers](https://stripe.com/docs/testing)
+Log in, got to the `store.html` page and then go to one of the items page. Verify that the progress bar and the numeric-style clock are working accurately. Refresh the page; check if the progress of the progress bar was not reset (only in `Chrome`).
+
+Log in, got to the `store.html` and then go to one of the items page containing the `Buy Now` button. Click this and on the `payment.html` at the bottom of the form, type for the card number a number different than the [Basic test card numbers](https://stripe.com/docs/testing)
 Verify that an error message appears.
 Repeat the same for the expiry month and the year, typing this time some older date than today.
 
 Log in, go to your history. If there is any activity displaying one of the table, type in the search bar the title or the date or the price. Verify that only those items are displaying and the rest removed. 
 If there are more than one item in a column, sort them using the sort option. Verify if that work correctly for each category.
 	
-In the search table, sort the items by their format choosing the Auction. Verify that the progress bar and the numeric-style clock are working accurately. Refresh the page; check if the progress of the progress bar was not reset.
+In the search table, sort the items by their format choosing the `Auction`. Verify that the progress bar and the numeric-style clock are working accurately. Refresh the page; check if the progress of the progress bar was not reset.
 	
 
 ### Backend
@@ -255,25 +267,31 @@ All tests for the backend were run manually.
 
 Log in with an unregistered username and password, verify that an error message appears.
 Log in with a registered username but wrong password; verify an error message is displayed.
-Log in with a registered username and correct password; verify being redirected to the store.html page.
+Log in with a registered username and correct password; verify being redirected to the `store.html` page.
 Close the page and open it again, verify the user is still logged in.
-Log out, verify being redirect to the logout.html page. Refresh the page and check if you are still logged out.
+Log out, verify being redirect to the `logout.html` page. Refresh the page and check if you are still logged out.
 	
 Register with a username already being used; verify an error message is displayed.
 Register with a email address without "@" and ".", verify an error message is displayed.
 Register with a password confirmation different than the password; verify an error message is displayed.
-Click the "Sign In" link at the bottom of the above form page and verify being taken to the login.html page.
+Click the `Sign In` link at the bottom of the above form page and verify being taken to the `login.html` page.
 
-On the page click the "Register Now" link at the bottom and verify being taken to the register.html page.
+On the page click the `Register Now` link at the bottom and verify being taken to the `register.html` page.
 
-Go back to the page and click the "Forgot Password?" link at the bottom and verify being taken to the password_reset.html page.
-Type your correct email address, click the button and verify being redirect to the page with the message stating 'An email has been sent with instructions to reset your password!'. Click the 'Go Back to Store' link. You should be taken to the store.html page.
-Now check your email box and find a message with a link for resetting your password. Click it. Verify being redirect to the password_reset_confirm.html.
-Type your new password and the same for the new password confirmation. You should be taken to the `password_rest_complete`  page. Click the 'Sign In Here' link below the message. Verify being taken to the login.html page. From here use a new password and verify that you can log in.
+Go back to the page and click the `Forgot Password?` link at the bottom and verify being taken to the `password_reset.html` page.
+
+Type your correct email address, click the button and verify being redirect to the page with the message stating `An email has been sent with instructions to reset your password!`. 
+Click the `Go Back to Store` link. You should be taken to the `store.html` page.
+Now check your email box and find a message with a link for resetting your password. 
+Click it. Verify being redirect to the `password_reset_confirm.html`.
+
+Type your new password and the same for the new password confirmation. You should be taken to the `password_rest_complete`  page. Click the `Sign In Here` link below the message. Verify being taken to the `login.html` page. From here use a new password and verify that you can log in.
 
 ##### Searching Option / Pagination
 Log in, go to your History. Check if there is any item in it. If so, type one of their titles in the search field and check if only this one appears.
+
 On the same page, if there is more than one item, try to sort each category. Repeat the sequence for all columns. Verify it works correctly.
+
 Log out, go to the store.html page. Type a title of available artifacts in the search bar. Verify it works correctly.
 On the same page check if all of the rest available searching (price) and sorting (category, format, seller, and sort) options work accurately.
 And simultaneously verify that pagination is working correctly.
@@ -281,31 +299,45 @@ And simultaneously verify that pagination is working correctly.
 ##### Selling / Bidding / Buying
 	
 __Selling__
+
 Log in and click the 'Sell' icon in the` navbar`. Fill in all the input fields and do not upload any image. Click 'submit' button and verify if the item has a default picture.
+
 Click the 'Sell' icon in the `navbar` again and try to submit the form with the Auction Price input field left blank, check if the item is in the store.
+
 __Bidding__
+
 Log in, go to the store page and find one of the items which you are not the seller of. On its page, click the 'Place Bid' button. And when a modal appears, check if the last bid is displayed correctly - should be the latest one or the starting one if there has not been any bid yet.
-Then click one of the buttons with the set bid amount and verify the correct value appears in the Amount input. After this click the 'Bid' button and verify your bid being displayed in the Bid History section. Repeat the sequence for each buttons and then type your own amount less than the last bid and next the same.
+
+Then click one of the buttons with the set bid amount and verify the correct value appears in the Amount input. After this click the 'Bid' button and verify your bid being displayed in the Bid History section. 
+
+Repeat the sequence for each buttons and then type your own amount less than the last bid and next the same.
 Verify you received an alert message.
+
 Then input a number higher than the last bid and check if you get an success message and the bid details appears in the Bid History table.
 
 __Buy Now__
+
 On the same page, click the 'Buy Now' button, you will be taken to the payment page. Fill in the form correctly and click the Submit Payment button. You should be redirect to the item page but this time both buttons are not displayed and the artifact is marked as sold. The history icon in the navbar should change its color for blue.
 
 __Buying Items in The Cart__
+
 When your cart is blue color instead of grey, it should contain at least one artifact that can be purchased. Click the blue button ("Buy") in the item card and check if the payment page displaying the item details (the title and the price) correctly.
+
 Fill in the required fields for the delivery address and use one of the test numbers [Basic test card numbers](https://stripe.com/docs/testing) for the card number. Click the Submit Payment button, if all the details are correct, you should be redirect to the item page and the artifact should be marked as sold.
 
 
 ##### Updating / Deleting 
 
 Log in and go to your history. Click one of "Your Sales" item which is still for sale. You should be redirected to the item page. Click "Update" button and change all the inputs in the fields including the picture. Click the Submit button. Check if the item details were updated.
+
 On the same item page, try to leave one of the fields blank (excluding the image). Click submit button. The blank field should be indicted as required.
-Go back to the item page and click "Delete" button. You should be redirected to the `item_confirm_delete` page. There click cancel, you should be taken back to the item page. Click the "Delete" button again. Now you should be redirected to the store page. Check if the item is in the store no more. 
+
+Go back to the item page and click "Delete" button. You should be redirected to the `item_confirm_delete` page. There click `Cancel`, you should be taken back to the item page. Click the `Delete` button again. Now you should be redirected to the store page. Check if the item is in the store no more. 
 
 #### Bugs
 
-The Carousel Images (home.html) are a little overstretched vertically in iPhone 5/SE. The bug did not appear in Chrome Dev Tools. I used bootstrap class *img-fluid* and then tried to limit the height of the *carousel-inner* but with no effect. 
+The Carousel Images (home.html) are a little overstretched vertically in iPhone 5/SE. The bug did not appear in Chrome Dev Tools. I used bootstrap class *img-fluid* and then tried to limit the height of the *carousel-inner* but with no effect.
+
 I created my own progress bar in javascript that works perfectly only in Chrome browser. Mozilla Firefox and Internet Explorer has some difficulty with interpreting this part of code *progressBar.style.width = '0px';*
 ```javascript
 	addEventListener('load', function() {
@@ -414,27 +446,27 @@ STRIPE_SECRET | `<your_sk_test_number>`
 
 #### IMPORTANT!
 
->Both ***AWS_ACCESS_KEY_ID*** and ***AWS_SECRET_ACCESS_KEY***, you can obtain from AWS Services. Check [AWS Identity and Access Management
+>Both __AWS_ACCESS_KEY_ID__ and __AWS_SECRET_ACCESS_KEY__, you can obtain from AWS Services. Check [AWS Identity and Access Management
 ](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) for more details.
 
 >You will also need S3 [Amazon Simple Storage Service (S3)](https://docs.aws.amazon.com/AmazonS3/latest/gsg/GetStartedWithS3.html)
 
->To receive ***DATABASE_URL***,
+>To receive __DATABASE_URL__,
 1. Login to your Heroku account (see above)
 2. Go to *Resources*
 3. Within *Add-ons* type in "postgres" there.
 4. From *Plan name* choose *Hobby Dev - Free* and click *Provision*
 5. Ready. The variable should be now set in *Settings*. 
 
->***EMAIL_PASS*** and ***EMAIL_USER*** is used for the Password Reset.
+>__EMAIL_PASS__ and __EMAIL_USER__ is used for the Password Reset.
 
->***STRIPE_PUBLISHABLE*** and ***STRIPE_SECRET*** can be obtain after registering your account with [Stripe](https://stripe.com/ie)
+>__STRIPE_PUBLISHABLE__ and __STRIPE_SECRET__ can be obtain after registering your account with [Stripe](https://stripe.com/ie)
 
->To be able to use ***Stripe*** for payment transaction:
->1. In the project folder go to *project_4* -> *auction_store* -> *static* -> *js* -> *payment.js*>2. Change the first line of the code using your ***STRIPE_PUBLISHABLE*** number. Type it in here:
+>To be able to use __Stripe__ for payment transaction:
+>1. In the project folder go to *project_4* -> *auction_store* -> *static* -> *js* -> *payment.js*>2. Change the first line of the code using your __STRIPE_PUBLISHABLE__ number. Type it in here:
 
 ```javascript
-	var stripe = Stripe('***STRIPE_PUBLISHABLE***');
+	var stripe = Stripe('`STRIPE_PUBLISHABLE`');
 ```
 
 >To be able to use the static files in Heroku:
