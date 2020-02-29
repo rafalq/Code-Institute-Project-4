@@ -12,7 +12,7 @@
  </div>
 
 <!-- Carousel -->
- <section class="col-12 p-0 py-2">
+<a href="{% url 'auction_store-store' %}">
   <div id="carouselExampleIndicators" class="carousel slide d-none d-lg-block" data-ride="carousel">
    <ol class="carousel-indicators">
     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -48,8 +48,10 @@
     </a>
    </div>
   </div>
+ </a>
 <!-- Carousel for smaller resolutions -->
-  <div id="ScarouselExampleIndicators" class="carousel slide d-block d-lg-none mb-0 mt-2 px-0" data-ride="carousel">
+<a href="{% url 'auction_store-store' %}">
+  <div id="ScarouselExampleIndicators" class="col-12 p-0 py-2 carousel slide d-block d-lg-none mb-0 mt-2 px-0" data-ride="carousel">
    <ol class="carousel-indicators">
     <li data-target="#ScarouselExampleIndicators" data-slide-to="0" class="active"></li>
     <li data-target="#ScarouselExampleIndicators" data-slide-to="1"></li>
@@ -80,7 +82,7 @@
     </a>
    </div>
   </div>
- </section>
+</a>
 
 <!-- About Section -->
  <section id="about" class="col-12bg-light p-4">
@@ -150,6 +152,7 @@
  </div>
 
 <!-- Jumbo.2 -->
+<a href="{% url 'auction_store-store' %}" class="text-dark">
  <section class="col-12 p-0 py-2">
   <div id="just-added-wrapper" class="row no-gutters">
    <div class="jumbotron col-12 col-lg-5 mb-0 px-3 pl-lg-5 pr-lg-0 text-center">
@@ -158,24 +161,17 @@
     <p class="pt-2">Become the owner of an artifact!</p>
    </div>
    <div id="home-scrollspy" class="col-12 pl-lg-5 col-lg-6 offset-lg-1 mr-lg-0">
-    <div class="row mr-0" style="max-width: 450px; height: auto !important;>
-     <a href="{% url 'auction_store-store' %}">
-      <img class="img-fluid col-12 order-lg-2 text-white" src='../static/img/james-ossuary.jpg'>
-     </a>
-     <a href="{% url 'auction_store-store' %}">
-      <img class="img-fluid col-12 order-lg-2 text-white" src='../static/img/thors-hammer.jpg'>
-     <a href="{% url 'auction_store-store' %}">
-      <img class="img-fluid col-12 order-lg-2 text-white" src='../static/img/nebra-sky-disk.jpg'>
-     </a>
-     <a href="{% url 'auction_store-store' %}">
-      <img class="img-fluid col-12 order-lg-2 text-white" src='../static/img/ubaid-lizard.jpg'>
-     </a>
-     <a href="{% url 'auction_store-store' %}">
-      <img class="img-fluid col-12 order-lg-2 text-white" src='../static/img/quipu-of-caral.jpg'>
-     </a>
+    <div class="row mr-0" style="max-width: 450px; height: auto !important;">
+     <img class="img-fluid col-12 order-lg-2 text-white" src='../static/img/james-ossuary.jpg'>
+     <img class="img-fluid col-12 order-lg-2 text-white" src='../static/img/thors-hammer.jpg'>
+     <img class="img-fluid col-12 order-lg-2 text-white" src='../static/img/nebra-sky-disk.jpg'>
+     <img class="img-fluid col-12 order-lg-2 text-white" src='../static/img/ubaid-lizard.jpg'>
+     <img class="img-fluid col-12 order-lg-2 text-white" src='../static/img/quipu-of-caral.jpg'>
+   </div>
   </div>
+ </div>
  </section>
-
+</a>
 <!-- Contact Section -->
  <section id="contact" class="mt-2">
   <h3 class="contact-heading uppercase text-center">Any Questions?</h3>
