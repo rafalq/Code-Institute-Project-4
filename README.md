@@ -111,9 +111,12 @@ __login.html__
 
 Registered users can log in to be able to use all the options available on the website. The page contains a username field and a password field. If someone forgets their password, they can use `Forget Password` link which directs them to another webpage or if an account is needed, they can use another link to register.
 
-__password_reset.html__, 
-__password_reset_confirm.html__, 
-__password_reset_confirm.html__, 
+__password_reset.html__,
+
+__password_reset_confirm.html__,
+
+__password_reset_confirm.html__,
+
 __password_reset_complete.html__
 
 Webpages contains forms and buttons or messages and links referring to a password reset process.
@@ -186,11 +189,16 @@ All used color are of bootstrap origin. The main ones are: primary, warning, dan
 
 ## Testing
 
-The website can be open with the browsers:  
+The website can be open with the browsers:
+
 `Firefox (Version 70.0.1`), 
+
 `Opera (Version 63.0.3)`, 
-`Internet Explorer (Version 11.0.9)`, 
+
+`Internet Explorer (Version 11.0.9)`,
+
 `Google Chrome (Version 77.0.3`);
+
 The responsiveness was checked in Chrome Development Tools.
 
 ### Frontend
