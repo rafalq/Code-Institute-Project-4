@@ -48,10 +48,15 @@ The goal was to create a website for existing and potential customers in order t
 ### Scope
 
 User 1 can find any item available for sale in the store using the search bars on the store page.
+
 User 2 can fill in the `For Sale` form to sell their artifacts or put them up for auction after they sign up.
+
 User 3 Both options are available on the item page if the user is registered. 
+
 User 4 can view their history page anytime. The latest activity is being noticeably indicated. 
+
 User 5 can find all the artifacts won at auction in their cart.
+
 User 6 can update the above easily.
 
 ### Structure
